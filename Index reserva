@@ -178,10 +178,27 @@
             color: var(--primary);
             transition: color 0.3s;
             cursor: pointer;
+            padding: 5px 0;
+            position: relative;
         }
 
         nav ul li a:hover {
             color: var(--secondary);
+        }
+
+        nav ul li a.active {
+            color: var(--secondary);
+            font-weight: 700;
+        }
+
+        nav ul li a.active:after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background-color: var(--secondary);
         }
 
         .admin-icon-btn {
@@ -266,15 +283,6 @@
         }
 
         /* Formulários */
-        .form-container {
-            background-color: white;
-            padding: 30px;
-            border-radius: 10px;
-            box-shadow: var(--shadow);
-            max-width: 800px;
-            margin: 0 auto;
-        }
-
         .form-group {
             margin-bottom: 20px;
         }
@@ -331,16 +339,6 @@
             background-color: rgba(46, 204, 113, 0.1);
             color: var(--success);
             border-left: 4px solid var(--success);
-        }
-
-        /* Página do Cliente */
-        .client-content, .admin-content {
-            display: none;
-            animation: fadeIn 0.5s ease;
-        }
-
-        .client-content.active, .admin-content.active {
-            display: block;
         }
 
         /* Hero Section */
@@ -462,169 +460,36 @@
             margin-top: 5px;
         }
 
-        /* Área Administrativa */
-        .admin-header {
-            background-color: var(--primary);
+        /* Botão Voltar ao Topo */
+        .back-to-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 50px;
+            height: 50px;
+            background-color: var(--secondary);
             color: white;
-            padding: 20px;
-            margin-bottom: 30px;
-            border-radius: 10px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .admin-logo-container {
-            display: flex;
-            align-items: center;
-            gap: 15px;
-        }
-
-        .admin-logo-placeholder {
-            width: 40px;
-            height: 40px;
-            border-radius: 8px;
+            border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            overflow: hidden;
-            background-color: white;
-        }
-
-        .admin-logo-placeholder img {
-            width: 100%;
-            height: 100%;
-            object-fit: contain;
-            padding: 3px;
-        }
-
-        .logout-btn {
-            background-color: rgba(255, 255, 255, 0.2);
-            color: white;
-            border: none;
-            padding: 8px 15px;
-            border-radius: 4px;
+            font-size: 1.5rem;
             cursor: pointer;
-            transition: background-color 0.3s;
-        }
-
-        .logout-btn:hover {
-            background-color: rgba(255, 255, 255, 0.3);
-        }
-
-        .admin-stats {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 20px;
-            margin-bottom: 40px;
-        }
-
-        .stat-card {
-            background-color: white;
-            padding: 20px;
-            border-radius: 10px;
-            box-shadow: var(--shadow);
-            text-align: center;
-        }
-
-        .stat-card i {
-            font-size: 2.5rem;
-            color: var(--secondary);
-            margin-bottom: 15px;
-        }
-
-        .stat-card h3 {
-            font-size: 2rem;
-            color: var(--primary);
-            margin-bottom: 5px;
-        }
-
-        .admin-tabs {
-            display: flex;
-            border-bottom: 2px solid #eee;
-            margin-bottom: 30px;
-            flex-wrap: wrap;
-        }
-
-        .admin-tab {
-            padding: 15px 30px;
-            background: none;
-            border: none;
-            font-weight: 600;
-            cursor: pointer;
-            border-bottom: 3px solid transparent;
-            transition: all 0.3s;
-        }
-
-        .admin-tab.active {
-            border-bottom: 3px solid var(--secondary);
-            color: var(--secondary);
-        }
-
-        .tab-content {
-            display: none;
-        }
-
-        .tab-content.active {
-            display: block;
-        }
-
-        table {
-            width: 100%;
-            background-color: white;
-            border-collapse: collapse;
-            border-radius: 10px;
-            overflow: hidden;
-            box-shadow: var(--shadow);
-            margin-bottom: 30px;
-        }
-
-        th, td {
-            padding: 15px;
-            text-align: left;
-            border-bottom: 1px solid #eee;
-        }
-
-        th {
-            background-color: var(--light);
-            color: var(--primary);
-            font-weight: 600;
-        }
-
-        tr:hover {
-            background-color: #f9f9f9;
-        }
-
-        .actions {
-            display: flex;
-            gap: 5px;
-        }
-
-        .action-btn {
-            padding: 6px 10px;
-            border-radius: 4px;
-            font-size: 0.8rem;
-            cursor: pointer;
-            border: none;
-            color: white;
-            transition: all 0.3s;
-        }
-
-        .action-btn:hover {
-            transform: translateY(-2px);
+            z-index: 100;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
             box-shadow: var(--shadow);
         }
 
-        .edit-btn {
-            background-color: var(--secondary);
+        .back-to-top.show {
+            opacity: 1;
+            visibility: visible;
         }
 
-        .delete-btn {
-            background-color: var(--accent);
-        }
-
-        .view-btn {
-            background-color: var(--success);
+        .back-to-top:hover {
+            background-color: #2980b9;
+            transform: translateY(-5px);
         }
 
         /* Footer */
@@ -683,38 +548,6 @@
             opacity: 0.8;
         }
 
-        /* Botão Voltar ao Topo */
-        .back-to-top {
-            position: fixed;
-            bottom: 30px;
-            right: 30px;
-            width: 50px;
-            height: 50px;
-            background-color: var(--secondary);
-            color: white;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.5rem;
-            cursor: pointer;
-            z-index: 100;
-            opacity: 0;
-            visibility: hidden;
-            transition: all 0.3s ease;
-            box-shadow: var(--shadow);
-        }
-
-        .back-to-top.show {
-            opacity: 1;
-            visibility: visible;
-        }
-
-        .back-to-top:hover {
-            background-color: #2980b9;
-            transform: translateY(-5px);
-        }
-
         /* Responsividade */
         @media (max-width: 992px) {
             .header-container {
@@ -745,16 +578,6 @@
                 text-align: center;
                 gap: 10px;
             }
-
-            .admin-header {
-                flex-direction: column;
-                gap: 15px;
-                text-align: center;
-            }
-            
-            .admin-header > div {
-                width: 100%;
-            }
         }
 
         @media (max-width: 768px) {
@@ -768,15 +591,6 @@
             
             .section-title {
                 font-size: 2rem;
-            }
-            
-            .admin-tabs {
-                flex-wrap: wrap;
-            }
-
-            table {
-                display: block;
-                overflow-x: auto;
             }
         }
     </style>
@@ -792,7 +606,7 @@
         <div class="header-container container">
             <div class="logo-container" id="logoHome">
                 <div class="logo-placeholder">
-                    <img src="imagem.png" alt="Bemorh Logo" id="logoImage" onerror="this.style.display='none'; document.getElementById('logoText').style.display='flex';">
+                    <img src="imagem.png" alt="Bemorh Logo" id="logoImage" onerror="handleLogoError(this)">
                     <div id="logoText" style="display: none; width: 100%; height: 100%; background: linear-gradient(135deg, var(--secondary), var(--primary)); color: white; font-weight: bold; font-size: 1.5rem; align-items: center; justify-content: center;">
                         BH
                     </div>
@@ -804,7 +618,7 @@
             </div>
             <nav>
                 <ul>
-                    <li><a id="navHome">Início</a></li>
+                    <li><a id="navHome" class="active">Início</a></li>
                     <li><a id="navProjects">Projetos</a></li>
                     <li><a id="navServices">Serviços</a></li>
                     <li><a id="navAbout">Sobre</a></li>
@@ -909,7 +723,7 @@
         </div>
     </div>
 
-    <!-- Conteúdo do Cliente (Sempre visível por padrão) -->
+    <!-- Conteúdo do Site -->
     <div class="client-content active">
         <!-- Hero Section -->
         <section class="hero" id="home">
@@ -1094,167 +908,6 @@
         </section>
     </div>
 
-    <!-- Conteúdo Administrativo (Oculto por padrão) -->
-    <div class="admin-content">
-        <div class="container">
-            <!-- Header Admin -->
-            <div class="admin-header">
-                <div class="admin-logo-container">
-                    <div class="admin-logo-placeholder">
-                        <img src="imagem.png" alt="Bemorh Logo" id="adminLogoImage" onerror="this.style.display='none'; document.getElementById('adminLogoText').style.display='flex';">
-                        <div id="adminLogoText" style="display: none; width: 100%; height: 100%; background: linear-gradient(135deg, var(--secondary), var(--primary)); color: white; font-weight: bold; align-items: center; justify-content: center;">
-                            BH
-                        </div>
-                    </div>
-                    <div>
-                        <h1><i class="fas fa-cogs"></i> Painel Administrativo</h1>
-                        <p>Gerencie projetos, clientes e configurações da empresa</p>
-                    </div>
-                </div>
-                <div>
-                    <button class="btn" id="backToSiteBtn">
-                        <i class="fas fa-globe"></i> Voltar ao Site
-                    </button>
-                    <button class="logout-btn" id="logoutBtn">
-                        <i class="fas fa-sign-out-alt"></i> Sair
-                    </button>
-                </div>
-            </div>
-
-            <!-- Estatísticas -->
-            <div class="admin-stats">
-                <div class="stat-card">
-                    <i class="fas fa-project-diagram"></i>
-                    <h3 id="projectCount">8</h3>
-                    <p>Projetos Ativos</p>
-                </div>
-                <div class="stat-card">
-                    <i class="fas fa-users"></i>
-                    <h3 id="clientCount">24</h3>
-                    <p>Clientes Ativos</p>
-                </div>
-                <div class="stat-card">
-                    <i class="fas fa-dollar-sign"></i>
-                    <h3>R$ 89,450</h3>
-                    <p>Faturamento Mensal</p>
-                </div>
-                <div class="stat-card">
-                    <i class="fas fa-tasks"></i>
-                    <h3 id="taskCount">92%</h3>
-                    <p>Projetos no Prazo</p>
-                </div>
-            </div>
-
-            <!-- Abas de Administração -->
-            <div class="admin-tabs">
-                <button class="admin-tab active" data-tab="projects-tab">Projetos</button>
-                <button class="admin-tab" data-tab="clients-tab">Clientes</button>
-                <button class="admin-tab" data-tab="team-tab">Equipe</button>
-                <button class="admin-tab" data-tab="settings-tab">Configurações</button>
-            </div>
-
-            <!-- Conteúdo das Abas -->
-            <div class="tab-content active" id="projects-tab">
-                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
-                    <h2>Gerenciamento de Projetos</h2>
-                    <button class="btn" id="addProjectBtn"><i class="fas fa-plus"></i> Novo Projeto</button>
-                </div>
-                <table>
-                    <thead>
-                        <tr>
-                            <th>Nome do Projeto</th>
-                            <th>Cliente</th>
-                            <th>Status</th>
-                            <th>Prazo</th>
-                            <th>Orçamento</th>
-                            <th>Ações</th>
-                        </tr>
-                    </thead>
-                    <tbody id="projectsTable">
-                        <!-- Projetos serão inseridos aqui via JavaScript -->
-                    </tbody>
-                </table>
-            </div>
-
-            <div class="tab-content" id="clients-tab">
-                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
-                    <h2>Gerenciamento de Clientes</h2>
-                    <button class="btn" id="addClientBtn"><i class="fas fa-plus"></i> Novo Cliente</button>
-                </div>
-                <table>
-                    <thead>
-                        <tr>
-                            <th>Nome</th>
-                            <th>Empresa</th>
-                            <th>Email</th>
-                            <th>Telefone</th>
-                            <th>Projetos</th>
-                            <th>Ações</th>
-                        </tr>
-                    </thead>
-                    <tbody id="clientsTable">
-                        <!-- Clientes serão inseridos aqui via JavaScript -->
-                    </tbody>
-                </table>
-            </div>
-
-            <div class="tab-content" id="team-tab">
-                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
-                    <h2>Gerenciamento de Equipe</h2>
-                    <button class="btn" id="addMemberBtn"><i class="fas fa-plus"></i> Novo Membro</button>
-                </div>
-                <table>
-                    <thead>
-                        <tr>
-                            <th>Nome</th>
-                            <th>Cargo</th>
-                            <th>Email</th>
-                            <th>Telefone</th>
-                            <th>Projetos</th>
-                            <th>Ações</th>
-                        </tr>
-                    </thead>
-                    <tbody id="teamTable">
-                        <!-- Equipe será inserida aqui via JavaScript -->
-                    </tbody>
-                </table>
-            </div>
-
-            <div class="tab-content" id="settings-tab">
-                <h2>Configurações da Empresa</h2>
-                <div class="form-container">
-                    <form id="companySettings">
-                        <div class="form-group">
-                            <label for="companyName">Nome da Empresa</label>
-                            <input type="text" id="companyName" class="form-control" value="Bemorh">
-                        </div>
-                        <div class="form-group">
-                            <label for="companyTagline">Frase de Efeito</label>
-                            <input type="text" id="companyTagline" class="form-control" value="tecnologia que conecta ideias">
-                        </div>
-                        <div class="form-group">
-                            <label for="companyEmail">Email de Contato</label>
-                            <input type="email" id="companyEmail" class="form-control" value="contato@bemorh.com.br">
-                        </div>
-                        <div class="form-group">
-                            <label for="companyPhone">Telefone</label>
-                            <input type="text" id="companyPhone" class="form-control" value="(11) 3456-7890">
-                        </div>
-                        <div class="form-group">
-                            <label for="companyAddress">Endereço</label>
-                            <input type="text" id="companyAddress" class="form-control" value="Av. das Inovações, 123 - Centro de Tecnologia, São Paulo - SP">
-                        </div>
-                        <div class="form-group">
-                            <label for="companyAbout">Sobre a Empresa</label>
-                            <textarea id="companyAbout" class="form-control" rows="5">A Bemorh nasceu da crença de que as melhores soluções surgem da conexão de ideias. Somos uma empresa de tecnologia especializada em desenvolver ferramentas virtuais que facilitam a colaboração, estimulam a inovação e transformam conceitos em realidade.</textarea>
-                        </div>
-                        <button type="submit" class="btn btn-success">Salvar Configurações</button>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </div>
-
     <!-- Footer -->
     <footer>
         <div class="container">
@@ -1262,7 +915,7 @@
                 <div class="footer-column">
                     <div class="logo-container" style="margin-bottom: 20px; cursor: default;">
                         <div class="logo-placeholder" style="width: 40px; height: 40px; font-size: 1.2rem;">
-                            <img src="imagem.png" alt="Bemorh Logo" style="width: 100%; height: 100%; object-fit: contain; padding: 3px;" onerror="this.style.display='none'; this.parentElement.innerHTML='BH'; this.parentElement.style.background='linear-gradient(135deg, var(--secondary), var(--primary))'; this.parentElement.style.color='white'; this.parentElement.style.fontWeight='bold'; this.parentElement.style.display='flex'; this.parentElement.style.alignItems='center'; this.parentElement.style.justifyContent='center';">
+                            <img src="imagem.png" alt="Bemorh Logo" style="width: 100%; height: 100%; object-fit: contain; padding: 3px;" onerror="handleLogoError(this)">
                         </div>
                         <div class="logo-text">
                             <div class="logo-main" style="font-size: 1.5rem;">Bemorh</div>
@@ -1312,64 +965,27 @@
     </footer>
 
     <script>
-        // Sistema de Autenticação
+        // Sistema de Autenticação COMPARTILHADO
         const adminAuth = {
-            password: "admin123",
-            isLoggedIn: false,
-            
-            checkLoginStatus: function() {
-                const savedLogin = localStorage.getItem('adminLoggedIn');
-                if (savedLogin === 'true') {
-                    this.isLoggedIn = true;
-                    showAdminArea();
-                }
-            },
+            password: localStorage.getItem('adminPassword') || "admin123",
             
             login: function(inputPassword) {
                 if (inputPassword === this.password) {
-                    this.isLoggedIn = true;
                     localStorage.setItem('adminLoggedIn', 'true');
                     return true;
                 }
                 return false;
             },
             
-            logout: function() {
-                this.isLoggedIn = false;
-                localStorage.removeItem('adminLoggedIn');
-                showClientArea();
-            },
-            
             changePassword: function(currentPassword, newPassword) {
                 if (currentPassword === this.password) {
                     this.password = newPassword;
+                    localStorage.setItem('adminPassword', newPassword);
                     return true;
                 }
                 return false;
             }
         };
-
-        // Sistema de Dados
-        let projects = JSON.parse(localStorage.getItem('bemorhProjects')) || [
-            { id: 1, name: "Sistema de Gestão de Ideias", client: "InovaCorp", status: "Concluído", deadline: "15/10/2023", budget: "R$ 52.000" },
-            { id: 2, name: "IA para Inovação", client: "TechVision", status: "Em Andamento", deadline: "30/11/2023", budget: "R$ 78.000" },
-            { id: 3, name: "Plataforma Colaborativa", client: "GlobalConnect", status: "Em Planejamento", deadline: "15/01/2024", budget: "R$ 95.000" },
-            { id: 4, name: "Dashboard de Inovação", client: "IdeaLabs", status: "Em Andamento", deadline: "20/12/2023", budget: "R$ 45.000" }
-        ];
-
-        let clients = JSON.parse(localStorage.getItem('bemorhClients')) || [
-            { id: 1, name: "Carlos Mendes", company: "InovaCorp", email: "carlos@inovacorp.com", phone: "(11) 98888-7777", projects: 1 },
-            { id: 2, name: "Ana Silva", company: "TechVision", email: "ana@techvision.com", phone: "(11) 97777-6666", projects: 1 },
-            { id: 3, name: "Roberto Lima", company: "GlobalConnect", email: "roberto@globalconnect.com", phone: "(11) 96666-5555", projects: 1 },
-            { id: 4, name: "Fernanda Costa", company: "IdeaLabs", email: "fernanda@idealabs.com", phone: "(11) 95555-4444", projects: 1 }
-        ];
-
-        let team = JSON.parse(localStorage.getItem('bemorhTeam')) || [
-            { id: 1, name: "João Santos", role: "Desenvolvedor Sênior", email: "joao@bemorh.com", phone: "(11) 94444-3333", projects: 3 },
-            { id: 2, name: "Maria Oliveira", role: "Designer UX/UI", email: "maria@bemorh.com", phone: "(11) 93333-2222", projects: 2 },
-            { id: 3, name: "Pedro Almeida", role: "Gerente de Projetos", email: "pedro@bemorh.com", phone: "(11) 92222-1111", projects: 4 },
-            { id: 4, name: "Julia Fernandes", role: "Arquiteta de Soluções", email: "julia@bemorh.com", phone: "(11) 91111-0000", projects: 2 }
-        ];
 
         // Elementos do DOM
         const adminLoginModal = document.getElementById('adminLoginModal');
@@ -1379,19 +995,22 @@
         const passwordError = document.getElementById('passwordError');
         const passwordSuccess = document.getElementById('passwordSuccess');
         const backToTopBtn = document.getElementById('backToTop');
+        const navItems = document.querySelectorAll('nav ul li a');
 
-        // Funções para mostrar/ocultar áreas
-        function showAdminArea() {
-            document.querySelector('.client-content').classList.remove('active');
-            document.querySelector('.admin-content').classList.add('active');
-            loadData();
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-        }
-
-        function showClientArea() {
-            document.querySelector('.admin-content').classList.remove('active');
-            document.querySelector('.client-content').classList.add('active');
-            window.scrollTo({ top: 0, behavior: 'smooth' });
+        // Função para tratar erro na logo
+        function handleLogoError(element) {
+            element.style.display = 'none';
+            const logoText = element.nextElementSibling || element.parentElement;
+            logoText.style.display = 'flex';
+            logoText.style.width = '100%';
+            logoText.style.height = '100%';
+            logoText.style.background = 'linear-gradient(135deg, var(--secondary), var(--primary))';
+            logoText.style.color = 'white';
+            logoText.style.fontWeight = 'bold';
+            logoText.style.fontSize = element.parentElement.classList.contains('logo-placeholder') ? '1.5rem' : '1rem';
+            logoText.style.alignItems = 'center';
+            logoText.style.justifyContent = 'center';
+            logoText.innerHTML = 'BH';
         }
 
         // Navegação do Site
@@ -1400,12 +1019,39 @@
             if (section) {
                 const headerHeight = document.querySelector('header').offsetHeight;
                 const sectionPosition = section.offsetTop - headerHeight;
+                
                 window.scrollTo({
                     top: sectionPosition,
                     behavior: 'smooth'
                 });
+                
+                updateNavigation(sectionId);
             }
         }
+
+        function updateNavigation(activeItem) {
+            navItems.forEach(item => item.classList.remove('active'));
+            
+            const activeNav = document.getElementById(`nav${capitalizeFirstLetter(activeItem)}`);
+            if (activeNav) activeNav.classList.add('active');
+        }
+
+        function capitalizeFirstLetter(string) {
+            return string.charAt(0).toUpperCase() + string.slice(1);
+        }
+
+        // Botão Voltar ao Topo
+        window.addEventListener('scroll', () => {
+            if (window.pageYOffset > 300) {
+                backToTopBtn.classList.add('show');
+            } else {
+                backToTopBtn.classList.remove('show');
+            }
+        });
+
+        backToTopBtn.addEventListener('click', () => {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
 
         // Configurar navegação
         document.getElementById('logoHome').addEventListener('click', () => scrollToSection('home'));
@@ -1423,36 +1069,11 @@
         document.getElementById('footerAbout').addEventListener('click', () => scrollToSection('about'));
         document.getElementById('footerContact').addEventListener('click', () => scrollToSection('contact'));
 
-        // Botão Voltar ao Topo
-        window.addEventListener('scroll', () => {
-            if (window.pageYOffset > 300) {
-                backToTopBtn.classList.add('show');
-            } else {
-                backToTopBtn.classList.remove('show');
-            }
-        });
-
-        backToTopBtn.addEventListener('click', () => {
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-        });
-
         // Botão de acesso admin
         document.getElementById('adminAccessBtn').addEventListener('click', function() {
-            if (!adminAuth.isLoggedIn) {
-                adminLoginModal.style.display = 'flex';
-                document.getElementById('adminPassword').focus();
-            } else {
-                showAdminArea();
-            }
+            adminLoginModal.style.display = 'flex';
+            document.getElementById('adminPassword').focus();
         });
-
-        // Botão para voltar ao site
-        document.getElementById('backToSiteBtn').addEventListener('click', function() {
-            showClientArea();
-        });
-
-        // Verificar status de login
-        adminAuth.checkLoginStatus();
 
         // Fechar modais
         document.getElementById('closeLoginModal').addEventListener('click', function() {
@@ -1530,7 +1151,8 @@
                 loginSuccess.style.display = 'block';
                 setTimeout(function() {
                     adminLoginModal.style.display = 'none';
-                    showAdminArea();
+                    // REDIRECIONAR PARA PAINEL ADMIN
+                    window.location.href = 'admin.html';
                     document.getElementById('adminPassword').value = '';
                 }, 1000);
             } else {
@@ -1588,25 +1210,6 @@
             }
         });
 
-        // Logout
-        document.getElementById('logoutBtn').addEventListener('click', function() {
-            adminAuth.logout();
-            alert("Você saiu da área administrativa com sucesso.");
-        });
-
-        // Alternar entre abas administrativas
-        document.querySelectorAll('.admin-tab').forEach(tab => {
-            tab.addEventListener('click', function() {
-                const tabId = this.getAttribute('data-tab');
-                
-                document.querySelectorAll('.admin-tab').forEach(t => t.classList.remove('active'));
-                document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
-                
-                this.classList.add('active');
-                document.getElementById(tabId).classList.add('active');
-            });
-        });
-
         // Formulário de contato
         document.getElementById('contactForm').addEventListener('submit', function(e) {
             e.preventDefault();
@@ -1616,7 +1219,8 @@
             const phone = document.getElementById('contactPhone').value;
             const message = document.getElementById('contactMessage').value;
             
-            // Salvar contato
+            // Salvar contato no localStorage
+            let contacts = JSON.parse(localStorage.getItem('bemorhContacts')) || [];
             const newContact = {
                 id: Date.now(),
                 name: name,
@@ -1627,8 +1231,6 @@
                 status: 'Novo'
             };
             
-            // Salvar no localStorage
-            let contacts = JSON.parse(localStorage.getItem('bemorhContacts')) || [];
             contacts.push(newContact);
             localStorage.setItem('bemorhContacts', JSON.stringify(contacts));
             
@@ -1641,7 +1243,6 @@
             const email = document.getElementById('newsletterEmail').value;
             
             if (email && email.includes('@')) {
-                // Salvar no localStorage
                 let newsletter = JSON.parse(localStorage.getItem('bemorhNewsletter')) || [];
                 if (!newsletter.includes(email)) {
                     newsletter.push(email);
@@ -1655,375 +1256,50 @@
             }
         });
 
-        // Funções CRUD para projetos
-        function addProject() {
-            const name = prompt("Nome do projeto:");
-            if (!name) return;
-            
-            const client = prompt("Cliente:");
-            const status = prompt("Status (Concluído/Em Andamento/Em Planejamento):");
-            const deadline = prompt("Prazo (dd/mm/aaaa):");
-            const budget = prompt("Orçamento:");
-            
-            const newProject = {
-                id: Date.now(),
-                name: name,
-                client: client || "Sem cliente",
-                status: status || "Em Planejamento",
-                deadline: deadline || "Não definido",
-                budget: budget || "Não definido"
-            };
-            
-            projects.push(newProject);
-            saveProjects();
-            loadData();
-            alert("Projeto adicionado com sucesso!");
-        }
-
-        function editProject(id) {
-            const project = projects.find(p => p.id === id);
-            if (!project) return;
-            
-            const newName = prompt("Novo nome do projeto:", project.name);
-            if (newName !== null) project.name = newName;
-            
-            const newClient = prompt("Novo cliente:", project.client);
-            if (newClient !== null) project.client = newClient;
-            
-            const newStatus = prompt("Novo status:", project.status);
-            if (newStatus !== null) project.status = newStatus;
-            
-            const newDeadline = prompt("Novo prazo:", project.deadline);
-            if (newDeadline !== null) project.deadline = newDeadline;
-            
-            const newBudget = prompt("Novo orçamento:", project.budget);
-            if (newBudget !== null) project.budget = newBudget;
-            
-            saveProjects();
-            loadData();
-            alert("Projeto atualizado com sucesso!");
-        }
-
-        function deleteProject(id) {
-            if (confirm("Tem certeza que deseja excluir este projeto?")) {
-                projects = projects.filter(p => p.id !== id);
-                saveProjects();
-                loadData();
-                alert("Projeto excluído com sucesso!");
-            }
-        }
-
-        function saveProjects() {
-            localStorage.setItem('bemorhProjects', JSON.stringify(projects));
-        }
-
-        // Funções CRUD para clientes
-        function addClient() {
-            const name = prompt("Nome do cliente:");
-            if (!name) return;
-            
-            const company = prompt("Empresa:");
-            const email = prompt("Email:");
-            const phone = prompt("Telefone:");
-            
-            const newClient = {
-                id: Date.now(),
-                name: name,
-                company: company || "Sem empresa",
-                email: email || "Não informado",
-                phone: phone || "Não informado",
-                projects: 0
-            };
-            
-            clients.push(newClient);
-            saveClients();
-            loadData();
-            alert("Cliente adicionado com sucesso!");
-        }
-
-        function editClient(id) {
-            const client = clients.find(c => c.id === id);
-            if (!client) return;
-            
-            const newName = prompt("Novo nome:", client.name);
-            if (newName !== null) client.name = newName;
-            
-            const newCompany = prompt("Nova empresa:", client.company);
-            if (newCompany !== null) client.company = newCompany;
-            
-            const newEmail = prompt("Novo email:", client.email);
-            if (newEmail !== null) client.email = newEmail;
-            
-            const newPhone = prompt("Novo telefone:", client.phone);
-            if (newPhone !== null) client.phone = newPhone;
-            
-            saveClients();
-            loadData();
-            alert("Cliente atualizado com sucesso!");
-        }
-
-        function deleteClient(id) {
-            if (confirm("Tem certeza que deseja excluir este cliente?")) {
-                clients = clients.filter(c => c.id !== id);
-                saveClients();
-                loadData();
-                alert("Cliente excluído com sucesso!");
-            }
-        }
-
-        function saveClients() {
-            localStorage.setItem('bemorhClients', JSON.stringify(clients));
-        }
-
-        // Funções CRUD para equipe
-        function addTeamMember() {
-            const name = prompt("Nome do membro:");
-            if (!name) return;
-            
-            const role = prompt("Cargo:");
-            const email = prompt("Email:");
-            const phone = prompt("Telefone:");
-            
-            const newMember = {
-                id: Date.now(),
-                name: name,
-                role: role || "Não definido",
-                email: email || "Não informado",
-                phone: phone || "Não informado",
-                projects: 0
-            };
-            
-            team.push(newMember);
-            saveTeam();
-            loadData();
-            alert("Membro adicionado com sucesso!");
-        }
-
-        function editTeamMember(id) {
-            const member = team.find(m => m.id === id);
-            if (!member) return;
-            
-            const newName = prompt("Novo nome:", member.name);
-            if (newName !== null) member.name = newName;
-            
-            const newRole = prompt("Novo cargo:", member.role);
-            if (newRole !== null) member.role = newRole;
-            
-            const newEmail = prompt("Novo email:", member.email);
-            if (newEmail !== null) member.email = newEmail;
-            
-            const newPhone = prompt("Novo telefone:", member.phone);
-            if (newPhone !== null) member.phone = newPhone;
-            
-            saveTeam();
-            loadData();
-            alert("Membro atualizado com sucesso!");
-        }
-
-        function deleteTeamMember(id) {
-            if (confirm("Tem certeza que deseja excluir este membro?")) {
-                team = team.filter(m => m.id !== id);
-                saveTeam();
-                loadData();
-                alert("Membro excluído com sucesso!");
-            }
-        }
-
-        function saveTeam() {
-            localStorage.setItem('bemorhTeam', JSON.stringify(team));
-        }
-
-        // Função para carregar dados nas tabelas
-        function loadData() {
-            // Atualiza contadores
-            document.getElementById('projectCount').textContent = projects.length;
-            document.getElementById('clientCount').textContent = clients.length;
-            document.getElementById('taskCount').textContent = calculateCompletionRate();
-            
-            // Carrega projetos
-            const projectsTable = document.getElementById('projectsTable');
-            projectsTable.innerHTML = '';
-            projects.forEach(project => {
-                const row = document.createElement('tr');
-                row.innerHTML = `
-                    <td>${project.name}</td>
-                    <td>${project.client}</td>
-                    <td><span class="project-status status-${getStatusClass(project.status)}">${project.status}</span></td>
-                    <td>${project.deadline}</td>
-                    <td>${project.budget}</td>
-                    <td class="actions">
-                        <button class="action-btn view-btn" onclick="viewProject(${project.id})">Ver</button>
-                        <button class="action-btn edit-btn" onclick="editProject(${project.id})">Editar</button>
-                        <button class="action-btn delete-btn" onclick="deleteProject(${project.id})">Excluir</button>
-                    </td>
-                `;
-                projectsTable.appendChild(row);
-            });
-            
-            // Carrega clientes
-            const clientsTable = document.getElementById('clientsTable');
-            clientsTable.innerHTML = '';
-            clients.forEach(client => {
-                const row = document.createElement('tr');
-                row.innerHTML = `
-                    <td>${client.name}</td>
-                    <td>${client.company}</td>
-                    <td>${client.email}</td>
-                    <td>${client.phone}</td>
-                    <td>${client.projects}</td>
-                    <td class="actions">
-                        <button class="action-btn view-btn" onclick="viewClient(${client.id})">Ver</button>
-                        <button class="action-btn edit-btn" onclick="editClient(${client.id})">Editar</button>
-                        <button class="action-btn delete-btn" onclick="deleteClient(${client.id})">Excluir</button>
-                    </td>
-                `;
-                clientsTable.appendChild(row);
-            });
-            
-            // Carrega equipe
-            const teamTable = document.getElementById('teamTable');
-            teamTable.innerHTML = '';
-            team.forEach(member => {
-                const row = document.createElement('tr');
-                row.innerHTML = `
-                    <td>${member.name}</td>
-                    <td>${member.role}</td>
-                    <td>${member.email}</td>
-                    <td>${member.phone}</td>
-                    <td>${member.projects}</td>
-                    <td class="actions">
-                        <button class="action-btn view-btn" onclick="viewTeamMember(${member.id})">Ver</button>
-                        <button class="action-btn edit-btn" onclick="editTeamMember(${member.id})">Editar</button>
-                        <button class="action-btn delete-btn" onclick="deleteTeamMember(${member.id})">Excluir</button>
-                    </td>
-                `;
-                teamTable.appendChild(row);
-            });
-        }
-
-        function calculateCompletionRate() {
-            if (projects.length === 0) return "0%";
-            const completed = projects.filter(p => p.status === "Concluído").length;
-            return Math.round((completed / projects.length) * 100) + "%";
-        }
-
-        function getStatusClass(status) {
-            if (status === 'Concluído') return 'completed';
-            if (status === 'Em Andamento') return 'in-progress';
-            if (status === 'Em Planejamento') return 'pending';
-            return 'pending';
-        }
-
-        // Funções de visualização
-        function viewProject(id) {
-            const project = projects.find(p => p.id === id);
-            if (project) {
-                alert(`Projeto: ${project.name}\nCliente: ${project.client}\nStatus: ${project.status}\nPrazo: ${project.deadline}\nOrçamento: ${project.budget}`);
-            }
-        }
-
-        function viewClient(id) {
-            const client = clients.find(c => c.id === id);
-            if (client) {
-                alert(`Cliente: ${client.name}\nEmpresa: ${client.company}\nEmail: ${client.email}\nTelefone: ${client.phone}\nProjetos: ${client.projects}`);
-            }
-        }
-
-        function viewTeamMember(id) {
-            const member = team.find(m => m.id === id);
-            if (member) {
-                alert(`Membro: ${member.name}\nCargo: ${member.role}\nEmail: ${member.email}\nTelefone: ${member.phone}\nProjetos: ${member.projects}`);
-            }
-        }
-
-        // Botões de adicionar
-        document.getElementById('addProjectBtn').addEventListener('click', function() {
-            if (!adminAuth.isLoggedIn) {
-                alert("Você precisa estar logado para adicionar um projeto.");
-                return;
-            }
-            addProject();
-        });
-
-        document.getElementById('addClientBtn').addEventListener('click', function() {
-            if (!adminAuth.isLoggedIn) {
-                alert("Você precisa estar logado para adicionar um cliente.");
-                return;
-            }
-            addClient();
-        });
-
-        document.getElementById('addMemberBtn').addEventListener('click', function() {
-            if (!adminAuth.isLoggedIn) {
-                alert("Você precisa estar logado para adicionar um membro da equipe.");
-                return;
-            }
-            addTeamMember();
-        });
-
-        // Configurações da empresa
-        document.getElementById('companySettings').addEventListener('submit', function(e) {
-            e.preventDefault();
-            if (!adminAuth.isLoggedIn) {
-                alert("Você precisa estar logado para alterar as configurações.");
-                return;
-            }
-            
-            const companyName = document.getElementById('companyName').value;
-            const companyTagline = document.getElementById('companyTagline').value;
-            
-            // Salvar no localStorage
-            localStorage.setItem('bemorhCompanyName', companyName);
-            localStorage.setItem('bemorhCompanyTagline', companyTagline);
-            
-            // Atualizar interface
-            document.querySelectorAll('.logo-main').forEach(el => el.textContent = companyName);
-            document.querySelectorAll('.logo-tagline').forEach(el => el.textContent = companyTagline);
-            document.title = `${companyName} - ${companyTagline}`;
-            
-            alert('Configurações da empresa salvas com sucesso!');
-        });
-
-        // Carregar configurações salvas
-        function loadSettings() {
+        // Carregar configurações da empresa
+        function loadCompanySettings() {
             const savedName = localStorage.getItem('bemorhCompanyName');
             const savedTagline = localStorage.getItem('bemorhCompanyTagline');
             
             if (savedName) {
-                document.getElementById('companyName').value = savedName;
                 document.querySelectorAll('.logo-main').forEach(el => el.textContent = savedName);
             }
             
             if (savedTagline) {
-                document.getElementById('companyTagline').value = savedTagline;
                 document.querySelectorAll('.logo-tagline').forEach(el => el.textContent = savedTagline);
                 document.title = `${savedName || 'Bemorh'} - ${savedTagline}`;
             }
         }
 
+        // Detectar seção ativa no scroll
+        window.addEventListener('scroll', function() {
+            const sections = ['home', 'projects', 'services', 'about', 'contact'];
+            let currentSection = 'home';
+            
+            sections.forEach(section => {
+                const element = document.getElementById(section);
+                if (element) {
+                    const rect = element.getBoundingClientRect();
+                    const headerHeight = document.querySelector('header').offsetHeight;
+                    
+                    if (rect.top <= headerHeight + 100 && rect.bottom >= headerHeight + 100) {
+                        currentSection = section;
+                    }
+                }
+            });
+            
+            updateNavigation(currentSection);
+        });
+
         // Inicializar
         document.addEventListener('DOMContentLoaded', function() {
-            loadSettings();
-            loadData();
+            loadCompanySettings();
             
-            // Configurar rolagem suave para todas as âncoras
-            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-                anchor.addEventListener('click', function(e) {
-                    e.preventDefault();
-                    const targetId = this.getAttribute('href');
-                    if (targetId === '#') return;
-                    
-                    const targetElement = document.querySelector(targetId);
-                    if (targetElement) {
-                        const headerHeight = document.querySelector('header').offsetHeight;
-                        const targetPosition = targetElement.offsetTop - headerHeight;
-                        window.scrollTo({
-                            top: targetPosition,
-                            behavior: 'smooth'
-                        });
-                    }
-                });
-            });
+            // Verificar se já está logado
+            if (localStorage.getItem('adminLoggedIn') === 'true') {
+                // Se já logado, redirecionar direto para admin
+                // window.location.href = 'admin.html';
+            }
         });
     </script>
 </body>

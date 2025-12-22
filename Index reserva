@@ -74,6 +74,10 @@
             background-color: var(--warning);
         }
 
+        .btn-contact {
+            background-color: var(--success);
+        }
+
         section {
             padding: 80px 0;
         }
@@ -147,9 +151,20 @@
             color: var(--secondary);
         }
 
-        .auth-buttons {
-            display: flex;
-            gap: 10px;
+        .admin-access-btn {
+            background: none;
+            border: 2px solid var(--secondary);
+            color: var(--secondary);
+            padding: 10px 20px;
+            border-radius: 4px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .admin-access-btn:hover {
+            background-color: var(--secondary);
+            color: white;
         }
 
         /* Cliente vs Admin */
@@ -409,6 +424,42 @@
             color: var(--warning);
         }
 
+        /* Seção de Contato */
+        .contact-section {
+            background-color: var(--light);
+        }
+
+        .contact-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 40px;
+        }
+
+        .contact-info {
+            background-color: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: var(--shadow);
+        }
+
+        .contact-info h3 {
+            margin-bottom: 20px;
+            color: var(--primary);
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 20px;
+        }
+
+        .contact-item i {
+            color: var(--secondary);
+            margin-right: 15px;
+            font-size: 1.2rem;
+            margin-top: 5px;
+        }
+
         /* Área Administrativa */
         .admin-header {
             background-color: var(--primary);
@@ -614,6 +665,10 @@
             .hero h1 {
                 font-size: 2.8rem;
             }
+            
+            .admin-access-btn {
+                margin-top: 15px;
+            }
         }
 
         @media (max-width: 768px) {
@@ -660,10 +715,9 @@
                     <li><a href="#contact">Contato</a></li>
                 </ul>
             </nav>
-            <div class="auth-buttons">
-                <button class="btn" id="loginBtn">Entrar</button>
-                <button class="btn btn-success" id="signupBtn">Cadastrar</button>
-            </div>
+            <button class="admin-access-btn" id="adminAccessBtn">
+                <i class="fas fa-cogs"></i> Acesso Admin
+            </button>
         </div>
     </header>
 
@@ -774,7 +828,9 @@
             <div class="container">
                 <h1>Ferramentas Virtuais para o Futuro</h1>
                 <p>Desenvolvemos soluções digitais inovadoras que impulsionam o seu negócio. Nossas ferramentas virtuais são criadas com as mais avançadas tecnologias para atender às demandas do mercado atual.</p>
-                <a href="#projects" class="btn">Ver Nossos Projetos</a>
+                <a href="#contact" class="btn btn-contact">
+                    <i class="fas fa-envelope"></i> Entre em Contato
+                </a>
             </div>
         </section>
 
@@ -848,6 +904,102 @@
                             <h3>Consultoria em Segurança</h3>
                             <p>Auditoria e implementação de medidas de segurança para proteger seus dados e aplicações.</p>
                         </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Sobre Nós -->
+        <section id="about" style="background-color: var(--light);">
+            <div class="container">
+                <h2 class="section-title">Sobre Nós</h2>
+                <div style="max-width: 800px; margin: 0 auto; text-align: center;">
+                    <p style="font-size: 1.2rem; margin-bottom: 30px;">
+                        A <strong>DevTools</strong> é uma empresa especializada no desenvolvimento de ferramentas virtuais inovadoras para empresas de todos os portes. Com mais de 10 anos de experiência no mercado, nossa equipe de especialistas está comprometida em entregar soluções digitais que otimizam processos e impulsionam resultados.
+                    </p>
+                    <div class="projects-grid">
+                        <div class="project-card" style="text-align: left;">
+                            <div class="project-info">
+                                <h3><i class="fas fa-bullseye" style="color: var(--secondary);"></i> Nossa Missão</h3>
+                                <p>Desenvolver ferramentas virtuais que transformam a maneira como as empresas operam, tornando processos mais eficientes e resultados mais consistentes.</p>
+                            </div>
+                        </div>
+                        <div class="project-card" style="text-align: left;">
+                            <div class="project-info">
+                                <h3><i class="fas fa-eye" style="color: var(--secondary);"></i> Nossa Visão</h3>
+                                <p>Ser referência nacional no desenvolvimento de soluções digitais inovadoras até 2030, impactando positivamente milhares de empresas.</p>
+                            </div>
+                        </div>
+                        <div class="project-card" style="text-align: left;">
+                            <div class="project-info">
+                                <h3><i class="fas fa-handshake" style="color: var(--secondary);"></i> Nossos Valores</h3>
+                                <p>Inovação, qualidade, transparência, parceria com o cliente e compromisso com resultados mensuráveis.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contato -->
+        <section class="contact-section" id="contact">
+            <div class="container">
+                <h2 class="section-title">Entre em Contato</h2>
+                <div class="contact-container">
+                    <div class="contact-info">
+                        <h3>Informações de Contato</h3>
+                        <div class="contact-item">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <div>
+                                <h4>Endereço</h4>
+                                <p>Av. Paulista, 1000 - Bela Vista<br>São Paulo - SP, 01310-100</p>
+                            </div>
+                        </div>
+                        <div class="contact-item">
+                            <i class="fas fa-phone"></i>
+                            <div>
+                                <h4>Telefone</h4>
+                                <p>(11) 3333-4444</p>
+                            </div>
+                        </div>
+                        <div class="contact-item">
+                            <i class="fas fa-envelope"></i>
+                            <div>
+                                <h4>Email</h4>
+                                <p>contato@devtools.com.br</p>
+                            </div>
+                        </div>
+                        <div class="contact-item">
+                            <i class="fas fa-clock"></i>
+                            <div>
+                                <h4>Horário de Atendimento</h4>
+                                <p>Segunda a Sexta: 9h às 18h<br>Sábado: 9h às 12h</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="contact-info">
+                        <h3>Envie uma Mensagem</h3>
+                        <form id="contactForm">
+                            <div class="form-group">
+                                <label for="contactName">Nome</label>
+                                <input type="text" id="contactName" class="form-control" placeholder="Seu nome completo" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="contactEmail">Email</label>
+                                <input type="email" id="contactEmail" class="form-control" placeholder="seu@email.com" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="contactPhone">Telefone</label>
+                                <input type="text" id="contactPhone" class="form-control" placeholder="(11) 99999-9999">
+                            </div>
+                            <div class="form-group">
+                                <label for="contactMessage">Mensagem</label>
+                                <textarea id="contactMessage" class="form-control" rows="5" placeholder="Como podemos ajudá-lo?" required></textarea>
+                            </div>
+                            <button type="submit" class="btn btn-contact" style="width: 100%;">
+                                <i class="fas fa-paper-plane"></i> Enviar Mensagem
+                            </button>
+                        </form>
                     </div>
                 </div>
             </div>
@@ -999,7 +1151,7 @@
     </div>
 
     <!-- Footer -->
-    <footer id="contact">
+    <footer>
         <div class="container">
             <div class="footer-content">
                 <div class="footer-column">
@@ -1026,7 +1178,7 @@
                     <h3>Contato</h3>
                     <ul>
                         <li><i class="fas fa-map-marker-alt"></i> Av. Paulista, 1000 - São Paulo, SP</li>
-                        <li><i class="fas fa-phone"></i> (11) 99999-9999</li>
+                        <li><i class="fas fa-phone"></i> (11) 3333-4444</li>
                         <li><i class="fas fa-envelope"></i> contato@devtools.com.br</li>
                         <li><i class="fas fa-clock"></i> Seg-Sex: 9h-18h</li>
                     </ul>
@@ -1035,8 +1187,8 @@
                     <h3>Newsletter</h3>
                     <p>Inscreva-se para receber novidades sobre nossos projetos e serviços.</p>
                     <div class="form-group" style="margin-top: 15px;">
-                        <input type="email" class="form-control" placeholder="Seu email">
-                        <button class="btn" style="margin-top: 10px; width: 100%;">Inscrever-se</button>
+                        <input type="email" class="form-control" placeholder="Seu email" id="newsletterEmail">
+                        <button class="btn" style="margin-top: 10px; width: 100%;" id="newsletterBtn">Inscrever-se</button>
                     </div>
                 </div>
             </div>
@@ -1119,6 +1271,12 @@
 
         // Verificar status de login ao carregar a página
         adminAuth.checkLoginStatus();
+
+        // Botão de acesso admin no header
+        document.getElementById('adminAccessBtn').addEventListener('click', function() {
+            adminLoginModal.style.display = 'flex';
+            document.getElementById('adminPassword').focus();
+        });
 
         // Função para alternar entre cliente e admin (com verificação de login)
         document.getElementById('adminBtn').addEventListener('click', function() {
@@ -1339,6 +1497,32 @@
             });
         });
 
+        // Formulário de contato
+        document.getElementById('contactForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const name = document.getElementById('contactName').value;
+            const email = document.getElementById('contactEmail').value;
+            
+            // Aqui normalmente enviaria para um servidor
+            alert(`Obrigado, ${name}! Sua mensagem foi enviada com sucesso. Entraremos em contato no email ${email} em breve.`);
+            
+            // Limpar formulário
+            document.getElementById('contactForm').reset();
+        });
+
+        // Newsletter
+        document.getElementById('newsletterBtn').addEventListener('click', function() {
+            const email = document.getElementById('newsletterEmail').value;
+            
+            if (email && email.includes('@')) {
+                alert(`Obrigado por se inscrever na nossa newsletter! Enviaremos novidades para ${email}.`);
+                document.getElementById('newsletterEmail').value = '';
+            } else {
+                alert('Por favor, insira um email válido.');
+            }
+        });
+
         // Função para carregar dados nas tabelas
         function loadData() {
             // Atualiza contadores
@@ -1446,15 +1630,6 @@
                 return;
             }
             alert('Configurações da empresa salvas com sucesso!');
-        });
-
-        // Função para os botões de login/cadastro (usuários comuns)
-        document.getElementById('loginBtn').addEventListener('click', function() {
-            alert('Funcionalidade de login para clientes será implementada aqui.');
-        });
-
-        document.getElementById('signupBtn').addEventListener('click', function() {
-            alert('Funcionalidade de cadastro para clientes será implementada aqui.');
         });
 
         // Inicializa os dados quando a página carrega

@@ -8,14 +8,14 @@
     <style>
         /* Estilos Gerais */
         :root {
-            --primary: #1a237e;
-            --secondary: #3d5afe;
-            --accent: #ff4081;
-            --light: #e8eaf6;
-            --dark: #0d1458;
-            --success: #00c853;
-            --warning: #ff9100;
-            --gray: #78909c;
+            --primary: #2c3e50;
+            --secondary: #3498db;
+            --accent: #e74c3c;
+            --light: #ecf0f1;
+            --dark: #2c3e50;
+            --success: #2ecc71;
+            --warning: #f39c12;
+            --gray: #95a5a6;
             --shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
         }
 
@@ -57,7 +57,7 @@
         }
 
         .btn:hover {
-            background-color: #304ffe;
+            background-color: #2980b9;
             transform: translateY(-2px);
             box-shadow: var(--shadow);
         }
@@ -119,7 +119,33 @@
             padding: 15px 20px;
         }
 
-        .logo {
+        .logo-container {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            cursor: pointer;
+        }
+
+        .logo-placeholder {
+            width: 50px;
+            height: 50px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            background-color: white;
+        }
+
+        .logo-placeholder img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            padding: 5px;
+        }
+
+        .logo-text {
             display: flex;
             flex-direction: column;
         }
@@ -151,6 +177,7 @@
             font-weight: 600;
             color: var(--primary);
             transition: color 0.3s;
+            cursor: pointer;
         }
 
         nav ul li a:hover {
@@ -170,7 +197,7 @@
 
         .admin-icon-btn:hover {
             color: var(--secondary);
-            background-color: rgba(61, 90, 254, 0.1);
+            background-color: rgba(52, 152, 219, 0.1);
         }
 
         /* Modal de Login */
@@ -295,13 +322,13 @@
         }
 
         .alert-danger {
-            background-color: rgba(255, 64, 129, 0.1);
+            background-color: rgba(231, 76, 60, 0.1);
             color: var(--accent);
             border-left: 4px solid var(--accent);
         }
 
         .alert-success {
-            background-color: rgba(0, 200, 83, 0.1);
+            background-color: rgba(46, 204, 113, 0.1);
             color: var(--success);
             border-left: 4px solid var(--success);
         }
@@ -318,7 +345,7 @@
 
         /* Hero Section */
         .hero {
-            background: linear-gradient(135deg, var(--primary) 0%, var(--dark) 100%);
+            background: linear-gradient(135deg, var(--primary) 0%, #1a2530 100%);
             color: white;
             padding: 150px 0 100px;
             text-align: center;
@@ -385,17 +412,17 @@
         }
 
         .status-completed {
-            background-color: rgba(0, 200, 83, 0.2);
+            background-color: rgba(46, 204, 113, 0.2);
             color: var(--success);
         }
 
         .status-in-progress {
-            background-color: rgba(61, 90, 254, 0.2);
+            background-color: rgba(52, 152, 219, 0.2);
             color: var(--secondary);
         }
 
         .status-pending {
-            background-color: rgba(255, 145, 0, 0.2);
+            background-color: rgba(243, 156, 18, 0.2);
             color: var(--warning);
         }
 
@@ -445,6 +472,30 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
+        }
+
+        .admin-logo-container {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .admin-logo-placeholder {
+            width: 40px;
+            height: 40px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            background-color: white;
+        }
+
+        .admin-logo-placeholder img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            padding: 3px;
         }
 
         .logout-btn {
@@ -525,6 +576,7 @@
             border-radius: 10px;
             overflow: hidden;
             box-shadow: var(--shadow);
+            margin-bottom: 30px;
         }
 
         th, td {
@@ -545,16 +597,22 @@
 
         .actions {
             display: flex;
-            gap: 10px;
+            gap: 5px;
         }
 
         .action-btn {
-            padding: 8px 12px;
+            padding: 6px 10px;
             border-radius: 4px;
             font-size: 0.8rem;
             cursor: pointer;
             border: none;
             color: white;
+            transition: all 0.3s;
+        }
+
+        .action-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow);
         }
 
         .edit-btn {
@@ -608,6 +666,11 @@
             margin-bottom: 10px;
         }
 
+        .footer-column ul li a {
+            cursor: pointer;
+            transition: color 0.3s;
+        }
+
         .footer-column ul li a:hover {
             color: var(--secondary);
         }
@@ -618,6 +681,38 @@
             border-top: 1px solid rgba(255, 255, 255, 0.1);
             font-size: 0.9rem;
             opacity: 0.8;
+        }
+
+        /* Botão Voltar ao Topo */
+        .back-to-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 50px;
+            height: 50px;
+            background-color: var(--secondary);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            cursor: pointer;
+            z-index: 100;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+            box-shadow: var(--shadow);
+        }
+
+        .back-to-top.show {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .back-to-top:hover {
+            background-color: #2980b9;
+            transform: translateY(-5px);
         }
 
         /* Responsividade */
@@ -644,6 +739,22 @@
             .admin-icon-btn {
                 margin-top: 15px;
             }
+            
+            .logo-container {
+                flex-direction: column;
+                text-align: center;
+                gap: 10px;
+            }
+
+            .admin-header {
+                flex-direction: column;
+                gap: 15px;
+                text-align: center;
+            }
+            
+            .admin-header > div {
+                width: 100%;
+            }
         }
 
         @media (max-width: 768px) {
@@ -662,24 +773,42 @@
             .admin-tabs {
                 flex-wrap: wrap;
             }
+
+            table {
+                display: block;
+                overflow-x: auto;
+            }
         }
     </style>
 </head>
 <body>
+    <!-- Botão Voltar ao Topo -->
+    <div class="back-to-top" id="backToTop">
+        <i class="fas fa-arrow-up"></i>
+    </div>
+
     <!-- Header -->
     <header>
         <div class="header-container container">
-            <div class="logo">
-                <div class="logo-main">Bemorh</div>
-                <div class="logo-tagline">tecnologia que conecta ideias</div>
+            <div class="logo-container" id="logoHome">
+                <div class="logo-placeholder">
+                    <img src="imagem.png" alt="Bemorh Logo" id="logoImage" onerror="this.style.display='none'; document.getElementById('logoText').style.display='flex';">
+                    <div id="logoText" style="display: none; width: 100%; height: 100%; background: linear-gradient(135deg, var(--secondary), var(--primary)); color: white; font-weight: bold; font-size: 1.5rem; align-items: center; justify-content: center;">
+                        BH
+                    </div>
+                </div>
+                <div class="logo-text">
+                    <div class="logo-main">Bemorh</div>
+                    <div class="logo-tagline">tecnologia que conecta ideias</div>
+                </div>
             </div>
             <nav>
                 <ul>
-                    <li><a href="#home">Início</a></li>
-                    <li><a href="#projects">Projetos</a></li>
-                    <li><a href="#services">Serviços</a></li>
-                    <li><a href="#about">Sobre</a></li>
-                    <li><a href="#contact">Contato</a></li>
+                    <li><a id="navHome">Início</a></li>
+                    <li><a id="navProjects">Projetos</a></li>
+                    <li><a id="navServices">Serviços</a></li>
+                    <li><a id="navAbout">Sobre</a></li>
+                    <li><a id="navContact">Contato</a></li>
                 </ul>
             </nav>
             <button class="admin-icon-btn" id="adminAccessBtn" title="Acesso Administrativo">
@@ -787,7 +916,7 @@
             <div class="container">
                 <h1>Tecnologia que Conecta Ideias</h1>
                 <p>Na Bemorh, transformamos conceitos em soluções digitais inovadoras. Desenvolvemos ferramentas virtuais que conectam pessoas, processos e tecnologias para impulsionar o seu negócio.</p>
-                <a href="#contact" class="btn btn-contact">
+                <a href="#contact" class="btn btn-contact" id="heroContactBtn">
                     <i class="fas fa-envelope"></i> Entre em Contato
                 </a>
             </div>
@@ -800,12 +929,12 @@
                 <div class="projects-grid">
                     <div class="project-card">
                         <div class="project-img">
-                            <i class="fas fa-chart-network"></i>
+                            <i class="fas fa-project-diagram"></i>
                         </div>
                         <div class="project-info">
-                            <h3>Sistema de Conexão de Ideias</h3>
+                            <h3>Sistema de Gestão de Ideias</h3>
                             <span class="project-status status-completed">Concluído</span>
-                            <p>Plataforma colaborativa que conecta equipes e organiza ideias em projetos executáveis com fluxos visuais.</p>
+                            <p>Plataforma colaborativa que organiza e prioriza ideias em projetos executáveis com fluxos visuais intuitivos.</p>
                         </div>
                     </div>
                     <div class="project-card">
@@ -838,7 +967,7 @@
                 <h2 class="section-title">Nossos Serviços</h2>
                 <div class="projects-grid">
                     <div class="project-card">
-                        <div class="project-img" style="background-color: #7b1fa2;">
+                        <div class="project-img" style="background-color: #9b59b6;">
                             <i class="fas fa-lightbulb"></i>
                         </div>
                         <div class="project-info">
@@ -847,7 +976,7 @@
                         </div>
                     </div>
                     <div class="project-card">
-                        <div class="project-img" style="background-color: #00796b;">
+                        <div class="project-img" style="background-color: #1abc9c;">
                             <i class="fas fa-code-branch"></i>
                         </div>
                         <div class="project-info">
@@ -856,7 +985,7 @@
                         </div>
                     </div>
                     <div class="project-card">
-                        <div class="project-img" style="background-color: #d84315;">
+                        <div class="project-img" style="background-color: #e67e22;">
                             <i class="fas fa-project-diagram"></i>
                         </div>
                         <div class="project-info">
@@ -880,7 +1009,7 @@
                         <div class="project-card" style="text-align: left;">
                             <div class="project-info">
                                 <h3><i class="fas fa-bullseye" style="color: var(--secondary);"></i> Nossa Missão</h3>
-                                <p>Conectar pessoas, ideias e tecnologias para criar soluções digitais inovadoras que transformam negócios e impulsionam resultados extraordinários.</p>
+                                <p>Conectar pessoas, ideias e tecnologias para criar soluções digitais inovadoras que transformam negócios e impulsionam resultados.</p>
                             </div>
                         </div>
                         <div class="project-card" style="text-align: left;">
@@ -970,12 +1099,20 @@
         <div class="container">
             <!-- Header Admin -->
             <div class="admin-header">
-                <div>
-                    <h1><i class="fas fa-cogs"></i> Painel Administrativo - Bemorh</h1>
-                    <p>Gerencie projetos, clientes e configurações da empresa</p>
+                <div class="admin-logo-container">
+                    <div class="admin-logo-placeholder">
+                        <img src="imagem.png" alt="Bemorh Logo" id="adminLogoImage" onerror="this.style.display='none'; document.getElementById('adminLogoText').style.display='flex';">
+                        <div id="adminLogoText" style="display: none; width: 100%; height: 100%; background: linear-gradient(135deg, var(--secondary), var(--primary)); color: white; font-weight: bold; align-items: center; justify-content: center;">
+                            BH
+                        </div>
+                    </div>
+                    <div>
+                        <h1><i class="fas fa-cogs"></i> Painel Administrativo</h1>
+                        <p>Gerencie projetos, clientes e configurações da empresa</p>
+                    </div>
                 </div>
                 <div>
-                    <button class="btn" id="backToSiteBtn" style="margin-right: 10px;">
+                    <button class="btn" id="backToSiteBtn">
                         <i class="fas fa-globe"></i> Voltar ao Site
                     </button>
                     <button class="logout-btn" id="logoutBtn">
@@ -1123,7 +1260,15 @@
         <div class="container">
             <div class="footer-content">
                 <div class="footer-column">
-                    <h3>Bemorh</h3>
+                    <div class="logo-container" style="margin-bottom: 20px; cursor: default;">
+                        <div class="logo-placeholder" style="width: 40px; height: 40px; font-size: 1.2rem;">
+                            <img src="imagem.png" alt="Bemorh Logo" style="width: 100%; height: 100%; object-fit: contain; padding: 3px;" onerror="this.style.display='none'; this.parentElement.innerHTML='BH'; this.parentElement.style.background='linear-gradient(135deg, var(--secondary), var(--primary))'; this.parentElement.style.color='white'; this.parentElement.style.fontWeight='bold'; this.parentElement.style.display='flex'; this.parentElement.style.alignItems='center'; this.parentElement.style.justifyContent='center';">
+                        </div>
+                        <div class="logo-text">
+                            <div class="logo-main" style="font-size: 1.5rem;">Bemorh</div>
+                            <div class="logo-tagline" style="font-size: 0.8rem;">tecnologia que conecta ideias</div>
+                        </div>
+                    </div>
                     <p>Tecnologia que conecta ideias. Desenvolvemos soluções digitais inovadoras que transformam conceitos em realidade.</p>
                     <div style="margin-top: 20px;">
                         <a href="#" style="margin-right: 15px;"><i class="fab fa-linkedin fa-lg"></i></a>
@@ -1135,11 +1280,11 @@
                 <div class="footer-column">
                     <h3>Links Rápidos</h3>
                     <ul>
-                        <li><a href="#home">Início</a></li>
-                        <li><a href="#projects">Projetos</a></li>
-                        <li><a href="#services">Serviços</a></li>
-                        <li><a href="#about">Sobre Nós</a></li>
-                        <li><a href="#contact">Contato</a></li>
+                        <li><a id="footerHome">Início</a></li>
+                        <li><a id="footerProjects">Projetos</a></li>
+                        <li><a id="footerServices">Serviços</a></li>
+                        <li><a id="footerAbout">Sobre Nós</a></li>
+                        <li><a id="footerContact">Contato</a></li>
                     </ul>
                 </div>
                 <div class="footer-column">
@@ -1169,21 +1314,17 @@
     <script>
         // Sistema de Autenticação
         const adminAuth = {
-            // Senha padrão (pode ser alterada)
             password: "admin123",
             isLoggedIn: false,
             
-            // Verificar login no localStorage ao carregar
             checkLoginStatus: function() {
                 const savedLogin = localStorage.getItem('adminLoggedIn');
                 if (savedLogin === 'true') {
                     this.isLoggedIn = true;
-                    // Se já estiver logado, mostrar área administrativa
                     showAdminArea();
                 }
             },
             
-            // Realizar login
             login: function(inputPassword) {
                 if (inputPassword === this.password) {
                     this.isLoggedIn = true;
@@ -1193,14 +1334,12 @@
                 return false;
             },
             
-            // Realizar logout
             logout: function() {
                 this.isLoggedIn = false;
                 localStorage.removeItem('adminLoggedIn');
                 showClientArea();
             },
             
-            // Alterar senha
             changePassword: function(currentPassword, newPassword) {
                 if (currentPassword === this.password) {
                     this.password = newPassword;
@@ -1210,22 +1349,22 @@
             }
         };
 
-        // Dados de exemplo para o sistema
-        const sampleProjects = [
-            { id: 1, name: "Sistema de Conexão de Ideias", client: "InovaCorp", status: "Concluído", deadline: "15/10/2023", budget: "R$ 52.000" },
+        // Sistema de Dados
+        let projects = JSON.parse(localStorage.getItem('bemorhProjects')) || [
+            { id: 1, name: "Sistema de Gestão de Ideias", client: "InovaCorp", status: "Concluído", deadline: "15/10/2023", budget: "R$ 52.000" },
             { id: 2, name: "IA para Inovação", client: "TechVision", status: "Em Andamento", deadline: "30/11/2023", budget: "R$ 78.000" },
             { id: 3, name: "Plataforma Colaborativa", client: "GlobalConnect", status: "Em Planejamento", deadline: "15/01/2024", budget: "R$ 95.000" },
             { id: 4, name: "Dashboard de Inovação", client: "IdeaLabs", status: "Em Andamento", deadline: "20/12/2023", budget: "R$ 45.000" }
         ];
 
-        const sampleClients = [
+        let clients = JSON.parse(localStorage.getItem('bemorhClients')) || [
             { id: 1, name: "Carlos Mendes", company: "InovaCorp", email: "carlos@inovacorp.com", phone: "(11) 98888-7777", projects: 1 },
             { id: 2, name: "Ana Silva", company: "TechVision", email: "ana@techvision.com", phone: "(11) 97777-6666", projects: 1 },
             { id: 3, name: "Roberto Lima", company: "GlobalConnect", email: "roberto@globalconnect.com", phone: "(11) 96666-5555", projects: 1 },
             { id: 4, name: "Fernanda Costa", company: "IdeaLabs", email: "fernanda@idealabs.com", phone: "(11) 95555-4444", projects: 1 }
         ];
 
-        const sampleTeam = [
+        let team = JSON.parse(localStorage.getItem('bemorhTeam')) || [
             { id: 1, name: "João Santos", role: "Desenvolvedor Sênior", email: "joao@bemorh.com", phone: "(11) 94444-3333", projects: 3 },
             { id: 2, name: "Maria Oliveira", role: "Designer UX/UI", email: "maria@bemorh.com", phone: "(11) 93333-2222", projects: 2 },
             { id: 3, name: "Pedro Almeida", role: "Gerente de Projetos", email: "pedro@bemorh.com", phone: "(11) 92222-1111", projects: 4 },
@@ -1239,33 +1378,70 @@
         const loginSuccess = document.getElementById('loginSuccess');
         const passwordError = document.getElementById('passwordError');
         const passwordSuccess = document.getElementById('passwordSuccess');
+        const backToTopBtn = document.getElementById('backToTop');
 
         // Funções para mostrar/ocultar áreas
         function showAdminArea() {
             document.querySelector('.client-content').classList.remove('active');
             document.querySelector('.admin-content').classList.add('active');
             loadData();
-            
-            // Rolar para o topo
             window.scrollTo({ top: 0, behavior: 'smooth' });
         }
 
         function showClientArea() {
             document.querySelector('.admin-content').classList.remove('active');
             document.querySelector('.client-content').classList.add('active');
-            
-            // Rolar para o topo
             window.scrollTo({ top: 0, behavior: 'smooth' });
         }
 
-        // Botão de acesso admin no header (ícone discreto)
+        // Navegação do Site
+        function scrollToSection(sectionId) {
+            const section = document.getElementById(sectionId);
+            if (section) {
+                const headerHeight = document.querySelector('header').offsetHeight;
+                const sectionPosition = section.offsetTop - headerHeight;
+                window.scrollTo({
+                    top: sectionPosition,
+                    behavior: 'smooth'
+                });
+            }
+        }
+
+        // Configurar navegação
+        document.getElementById('logoHome').addEventListener('click', () => scrollToSection('home'));
+        document.getElementById('navHome').addEventListener('click', () => scrollToSection('home'));
+        document.getElementById('navProjects').addEventListener('click', () => scrollToSection('projects'));
+        document.getElementById('navServices').addEventListener('click', () => scrollToSection('services'));
+        document.getElementById('navAbout').addEventListener('click', () => scrollToSection('about'));
+        document.getElementById('navContact').addEventListener('click', () => scrollToSection('contact'));
+        document.getElementById('heroContactBtn').addEventListener('click', () => scrollToSection('contact'));
+
+        // Footer navigation
+        document.getElementById('footerHome').addEventListener('click', () => scrollToSection('home'));
+        document.getElementById('footerProjects').addEventListener('click', () => scrollToSection('projects'));
+        document.getElementById('footerServices').addEventListener('click', () => scrollToSection('services'));
+        document.getElementById('footerAbout').addEventListener('click', () => scrollToSection('about'));
+        document.getElementById('footerContact').addEventListener('click', () => scrollToSection('contact'));
+
+        // Botão Voltar ao Topo
+        window.addEventListener('scroll', () => {
+            if (window.pageYOffset > 300) {
+                backToTopBtn.classList.add('show');
+            } else {
+                backToTopBtn.classList.remove('show');
+            }
+        });
+
+        backToTopBtn.addEventListener('click', () => {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+
+        // Botão de acesso admin
         document.getElementById('adminAccessBtn').addEventListener('click', function() {
             if (!adminAuth.isLoggedIn) {
-                // Mostrar modal de login
                 adminLoginModal.style.display = 'flex';
                 document.getElementById('adminPassword').focus();
             } else {
-                // Já está logado, mostrar área administrativa
                 showAdminArea();
             }
         });
@@ -1275,7 +1451,7 @@
             showClientArea();
         });
 
-        // Verificar status de login ao carregar a página
+        // Verificar status de login
         adminAuth.checkLoginStatus();
 
         // Fechar modais
@@ -1309,35 +1485,28 @@
         document.getElementById('togglePassword').addEventListener('click', function() {
             const passwordInput = document.getElementById('adminPassword');
             const icon = this.querySelector('i');
-            
-            if (passwordInput.type === 'password') {
-                passwordInput.type = 'text';
-                icon.classList.remove('fa-eye');
-                icon.classList.add('fa-eye-slash');
-            } else {
-                passwordInput.type = 'password';
-                icon.classList.remove('fa-eye-slash');
-                icon.classList.add('fa-eye');
-            }
+            togglePassword(passwordInput, icon);
         });
 
-        // Toggle para senhas do formulário de alteração
         document.getElementById('toggleCurrentPassword').addEventListener('click', function() {
-            togglePasswordVisibility('currentPassword', this);
+            const passwordInput = document.getElementById('currentPassword');
+            const icon = this.querySelector('i');
+            togglePassword(passwordInput, icon);
         });
 
         document.getElementById('toggleNewPassword').addEventListener('click', function() {
-            togglePasswordVisibility('newPassword', this);
+            const passwordInput = document.getElementById('newPassword');
+            const icon = this.querySelector('i');
+            togglePassword(passwordInput, icon);
         });
 
         document.getElementById('toggleConfirmPassword').addEventListener('click', function() {
-            togglePasswordVisibility('confirmPassword', this);
+            const passwordInput = document.getElementById('confirmPassword');
+            const icon = this.querySelector('i');
+            togglePassword(passwordInput, icon);
         });
 
-        function togglePasswordVisibility(inputId, button) {
-            const passwordInput = document.getElementById(inputId);
-            const icon = button.querySelector('i');
-            
+        function togglePassword(passwordInput, icon) {
             if (passwordInput.type === 'password') {
                 passwordInput.type = 'text';
                 icon.classList.remove('fa-eye');
@@ -1354,22 +1523,17 @@
             e.preventDefault();
             const password = document.getElementById('adminPassword').value;
             
-            // Esconder mensagens anteriores
             loginError.style.display = 'none';
             loginSuccess.style.display = 'none';
             
             if (adminAuth.login(password)) {
-                // Login bem-sucedido
                 loginSuccess.style.display = 'block';
-                
-                // Fechar modal após 1 segundo e entrar na área administrativa
                 setTimeout(function() {
                     adminLoginModal.style.display = 'none';
                     showAdminArea();
                     document.getElementById('adminPassword').value = '';
                 }, 1000);
             } else {
-                // Login falhou
                 loginError.style.display = 'block';
                 document.getElementById('adminPassword').value = '';
                 document.getElementById('adminPassword').focus();
@@ -1391,41 +1555,32 @@
             const newPassword = document.getElementById('newPassword').value;
             const confirmPassword = document.getElementById('confirmPassword').value;
             
-            // Esconder mensagens anteriores
             passwordError.style.display = 'none';
             passwordSuccess.style.display = 'none';
             
-            // Validar se as senhas coincidem
             if (newPassword !== confirmPassword) {
                 passwordError.textContent = "As novas senhas não coincidem!";
                 passwordError.style.display = 'block';
                 return;
             }
             
-            // Validar comprimento mínimo
             if (newPassword.length < 6) {
                 passwordError.textContent = "A nova senha deve ter pelo menos 6 caracteres!";
                 passwordError.style.display = 'block';
                 return;
             }
             
-            // Tentar alterar a senha
             if (adminAuth.changePassword(currentPassword, newPassword)) {
-                // Senha alterada com sucesso
                 passwordSuccess.style.display = 'block';
-                
-                // Limpar formulário
                 document.getElementById('currentPassword').value = '';
                 document.getElementById('newPassword').value = '';
                 document.getElementById('confirmPassword').value = '';
                 
-                // Fechar modal após 2 segundos
                 setTimeout(function() {
                     changePasswordModal.style.display = 'none';
                     adminLoginModal.style.display = 'flex';
                 }, 2000);
             } else {
-                // Senha atual incorreta
                 passwordError.textContent = "Senha atual incorreta!";
                 passwordError.style.display = 'block';
                 document.getElementById('currentPassword').value = '';
@@ -1439,16 +1594,14 @@
             alert("Você saiu da área administrativa com sucesso.");
         });
 
-        // Função para alternar entre abas administrativas
+        // Alternar entre abas administrativas
         document.querySelectorAll('.admin-tab').forEach(tab => {
             tab.addEventListener('click', function() {
                 const tabId = this.getAttribute('data-tab');
                 
-                // Remove active de todas as abas
                 document.querySelectorAll('.admin-tab').forEach(t => t.classList.remove('active'));
                 document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
                 
-                // Adiciona active na aba clicada
                 this.classList.add('active');
                 document.getElementById(tabId).classList.add('active');
             });
@@ -1460,11 +1613,26 @@
             
             const name = document.getElementById('contactName').value;
             const email = document.getElementById('contactEmail').value;
+            const phone = document.getElementById('contactPhone').value;
+            const message = document.getElementById('contactMessage').value;
             
-            // Aqui normalmente enviaria para um servidor
-            alert(`Obrigado, ${name}! Sua ideia foi recebida com sucesso. Entraremos em contato no email ${email} em breve para conversarmos.`);
+            // Salvar contato
+            const newContact = {
+                id: Date.now(),
+                name: name,
+                email: email,
+                phone: phone,
+                message: message,
+                date: new Date().toLocaleDateString('pt-BR'),
+                status: 'Novo'
+            };
             
-            // Limpar formulário
+            // Salvar no localStorage
+            let contacts = JSON.parse(localStorage.getItem('bemorhContacts')) || [];
+            contacts.push(newContact);
+            localStorage.setItem('bemorhContacts', JSON.stringify(contacts));
+            
+            alert(`Obrigado, ${name}! Sua mensagem foi enviada com sucesso. Entraremos em contato em breve.`);
             document.getElementById('contactForm').reset();
         });
 
@@ -1473,23 +1641,209 @@
             const email = document.getElementById('newsletterEmail').value;
             
             if (email && email.includes('@')) {
-                alert(`Obrigado por se inscrever! Enviaremos nossas inovações e ideias para ${email}.`);
+                // Salvar no localStorage
+                let newsletter = JSON.parse(localStorage.getItem('bemorhNewsletter')) || [];
+                if (!newsletter.includes(email)) {
+                    newsletter.push(email);
+                    localStorage.setItem('bemorhNewsletter', JSON.stringify(newsletter));
+                }
+                
+                alert(`Obrigado por se inscrever! Enviaremos nossas inovações para ${email}.`);
                 document.getElementById('newsletterEmail').value = '';
             } else {
                 alert('Por favor, insira um email válido.');
             }
         });
 
+        // Funções CRUD para projetos
+        function addProject() {
+            const name = prompt("Nome do projeto:");
+            if (!name) return;
+            
+            const client = prompt("Cliente:");
+            const status = prompt("Status (Concluído/Em Andamento/Em Planejamento):");
+            const deadline = prompt("Prazo (dd/mm/aaaa):");
+            const budget = prompt("Orçamento:");
+            
+            const newProject = {
+                id: Date.now(),
+                name: name,
+                client: client || "Sem cliente",
+                status: status || "Em Planejamento",
+                deadline: deadline || "Não definido",
+                budget: budget || "Não definido"
+            };
+            
+            projects.push(newProject);
+            saveProjects();
+            loadData();
+            alert("Projeto adicionado com sucesso!");
+        }
+
+        function editProject(id) {
+            const project = projects.find(p => p.id === id);
+            if (!project) return;
+            
+            const newName = prompt("Novo nome do projeto:", project.name);
+            if (newName !== null) project.name = newName;
+            
+            const newClient = prompt("Novo cliente:", project.client);
+            if (newClient !== null) project.client = newClient;
+            
+            const newStatus = prompt("Novo status:", project.status);
+            if (newStatus !== null) project.status = newStatus;
+            
+            const newDeadline = prompt("Novo prazo:", project.deadline);
+            if (newDeadline !== null) project.deadline = newDeadline;
+            
+            const newBudget = prompt("Novo orçamento:", project.budget);
+            if (newBudget !== null) project.budget = newBudget;
+            
+            saveProjects();
+            loadData();
+            alert("Projeto atualizado com sucesso!");
+        }
+
+        function deleteProject(id) {
+            if (confirm("Tem certeza que deseja excluir este projeto?")) {
+                projects = projects.filter(p => p.id !== id);
+                saveProjects();
+                loadData();
+                alert("Projeto excluído com sucesso!");
+            }
+        }
+
+        function saveProjects() {
+            localStorage.setItem('bemorhProjects', JSON.stringify(projects));
+        }
+
+        // Funções CRUD para clientes
+        function addClient() {
+            const name = prompt("Nome do cliente:");
+            if (!name) return;
+            
+            const company = prompt("Empresa:");
+            const email = prompt("Email:");
+            const phone = prompt("Telefone:");
+            
+            const newClient = {
+                id: Date.now(),
+                name: name,
+                company: company || "Sem empresa",
+                email: email || "Não informado",
+                phone: phone || "Não informado",
+                projects: 0
+            };
+            
+            clients.push(newClient);
+            saveClients();
+            loadData();
+            alert("Cliente adicionado com sucesso!");
+        }
+
+        function editClient(id) {
+            const client = clients.find(c => c.id === id);
+            if (!client) return;
+            
+            const newName = prompt("Novo nome:", client.name);
+            if (newName !== null) client.name = newName;
+            
+            const newCompany = prompt("Nova empresa:", client.company);
+            if (newCompany !== null) client.company = newCompany;
+            
+            const newEmail = prompt("Novo email:", client.email);
+            if (newEmail !== null) client.email = newEmail;
+            
+            const newPhone = prompt("Novo telefone:", client.phone);
+            if (newPhone !== null) client.phone = newPhone;
+            
+            saveClients();
+            loadData();
+            alert("Cliente atualizado com sucesso!");
+        }
+
+        function deleteClient(id) {
+            if (confirm("Tem certeza que deseja excluir este cliente?")) {
+                clients = clients.filter(c => c.id !== id);
+                saveClients();
+                loadData();
+                alert("Cliente excluído com sucesso!");
+            }
+        }
+
+        function saveClients() {
+            localStorage.setItem('bemorhClients', JSON.stringify(clients));
+        }
+
+        // Funções CRUD para equipe
+        function addTeamMember() {
+            const name = prompt("Nome do membro:");
+            if (!name) return;
+            
+            const role = prompt("Cargo:");
+            const email = prompt("Email:");
+            const phone = prompt("Telefone:");
+            
+            const newMember = {
+                id: Date.now(),
+                name: name,
+                role: role || "Não definido",
+                email: email || "Não informado",
+                phone: phone || "Não informado",
+                projects: 0
+            };
+            
+            team.push(newMember);
+            saveTeam();
+            loadData();
+            alert("Membro adicionado com sucesso!");
+        }
+
+        function editTeamMember(id) {
+            const member = team.find(m => m.id === id);
+            if (!member) return;
+            
+            const newName = prompt("Novo nome:", member.name);
+            if (newName !== null) member.name = newName;
+            
+            const newRole = prompt("Novo cargo:", member.role);
+            if (newRole !== null) member.role = newRole;
+            
+            const newEmail = prompt("Novo email:", member.email);
+            if (newEmail !== null) member.email = newEmail;
+            
+            const newPhone = prompt("Novo telefone:", member.phone);
+            if (newPhone !== null) member.phone = newPhone;
+            
+            saveTeam();
+            loadData();
+            alert("Membro atualizado com sucesso!");
+        }
+
+        function deleteTeamMember(id) {
+            if (confirm("Tem certeza que deseja excluir este membro?")) {
+                team = team.filter(m => m.id !== id);
+                saveTeam();
+                loadData();
+                alert("Membro excluído com sucesso!");
+            }
+        }
+
+        function saveTeam() {
+            localStorage.setItem('bemorhTeam', JSON.stringify(team));
+        }
+
         // Função para carregar dados nas tabelas
         function loadData() {
             // Atualiza contadores
-            document.getElementById('projectCount').textContent = sampleProjects.length;
-            document.getElementById('clientCount').textContent = sampleClients.length;
+            document.getElementById('projectCount').textContent = projects.length;
+            document.getElementById('clientCount').textContent = clients.length;
+            document.getElementById('taskCount').textContent = calculateCompletionRate();
             
             // Carrega projetos
             const projectsTable = document.getElementById('projectsTable');
             projectsTable.innerHTML = '';
-            sampleProjects.forEach(project => {
+            projects.forEach(project => {
                 const row = document.createElement('tr');
                 row.innerHTML = `
                     <td>${project.name}</td>
@@ -1498,9 +1852,9 @@
                     <td>${project.deadline}</td>
                     <td>${project.budget}</td>
                     <td class="actions">
-                        <button class="action-btn view-btn">Ver</button>
-                        <button class="action-btn edit-btn">Editar</button>
-                        <button class="action-btn delete-btn">Excluir</button>
+                        <button class="action-btn view-btn" onclick="viewProject(${project.id})">Ver</button>
+                        <button class="action-btn edit-btn" onclick="editProject(${project.id})">Editar</button>
+                        <button class="action-btn delete-btn" onclick="deleteProject(${project.id})">Excluir</button>
                     </td>
                 `;
                 projectsTable.appendChild(row);
@@ -1509,7 +1863,7 @@
             // Carrega clientes
             const clientsTable = document.getElementById('clientsTable');
             clientsTable.innerHTML = '';
-            sampleClients.forEach(client => {
+            clients.forEach(client => {
                 const row = document.createElement('tr');
                 row.innerHTML = `
                     <td>${client.name}</td>
@@ -1518,9 +1872,9 @@
                     <td>${client.phone}</td>
                     <td>${client.projects}</td>
                     <td class="actions">
-                        <button class="action-btn view-btn">Ver</button>
-                        <button class="action-btn edit-btn">Editar</button>
-                        <button class="action-btn delete-btn">Excluir</button>
+                        <button class="action-btn view-btn" onclick="viewClient(${client.id})">Ver</button>
+                        <button class="action-btn edit-btn" onclick="editClient(${client.id})">Editar</button>
+                        <button class="action-btn delete-btn" onclick="deleteClient(${client.id})">Excluir</button>
                     </td>
                 `;
                 clientsTable.appendChild(row);
@@ -1529,7 +1883,7 @@
             // Carrega equipe
             const teamTable = document.getElementById('teamTable');
             teamTable.innerHTML = '';
-            sampleTeam.forEach(member => {
+            team.forEach(member => {
                 const row = document.createElement('tr');
                 row.innerHTML = `
                     <td>${member.name}</td>
@@ -1538,16 +1892,21 @@
                     <td>${member.phone}</td>
                     <td>${member.projects}</td>
                     <td class="actions">
-                        <button class="action-btn view-btn">Ver</button>
-                        <button class="action-btn edit-btn">Editar</button>
-                        <button class="action-btn delete-btn">Excluir</button>
+                        <button class="action-btn view-btn" onclick="viewTeamMember(${member.id})">Ver</button>
+                        <button class="action-btn edit-btn" onclick="editTeamMember(${member.id})">Editar</button>
+                        <button class="action-btn delete-btn" onclick="deleteTeamMember(${member.id})">Excluir</button>
                     </td>
                 `;
                 teamTable.appendChild(row);
             });
         }
 
-        // Função auxiliar para obter a classe do status
+        function calculateCompletionRate() {
+            if (projects.length === 0) return "0%";
+            const completed = projects.filter(p => p.status === "Concluído").length;
+            return Math.round((completed / projects.length) * 100) + "%";
+        }
+
         function getStatusClass(status) {
             if (status === 'Concluído') return 'completed';
             if (status === 'Em Andamento') return 'in-progress';
@@ -1555,13 +1914,35 @@
             return 'pending';
         }
 
-        // Função para os botões de adicionar
+        // Funções de visualização
+        function viewProject(id) {
+            const project = projects.find(p => p.id === id);
+            if (project) {
+                alert(`Projeto: ${project.name}\nCliente: ${project.client}\nStatus: ${project.status}\nPrazo: ${project.deadline}\nOrçamento: ${project.budget}`);
+            }
+        }
+
+        function viewClient(id) {
+            const client = clients.find(c => c.id === id);
+            if (client) {
+                alert(`Cliente: ${client.name}\nEmpresa: ${client.company}\nEmail: ${client.email}\nTelefone: ${client.phone}\nProjetos: ${client.projects}`);
+            }
+        }
+
+        function viewTeamMember(id) {
+            const member = team.find(m => m.id === id);
+            if (member) {
+                alert(`Membro: ${member.name}\nCargo: ${member.role}\nEmail: ${member.email}\nTelefone: ${member.phone}\nProjetos: ${member.projects}`);
+            }
+        }
+
+        // Botões de adicionar
         document.getElementById('addProjectBtn').addEventListener('click', function() {
             if (!adminAuth.isLoggedIn) {
                 alert("Você precisa estar logado para adicionar um projeto.");
                 return;
             }
-            alert('Funcionalidade de adicionar projeto será implementada aqui.');
+            addProject();
         });
 
         document.getElementById('addClientBtn').addEventListener('click', function() {
@@ -1569,7 +1950,7 @@
                 alert("Você precisa estar logado para adicionar um cliente.");
                 return;
             }
-            alert('Funcionalidade de adicionar cliente será implementada aqui.');
+            addClient();
         });
 
         document.getElementById('addMemberBtn').addEventListener('click', function() {
@@ -1577,10 +1958,10 @@
                 alert("Você precisa estar logado para adicionar um membro da equipe.");
                 return;
             }
-            alert('Funcionalidade de adicionar membro da equipe será implementada aqui.');
+            addTeamMember();
         });
 
-        // Função para salvar configurações da empresa
+        // Configurações da empresa
         document.getElementById('companySettings').addEventListener('submit', function(e) {
             e.preventDefault();
             if (!adminAuth.isLoggedIn) {
@@ -1588,36 +1969,56 @@
                 return;
             }
             
-            // Atualizar informações no site
             const companyName = document.getElementById('companyName').value;
             const companyTagline = document.getElementById('companyTagline').value;
             
-            // Atualizar header
-            document.querySelector('.logo-main').textContent = companyName;
-            document.querySelector('.logo-tagline').textContent = companyTagline;
+            // Salvar no localStorage
+            localStorage.setItem('bemorhCompanyName', companyName);
+            localStorage.setItem('bemorhCompanyTagline', companyTagline);
             
-            // Atualizar título da página
+            // Atualizar interface
+            document.querySelectorAll('.logo-main').forEach(el => el.textContent = companyName);
+            document.querySelectorAll('.logo-tagline').forEach(el => el.textContent = companyTagline);
             document.title = `${companyName} - ${companyTagline}`;
             
             alert('Configurações da empresa salvas com sucesso!');
         });
 
-        // Inicializa os dados quando a página carrega
+        // Carregar configurações salvas
+        function loadSettings() {
+            const savedName = localStorage.getItem('bemorhCompanyName');
+            const savedTagline = localStorage.getItem('bemorhCompanyTagline');
+            
+            if (savedName) {
+                document.getElementById('companyName').value = savedName;
+                document.querySelectorAll('.logo-main').forEach(el => el.textContent = savedName);
+            }
+            
+            if (savedTagline) {
+                document.getElementById('companyTagline').value = savedTagline;
+                document.querySelectorAll('.logo-tagline').forEach(el => el.textContent = savedTagline);
+                document.title = `${savedName || 'Bemorh'} - ${savedTagline}`;
+            }
+        }
+
+        // Inicializar
         document.addEventListener('DOMContentLoaded', function() {
-            // Carregar dados
+            loadSettings();
             loadData();
             
-            // Rolagem suave para links âncora
+            // Configurar rolagem suave para todas as âncoras
             document.querySelectorAll('a[href^="#"]').forEach(anchor => {
                 anchor.addEventListener('click', function(e) {
+                    e.preventDefault();
                     const targetId = this.getAttribute('href');
                     if (targetId === '#') return;
                     
                     const targetElement = document.querySelector(targetId);
                     if (targetElement) {
-                        e.preventDefault();
+                        const headerHeight = document.querySelector('header').offsetHeight;
+                        const targetPosition = targetElement.offsetTop - headerHeight;
                         window.scrollTo({
-                            top: targetElement.offsetTop - 80,
+                            top: targetPosition,
                             behavior: 'smooth'
                         });
                     }

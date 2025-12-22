@@ -74,10 +74,6 @@
             background-color: var(--warning);
         }
 
-        .btn-contact {
-            background-color: var(--success);
-        }
-
         section {
             padding: 80px 0;
         }
@@ -102,7 +98,7 @@
             border-radius: 2px;
         }
 
-        /* Header */
+        /* HEADER - LOGO CORRIGIDO */
         header {
             background-color: white;
             box-shadow: var(--shadow);
@@ -119,58 +115,66 @@
             padding: 15px 20px;
         }
 
+        /* LOGO GRANDE E VISÍVEL */
         .logo-container {
             display: flex;
             align-items: center;
-            gap: 15px;
+            gap: 20px;
             cursor: pointer;
+            flex-shrink: 0;
         }
 
-        .logo-placeholder {
-            width: 50px;
-            height: 50px;
-            border-radius: 10px;
+        .logo-visual {
+            width: 80px;
+            height: 80px;
+            border-radius: 15px;
             display: flex;
             align-items: center;
             justify-content: center;
             overflow: hidden;
             box-shadow: var(--shadow);
-            background-color: white;
+            background: linear-gradient(135deg, var(--secondary), var(--primary));
+            transition: all 0.3s ease;
         }
 
-        .logo-placeholder img {
-            width: 100%;
-            height: 100%;
+        .logo-visual img {
+            width: 90%;
+            height: 90%;
             object-fit: contain;
-            padding: 5px;
+            padding: 10px;
+            transition: transform 0.3s ease;
+        }
+
+        .logo-container:hover .logo-visual img {
+            transform: scale(1.05);
         }
 
         .logo-text {
             display: flex;
             flex-direction: column;
+            justify-content: center;
         }
 
         .logo-main {
-            font-size: 2rem;
+            font-size: 2.2rem;
             font-weight: 800;
             color: var(--primary);
             letter-spacing: 1px;
+            line-height: 1.2;
         }
 
         .logo-tagline {
-            font-size: 0.9rem;
+            font-size: 1rem;
             color: var(--secondary);
             font-style: italic;
-            margin-top: -5px;
+            margin-top: 2px;
         }
 
+        /* NAVEGAÇÃO */
         nav ul {
             display: flex;
             list-style: none;
-        }
-
-        nav ul li {
-            margin-left: 30px;
+            gap: 30px;
         }
 
         nav ul li a {
@@ -180,6 +184,7 @@
             cursor: pointer;
             padding: 5px 0;
             position: relative;
+            font-size: 1.1rem;
         }
 
         nav ul li a:hover {
@@ -201,6 +206,7 @@
             background-color: var(--secondary);
         }
 
+        /* BOTÃO ADMIN */
         .admin-icon-btn {
             background: none;
             border: none;
@@ -217,7 +223,7 @@
             background-color: rgba(52, 152, 219, 0.1);
         }
 
-        /* Modal de Login */
+        /* MODAL */
         .modal {
             display: none;
             position: fixed;
@@ -282,7 +288,7 @@
             padding: 30px;
         }
 
-        /* Formulários */
+        /* FORMULÁRIOS */
         .form-group {
             margin-bottom: 20px;
         }
@@ -341,12 +347,13 @@
             border-left: 4px solid var(--success);
         }
 
-        /* Hero Section */
+        /* HERO SECTION */
         .hero {
             background: linear-gradient(135deg, var(--primary) 0%, #1a2530 100%);
             color: white;
             padding: 150px 0 100px;
             text-align: center;
+            margin-top: 80px;
         }
 
         .hero h1 {
@@ -361,7 +368,34 @@
             opacity: 0.9;
         }
 
-        /* Projetos */
+        /* BOTÃO DE CONTATO - AZUL PERMANENTE */
+        .btn-contact {
+            background-color: var(--secondary);
+            color: white;
+            padding: 16px 40px;
+            border-radius: 50px;
+            font-weight: 700;
+            font-size: 1.2rem;
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 8px 20px rgba(52, 152, 219, 0.25);
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .btn-contact:hover {
+            background-color: #2980b9;
+            transform: translateY(-5px);
+            box-shadow: 0 12px 25px rgba(52, 152, 219, 0.35);
+        }
+
+        .btn-contact:active {
+            transform: translateY(-2px);
+        }
+
+        /* PROJETOS */
         .projects-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
@@ -424,7 +458,7 @@
             color: var(--warning);
         }
 
-        /* Seção de Contato */
+        /* CONTATO */
         .contact-section {
             background-color: var(--light);
         }
@@ -460,7 +494,7 @@
             margin-top: 5px;
         }
 
-        /* Botão Voltar ao Topo */
+        /* BOTÃO VOLTAR AO TOPO */
         .back-to-top {
             position: fixed;
             bottom: 30px;
@@ -492,7 +526,7 @@
             transform: translateY(-5px);
         }
 
-        /* Footer */
+        /* FOOTER */
         footer {
             background-color: var(--primary);
             color: white;
@@ -548,7 +582,7 @@
             opacity: 0.8;
         }
 
-        /* Responsividade */
+        /* RESPONSIVIDADE */
         @media (max-width: 992px) {
             .header-container {
                 flex-direction: column;
@@ -605,10 +639,11 @@
     <header>
         <div class="header-container container">
             <div class="logo-container" id="logoHome">
-                <div class="logo-placeholder">
+                <!-- LOGO GRANDE E VISÍVEL -->
+                <div class="logo-visual">
                     <img src="imagem.png" alt="Bemorh Logo" id="logoImage" onerror="handleLogoError(this)">
-                    <div id="logoText" style="display: none; width: 100%; height: 100%; background: linear-gradient(135deg, var(--secondary), var(--primary)); color: white; font-weight: bold; font-size: 1.5rem; align-items: center; justify-content: center;">
-                        BH
+                    <div id="logoText" style="display: none; width: 100%; height: 100%; background: linear-gradient(135deg, var(--secondary), var(--primary)); color: white; font-weight: bold; font-size: 2rem; align-items: center; justify-content: center;">
+                        J
                     </div>
                 </div>
                 <div class="logo-text">
@@ -730,9 +765,10 @@
             <div class="container">
                 <h1>Tecnologia que Conecta Ideias</h1>
                 <p>Na Bemorh, transformamos conceitos em soluções digitais inovadoras. Desenvolvemos ferramentas virtuais que conectam pessoas, processos e tecnologias para impulsionar o seu negócio.</p>
-                <a href="#contact" class="btn btn-contact" id="heroContactBtn">
+                <!-- BOTÃO DE CONTATO EM AZUL -->
+                <button class="btn-contact" id="heroContactBtn">
                     <i class="fas fa-envelope"></i> Entre em Contato
-                </a>
+                </button>
             </div>
         </section>
 
@@ -898,7 +934,7 @@
                                 <label for="contactMessage">Sua Ideia ou Projeto</label>
                                 <textarea id="contactMessage" class="form-control" rows="5" placeholder="Conte-nos sobre sua ideia ou projeto..." required></textarea>
                             </div>
-                            <button type="submit" class="btn btn-contact" style="width: 100%;">
+                            <button type="submit" class="btn-contact" style="width: 100%;">
                                 <i class="fas fa-paper-plane"></i> Enviar Mensagem
                             </button>
                         </form>
@@ -914,8 +950,8 @@
             <div class="footer-content">
                 <div class="footer-column">
                     <div class="logo-container" style="margin-bottom: 20px; cursor: default;">
-                        <div class="logo-placeholder" style="width: 40px; height: 40px; font-size: 1.2rem;">
-                            <img src="imagem.png" alt="Bemorh Logo" style="width: 100%; height: 100%; object-fit: contain; padding: 3px;" onerror="handleLogoError(this)">
+                        <div class="logo-visual" style="width: 60px; height: 60px;">
+                            <img src="imagem.png" alt="Bemorh Logo" style="width: 90%; height: 90%; object-fit: contain; padding: 8px;" onerror="handleLogoError(this)">
                         </div>
                         <div class="logo-text">
                             <div class="logo-main" style="font-size: 1.5rem;">Bemorh</div>
@@ -965,7 +1001,7 @@
     </footer>
 
     <script>
-        // Sistema de Autenticação COMPARTILHADO
+        // Sistema de Autenticação
         const adminAuth = {
             password: localStorage.getItem('adminPassword') || "admin123",
             
@@ -998,20 +1034,44 @@
         const navItems = document.querySelectorAll('nav ul li a');
 
         // Função para tratar erro na logo
-        function handleLogoError(element) {
-            element.style.display = 'none';
-            const logoText = element.nextElementSibling || element.parentElement;
+        function handleLogoError(imgElement) {
+            console.log("Erro ao carregar logo, usando fallback...");
+            
+            imgElement.style.display = 'none';
+            
+            let logoText = imgElement.nextElementSibling;
+            if (!logoText || !logoText.id.includes('logoText')) {
+                logoText = document.createElement('div');
+                logoText.id = 'logoText';
+                imgElement.parentElement.appendChild(logoText);
+            }
+            
             logoText.style.display = 'flex';
             logoText.style.width = '100%';
             logoText.style.height = '100%';
             logoText.style.background = 'linear-gradient(135deg, var(--secondary), var(--primary))';
             logoText.style.color = 'white';
             logoText.style.fontWeight = 'bold';
-            logoText.style.fontSize = element.parentElement.classList.contains('logo-placeholder') ? '1.5rem' : '1rem';
+            logoText.style.fontSize = '2.5rem';
             logoText.style.alignItems = 'center';
             logoText.style.justifyContent = 'center';
-            logoText.innerHTML = 'BH';
+            logoText.style.borderRadius = 'inherit';
+            logoText.innerHTML = 'J';
         }
+
+        // Verificar logo ao carregar
+        window.addEventListener('load', function() {
+            const logoImg = document.getElementById('logoImage');
+            if (logoImg && (logoImg.naturalWidth === 0 || logoImg.complete === false)) {
+                handleLogoError(logoImg);
+            }
+            
+            document.querySelectorAll('.logo-visual img').forEach(img => {
+                if (img.naturalWidth === 0) {
+                    handleLogoError(img);
+                }
+            });
+        });
 
         // Navegação do Site
         function scrollToSection(sectionId) {
@@ -1151,7 +1211,6 @@
                 loginSuccess.style.display = 'block';
                 setTimeout(function() {
                     adminLoginModal.style.display = 'none';
-                    // REDIRECIONAR PARA PAINEL ADMIN
                     window.location.href = 'admin.html';
                     document.getElementById('adminPassword').value = '';
                 }, 1000);
@@ -1219,21 +1278,6 @@
             const phone = document.getElementById('contactPhone').value;
             const message = document.getElementById('contactMessage').value;
             
-            // Salvar contato no localStorage
-            let contacts = JSON.parse(localStorage.getItem('bemorhContacts')) || [];
-            const newContact = {
-                id: Date.now(),
-                name: name,
-                email: email,
-                phone: phone,
-                message: message,
-                date: new Date().toLocaleDateString('pt-BR'),
-                status: 'Novo'
-            };
-            
-            contacts.push(newContact);
-            localStorage.setItem('bemorhContacts', JSON.stringify(contacts));
-            
             alert(`Obrigado, ${name}! Sua mensagem foi enviada com sucesso. Entraremos em contato em breve.`);
             document.getElementById('contactForm').reset();
         });
@@ -1243,33 +1287,12 @@
             const email = document.getElementById('newsletterEmail').value;
             
             if (email && email.includes('@')) {
-                let newsletter = JSON.parse(localStorage.getItem('bemorhNewsletter')) || [];
-                if (!newsletter.includes(email)) {
-                    newsletter.push(email);
-                    localStorage.setItem('bemorhNewsletter', JSON.stringify(newsletter));
-                }
-                
                 alert(`Obrigado por se inscrever! Enviaremos nossas inovações para ${email}.`);
                 document.getElementById('newsletterEmail').value = '';
             } else {
                 alert('Por favor, insira um email válido.');
             }
         });
-
-        // Carregar configurações da empresa
-        function loadCompanySettings() {
-            const savedName = localStorage.getItem('bemorhCompanyName');
-            const savedTagline = localStorage.getItem('bemorhCompanyTagline');
-            
-            if (savedName) {
-                document.querySelectorAll('.logo-main').forEach(el => el.textContent = savedName);
-            }
-            
-            if (savedTagline) {
-                document.querySelectorAll('.logo-tagline').forEach(el => el.textContent = savedTagline);
-                document.title = `${savedName || 'Bemorh'} - ${savedTagline}`;
-            }
-        }
 
         // Detectar seção ativa no scroll
         window.addEventListener('scroll', function() {
@@ -1293,9 +1316,6 @@
 
         // Inicializar
         document.addEventListener('DOMContentLoaded', function() {
-            loadCompanySettings();
-            
-            // Verificar se já está logado
             if (localStorage.getItem('adminLoggedIn') === 'true') {
                 // Se já logado, redirecionar direto para admin
                 // window.location.href = 'admin.html';

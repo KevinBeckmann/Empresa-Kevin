@@ -127,8 +127,8 @@
         }
 
         .logo-placeholder {
-            width: 50px;
-            height: 50px;
+            width: 120px; /* AUMENTADO de 50px */
+            height: 70px; /* AUMENTADO de 50px */
             border-radius: 10px;
             display: flex;
             align-items: center;
@@ -136,6 +136,7 @@
             overflow: hidden;
             box-shadow: var(--shadow);
             background-color: white;
+            border: 2px solid var(--light);
         }
 
         .logo-placeholder img {
@@ -178,10 +179,27 @@
             color: var(--primary);
             transition: color 0.3s;
             cursor: pointer;
+            padding: 5px 0;
+            position: relative;
         }
 
         nav ul li a:hover {
             color: var(--secondary);
+        }
+
+        nav ul li a.active {
+            color: var(--secondary);
+            font-weight: 700;
+        }
+
+        nav ul li a.active:after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background-color: var(--secondary);
         }
 
         .admin-icon-btn {
@@ -481,14 +499,15 @@
         }
 
         .admin-logo-placeholder {
-            width: 40px;
-            height: 40px;
+            width: 80px; /* AUMENTADO de 40px */
+            height: 60px; /* AUMENTADO de 40px */
             border-radius: 8px;
             display: flex;
             align-items: center;
             justify-content: center;
             overflow: hidden;
             background-color: white;
+            border: 2px solid rgba(255, 255, 255, 0.3);
         }
 
         .admin-logo-placeholder img {
@@ -778,6 +797,41 @@
                 display: block;
                 overflow-x: auto;
             }
+
+            .logo-placeholder {
+                width: 100px;
+                height: 60px;
+            }
+
+            .admin-logo-placeholder {
+                width: 70px;
+                height: 50px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .logo-container {
+                flex-direction: column;
+                gap: 5px;
+            }
+
+            .logo-main {
+                font-size: 1.8rem;
+            }
+
+            .logo-tagline {
+                font-size: 0.8rem;
+            }
+
+            .logo-placeholder {
+                width: 80px;
+                height: 50px;
+            }
+
+            .admin-logo-placeholder {
+                width: 60px;
+                height: 40px;
+            }
         }
     </style>
 </head>
@@ -804,7 +858,7 @@
             </div>
             <nav>
                 <ul>
-                    <li><a id="navHome">Início</a></li>
+                    <li><a id="navHome" class="active">Início</a></li>
                     <li><a id="navProjects">Projetos</a></li>
                     <li><a id="navServices">Serviços</a></li>
                     <li><a id="navAbout">Sobre</a></li>
@@ -910,7 +964,7 @@
     </div>
 
     <!-- Conteúdo do Cliente (Sempre visível por padrão) -->
-    <div class="client-content active">
+    <div class="client-content active" id="clientContent">
         <!-- Hero Section -->
         <section class="hero" id="home">
             <div class="container">
@@ -1095,7 +1149,7 @@
     </div>
 
     <!-- Conteúdo Administrativo (Oculto por padrão) -->
-    <div class="admin-content">
+    <div class="admin-content" id="adminContent">
         <div class="container">
             <!-- Header Admin -->
             <div class="admin-header">
@@ -1261,7 +1315,7 @@
             <div class="footer-content">
                 <div class="footer-column">
                     <div class="logo-container" style="margin-bottom: 20px; cursor: default;">
-                        <div class="logo-placeholder" style="width: 40px; height: 40px; font-size: 1.2rem;">
+                        <div class="logo-placeholder" style="width: 80px; height: 60px; font-size: 1.2rem;">
                             <img src="imagem.png" alt="Bemorh Logo" style="width: 100%; height: 100%; object-fit: contain; padding: 3px;" onerror="this.style.display='none'; this.parentElement.innerHTML='BH'; this.parentElement.style.background='linear-gradient(135deg, var(--secondary), var(--primary))'; this.parentElement.style.color='white'; this.parentElement.style.fontWeight='bold'; this.parentElement.style.display='flex'; this.parentElement.style.alignItems='center'; this.parentElement.style.justifyContent='center';">
                         </div>
                         <div class="logo-text">
@@ -1379,19 +1433,38 @@
         const passwordError = document.getElementById('passwordError');
         const passwordSuccess = document.getElementById('passwordSuccess');
         const backToTopBtn = document.getElementById('backToTop');
+        const navItems = document.querySelectorAll('nav ul li a');
+        const clientContent = document.getElementById('clientContent');
+        const adminContent = document.getElementById('adminContent');
 
         // Funções para mostrar/ocultar áreas
         function showAdminArea() {
-            document.querySelector('.client-content').classList.remove('active');
-            document.querySelector('.admin-content').classList.add('active');
+            clientContent.classList.remove('active');
+            adminContent.classList.add('active');
+            updateNavigation('admin');
             loadData();
             window.scrollTo({ top: 0, behavior: 'smooth' });
         }
 
         function showClientArea() {
-            document.querySelector('.admin-content').classList.remove('active');
-            document.querySelector('.client-content').classList.add('active');
+            adminContent.classList.remove('active');
+            clientContent.classList.add('active');
+            updateNavigation('home');
             window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        // Atualizar navegação ativa
+        function updateNavigation(activeItem) {
+            navItems.forEach(item => item.classList.remove('active'));
+            
+            if (activeItem !== 'admin') {
+                const activeNav = document.getElementById(`nav${capitalizeFirstLetter(activeItem)}`);
+                if (activeNav) activeNav.classList.add('active');
+            }
+        }
+
+        function capitalizeFirstLetter(string) {
+            return string.charAt(0).toUpperCase() + string.slice(1);
         }
 
         // Navegação do Site
@@ -1400,15 +1473,22 @@
             if (section) {
                 const headerHeight = document.querySelector('header').offsetHeight;
                 const sectionPosition = section.offsetTop - headerHeight;
+                
                 window.scrollTo({
                     top: sectionPosition,
                     behavior: 'smooth'
                 });
+                
+                updateNavigation(sectionId);
             }
         }
 
         // Configurar navegação
-        document.getElementById('logoHome').addEventListener('click', () => scrollToSection('home'));
+        document.getElementById('logoHome').addEventListener('click', () => {
+            showClientArea();
+            scrollToSection('home');
+        });
+        
         document.getElementById('navHome').addEventListener('click', () => scrollToSection('home'));
         document.getElementById('navProjects').addEventListener('click', () => scrollToSection('projects'));
         document.getElementById('navServices').addEventListener('click', () => scrollToSection('services'));
@@ -1449,6 +1529,7 @@
         // Botão para voltar ao site
         document.getElementById('backToSiteBtn').addEventListener('click', function() {
             showClientArea();
+            scrollToSection('home');
         });
 
         // Verificar status de login
@@ -1592,6 +1673,7 @@
         document.getElementById('logoutBtn').addEventListener('click', function() {
             adminAuth.logout();
             alert("Você saiu da área administrativa com sucesso.");
+            scrollToSection('home');
         });
 
         // Alternar entre abas administrativas
@@ -2001,6 +2083,28 @@
             }
         }
 
+        // Detectar seção ativa no scroll
+        window.addEventListener('scroll', function() {
+            if (clientContent.classList.contains('active')) {
+                const sections = ['home', 'projects', 'services', 'about', 'contact'];
+                let currentSection = 'home';
+                
+                sections.forEach(section => {
+                    const element = document.getElementById(section);
+                    if (element) {
+                        const rect = element.getBoundingClientRect();
+                        const headerHeight = document.querySelector('header').offsetHeight;
+                        
+                        if (rect.top <= headerHeight + 100 && rect.bottom >= headerHeight + 100) {
+                            currentSection = section;
+                        }
+                    }
+                });
+                
+                updateNavigation(currentSection);
+            }
+        });
+
         // Inicializar
         document.addEventListener('DOMContentLoaded', function() {
             loadSettings();
@@ -2009,10 +2113,10 @@
             // Configurar rolagem suave para todas as âncoras
             document.querySelectorAll('a[href^="#"]').forEach(anchor => {
                 anchor.addEventListener('click', function(e) {
-                    e.preventDefault();
                     const targetId = this.getAttribute('href');
-                    if (targetId === '#') return;
+                    if (targetId === '#' || !clientContent.classList.contains('active')) return;
                     
+                    e.preventDefault();
                     const targetElement = document.querySelector(targetId);
                     if (targetElement) {
                         const headerHeight = document.querySelector('header').offsetHeight;

@@ -183,6 +183,139 @@
             color: white;
         }
 
+        /* Modal de Login */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.7);
+            z-index: 2000;
+            justify-content: center;
+            align-items: center;
+            animation: fadeIn 0.3s ease;
+        }
+
+        .modal-content {
+            background-color: white;
+            width: 100%;
+            max-width: 400px;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            animation: slideIn 0.3s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes slideIn {
+            from { transform: translateY(-50px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+
+        .modal-header {
+            background-color: var(--primary);
+            color: white;
+            padding: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .modal-header h3 {
+            font-size: 1.5rem;
+        }
+
+        .close-modal {
+            background: none;
+            border: none;
+            color: white;
+            font-size: 1.5rem;
+            cursor: pointer;
+            transition: transform 0.3s;
+        }
+
+        .close-modal:hover {
+            transform: scale(1.2);
+        }
+
+        .modal-body {
+            padding: 30px;
+        }
+
+        /* Formulários */
+        .form-container {
+            background-color: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: var(--shadow);
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: var(--primary);
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 1rem;
+        }
+
+        .form-control:focus {
+            outline: none;
+            border-color: var(--secondary);
+        }
+
+        .password-input {
+            position: relative;
+        }
+
+        .toggle-password {
+            position: absolute;
+            right: 10px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: none;
+            border: none;
+            color: var(--gray);
+            cursor: pointer;
+        }
+
+        .alert {
+            padding: 12px;
+            border-radius: 4px;
+            margin-bottom: 20px;
+            display: none;
+        }
+
+        .alert-danger {
+            background-color: rgba(231, 76, 60, 0.1);
+            color: var(--accent);
+            border-left: 4px solid var(--accent);
+        }
+
+        .alert-success {
+            background-color: rgba(46, 204, 113, 0.1);
+            color: var(--success);
+            border-left: 4px solid var(--success);
+        }
+
         /* Página do Cliente */
         .client-content, .admin-content {
             display: none;
@@ -191,11 +324,6 @@
 
         .client-content.active, .admin-content.active {
             display: block;
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
         }
 
         /* Hero Section */
@@ -288,6 +416,23 @@
             padding: 20px;
             margin-bottom: 30px;
             border-radius: 10px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logout-btn {
+            background-color: rgba(255, 255, 255, 0.2);
+            color: white;
+            border: none;
+            padding: 8px 15px;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .logout-btn:hover {
+            background-color: rgba(255, 255, 255, 0.3);
         }
 
         .admin-stats {
@@ -321,6 +466,7 @@
             display: flex;
             border-bottom: 2px solid #eee;
             margin-bottom: 30px;
+            flex-wrap: wrap;
         }
 
         .admin-tab {
@@ -395,40 +541,6 @@
 
         .view-btn {
             background-color: var(--success);
-        }
-
-        /* Formulários */
-        .form-container {
-            background-color: white;
-            padding: 30px;
-            border-radius: 10px;
-            box-shadow: var(--shadow);
-            max-width: 800px;
-            margin: 0 auto;
-        }
-
-        .form-group {
-            margin-bottom: 20px;
-        }
-
-        .form-group label {
-            display: block;
-            margin-bottom: 8px;
-            font-weight: 600;
-            color: var(--primary);
-        }
-
-        .form-control {
-            width: 100%;
-            padding: 12px;
-            border: 1px solid #ddd;
-            border-radius: 4px;
-            font-size: 1rem;
-        }
-
-        .form-control:focus {
-            outline: none;
-            border-color: var(--secondary);
         }
 
         /* Footer */
@@ -555,6 +667,98 @@
         </div>
     </header>
 
+    <!-- Modal de Login Admin -->
+    <div class="modal" id="adminLoginModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3><i class="fas fa-lock"></i> Acesso Administrativo</h3>
+                <button class="close-modal" id="closeLoginModal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="alert alert-danger" id="loginError">
+                    <i class="fas fa-exclamation-circle"></i> Senha incorreta. Tente novamente.
+                </div>
+                <div class="alert alert-success" id="loginSuccess">
+                    <i class="fas fa-check-circle"></i> Login realizado com sucesso!
+                </div>
+                <form id="adminLoginForm">
+                    <div class="form-group">
+                        <label for="adminUsername">Usuário Administrador</label>
+                        <input type="text" id="adminUsername" class="form-control" value="admin" readonly>
+                    </div>
+                    <div class="form-group">
+                        <label for="adminPassword">Senha</label>
+                        <div class="password-input">
+                            <input type="password" id="adminPassword" class="form-control" placeholder="Digite a senha de administrador" required>
+                            <button type="button" class="toggle-password" id="togglePassword">
+                                <i class="fas fa-eye"></i>
+                            </button>
+                        </div>
+                        <small style="color: var(--gray); margin-top: 5px; display: block;">
+                            <i class="fas fa-info-circle"></i> Senha padrão: <code>admin123</code>
+                        </small>
+                    </div>
+                    <button type="submit" class="btn" style="width: 100%;">Acessar Painel Administrativo</button>
+                </form>
+                <div style="text-align: center; margin-top: 20px;">
+                    <button class="btn btn-warning" id="resetPasswordBtn" style="width: 100%;">
+                        <i class="fas fa-key"></i> Alterar Senha Padrão
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal de Alterar Senha -->
+    <div class="modal" id="changePasswordModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3><i class="fas fa-key"></i> Alterar Senha de Administrador</h3>
+                <button class="close-modal" id="closePasswordModal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="alert alert-danger" id="passwordError">
+                    <i class="fas fa-exclamation-circle"></i> As senhas não coincidem!
+                </div>
+                <div class="alert alert-success" id="passwordSuccess">
+                    <i class="fas fa-check-circle"></i> Senha alterada com sucesso!
+                </div>
+                <form id="changePasswordForm">
+                    <div class="form-group">
+                        <label for="currentPassword">Senha Atual</label>
+                        <div class="password-input">
+                            <input type="password" id="currentPassword" class="form-control" placeholder="Digite a senha atual" required>
+                            <button type="button" class="toggle-password" id="toggleCurrentPassword">
+                                <i class="fas fa-eye"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="newPassword">Nova Senha</label>
+                        <div class="password-input">
+                            <input type="password" id="newPassword" class="form-control" placeholder="Digite a nova senha" required minlength="6">
+                            <button type="button" class="toggle-password" id="toggleNewPassword">
+                                <i class="fas fa-eye"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="confirmPassword">Confirmar Nova Senha</label>
+                        <div class="password-input">
+                            <input type="password" id="confirmPassword" class="form-control" placeholder="Confirme a nova senha" required>
+                            <button type="button" class="toggle-password" id="toggleConfirmPassword">
+                                <i class="fas fa-eye"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <button type="submit" class="btn btn-success" style="width: 100%;">
+                        <i class="fas fa-save"></i> Salvar Nova Senha
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+
     <!-- Seletor de Tipo de Usuário -->
     <div class="user-type container">
         <div class="type-selector">
@@ -655,8 +859,13 @@
         <div class="container">
             <!-- Header Admin -->
             <div class="admin-header">
-                <h1><i class="fas fa-cogs"></i> Painel Administrativo</h1>
-                <p>Gerencie seus projetos, clientes e configurações da empresa</p>
+                <div>
+                    <h1><i class="fas fa-cogs"></i> Painel Administrativo</h1>
+                    <p>Gerencie seus projetos, clientes e configurações da empresa</p>
+                </div>
+                <button class="logout-btn" id="logoutBtn">
+                    <i class="fas fa-sign-out-alt"></i> Sair
+                </button>
             </div>
 
             <!-- Estatísticas -->
@@ -838,6 +1047,46 @@
     </footer>
 
     <script>
+        // Sistema de Autenticação
+        const adminAuth = {
+            // Senha padrão (pode ser alterada)
+            password: "admin123",
+            isLoggedIn: false,
+            
+            // Verificar login no localStorage ao carregar
+            checkLoginStatus: function() {
+                const savedLogin = localStorage.getItem('adminLoggedIn');
+                if (savedLogin === 'true') {
+                    this.isLoggedIn = true;
+                }
+            },
+            
+            // Realizar login
+            login: function(inputPassword) {
+                if (inputPassword === this.password) {
+                    this.isLoggedIn = true;
+                    localStorage.setItem('adminLoggedIn', 'true');
+                    return true;
+                }
+                return false;
+            },
+            
+            // Realizar logout
+            logout: function() {
+                this.isLoggedIn = false;
+                localStorage.removeItem('adminLoggedIn');
+            },
+            
+            // Alterar senha
+            changePassword: function(currentPassword, newPassword) {
+                if (currentPassword === this.password) {
+                    this.password = newPassword;
+                    return true;
+                }
+                return false;
+            }
+        };
+
         // Dados de exemplo para o sistema
         const sampleProjects = [
             { id: 1, name: "Dashboard Analytics Pro", client: "TechCorp", status: "Concluído", deadline: "15/10/2023", budget: "R$ 45.000" },
@@ -860,19 +1109,219 @@
             { id: 4, name: "Julia Fernandes", role: "Analista de QA", email: "julia@devtools.com", phone: "(11) 92222-1111", projects: 2 }
         ];
 
-        // Função para alternar entre cliente e admin
-        document.getElementById('clientBtn').addEventListener('click', function() {
-            document.getElementById('clientBtn').classList.add('active');
-            document.getElementById('adminBtn').classList.remove('active');
-            document.querySelector('.client-content').classList.add('active');
-            document.querySelector('.admin-content').classList.remove('active');
+        // Elementos do DOM
+        const adminLoginModal = document.getElementById('adminLoginModal');
+        const changePasswordModal = document.getElementById('changePasswordModal');
+        const loginError = document.getElementById('loginError');
+        const loginSuccess = document.getElementById('loginSuccess');
+        const passwordError = document.getElementById('passwordError');
+        const passwordSuccess = document.getElementById('passwordSuccess');
+
+        // Verificar status de login ao carregar a página
+        adminAuth.checkLoginStatus();
+
+        // Função para alternar entre cliente e admin (com verificação de login)
+        document.getElementById('adminBtn').addEventListener('click', function() {
+            if (!adminAuth.isLoggedIn) {
+                // Mostrar modal de login
+                adminLoginModal.style.display = 'flex';
+                document.getElementById('adminPassword').focus();
+            } else {
+                // Acessar diretamente a área administrativa
+                switchToAdminArea();
+            }
         });
 
-        document.getElementById('adminBtn').addEventListener('click', function() {
+        document.getElementById('clientBtn').addEventListener('click', function() {
+            switchToClientArea();
+        });
+
+        // Funções para alternar entre áreas
+        function switchToAdminArea() {
             document.getElementById('adminBtn').classList.add('active');
             document.getElementById('clientBtn').classList.remove('active');
             document.querySelector('.admin-content').classList.add('active');
             document.querySelector('.client-content').classList.remove('active');
+            
+            // Carregar dados administrativos
+            loadData();
+            
+            // Rolar para o topo
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function switchToClientArea() {
+            document.getElementById('clientBtn').classList.add('active');
+            document.getElementById('adminBtn').classList.remove('active');
+            document.querySelector('.client-content').classList.add('active');
+            document.querySelector('.admin-content').classList.remove('active');
+            
+            // Rolar para o topo
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        // Fechar modais
+        document.getElementById('closeLoginModal').addEventListener('click', function() {
+            adminLoginModal.style.display = 'none';
+            loginError.style.display = 'none';
+            loginSuccess.style.display = 'none';
+        });
+
+        document.getElementById('closePasswordModal').addEventListener('click', function() {
+            changePasswordModal.style.display = 'none';
+            passwordError.style.display = 'none';
+            passwordSuccess.style.display = 'none';
+        });
+
+        // Fechar modais ao clicar fora
+        window.addEventListener('click', function(event) {
+            if (event.target === adminLoginModal) {
+                adminLoginModal.style.display = 'none';
+                loginError.style.display = 'none';
+                loginSuccess.style.display = 'none';
+            }
+            if (event.target === changePasswordModal) {
+                changePasswordModal.style.display = 'none';
+                passwordError.style.display = 'none';
+                passwordSuccess.style.display = 'none';
+            }
+        });
+
+        // Mostrar/ocultar senha
+        document.getElementById('togglePassword').addEventListener('click', function() {
+            const passwordInput = document.getElementById('adminPassword');
+            const icon = this.querySelector('i');
+            
+            if (passwordInput.type === 'password') {
+                passwordInput.type = 'text';
+                icon.classList.remove('fa-eye');
+                icon.classList.add('fa-eye-slash');
+            } else {
+                passwordInput.type = 'password';
+                icon.classList.remove('fa-eye-slash');
+                icon.classList.add('fa-eye');
+            }
+        });
+
+        // Toggle para senhas do formulário de alteração
+        document.getElementById('toggleCurrentPassword').addEventListener('click', function() {
+            togglePasswordVisibility('currentPassword', this);
+        });
+
+        document.getElementById('toggleNewPassword').addEventListener('click', function() {
+            togglePasswordVisibility('newPassword', this);
+        });
+
+        document.getElementById('toggleConfirmPassword').addEventListener('click', function() {
+            togglePasswordVisibility('confirmPassword', this);
+        });
+
+        function togglePasswordVisibility(inputId, button) {
+            const passwordInput = document.getElementById(inputId);
+            const icon = button.querySelector('i');
+            
+            if (passwordInput.type === 'password') {
+                passwordInput.type = 'text';
+                icon.classList.remove('fa-eye');
+                icon.classList.add('fa-eye-slash');
+            } else {
+                passwordInput.type = 'password';
+                icon.classList.remove('fa-eye-slash');
+                icon.classList.add('fa-eye');
+            }
+        }
+
+        // Login administrativo
+        document.getElementById('adminLoginForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const password = document.getElementById('adminPassword').value;
+            
+            // Esconder mensagens anteriores
+            loginError.style.display = 'none';
+            loginSuccess.style.display = 'none';
+            
+            if (adminAuth.login(password)) {
+                // Login bem-sucedido
+                loginSuccess.style.display = 'block';
+                
+                // Fechar modal após 1 segundo e entrar na área administrativa
+                setTimeout(function() {
+                    adminLoginModal.style.display = 'none';
+                    switchToAdminArea();
+                    document.getElementById('adminPassword').value = '';
+                }, 1000);
+            } else {
+                // Login falhou
+                loginError.style.display = 'block';
+                document.getElementById('adminPassword').value = '';
+                document.getElementById('adminPassword').focus();
+            }
+        });
+
+        // Botão para alterar senha
+        document.getElementById('resetPasswordBtn').addEventListener('click', function() {
+            adminLoginModal.style.display = 'none';
+            changePasswordModal.style.display = 'flex';
+            document.getElementById('currentPassword').focus();
+        });
+
+        // Alterar senha
+        document.getElementById('changePasswordForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const currentPassword = document.getElementById('currentPassword').value;
+            const newPassword = document.getElementById('newPassword').value;
+            const confirmPassword = document.getElementById('confirmPassword').value;
+            
+            // Esconder mensagens anteriores
+            passwordError.style.display = 'none';
+            passwordSuccess.style.display = 'none';
+            
+            // Validar se as senhas coincidem
+            if (newPassword !== confirmPassword) {
+                passwordError.textContent = "As novas senhas não coincidem!";
+                passwordError.style.display = 'block';
+                return;
+            }
+            
+            // Validar comprimento mínimo
+            if (newPassword.length < 6) {
+                passwordError.textContent = "A nova senha deve ter pelo menos 6 caracteres!";
+                passwordError.style.display = 'block';
+                return;
+            }
+            
+            // Tentar alterar a senha
+            if (adminAuth.changePassword(currentPassword, newPassword)) {
+                // Senha alterada com sucesso
+                passwordSuccess.style.display = 'block';
+                
+                // Limpar formulário
+                document.getElementById('currentPassword').value = '';
+                document.getElementById('newPassword').value = '';
+                document.getElementById('confirmPassword').value = '';
+                
+                // Fechar modal após 2 segundos
+                setTimeout(function() {
+                    changePasswordModal.style.display = 'none';
+                    adminLoginModal.style.display = 'flex';
+                }, 2000);
+            } else {
+                // Senha atual incorreta
+                passwordError.textContent = "Senha atual incorreta!";
+                passwordError.style.display = 'block';
+                document.getElementById('currentPassword').value = '';
+                document.getElementById('currentPassword').focus();
+            }
+        });
+
+        // Logout
+        document.getElementById('logoutBtn').addEventListener('click', function() {
+            adminAuth.logout();
+            switchToClientArea();
+            
+            // Mostrar mensagem de logout
+            alert("Você saiu da área administrativa com sucesso.");
         });
 
         // Função para alternar entre abas administrativas
@@ -966,35 +1415,56 @@
 
         // Função para os botões de adicionar
         document.getElementById('addProjectBtn').addEventListener('click', function() {
+            if (!adminAuth.isLoggedIn) {
+                alert("Você precisa estar logado para adicionar um projeto.");
+                return;
+            }
             alert('Funcionalidade de adicionar projeto será implementada aqui.');
         });
 
         document.getElementById('addClientBtn').addEventListener('click', function() {
+            if (!adminAuth.isLoggedIn) {
+                alert("Você precisa estar logado para adicionar um cliente.");
+                return;
+            }
             alert('Funcionalidade de adicionar cliente será implementada aqui.');
         });
 
         document.getElementById('addMemberBtn').addEventListener('click', function() {
+            if (!adminAuth.isLoggedIn) {
+                alert("Você precisa estar logado para adicionar um membro da equipe.");
+                return;
+            }
             alert('Funcionalidade de adicionar membro da equipe será implementada aqui.');
         });
 
         // Função para salvar configurações da empresa
         document.getElementById('companySettings').addEventListener('submit', function(e) {
             e.preventDefault();
+            if (!adminAuth.isLoggedIn) {
+                alert("Você precisa estar logado para alterar as configurações.");
+                return;
+            }
             alert('Configurações da empresa salvas com sucesso!');
         });
 
-        // Função para os botões de login/cadastro
+        // Função para os botões de login/cadastro (usuários comuns)
         document.getElementById('loginBtn').addEventListener('click', function() {
-            alert('Funcionalidade de login será implementada aqui.');
+            alert('Funcionalidade de login para clientes será implementada aqui.');
         });
 
         document.getElementById('signupBtn').addEventListener('click', function() {
-            alert('Funcionalidade de cadastro será implementada aqui.');
+            alert('Funcionalidade de cadastro para clientes será implementada aqui.');
         });
 
         // Inicializa os dados quando a página carrega
         document.addEventListener('DOMContentLoaded', function() {
-            loadData();
+            // Se já estiver logado, mostrar área administrativa
+            if (adminAuth.isLoggedIn) {
+                switchToAdminArea();
+            } else {
+                loadData();
+            }
             
             // Rolagem suave para links âncora
             document.querySelectorAll('a[href^="#"]').forEach(anchor => {

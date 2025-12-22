@@ -3,19 +3,19 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DevTools - Ferramentas Virtuais</title>
+    <title>Bemorh - Tecnologia que Conecta Ideias</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         /* Estilos Gerais */
         :root {
-            --primary: #2c3e50;
-            --secondary: #3498db;
-            --accent: #e74c3c;
-            --light: #ecf0f1;
-            --dark: #2c3e50;
-            --success: #2ecc71;
-            --warning: #f39c12;
-            --gray: #95a5a6;
+            --primary: #1a237e;
+            --secondary: #3d5afe;
+            --accent: #ff4081;
+            --light: #e8eaf6;
+            --dark: #0d1458;
+            --success: #00c853;
+            --warning: #ff9100;
+            --gray: #78909c;
             --shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
         }
 
@@ -57,7 +57,7 @@
         }
 
         .btn:hover {
-            background-color: #2980b9;
+            background-color: #304ffe;
             transform: translateY(-2px);
             box-shadow: var(--shadow);
         }
@@ -121,15 +121,21 @@
 
         .logo {
             display: flex;
-            align-items: center;
-            font-size: 1.8rem;
-            font-weight: 700;
-            color: var(--primary);
+            flex-direction: column;
         }
 
-        .logo i {
+        .logo-main {
+            font-size: 2rem;
+            font-weight: 800;
+            color: var(--primary);
+            letter-spacing: 1px;
+        }
+
+        .logo-tagline {
+            font-size: 0.9rem;
             color: var(--secondary);
-            margin-right: 10px;
+            font-style: italic;
+            margin-top: -5px;
         }
 
         nav ul {
@@ -151,51 +157,20 @@
             color: var(--secondary);
         }
 
-        .admin-access-btn {
+        .admin-icon-btn {
             background: none;
-            border: 2px solid var(--secondary);
-            color: var(--secondary);
-            padding: 10px 20px;
-            border-radius: 4px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-
-        .admin-access-btn:hover {
-            background-color: var(--secondary);
-            color: white;
-        }
-
-        /* Cliente vs Admin */
-        .user-type {
-            display: flex;
-            justify-content: center;
-            margin-top: 100px;
-            margin-bottom: 50px;
-        }
-
-        .type-selector {
-            display: flex;
-            background-color: white;
-            border-radius: 10px;
-            overflow: hidden;
-            box-shadow: var(--shadow);
-        }
-
-        .type-selector button {
-            padding: 15px 40px;
             border: none;
-            background: none;
-            font-size: 1.1rem;
-            font-weight: 600;
+            color: var(--gray);
+            font-size: 1.2rem;
             cursor: pointer;
+            padding: 8px;
+            border-radius: 50%;
             transition: all 0.3s ease;
         }
 
-        .type-selector button.active {
-            background-color: var(--secondary);
-            color: white;
+        .admin-icon-btn:hover {
+            color: var(--secondary);
+            background-color: rgba(61, 90, 254, 0.1);
         }
 
         /* Modal de Login */
@@ -320,13 +295,13 @@
         }
 
         .alert-danger {
-            background-color: rgba(231, 76, 60, 0.1);
+            background-color: rgba(255, 64, 129, 0.1);
             color: var(--accent);
             border-left: 4px solid var(--accent);
         }
 
         .alert-success {
-            background-color: rgba(46, 204, 113, 0.1);
+            background-color: rgba(0, 200, 83, 0.1);
             color: var(--success);
             border-left: 4px solid var(--success);
         }
@@ -343,7 +318,7 @@
 
         /* Hero Section */
         .hero {
-            background: linear-gradient(135deg, var(--primary) 0%, #1a2530 100%);
+            background: linear-gradient(135deg, var(--primary) 0%, var(--dark) 100%);
             color: white;
             padding: 150px 0 100px;
             text-align: center;
@@ -410,17 +385,17 @@
         }
 
         .status-completed {
-            background-color: rgba(46, 204, 113, 0.2);
+            background-color: rgba(0, 200, 83, 0.2);
             color: var(--success);
         }
 
         .status-in-progress {
-            background-color: rgba(52, 152, 219, 0.2);
+            background-color: rgba(61, 90, 254, 0.2);
             color: var(--secondary);
         }
 
         .status-pending {
-            background-color: rgba(243, 156, 18, 0.2);
+            background-color: rgba(255, 145, 0, 0.2);
             color: var(--warning);
         }
 
@@ -666,7 +641,7 @@
                 font-size: 2.8rem;
             }
             
-            .admin-access-btn {
+            .admin-icon-btn {
                 margin-top: 15px;
             }
         }
@@ -684,14 +659,6 @@
                 font-size: 2rem;
             }
             
-            .user-type {
-                margin-top: 80px;
-            }
-            
-            .type-selector {
-                flex-direction: column;
-            }
-            
             .admin-tabs {
                 flex-wrap: wrap;
             }
@@ -703,8 +670,8 @@
     <header>
         <div class="header-container container">
             <div class="logo">
-                <i class="fas fa-tools"></i>
-                <span>DevTools</span>
+                <div class="logo-main">Bemorh</div>
+                <div class="logo-tagline">tecnologia que conecta ideias</div>
             </div>
             <nav>
                 <ul>
@@ -715,8 +682,8 @@
                     <li><a href="#contact">Contato</a></li>
                 </ul>
             </nav>
-            <button class="admin-access-btn" id="adminAccessBtn">
-                <i class="fas fa-cogs"></i> Acesso Admin
+            <button class="admin-icon-btn" id="adminAccessBtn" title="Acesso Administrativo">
+                <i class="fas fa-cogs"></i>
             </button>
         </div>
     </header>
@@ -813,21 +780,13 @@
         </div>
     </div>
 
-    <!-- Seletor de Tipo de Usuário -->
-    <div class="user-type container">
-        <div class="type-selector">
-            <button class="active" id="clientBtn">Área do Cliente</button>
-            <button id="adminBtn">Área Administrativa</button>
-        </div>
-    </div>
-
-    <!-- Conteúdo do Cliente -->
+    <!-- Conteúdo do Cliente (Sempre visível por padrão) -->
     <div class="client-content active">
         <!-- Hero Section -->
         <section class="hero" id="home">
             <div class="container">
-                <h1>Ferramentas Virtuais para o Futuro</h1>
-                <p>Desenvolvemos soluções digitais inovadoras que impulsionam o seu negócio. Nossas ferramentas virtuais são criadas com as mais avançadas tecnologias para atender às demandas do mercado atual.</p>
+                <h1>Tecnologia que Conecta Ideias</h1>
+                <p>Na Bemorh, transformamos conceitos em soluções digitais inovadoras. Desenvolvemos ferramentas virtuais que conectam pessoas, processos e tecnologias para impulsionar o seu negócio.</p>
                 <a href="#contact" class="btn btn-contact">
                     <i class="fas fa-envelope"></i> Entre em Contato
                 </a>
@@ -841,32 +800,32 @@
                 <div class="projects-grid">
                     <div class="project-card">
                         <div class="project-img">
-                            <i class="fas fa-chart-bar"></i>
+                            <i class="fas fa-chart-network"></i>
                         </div>
                         <div class="project-info">
-                            <h3>Dashboard Analytics Pro</h3>
+                            <h3>Sistema de Conexão de Ideias</h3>
                             <span class="project-status status-completed">Concluído</span>
-                            <p>Plataforma de análise de dados em tempo real com visualizações interativas e relatórios personalizados.</p>
+                            <p>Plataforma colaborativa que conecta equipes e organiza ideias em projetos executáveis com fluxos visuais.</p>
                         </div>
                     </div>
                     <div class="project-card">
                         <div class="project-img">
-                            <i class="fas fa-shopping-cart"></i>
+                            <i class="fas fa-brain"></i>
                         </div>
                         <div class="project-info">
-                            <h3>E-commerce Suite</h3>
+                            <h3>IA para Inovação</h3>
                             <span class="project-status status-in-progress">Em Andamento</span>
-                            <p>Sistema completo de e-commerce com gestão de inventário, pagamentos integrados e análise de vendas.</p>
+                            <p>Ferramenta de inteligência artificial que auxilia na geração e refinamento de ideias criativas para negócios.</p>
                         </div>
                     </div>
                     <div class="project-card">
                         <div class="project-img">
-                            <i class="fas fa-video"></i>
+                            <i class="fas fa-users-cog"></i>
                         </div>
                         <div class="project-info">
-                            <h3>Video Conference Pro</h3>
-                            <span class="project-status status-pending">Pendente</span>
-                            <p>Ferramenta de videoconferência empresarial com salas virtuais, gravação e compartilhamento de tela.</p>
+                            <h3>Plataforma Colaborativa</h3>
+                            <span class="project-status status-pending">Em Planejamento</span>
+                            <p>Ambiente virtual para equipes distribuídas colaborarem em tempo real no desenvolvimento de projetos.</p>
                         </div>
                     </div>
                 </div>
@@ -879,30 +838,30 @@
                 <h2 class="section-title">Nossos Serviços</h2>
                 <div class="projects-grid">
                     <div class="project-card">
-                        <div class="project-img" style="background-color: #9b59b6;">
-                            <i class="fas fa-code"></i>
+                        <div class="project-img" style="background-color: #7b1fa2;">
+                            <i class="fas fa-lightbulb"></i>
                         </div>
                         <div class="project-info">
-                            <h3>Desenvolvimento Customizado</h3>
-                            <p>Criamos ferramentas virtuais sob medida para atender às necessidades específicas do seu negócio.</p>
+                            <h3>Consultoria em Inovação</h3>
+                            <p>Ajudamos sua empresa a identificar oportunidades e transformar ideias em projetos viáveis com metodologias ágeis.</p>
                         </div>
                     </div>
                     <div class="project-card">
-                        <div class="project-img" style="background-color: #1abc9c;">
-                            <i class="fas fa-cloud"></i>
+                        <div class="project-img" style="background-color: #00796b;">
+                            <i class="fas fa-code-branch"></i>
                         </div>
                         <div class="project-info">
-                            <h3>Soluções em Nuvem</h3>
-                            <p>Implementamos e gerenciamos soluções escaláveis na nuvem para maior flexibilidade e segurança.</p>
+                            <h3>Desenvolvimento Ágil</h3>
+                            <p>Criamos soluções personalizadas com metodologias ágeis, garantindo entrega rápida e adaptação contínua.</p>
                         </div>
                     </div>
                     <div class="project-card">
-                        <div class="project-img" style="background-color: #e67e22;">
-                            <i class="fas fa-shield-alt"></i>
+                        <div class="project-img" style="background-color: #d84315;">
+                            <i class="fas fa-project-diagram"></i>
                         </div>
                         <div class="project-info">
-                            <h3>Consultoria em Segurança</h3>
-                            <p>Auditoria e implementação de medidas de segurança para proteger seus dados e aplicações.</p>
+                            <h3>Integração de Sistemas</h3>
+                            <p>Conectamos diferentes tecnologias e plataformas para criar ecossistemas digitais coesos e eficientes.</p>
                         </div>
                     </div>
                 </div>
@@ -912,28 +871,28 @@
         <!-- Sobre Nós -->
         <section id="about" style="background-color: var(--light);">
             <div class="container">
-                <h2 class="section-title">Sobre Nós</h2>
+                <h2 class="section-title">Sobre a Bemorh</h2>
                 <div style="max-width: 800px; margin: 0 auto; text-align: center;">
                     <p style="font-size: 1.2rem; margin-bottom: 30px;">
-                        A <strong>DevTools</strong> é uma empresa especializada no desenvolvimento de ferramentas virtuais inovadoras para empresas de todos os portes. Com mais de 10 anos de experiência no mercado, nossa equipe de especialistas está comprometida em entregar soluções digitais que otimizam processos e impulsionam resultados.
+                        A <strong>Bemorh</strong> nasceu da crença de que as melhores soluções surgem da conexão de ideias. Somos uma empresa de tecnologia especializada em desenvolver ferramentas virtuais que facilitam a colaboração, estimulam a inovação e transformam conceitos em realidade.
                     </p>
                     <div class="projects-grid">
                         <div class="project-card" style="text-align: left;">
                             <div class="project-info">
                                 <h3><i class="fas fa-bullseye" style="color: var(--secondary);"></i> Nossa Missão</h3>
-                                <p>Desenvolver ferramentas virtuais que transformam a maneira como as empresas operam, tornando processos mais eficientes e resultados mais consistentes.</p>
+                                <p>Conectar pessoas, ideias e tecnologias para criar soluções digitais inovadoras que transformam negócios e impulsionam resultados extraordinários.</p>
                             </div>
                         </div>
                         <div class="project-card" style="text-align: left;">
                             <div class="project-info">
                                 <h3><i class="fas fa-eye" style="color: var(--secondary);"></i> Nossa Visão</h3>
-                                <p>Ser referência nacional no desenvolvimento de soluções digitais inovadoras até 2030, impactando positivamente milhares de empresas.</p>
+                                <p>Ser referência em tecnologia conectiva, reconhecida por transformar ideias dispersas em ecossistemas digitais integrados e eficientes.</p>
                             </div>
                         </div>
                         <div class="project-card" style="text-align: left;">
                             <div class="project-info">
-                                <h3><i class="fas fa-handshake" style="color: var(--secondary);"></i> Nossos Valores</h3>
-                                <p>Inovação, qualidade, transparência, parceria com o cliente e compromisso com resultados mensuráveis.</p>
+                                <h3><i class="fas fa-handshake" style="color: var(--secondary);"></i> Nossa Abordagem</h3>
+                                <p>Trabalhamos em parceria com nossos clientes, entendendo suas necessidades únicas e co-criando soluções que realmente fazem a diferença.</p>
                             </div>
                         </div>
                     </div>
@@ -944,7 +903,7 @@
         <!-- Contato -->
         <section class="contact-section" id="contact">
             <div class="container">
-                <h2 class="section-title">Entre em Contato</h2>
+                <h2 class="section-title">Conecte-se Conosco</h2>
                 <div class="contact-container">
                     <div class="contact-info">
                         <h3>Informações de Contato</h3>
@@ -952,33 +911,33 @@
                             <i class="fas fa-map-marker-alt"></i>
                             <div>
                                 <h4>Endereço</h4>
-                                <p>Av. Paulista, 1000 - Bela Vista<br>São Paulo - SP, 01310-100</p>
+                                <p>Av. das Inovações, 123 - Centro de Tecnologia<br>São Paulo - SP, 04538-000</p>
                             </div>
                         </div>
                         <div class="contact-item">
                             <i class="fas fa-phone"></i>
                             <div>
                                 <h4>Telefone</h4>
-                                <p>(11) 3333-4444</p>
+                                <p>(11) 3456-7890</p>
                             </div>
                         </div>
                         <div class="contact-item">
                             <i class="fas fa-envelope"></i>
                             <div>
                                 <h4>Email</h4>
-                                <p>contato@devtools.com.br</p>
+                                <p>contato@bemorh.com.br</p>
                             </div>
                         </div>
                         <div class="contact-item">
                             <i class="fas fa-clock"></i>
                             <div>
                                 <h4>Horário de Atendimento</h4>
-                                <p>Segunda a Sexta: 9h às 18h<br>Sábado: 9h às 12h</p>
+                                <p>Segunda a Sexta: 8h às 19h<br>Sábado: 9h às 13h</p>
                             </div>
                         </div>
                     </div>
                     <div class="contact-info">
-                        <h3>Envie uma Mensagem</h3>
+                        <h3>Envie sua Ideia</h3>
                         <form id="contactForm">
                             <div class="form-group">
                                 <label for="contactName">Nome</label>
@@ -993,8 +952,8 @@
                                 <input type="text" id="contactPhone" class="form-control" placeholder="(11) 99999-9999">
                             </div>
                             <div class="form-group">
-                                <label for="contactMessage">Mensagem</label>
-                                <textarea id="contactMessage" class="form-control" rows="5" placeholder="Como podemos ajudá-lo?" required></textarea>
+                                <label for="contactMessage">Sua Ideia ou Projeto</label>
+                                <textarea id="contactMessage" class="form-control" rows="5" placeholder="Conte-nos sobre sua ideia ou projeto..." required></textarea>
                             </div>
                             <button type="submit" class="btn btn-contact" style="width: 100%;">
                                 <i class="fas fa-paper-plane"></i> Enviar Mensagem
@@ -1006,40 +965,45 @@
         </section>
     </div>
 
-    <!-- Conteúdo Administrativo -->
+    <!-- Conteúdo Administrativo (Oculto por padrão) -->
     <div class="admin-content">
         <div class="container">
             <!-- Header Admin -->
             <div class="admin-header">
                 <div>
-                    <h1><i class="fas fa-cogs"></i> Painel Administrativo</h1>
-                    <p>Gerencie seus projetos, clientes e configurações da empresa</p>
+                    <h1><i class="fas fa-cogs"></i> Painel Administrativo - Bemorh</h1>
+                    <p>Gerencie projetos, clientes e configurações da empresa</p>
                 </div>
-                <button class="logout-btn" id="logoutBtn">
-                    <i class="fas fa-sign-out-alt"></i> Sair
-                </button>
+                <div>
+                    <button class="btn" id="backToSiteBtn" style="margin-right: 10px;">
+                        <i class="fas fa-globe"></i> Voltar ao Site
+                    </button>
+                    <button class="logout-btn" id="logoutBtn">
+                        <i class="fas fa-sign-out-alt"></i> Sair
+                    </button>
+                </div>
             </div>
 
             <!-- Estatísticas -->
             <div class="admin-stats">
                 <div class="stat-card">
                     <i class="fas fa-project-diagram"></i>
-                    <h3 id="projectCount">12</h3>
+                    <h3 id="projectCount">8</h3>
                     <p>Projetos Ativos</p>
                 </div>
                 <div class="stat-card">
                     <i class="fas fa-users"></i>
-                    <h3 id="clientCount">48</h3>
+                    <h3 id="clientCount">24</h3>
                     <p>Clientes Ativos</p>
                 </div>
                 <div class="stat-card">
                     <i class="fas fa-dollar-sign"></i>
-                    <h3>R$ 124,580</h3>
+                    <h3>R$ 89,450</h3>
                     <p>Faturamento Mensal</p>
                 </div>
                 <div class="stat-card">
                     <i class="fas fa-tasks"></i>
-                    <h3 id="taskCount">86%</h3>
+                    <h3 id="taskCount">92%</h3>
                     <p>Projetos no Prazo</p>
                 </div>
             </div>
@@ -1125,23 +1089,27 @@
                     <form id="companySettings">
                         <div class="form-group">
                             <label for="companyName">Nome da Empresa</label>
-                            <input type="text" id="companyName" class="form-control" value="DevTools Ferramentas Virtuais">
+                            <input type="text" id="companyName" class="form-control" value="Bemorh">
+                        </div>
+                        <div class="form-group">
+                            <label for="companyTagline">Frase de Efeito</label>
+                            <input type="text" id="companyTagline" class="form-control" value="tecnologia que conecta ideias">
                         </div>
                         <div class="form-group">
                             <label for="companyEmail">Email de Contato</label>
-                            <input type="email" id="companyEmail" class="form-control" value="contato@devtools.com.br">
+                            <input type="email" id="companyEmail" class="form-control" value="contato@bemorh.com.br">
                         </div>
                         <div class="form-group">
                             <label for="companyPhone">Telefone</label>
-                            <input type="text" id="companyPhone" class="form-control" value="(11) 99999-9999">
+                            <input type="text" id="companyPhone" class="form-control" value="(11) 3456-7890">
                         </div>
                         <div class="form-group">
                             <label for="companyAddress">Endereço</label>
-                            <input type="text" id="companyAddress" class="form-control" value="Av. Paulista, 1000 - São Paulo, SP">
+                            <input type="text" id="companyAddress" class="form-control" value="Av. das Inovações, 123 - Centro de Tecnologia, São Paulo - SP">
                         </div>
                         <div class="form-group">
                             <label for="companyAbout">Sobre a Empresa</label>
-                            <textarea id="companyAbout" class="form-control" rows="5">A DevTools é especializada no desenvolvimento de ferramentas virtuais inovadoras para empresas de todos os portes. Com mais de 10 anos de experiência, entregamos soluções digitais que otimizam processos e impulsionam resultados.</textarea>
+                            <textarea id="companyAbout" class="form-control" rows="5">A Bemorh nasceu da crença de que as melhores soluções surgem da conexão de ideias. Somos uma empresa de tecnologia especializada em desenvolver ferramentas virtuais que facilitam a colaboração, estimulam a inovação e transformam conceitos em realidade.</textarea>
                         </div>
                         <button type="submit" class="btn btn-success">Salvar Configurações</button>
                     </form>
@@ -1155,13 +1123,13 @@
         <div class="container">
             <div class="footer-content">
                 <div class="footer-column">
-                    <h3>DevTools</h3>
-                    <p>Especialistas em desenvolvimento de ferramentas virtuais para transformar seus processos de negócio.</p>
+                    <h3>Bemorh</h3>
+                    <p>Tecnologia que conecta ideias. Desenvolvemos soluções digitais inovadoras que transformam conceitos em realidade.</p>
                     <div style="margin-top: 20px;">
-                        <a href="#" style="margin-right: 15px;"><i class="fab fa-facebook fa-lg"></i></a>
-                        <a href="#" style="margin-right: 15px;"><i class="fab fa-instagram fa-lg"></i></a>
                         <a href="#" style="margin-right: 15px;"><i class="fab fa-linkedin fa-lg"></i></a>
-                        <a href="#"><i class="fab fa-twitter fa-lg"></i></a>
+                        <a href="#" style="margin-right: 15px;"><i class="fab fa-instagram fa-lg"></i></a>
+                        <a href="#" style="margin-right: 15px;"><i class="fab fa-twitter fa-lg"></i></a>
+                        <a href="#"><i class="fab fa-youtube fa-lg"></i></a>
                     </div>
                 </div>
                 <div class="footer-column">
@@ -1177,15 +1145,15 @@
                 <div class="footer-column">
                     <h3>Contato</h3>
                     <ul>
-                        <li><i class="fas fa-map-marker-alt"></i> Av. Paulista, 1000 - São Paulo, SP</li>
-                        <li><i class="fas fa-phone"></i> (11) 3333-4444</li>
-                        <li><i class="fas fa-envelope"></i> contato@devtools.com.br</li>
-                        <li><i class="fas fa-clock"></i> Seg-Sex: 9h-18h</li>
+                        <li><i class="fas fa-map-marker-alt"></i> Av. das Inovações, 123 - São Paulo, SP</li>
+                        <li><i class="fas fa-phone"></i> (11) 3456-7890</li>
+                        <li><i class="fas fa-envelope"></i> contato@bemorh.com.br</li>
+                        <li><i class="fas fa-clock"></i> Seg-Sex: 8h-19h</li>
                     </ul>
                 </div>
                 <div class="footer-column">
-                    <h3>Newsletter</h3>
-                    <p>Inscreva-se para receber novidades sobre nossos projetos e serviços.</p>
+                    <h3>Novidades</h3>
+                    <p>Receba nossas ideias e inovações diretamente no seu email.</p>
                     <div class="form-group" style="margin-top: 15px;">
                         <input type="email" class="form-control" placeholder="Seu email" id="newsletterEmail">
                         <button class="btn" style="margin-top: 10px; width: 100%;" id="newsletterBtn">Inscrever-se</button>
@@ -1193,7 +1161,7 @@
                 </div>
             </div>
             <div class="copyright">
-                <p>&copy; 2023 DevTools - Ferramentas Virtuais. Todos os direitos reservados.</p>
+                <p>&copy; 2023 Bemorh - Tecnologia que Conecta Ideias. Todos os direitos reservados.</p>
             </div>
         </div>
     </footer>
@@ -1210,6 +1178,8 @@
                 const savedLogin = localStorage.getItem('adminLoggedIn');
                 if (savedLogin === 'true') {
                     this.isLoggedIn = true;
+                    // Se já estiver logado, mostrar área administrativa
+                    showAdminArea();
                 }
             },
             
@@ -1227,6 +1197,7 @@
             logout: function() {
                 this.isLoggedIn = false;
                 localStorage.removeItem('adminLoggedIn');
+                showClientArea();
             },
             
             // Alterar senha
@@ -1241,24 +1212,24 @@
 
         // Dados de exemplo para o sistema
         const sampleProjects = [
-            { id: 1, name: "Dashboard Analytics Pro", client: "TechCorp", status: "Concluído", deadline: "15/10/2023", budget: "R$ 45.000" },
-            { id: 2, name: "E-commerce Suite", client: "FashionStore", status: "Em Andamento", deadline: "30/11/2023", budget: "R$ 68.000" },
-            { id: 3, name: "Video Conference Pro", client: "GlobalBiz", status: "Pendente", deadline: "15/12/2023", budget: "R$ 32.000" },
-            { id: 4, name: "ERP Customizado", client: "ManufactureCo", status: "Em Andamento", deadline: "20/01/2024", budget: "R$ 120.000" }
+            { id: 1, name: "Sistema de Conexão de Ideias", client: "InovaCorp", status: "Concluído", deadline: "15/10/2023", budget: "R$ 52.000" },
+            { id: 2, name: "IA para Inovação", client: "TechVision", status: "Em Andamento", deadline: "30/11/2023", budget: "R$ 78.000" },
+            { id: 3, name: "Plataforma Colaborativa", client: "GlobalConnect", status: "Em Planejamento", deadline: "15/01/2024", budget: "R$ 95.000" },
+            { id: 4, name: "Dashboard de Inovação", client: "IdeaLabs", status: "Em Andamento", deadline: "20/12/2023", budget: "R$ 45.000" }
         ];
 
         const sampleClients = [
-            { id: 1, name: "Carlos Silva", company: "TechCorp", email: "carlos@techcorp.com", phone: "(11) 99999-8888", projects: 2 },
-            { id: 2, name: "Ana Santos", company: "FashionStore", email: "ana@fashionstore.com", phone: "(11) 97777-6666", projects: 1 },
-            { id: 3, name: "Roberto Almeida", company: "GlobalBiz", email: "roberto@globalbiz.com", phone: "(11) 95555-4444", projects: 1 },
-            { id: 4, name: "Fernanda Lima", company: "ManufactureCo", email: "fernanda@manufactureco.com", phone: "(11) 93333-2222", projects: 1 }
+            { id: 1, name: "Carlos Mendes", company: "InovaCorp", email: "carlos@inovacorp.com", phone: "(11) 98888-7777", projects: 1 },
+            { id: 2, name: "Ana Silva", company: "TechVision", email: "ana@techvision.com", phone: "(11) 97777-6666", projects: 1 },
+            { id: 3, name: "Roberto Lima", company: "GlobalConnect", email: "roberto@globalconnect.com", phone: "(11) 96666-5555", projects: 1 },
+            { id: 4, name: "Fernanda Costa", company: "IdeaLabs", email: "fernanda@idealabs.com", phone: "(11) 95555-4444", projects: 1 }
         ];
 
         const sampleTeam = [
-            { id: 1, name: "João Oliveira", role: "Desenvolvedor Sênior", email: "joao@devtools.com", phone: "(11) 98888-7777", projects: 3 },
-            { id: 2, name: "Maria Costa", role: "Designer UI/UX", email: "maria@devtools.com", phone: "(11) 96666-5555", projects: 2 },
-            { id: 3, name: "Pedro Santos", role: "Gerente de Projetos", email: "pedro@devtools.com", phone: "(11) 94444-3333", projects: 4 },
-            { id: 4, name: "Julia Fernandes", role: "Analista de QA", email: "julia@devtools.com", phone: "(11) 92222-1111", projects: 2 }
+            { id: 1, name: "João Santos", role: "Desenvolvedor Sênior", email: "joao@bemorh.com", phone: "(11) 94444-3333", projects: 3 },
+            { id: 2, name: "Maria Oliveira", role: "Designer UX/UI", email: "maria@bemorh.com", phone: "(11) 93333-2222", projects: 2 },
+            { id: 3, name: "Pedro Almeida", role: "Gerente de Projetos", email: "pedro@bemorh.com", phone: "(11) 92222-1111", projects: 4 },
+            { id: 4, name: "Julia Fernandes", role: "Arquiteta de Soluções", email: "julia@bemorh.com", phone: "(11) 91111-0000", projects: 2 }
         ];
 
         // Elementos do DOM
@@ -1269,54 +1240,43 @@
         const passwordError = document.getElementById('passwordError');
         const passwordSuccess = document.getElementById('passwordSuccess');
 
-        // Verificar status de login ao carregar a página
-        adminAuth.checkLoginStatus();
-
-        // Botão de acesso admin no header
-        document.getElementById('adminAccessBtn').addEventListener('click', function() {
-            adminLoginModal.style.display = 'flex';
-            document.getElementById('adminPassword').focus();
-        });
-
-        // Função para alternar entre cliente e admin (com verificação de login)
-        document.getElementById('adminBtn').addEventListener('click', function() {
-            if (!adminAuth.isLoggedIn) {
-                // Mostrar modal de login
-                adminLoginModal.style.display = 'flex';
-                document.getElementById('adminPassword').focus();
-            } else {
-                // Acessar diretamente a área administrativa
-                switchToAdminArea();
-            }
-        });
-
-        document.getElementById('clientBtn').addEventListener('click', function() {
-            switchToClientArea();
-        });
-
-        // Funções para alternar entre áreas
-        function switchToAdminArea() {
-            document.getElementById('adminBtn').classList.add('active');
-            document.getElementById('clientBtn').classList.remove('active');
-            document.querySelector('.admin-content').classList.add('active');
+        // Funções para mostrar/ocultar áreas
+        function showAdminArea() {
             document.querySelector('.client-content').classList.remove('active');
-            
-            // Carregar dados administrativos
+            document.querySelector('.admin-content').classList.add('active');
             loadData();
             
             // Rolar para o topo
             window.scrollTo({ top: 0, behavior: 'smooth' });
         }
 
-        function switchToClientArea() {
-            document.getElementById('clientBtn').classList.add('active');
-            document.getElementById('adminBtn').classList.remove('active');
-            document.querySelector('.client-content').classList.add('active');
+        function showClientArea() {
             document.querySelector('.admin-content').classList.remove('active');
+            document.querySelector('.client-content').classList.add('active');
             
             // Rolar para o topo
             window.scrollTo({ top: 0, behavior: 'smooth' });
         }
+
+        // Botão de acesso admin no header (ícone discreto)
+        document.getElementById('adminAccessBtn').addEventListener('click', function() {
+            if (!adminAuth.isLoggedIn) {
+                // Mostrar modal de login
+                adminLoginModal.style.display = 'flex';
+                document.getElementById('adminPassword').focus();
+            } else {
+                // Já está logado, mostrar área administrativa
+                showAdminArea();
+            }
+        });
+
+        // Botão para voltar ao site
+        document.getElementById('backToSiteBtn').addEventListener('click', function() {
+            showClientArea();
+        });
+
+        // Verificar status de login ao carregar a página
+        adminAuth.checkLoginStatus();
 
         // Fechar modais
         document.getElementById('closeLoginModal').addEventListener('click', function() {
@@ -1405,7 +1365,7 @@
                 // Fechar modal após 1 segundo e entrar na área administrativa
                 setTimeout(function() {
                     adminLoginModal.style.display = 'none';
-                    switchToAdminArea();
+                    showAdminArea();
                     document.getElementById('adminPassword').value = '';
                 }, 1000);
             } else {
@@ -1476,9 +1436,6 @@
         // Logout
         document.getElementById('logoutBtn').addEventListener('click', function() {
             adminAuth.logout();
-            switchToClientArea();
-            
-            // Mostrar mensagem de logout
             alert("Você saiu da área administrativa com sucesso.");
         });
 
@@ -1505,7 +1462,7 @@
             const email = document.getElementById('contactEmail').value;
             
             // Aqui normalmente enviaria para um servidor
-            alert(`Obrigado, ${name}! Sua mensagem foi enviada com sucesso. Entraremos em contato no email ${email} em breve.`);
+            alert(`Obrigado, ${name}! Sua ideia foi recebida com sucesso. Entraremos em contato no email ${email} em breve para conversarmos.`);
             
             // Limpar formulário
             document.getElementById('contactForm').reset();
@@ -1516,7 +1473,7 @@
             const email = document.getElementById('newsletterEmail').value;
             
             if (email && email.includes('@')) {
-                alert(`Obrigado por se inscrever na nossa newsletter! Enviaremos novidades para ${email}.`);
+                alert(`Obrigado por se inscrever! Enviaremos nossas inovações e ideias para ${email}.`);
                 document.getElementById('newsletterEmail').value = '';
             } else {
                 alert('Por favor, insira um email válido.');
@@ -1594,6 +1551,7 @@
         function getStatusClass(status) {
             if (status === 'Concluído') return 'completed';
             if (status === 'Em Andamento') return 'in-progress';
+            if (status === 'Em Planejamento') return 'pending';
             return 'pending';
         }
 
@@ -1629,17 +1587,25 @@
                 alert("Você precisa estar logado para alterar as configurações.");
                 return;
             }
+            
+            // Atualizar informações no site
+            const companyName = document.getElementById('companyName').value;
+            const companyTagline = document.getElementById('companyTagline').value;
+            
+            // Atualizar header
+            document.querySelector('.logo-main').textContent = companyName;
+            document.querySelector('.logo-tagline').textContent = companyTagline;
+            
+            // Atualizar título da página
+            document.title = `${companyName} - ${companyTagline}`;
+            
             alert('Configurações da empresa salvas com sucesso!');
         });
 
         // Inicializa os dados quando a página carrega
         document.addEventListener('DOMContentLoaded', function() {
-            // Se já estiver logado, mostrar área administrativa
-            if (adminAuth.isLoggedIn) {
-                switchToAdminArea();
-            } else {
-                loadData();
-            }
+            // Carregar dados
+            loadData();
             
             // Rolagem suave para links âncora
             document.querySelectorAll('a[href^="#"]').forEach(anchor => {

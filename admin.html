@@ -174,7 +174,7 @@
         .modal-content {
             background-color: white;
             width: 100%;
-            max-width: 500px;
+            max-width: 800px;
             border-radius: 10px;
             overflow: hidden;
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
@@ -219,6 +219,8 @@
 
         .modal-body {
             padding: 30px;
+            max-height: 70vh;
+            overflow-y: auto;
         }
 
         /* Formulários */
@@ -253,6 +255,11 @@
         .form-control:focus {
             outline: none;
             border-color: var(--secondary);
+        }
+
+        .form-control-textarea {
+            min-height: 120px;
+            resize: vertical;
         }
 
         .password-input {
@@ -420,6 +427,50 @@
             background-color: var(--success);
         }
 
+        /* Project Image Preview */
+        .image-preview-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .image-preview {
+            width: 120px;
+            height: 120px;
+            border-radius: 8px;
+            overflow: hidden;
+            border: 2px solid #eee;
+            position: relative;
+        }
+
+        .image-preview img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .remove-image {
+            position: absolute;
+            top: 5px;
+            right: 5px;
+            background-color: rgba(231, 76, 60, 0.9);
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 25px;
+            height: 25px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+        }
+
+        .remove-image:hover {
+            background-color: var(--accent);
+        }
+
         /* Footer */
         footer {
             background-color: var(--primary);
@@ -535,13 +586,95 @@
         </div>
     </div>
 
+    <!-- Modal de Gerenciar Projetos do Site -->
+    <div class="modal" id="manageSiteProjectsModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3><i class="fas fa-edit"></i> Gerenciar Projetos do Site Principal</h3>
+                <button class="close-modal" id="closeManageProjectsModal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="alert alert-success" id="projectSuccess" style="display: none;">
+                    <i class="fas fa-check-circle"></i> Projeto salvo com sucesso!
+                </div>
+                <div class="alert alert-danger" id="projectError" style="display: none;">
+                    <i class="fas fa-exclamation-circle"></i> Erro ao salvar projeto!
+                </div>
+                
+                <form id="siteProjectForm">
+                    <input type="hidden" id="projectId" value="">
+                    
+                    <div class="form-group">
+                        <label for="projectTitle">Título do Projeto *</label>
+                        <input type="text" id="projectTitle" class="form-control" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="projectDescription">Descrição do Projeto *</label>
+                        <textarea id="projectDescription" class="form-control form-control-textarea" required></textarea>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="projectCategory">Categoria *</label>
+                        <select id="projectCategory" class="form-control" required>
+                            <option value="web">Desenvolvimento Web</option>
+                            <option value="mobile">Apps Mobile</option>
+                            <option value="design">UI/UX Design</option>
+                            <option value="consulting">Consultoria</option>
+                            <option value="innovation">Inovação</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="projectImages">Imagens do Projeto</label>
+                        <div class="image-preview-container" id="projectImagesPreview">
+                            <!-- As prévias das imagens serão inseridas aqui -->
+                        </div>
+                        <input type="file" id="projectImages" class="form-control" accept=".png,.jpg,.jpeg,.gif" multiple>
+                        <small style="color: var(--gray);">Você pode selecionar múltiplas imagens</small>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="projectFeatures">Características (separadas por vírgula)</label>
+                        <input type="text" id="projectFeatures" class="form-control" placeholder="ex: Design Responsivo, SEO Otimizado, API Integrada">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="projectLink">Link do Projeto (opcional)</label>
+                        <input type="url" id="projectLink" class="form-control" placeholder="https://exemplo.com">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="projectStatus">Status de Exibição</label>
+                        <select id="projectStatus" class="form-control">
+                            <option value="active">Ativo (aparece no site)</option>
+                            <option value="inactive">Inativo (não aparece no site)</option>
+                        </select>
+                    </div>
+                    
+                    <div style="display: flex; gap: 10px; margin-top: 20px;">
+                        <button type="button" class="btn btn-warning" id="cancelProjectBtn" style="flex: 1;">
+                            <i class="fas fa-times"></i> Cancelar
+                        </button>
+                        <button type="submit" class="btn btn-success" style="flex: 2;">
+                            <i class="fas fa-save"></i> Salvar Projeto
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
     <!-- Conteúdo Administrativo -->
     <div class="admin-content">
         <div class="container">
-            <!-- Botão para Alterar Logo -->
-            <div style="text-align: center; margin-bottom: 30px;">
+            <!-- Botões de Gerenciamento -->
+            <div style="display: flex; gap: 15px; margin-bottom: 30px; flex-wrap: wrap; justify-content: center;">
                 <button class="btn btn-warning" id="changeLogoBtn">
                     <i class="fas fa-image"></i> Alterar Logo da Empresa
+                </button>
+                <button class="btn btn-success" id="manageSiteProjectsBtn">
+                    <i class="fas fa-edit"></i> Gerenciar Projetos do Site
                 </button>
             </div>
 
@@ -575,6 +708,7 @@
                 <button class="admin-tab" data-tab="clients-tab">Clientes</button>
                 <button class="admin-tab" data-tab="team-tab">Equipe</button>
                 <button class="admin-tab" data-tab="settings-tab">Configurações</button>
+                <button class="admin-tab" data-tab="site-projects-tab">Projetos do Site</button>
             </div>
 
             <!-- Conteúdo das Abas -->
@@ -676,6 +810,32 @@
                     </form>
                 </div>
             </div>
+
+            <!-- Nova aba: Projetos do Site -->
+            <div class="tab-content" id="site-projects-tab">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+                    <h2>Projetos do Site Principal</h2>
+                    <button class="btn" id="addSiteProjectBtn"><i class="fas fa-plus"></i> Adicionar Projeto</button>
+                </div>
+                <div style="margin-bottom: 20px;">
+                    <p>Aqui você pode gerenciar todos os projetos que aparecem na seção "Projetos" e "Serviços" do site principal.</p>
+                </div>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Título</th>
+                            <th>Categoria</th>
+                            <th>Status</th>
+                            <th>Imagens</th>
+                            <th>Características</th>
+                            <th>Ações</th>
+                        </tr>
+                    </thead>
+                    <tbody id="siteProjectsTable">
+                        <!-- Projetos do site serão inseridos aqui via JavaScript -->
+                    </tbody>
+                </table>
+            </div>
         </div>
     </div>
 
@@ -717,14 +877,54 @@
             { id: 4, name: "Julia Fernandes", role: "Arquiteta de Soluções", email: "julia@bemorh.com", phone: "(11) 91111-0000", projects: 2 }
         ];
 
+        // Dados dos projetos do site
+        let siteProjects = JSON.parse(localStorage.getItem('bemorhSiteProjects')) || [
+            { 
+                id: 1, 
+                title: "Sistema de Gestão de Ideias", 
+                description: "Desenvolvimento de uma plataforma completa para gestão e colaboração de ideias inovadoras dentro de empresas.",
+                category: "innovation",
+                images: [],
+                features: ["Colaboração em tempo real", "Dashboard analítico", "Controle de versões"],
+                link: "https://inovacorp.com/gestao-ideias",
+                status: "active"
+            },
+            { 
+                id: 2, 
+                title: "Plataforma E-commerce", 
+                description: "Criação de uma loja virtual completa com sistema de pagamentos integrado e gestão de estoque.",
+                category: "web",
+                images: [],
+                features: ["Design responsivo", "Multi-pagamentos", "Relatórios de vendas"],
+                link: "https://exemplo.com/ecommerce",
+                status: "active"
+            },
+            { 
+                id: 3, 
+                title: "App de Gestão Financeira", 
+                description: "Aplicativo mobile para controle de finanças pessoais com relatórios gráficos e metas de economia.",
+                category: "mobile",
+                images: [],
+                features: ["Sincronização em nuvem", "Gráficos interativos", "Metas personalizáveis"],
+                link: "https://play.google.com/app-finance",
+                status: "active"
+            }
+        ];
+
         // Elementos do DOM
         const changeLogoModal = document.getElementById('changeLogoModal');
+        const manageSiteProjectsModal = document.getElementById('manageSiteProjectsModal');
         const logoSuccess = document.getElementById('logoSuccess');
         const logoError = document.getElementById('logoError');
+        const projectSuccess = document.getElementById('projectSuccess');
+        const projectError = document.getElementById('projectError');
         const logoFile = document.getElementById('logoFile');
         const logoUrl = document.getElementById('logoUrl');
         const previewImage = document.getElementById('previewImage');
         const noLogoText = document.getElementById('noLogoText');
+
+        // Variáveis para gerenciamento de imagens
+        let currentProjectImages = [];
 
         // Função para tratar erro na logo
         function handleLogoError(element) {
@@ -767,19 +967,80 @@
             updateLogoPreview();
         });
 
-        // Fechar modal
+        // Botão para gerenciar projetos do site
+        document.getElementById('manageSiteProjectsBtn').addEventListener('click', function() {
+            document.querySelector('.admin-tabs .active').classList.remove('active');
+            document.querySelector('.tab-content.active').classList.remove('active');
+            
+            document.querySelector('[data-tab="site-projects-tab"]').classList.add('active');
+            document.getElementById('site-projects-tab').classList.add('active');
+        });
+
+        // Botão para adicionar projeto do site
+        document.getElementById('addSiteProjectBtn').addEventListener('click', function() {
+            openProjectModal();
+        });
+
+        // Abrir modal de projeto
+        function openProjectModal(projectId = null) {
+            const modal = document.getElementById('manageSiteProjectsModal');
+            const form = document.getElementById('siteProjectForm');
+            
+            if (projectId) {
+                // Modo edição
+                const project = siteProjects.find(p => p.id === projectId);
+                if (project) {
+                    document.getElementById('projectId').value = project.id;
+                    document.getElementById('projectTitle').value = project.title;
+                    document.getElementById('projectDescription').value = project.description;
+                    document.getElementById('projectCategory').value = project.category;
+                    document.getElementById('projectFeatures').value = project.features.join(', ');
+                    document.getElementById('projectLink').value = project.link || '';
+                    document.getElementById('projectStatus').value = project.status;
+                    
+                    // Carregar imagens
+                    currentProjectImages = [...project.images];
+                    updateProjectImagesPreview();
+                }
+            } else {
+                // Modo adição
+                form.reset();
+                document.getElementById('projectId').value = '';
+                currentProjectImages = [];
+                updateProjectImagesPreview();
+            }
+            
+            modal.style.display = 'flex';
+            projectSuccess.style.display = 'none';
+            projectError.style.display = 'none';
+        }
+
+        // Fechar modal de logo
         document.getElementById('closeLogoModal').addEventListener('click', function() {
             changeLogoModal.style.display = 'none';
             logoSuccess.style.display = 'none';
             logoError.style.display = 'none';
         });
 
-        // Fechar modal ao clicar fora
+        // Fechar modal de projetos
+        document.getElementById('closeManageProjectsModal').addEventListener('click', function() {
+            manageSiteProjectsModal.style.display = 'none';
+        });
+
+        // Botão cancelar projeto
+        document.getElementById('cancelProjectBtn').addEventListener('click', function() {
+            manageSiteProjectsModal.style.display = 'none';
+        });
+
+        // Fechar modais ao clicar fora
         window.addEventListener('click', function(event) {
             if (event.target === changeLogoModal) {
                 changeLogoModal.style.display = 'none';
                 logoSuccess.style.display = 'none';
                 logoError.style.display = 'none';
+            }
+            if (event.target === manageSiteProjectsModal) {
+                manageSiteProjectsModal.style.display = 'none';
             }
         });
 
@@ -799,7 +1060,7 @@
             };
         }
 
-        // Preview quando selecionar arquivo
+        // Preview quando selecionar arquivo da logo
         logoFile.addEventListener('change', function(e) {
             const file = e.target.files[0];
             if (file) {
@@ -814,7 +1075,7 @@
             }
         });
 
-        // Preview quando inserir URL
+        // Preview quando inserir URL da logo
         logoUrl.addEventListener('input', function() {
             if (logoUrl.value) {
                 previewImage.src = logoUrl.value;
@@ -901,6 +1162,179 @@
                 document.getElementById(tabId).classList.add('active');
             });
         });
+
+        // Gerenciamento de imagens dos projetos
+        document.getElementById('projectImages').addEventListener('change', function(e) {
+            const files = e.target.files;
+            if (!files || files.length === 0) return;
+            
+            for (let i = 0; i < files.length; i++) {
+                const file = files[i];
+                const reader = new FileReader();
+                
+                reader.onload = function(e) {
+                    currentProjectImages.push(e.target.result);
+                    updateProjectImagesPreview();
+                };
+                
+                reader.readAsDataURL(file);
+            }
+            
+            // Limpar o input de arquivo
+            this.value = '';
+        });
+
+        // Atualizar preview das imagens do projeto
+        function updateProjectImagesPreview() {
+            const previewContainer = document.getElementById('projectImagesPreview');
+            previewContainer.innerHTML = '';
+            
+            currentProjectImages.forEach((image, index) => {
+                const previewDiv = document.createElement('div');
+                previewDiv.className = 'image-preview';
+                
+                previewDiv.innerHTML = `
+                    <img src="${image}" alt="Preview ${index + 1}">
+                    <button type="button" class="remove-image" onclick="removeProjectImage(${index})">
+                        <i class="fas fa-times"></i>
+                    </button>
+                `;
+                
+                previewContainer.appendChild(previewDiv);
+            });
+            
+            if (currentProjectImages.length === 0) {
+                previewContainer.innerHTML = '<p style="color: var(--gray);">Nenhuma imagem adicionada</p>';
+            }
+        }
+
+        // Remover imagem do projeto
+        window.removeProjectImage = function(index) {
+            if (confirm("Remover esta imagem?")) {
+                currentProjectImages.splice(index, 1);
+                updateProjectImagesPreview();
+            }
+        };
+
+        // Formulário de projeto do site
+        document.getElementById('siteProjectForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const projectId = document.getElementById('projectId').value;
+            const title = document.getElementById('projectTitle').value;
+            const description = document.getElementById('projectDescription').value;
+            const category = document.getElementById('projectCategory').value;
+            const features = document.getElementById('projectFeatures').value
+                .split(',')
+                .map(f => f.trim())
+                .filter(f => f.length > 0);
+            const link = document.getElementById('projectLink').value;
+            const status = document.getElementById('projectStatus').value;
+            
+            if (!title || !description) {
+                projectError.textContent = "Título e descrição são obrigatórios!";
+                projectError.style.display = 'block';
+                return;
+            }
+            
+            const projectData = {
+                id: projectId ? parseInt(projectId) : Date.now(),
+                title: title,
+                description: description,
+                category: category,
+                images: [...currentProjectImages],
+                features: features,
+                link: link,
+                status: status
+            };
+            
+            if (projectId) {
+                // Atualizar projeto existente
+                const index = siteProjects.findIndex(p => p.id === parseInt(projectId));
+                if (index !== -1) {
+                    siteProjects[index] = projectData;
+                }
+            } else {
+                // Adicionar novo projeto
+                siteProjects.push(projectData);
+            }
+            
+            // Salvar no localStorage
+            localStorage.setItem('bemorhSiteProjects', JSON.stringify(siteProjects));
+            
+            // Atualizar tabela
+            loadSiteProjects();
+            
+            projectSuccess.style.display = 'block';
+            projectError.style.display = 'none';
+            
+            setTimeout(function() {
+                manageSiteProjectsModal.style.display = 'none';
+                projectSuccess.style.display = 'none';
+            }, 2000);
+        });
+
+        // Funções CRUD para projetos do site
+        function editSiteProject(id) {
+            openProjectModal(id);
+        }
+
+        function deleteSiteProject(id) {
+            if (confirm("Tem certeza que deseja excluir este projeto do site?")) {
+                siteProjects = siteProjects.filter(p => p.id !== id);
+                localStorage.setItem('bemorhSiteProjects', JSON.stringify(siteProjects));
+                loadSiteProjects();
+                alert("Projeto excluído do site com sucesso!");
+            }
+        }
+
+        // Carregar projetos do site na tabela
+        function loadSiteProjects() {
+            const table = document.getElementById('siteProjectsTable');
+            table.innerHTML = '';
+            
+            siteProjects.forEach(project => {
+                const row = document.createElement('tr');
+                
+                // Converter categoria para texto legível
+                const categoryText = {
+                    'web': 'Web',
+                    'mobile': 'Mobile',
+                    'design': 'Design',
+                    'consulting': 'Consultoria',
+                    'innovation': 'Inovação'
+                }[project.category] || project.category;
+                
+                // Status com cor
+                const statusColor = project.status === 'active' ? '#2ecc71' : '#95a5a6';
+                
+                row.innerHTML = `
+                    <td>${project.title}</td>
+                    <td>${categoryText}</td>
+                    <td><span style="background-color: ${statusColor}; color: white; padding: 5px 10px; border-radius: 20px; font-size: 0.8rem;">${project.status === 'active' ? 'Ativo' : 'Inativo'}</span></td>
+                    <td>${project.images.length} imagem(s)</td>
+                    <td>${project.features.slice(0, 2).join(', ')}${project.features.length > 2 ? '...' : ''}</td>
+                    <td class="actions">
+                        <button class="action-btn view-btn" onclick="viewSiteProject(${project.id})">Ver</button>
+                        <button class="action-btn edit-btn" onclick="editSiteProject(${project.id})">Editar</button>
+                        <button class="action-btn delete-btn" onclick="deleteSiteProject(${project.id})">Excluir</button>
+                    </td>
+                `;
+                table.appendChild(row);
+            });
+        }
+
+        // Visualizar projeto do site
+        window.viewSiteProject = function(id) {
+            const project = siteProjects.find(p => p.id === id);
+            if (project) {
+                let imagesInfo = project.images.length > 0 ? 
+                    `\nImagens: ${project.images.length} imagem(s) adicionada(s)` : 
+                    '\nImagens: Nenhuma imagem';
+                
+                alert(`Projeto: ${project.title}\nDescrição: ${project.description}\nCategoria: ${project.category}\n${imagesInfo}\nCaracterísticas: ${project.features.join(', ')}\nLink: ${project.link || 'Nenhum'}\nStatus: ${project.status === 'active' ? 'Ativo (visível no site)' : 'Inativo (não visível no site)'}`);
+            }
+        };
 
         // Funções CRUD para projetos
         function addProject() {
@@ -1146,6 +1580,9 @@
                 `;
                 teamTable.appendChild(row);
             });
+            
+            // Carrega projetos do site
+            loadSiteProjects();
         }
 
         function calculateCompletionRate() {

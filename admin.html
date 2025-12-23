@@ -17,6 +17,7 @@
             --warning: #f39c12;
             --gray: #95a5a6;
             --shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            --transition: all 0.3s ease;
         }
 
         * {
@@ -46,14 +47,14 @@
 
         .btn {
             display: inline-block;
-            padding: 12px 24px;
+            padding: 14px 28px;
             background-color: var(--secondary);
             color: white;
             border-radius: 4px;
             font-weight: 600;
             border: none;
             cursor: pointer;
-            transition: all 0.3s ease;
+            transition: var(--transition);
         }
 
         .btn:hover {
@@ -78,7 +79,7 @@
             background-color: var(--success);
         }
 
-        /* Header */
+        /* Header - LOGO ATUALIZADO */
         header {
             background-color: white;
             box-shadow: var(--shadow);
@@ -92,29 +93,35 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 15px 20px;
+            padding: 20px;
         }
 
         .logo-container {
             display: flex;
             align-items: center;
-            gap: 15px;
+            gap: 20px;
             cursor: pointer;
+            transition: var(--transition);
         }
 
-        .logo-placeholder {
-            width: 50px;
-            height: 50px;
-            border-radius: 10px;
+        .logo-container:hover {
+            transform: translateY(-2px);
+        }
+
+        .logo-img {
+            width: 60px;
+            height: 60px;
+            border-radius: 12px;
             display: flex;
             align-items: center;
             justify-content: center;
             overflow: hidden;
             box-shadow: var(--shadow);
             background-color: white;
+            flex-shrink: 0;
         }
 
-        .logo-placeholder img {
+        .logo-img img {
             width: 100%;
             height: 100%;
             object-fit: contain;
@@ -127,14 +134,14 @@
         }
 
         .logo-main {
-            font-size: 2rem;
+            font-size: 2.2rem;
             font-weight: 800;
             color: var(--primary);
             letter-spacing: 1px;
         }
 
         .logo-tagline {
-            font-size: 0.9rem;
+            font-size: 0.95rem;
             color: var(--secondary);
             font-style: italic;
             margin-top: -5px;
@@ -144,16 +151,17 @@
             background-color: rgba(231, 76, 60, 0.2);
             color: var(--accent);
             border: none;
-            padding: 10px 20px;
+            padding: 12px 24px;
             border-radius: 4px;
             cursor: pointer;
-            transition: background-color 0.3s;
+            transition: var(--transition);
             margin-left: 10px;
             font-weight: 600;
         }
 
         .logout-btn:hover {
             background-color: rgba(231, 76, 60, 0.3);
+            transform: translateY(-2px);
         }
 
         /* Modal */
@@ -255,6 +263,7 @@
         .form-control:focus {
             outline: none;
             border-color: var(--secondary);
+            box-shadow: 0 0 0 2px rgba(52, 152, 219, 0.2);
         }
 
         .form-control-textarea {
@@ -321,20 +330,26 @@
 
         .stat-card {
             background-color: white;
-            padding: 20px;
+            padding: 25px;
             border-radius: 10px;
             box-shadow: var(--shadow);
             text-align: center;
+            transition: var(--transition);
+        }
+
+        .stat-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
         }
 
         .stat-card i {
-            font-size: 2.5rem;
+            font-size: 2.8rem;
             color: var(--secondary);
             margin-bottom: 15px;
         }
 
         .stat-card h3 {
-            font-size: 2rem;
+            font-size: 2.2rem;
             color: var(--primary);
             margin-bottom: 5px;
         }
@@ -353,7 +368,12 @@
             font-weight: 600;
             cursor: pointer;
             border-bottom: 3px solid transparent;
-            transition: all 0.3s;
+            transition: var(--transition);
+            color: var(--gray);
+        }
+
+        .admin-tab:hover {
+            color: var(--secondary);
         }
 
         .admin-tab.active {
@@ -367,6 +387,7 @@
 
         .tab-content.active {
             display: block;
+            animation: fadeIn 0.3s ease;
         }
 
         table {
@@ -397,17 +418,20 @@
 
         .actions {
             display: flex;
-            gap: 5px;
+            gap: 8px;
         }
 
         .action-btn {
-            padding: 6px 10px;
+            padding: 8px 12px;
             border-radius: 4px;
-            font-size: 0.8rem;
+            font-size: 0.85rem;
             cursor: pointer;
             border: none;
             color: white;
-            transition: all 0.3s;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            gap: 5px;
         }
 
         .action-btn:hover {
@@ -442,6 +466,12 @@
             overflow: hidden;
             border: 2px solid #eee;
             position: relative;
+            transition: var(--transition);
+        }
+
+        .image-preview:hover {
+            transform: scale(1.05);
+            border-color: var(--secondary);
         }
 
         .image-preview img {
@@ -465,10 +495,12 @@
             align-items: center;
             justify-content: center;
             font-size: 12px;
+            transition: var(--transition);
         }
 
         .remove-image:hover {
             background-color: var(--accent);
+            transform: scale(1.1);
         }
 
         /* Footer */
@@ -486,25 +518,70 @@
         }
 
         /* Responsividade */
+        @media (max-width: 992px) {
+            .header-container {
+                flex-direction: column;
+                gap: 15px;
+                text-align: center;
+            }
+            
+            .logo-container {
+                justify-content: center;
+            }
+            
+            .admin-header {
+                flex-direction: column;
+                gap: 15px;
+                text-align: center;
+            }
+        }
+
         @media (max-width: 768px) {
             .admin-tabs {
                 flex-wrap: wrap;
+            }
+            
+            .admin-tab {
+                padding: 12px 20px;
+                font-size: 0.9rem;
             }
 
             table {
                 display: block;
                 overflow-x: auto;
             }
-
-            .header-container {
+            
+            .actions {
                 flex-direction: column;
-                gap: 15px;
+                gap: 5px;
             }
+            
+            .action-btn {
+                width: 100%;
+                justify-content: center;
+            }
+        }
 
-            .admin-header {
-                flex-direction: column;
-                gap: 15px;
-                text-align: center;
+        @media (max-width: 576px) {
+            .logo-main {
+                font-size: 1.8rem;
+            }
+            
+            .logo-img {
+                width: 50px;
+                height: 50px;
+            }
+            
+            .stat-card {
+                padding: 20px;
+            }
+            
+            .stat-card i {
+                font-size: 2.2rem;
+            }
+            
+            .stat-card h3 {
+                font-size: 1.8rem;
             }
         }
     </style>
@@ -512,27 +589,30 @@
 <body>
     <!-- Header Admin -->
     <header>
-        <div class="header-container container">
-            <div class="logo-container" id="logoHome">
-                <div class="logo-placeholder">
-                    <img src="imagem.png" alt="Bemorh Logo" id="logoImage" onerror="handleLogoError(this)">
-                    <div id="logoText" style="display: none; width: 100%; height: 100%; background: linear-gradient(135deg, var(--secondary), var(--primary)); color: white; font-weight: bold; font-size: 1.5rem; align-items: center; justify-content: center;">
-                        BH
+        <div class="container">
+            <nav class="navbar">
+                <div class="logo-container" id="logoHome">
+                    <div class="logo-img">
+                        <img src="imagem.png" alt="Bemorh Logo" id="logoImage" onerror="handleLogoError(this)">
+                        <div id="logoText" style="display: none; width: 100%; height: 100%; background: linear-gradient(135deg, var(--secondary), var(--primary)); color: white; font-weight: bold; font-size: 1.5rem; display: flex; align-items: center; justify-content: center;">
+                            BH
+                        </div>
+                    </div>
+                    <div class="logo-text">
+                        <div class="logo-main">Bemorh</div>
+                        <div class="logo-tagline">Painel Administrativo</div>
                     </div>
                 </div>
-                <div class="logo-text">
-                    <div class="logo-main">Bemorh</div>
-                    <div class="logo-tagline">Painel Administrativo</div>
+                
+                <div style="display: flex; gap: 10px;">
+                    <button class="btn" id="backToSiteBtn">
+                        <i class="fas fa-globe"></i> Voltar ao Site
+                    </button>
+                    <button class="logout-btn" id="logoutBtn">
+                        <i class="fas fa-sign-out-alt"></i> Sair
+                    </button>
                 </div>
-            </div>
-            <div>
-                <button class="btn" id="backToSiteBtn">
-                    <i class="fas fa-globe"></i> Voltar ao Site
-                </button>
-                <button class="logout-btn" id="logoutBtn">
-                    <i class="fas fa-sign-out-alt"></i> Sair
-                </button>
-            </div>
+            </nav>
         </div>
     </header>
 
@@ -552,7 +632,7 @@
                 </div>
                 
                 <div style="text-align: center; margin-bottom: 20px;">
-                    <div id="logoPreview" style="width: 150px; height: 150px; margin: 0 auto 20px; border: 2px dashed var(--gray); border-radius: 10px; display: flex; align-items: center; justify-content: center; overflow: hidden; background-color: white;">
+                    <div id="logoPreview" style="width: 200px; height: 200px; margin: 0 auto 20px; border: 2px dashed var(--gray); border-radius: 10px; display: flex; align-items: center; justify-content: center; overflow: hidden; background-color: white;">
                         <img src="imagem.png" alt="Prévia da Logo" id="previewImage" style="max-width: 100%; max-height: 100%; object-fit: contain; padding: 10px;">
                         <div id="noLogoText" style="display: none; color: var(--gray); font-weight: bold;">
                             Sem Logo
@@ -929,17 +1009,10 @@
         // Função para tratar erro na logo
         function handleLogoError(element) {
             element.style.display = 'none';
-            const logoText = element.nextElementSibling || element.parentElement;
-            logoText.style.display = 'flex';
-            logoText.style.width = '100%';
-            logoText.style.height = '100%';
-            logoText.style.background = 'linear-gradient(135deg, var(--secondary), var(--primary))';
-            logoText.style.color = 'white';
-            logoText.style.fontWeight = 'bold';
-            logoText.style.fontSize = '1.5rem';
-            logoText.style.alignItems = 'center';
-            logoText.style.justifyContent = 'center';
-            logoText.innerHTML = 'BH';
+            const logoText = element.nextElementSibling;
+            if (logoText && logoText.id === 'logoText') {
+                logoText.style.display = 'flex';
+            }
         }
 
         // Verificar se está logado
@@ -1118,7 +1191,7 @@
             localStorage.setItem('bemorhLogo', logoData);
             
             // Atualizar todas as logos na página atual
-            document.querySelectorAll('.logo-placeholder img').forEach(img => {
+            document.querySelectorAll('.logo-img img').forEach(img => {
                 img.src = logoData;
             });
             
@@ -1315,9 +1388,9 @@
                     <td>${project.images.length} imagem(s)</td>
                     <td>${project.features.slice(0, 2).join(', ')}${project.features.length > 2 ? '...' : ''}</td>
                     <td class="actions">
-                        <button class="action-btn view-btn" onclick="viewSiteProject(${project.id})">Ver</button>
-                        <button class="action-btn edit-btn" onclick="editSiteProject(${project.id})">Editar</button>
-                        <button class="action-btn delete-btn" onclick="deleteSiteProject(${project.id})">Excluir</button>
+                        <button class="action-btn view-btn" onclick="viewSiteProject(${project.id})"><i class="fas fa-eye"></i> Ver</button>
+                        <button class="action-btn edit-btn" onclick="editSiteProject(${project.id})"><i class="fas fa-edit"></i> Editar</button>
+                        <button class="action-btn delete-btn" onclick="deleteSiteProject(${project.id})"><i class="fas fa-trash"></i> Excluir</button>
                     </td>
                 `;
                 table.appendChild(row);
@@ -1533,9 +1606,9 @@
                     <td>${project.deadline}</td>
                     <td>${project.budget}</td>
                     <td class="actions">
-                        <button class="action-btn view-btn" onclick="viewProject(${project.id})">Ver</button>
-                        <button class="action-btn edit-btn" onclick="editProject(${project.id})">Editar</button>
-                        <button class="action-btn delete-btn" onclick="deleteProject(${project.id})">Excluir</button>
+                        <button class="action-btn view-btn" onclick="viewProject(${project.id})"><i class="fas fa-eye"></i> Ver</button>
+                        <button class="action-btn edit-btn" onclick="editProject(${project.id})"><i class="fas fa-edit"></i> Editar</button>
+                        <button class="action-btn delete-btn" onclick="deleteProject(${project.id})"><i class="fas fa-trash"></i> Excluir</button>
                     </td>
                 `;
                 projectsTable.appendChild(row);
@@ -1553,9 +1626,9 @@
                     <td>${client.phone}</td>
                     <td>${client.projects}</td>
                     <td class="actions">
-                        <button class="action-btn view-btn" onclick="viewClient(${client.id})">Ver</button>
-                        <button class="action-btn edit-btn" onclick="editClient(${client.id})">Editar</button>
-                        <button class="action-btn delete-btn" onclick="deleteClient(${client.id})">Excluir</button>
+                        <button class="action-btn view-btn" onclick="viewClient(${client.id})"><i class="fas fa-eye"></i> Ver</button>
+                        <button class="action-btn edit-btn" onclick="editClient(${client.id})"><i class="fas fa-edit"></i> Editar</button>
+                        <button class="action-btn delete-btn" onclick="deleteClient(${client.id})"><i class="fas fa-trash"></i> Excluir</button>
                     </td>
                 `;
                 clientsTable.appendChild(row);
@@ -1573,9 +1646,9 @@
                     <td>${member.phone}</td>
                     <td>${member.projects}</td>
                     <td class="actions">
-                        <button class="action-btn view-btn" onclick="viewTeamMember(${member.id})">Ver</button>
-                        <button class="action-btn edit-btn" onclick="editTeamMember(${member.id})">Editar</button>
-                        <button class="action-btn delete-btn" onclick="deleteTeamMember(${member.id})">Excluir</button>
+                        <button class="action-btn view-btn" onclick="viewTeamMember(${member.id})"><i class="fas fa-eye"></i> Ver</button>
+                        <button class="action-btn edit-btn" onclick="editTeamMember(${member.id})"><i class="fas fa-edit"></i> Editar</button>
+                        <button class="action-btn delete-btn" onclick="deleteTeamMember(${member.id})"><i class="fas fa-trash"></i> Excluir</button>
                     </td>
                 `;
                 teamTable.appendChild(row);
@@ -1684,7 +1757,7 @@
         function loadCustomLogo() {
             const customLogo = localStorage.getItem('bemorhLogo');
             if (customLogo) {
-                document.querySelectorAll('.logo-placeholder img').forEach(img => {
+                document.querySelectorAll('.logo-img img').forEach(img => {
                     img.src = customLogo;
                 });
             }

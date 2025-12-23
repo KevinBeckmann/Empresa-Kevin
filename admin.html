@@ -108,7 +108,7 @@
             transform: translateY(-2px);
         }
 
-        .logo-img {
+        .logo-placeholder {
             width: 60px;
             height: 60px;
             border-radius: 12px;
@@ -121,7 +121,7 @@
             flex-shrink: 0;
         }
 
-        .logo-img img {
+        .logo-placeholder img {
             width: 100%;
             height: 100%;
             object-fit: contain;
@@ -567,7 +567,7 @@
                 font-size: 1.8rem;
             }
             
-            .logo-img {
+            .logo-placeholder {
                 width: 50px;
                 height: 50px;
             }
@@ -592,7 +592,7 @@
         <div class="container">
             <nav class="navbar">
                 <div class="logo-container" id="logoHome">
-                    <div class="logo-img">
+                    <div class="logo-placeholder">
                         <img src="imagem.png" alt="Bemorh Logo" id="logoImage" onerror="handleLogoError(this)">
                         <div id="logoText" style="display: none; width: 100%; height: 100%; background: linear-gradient(135deg, var(--secondary), var(--primary)); color: white; font-weight: bold; font-size: 1.5rem; display: flex; align-items: center; justify-content: center;">
                             BH
@@ -1191,7 +1191,7 @@
             localStorage.setItem('bemorhLogo', logoData);
             
             // Atualizar todas as logos na página atual
-            document.querySelectorAll('.logo-img img').forEach(img => {
+            document.querySelectorAll('.logo-placeholder img').forEach(img => {
                 img.src = logoData;
             });
             
@@ -1757,7 +1757,7 @@
         function loadCustomLogo() {
             const customLogo = localStorage.getItem('bemorhLogo');
             if (customLogo) {
-                document.querySelectorAll('.logo-img img').forEach(img => {
+                document.querySelectorAll('.logo-placeholder img').forEach(img => {
                     img.src = customLogo;
                 });
             }

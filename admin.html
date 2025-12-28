@@ -1,987 +1,1383 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Painel Administrativo - Bemorh</title>
-
-  <!-- Font Awesome -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
-
-  <!-- Google Fonts -->
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Open+Sans:wght@300;400;600&display=swap" rel="stylesheet" />
-
-  <style>
-    :root {
-      --primary: #2c3e50;
-      --secondary: #3498db;
-      --accent: #e74c3c;
-      --success: #2ecc71;
-      --warning: #f39c12;
-      --bg: #f3f6fb;
-      --gray: #95a5a6;
-      --shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
-      --radius: 10px;
-      --transition: all 0.2s ease;
-    }
-
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-
-    body {
-      font-family: "Open Sans", sans-serif;
-      background-color: var(--bg);
-      color: #333;
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
-    }
-
-    a {
-      text-decoration: none;
-      color: inherit;
-    }
-
-    /* Layout geral */
-    .admin-wrapper {
-      display: grid;
-      grid-template-columns: 260px minmax(0, 1fr);
-      min-height: 100vh;
-    }
-
-    @media (max-width: 900px) {
-      .admin-wrapper {
-        grid-template-columns: 1fr;
-      }
-    }
-
-    /* Sidebar */
-    .sidebar {
-      background-color: #1f2a36;
-      color: #ecf0f1;
-      padding: 20px 18px;
-      display: flex;
-      flex-direction: column;
-      gap: 25px;
-    }
-
-    .sidebar-header {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      margin-bottom: 10px;
-    }
-
-    .sidebar-logo {
-      width: 42px;
-      height: 42px;
-      border-radius: 10px;
-      background: #fff;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      overflow: hidden;
-      box-shadow: var(--shadow);
-    }
-
-    .sidebar-logo img {
-      width: 90%;
-      height: 90%;
-      object-fit: contain;
-    }
-
-    .sidebar-title {
-      display: flex;
-      flex-direction: column;
-    }
-
-    .sidebar-title span:first-child {
-      font-family: "Montserrat", sans-serif;
-      font-weight: 700;
-      font-size: 1.2rem;
-    }
-
-    .sidebar-title span:last-child {
-      font-size: 0.75rem;
-      color: #bdc3c7;
-    }
-
-    .sidebar-nav {
-      margin-top: 10px;
-    }
-
-    .sidebar-nav h4 {
-      font-size: 0.8rem;
-      text-transform: uppercase;
-      letter-spacing: 1px;
-      color: #95a5a6;
-      margin-bottom: 8px;
-    }
-
-    .nav-list {
-      list-style: none;
-      display: flex;
-      flex-direction: column;
-      gap: 4px;
-    }
-
-    .nav-item {
-      border-radius: 8px;
-      padding: 8px 10px;
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      cursor: pointer;
-      color: #ecf0f1;
-      font-size: 0.9rem;
-      transition: var(--transition);
-    }
-
-    .nav-item i {
-      width: 18px;
-      text-align: center;
-    }
-
-    .nav-item.active,
-    .nav-item:hover {
-      background-color: rgba(52, 152, 219, 0.18);
-      color: #ffffff;
-    }
-
-    .sidebar-footer {
-      margin-top: auto;
-      font-size: 0.8rem;
-      color: #7f8c8d;
-    }
-
-    .sidebar-footer a {
-      color: #bdc3c7;
-      text-decoration: underline;
-    }
-
-    /* Conteúdo principal */
-    .main {
-      padding: 20px 24px 30px;
-      display: flex;
-      flex-direction: column;
-      gap: 20px;
-    }
-
-    .main-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      gap: 15px;
-    }
-
-    .main-header-left h1 {
-      font-family: "Montserrat", sans-serif;
-      font-size: 1.8rem;
-      color: var(--primary);
-    }
-
-    .main-header-left p {
-      font-size: 0.9rem;
-      color: var(--gray);
-    }
-
-    .main-header-right {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-    }
-
-    .badge {
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      padding: 6px 10px;
-      border-radius: 999px;
-      font-size: 0.8rem;
-      background-color: rgba(52, 152, 219, 0.1);
-      color: #2980b9;
-    }
-
-    .btn-small {
-      padding: 8px 14px;
-      border-radius: 999px;
-      font-size: 0.8rem;
-    }
-
-    .btn-danger {
-      background-color: var(--accent);
-    }
-
-    .btn-danger:hover {
-      background-color: #c0392b;
-    }
-
-    /* Cards de resumo */
-    .summary-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-      gap: 15px;
-    }
-
-    .summary-card {
-      background-color: #ffffff;
-      border-radius: var(--radius);
-      padding: 14px 16px;
-      box-shadow: var(--shadow);
-      display: flex;
-      align-items: center;
-      gap: 10px;
-    }
-
-    .summary-icon {
-      width: 34px;
-      height: 34px;
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: #fff;
-      font-size: 1rem;
-    }
-
-    .summary-icon.blue {
-      background-color: #3498db;
-    }
-
-    .summary-icon.green {
-      background-color: #2ecc71;
-    }
-
-    .summary-icon.orange {
-      background-color: #f39c12;
-    }
-
-    .summary-content span:first-child {
-      font-size: 0.75rem;
-      color: var(--gray);
-    }
-
-    .summary-content span:last-child {
-      font-size: 1.1rem;
-      font-weight: 700;
-      color: var(--primary);
-    }
-
-    /* Layout principal: tabela + formulário */
-    .panel-grid {
-      display: grid;
-      grid-template-columns: minmax(0, 2fr) minmax(0, 1.2fr);
-      gap: 20px;
-      align-items: flex-start;
-    }
-
-    @media (max-width: 980px) {
-      .panel-grid {
-        grid-template-columns: 1fr;
-      }
-    }
-
-    .card {
-      background-color: #ffffff;
-      border-radius: var(--radius);
-      box-shadow: var(--shadow);
-      padding: 18px 18px 20px;
-    }
-
-    .card-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 10px;
-    }
-
-    .card-header h2 {
-      font-size: 1.1rem;
-      color: var(--primary);
-    }
-
-    .card-header small {
-      font-size: 0.8rem;
-      color: var(--gray);
-    }
-
-    /* Tabela de projetos */
-    .projects-table-wrapper {
-      max-height: 420px;
-      overflow-y: auto;
-      margin-top: 10px;
-    }
-
-    table {
-      width: 100%;
-      border-collapse: collapse;
-      font-size: 0.9rem;
-    }
-
-    thead {
-      position: sticky;
-      top: 0;
-      background-color: #f8f9fc;
-      z-index: 1;
-    }
-
-    th,
-    td {
-      padding: 8px 10px;
-      text-align: left;
-      border-bottom: 1px solid #ecf0f1;
-      vertical-align: middle;
-    }
-
-    th {
-      font-weight: 600;
-      color: #7f8c8d;
-      font-size: 0.8rem;
-      text-transform: uppercase;
-    }
-
-    tr:hover td {
-      background-color: #f8fbff;
-    }
-
-    .tag-status {
-      display: inline-flex;
-      align-items: center;
-      gap: 4px;
-      padding: 3px 8px;
-      border-radius: 999px;
-      font-size: 0.75rem;
-      font-weight: 600;
-    }
-
-    .tag-status.active {
-      background-color: rgba(46, 204, 113, 0.12);
-      color: #27ae60;
-    }
-
-    .tag-status.draft {
-      background-color: rgba(241, 196, 15, 0.14);
-      color: #f39c12;
-    }
-
-    .tag-status.archived {
-      background-color: rgba(127, 140, 141, 0.16);
-      color: #7f8c8d;
-    }
-
-    .table-actions {
-      display: flex;
-      gap: 6px;
-    }
-
-    .btn-icon {
-      border: none;
-      background: none;
-      cursor: pointer;
-      padding: 4px;
-      border-radius: 4px;
-      color: #7f8c8d;
-      transition: var(--transition);
-      font-size: 0.9rem;
-    }
-
-    .btn-icon:hover {
-      background-color: #ecf0f1;
-      color: #34495e;
-    }
-
-    .badge-category {
-      display: inline-flex;
-      align-items: center;
-      gap: 4px;
-      padding: 3px 7px;
-      border-radius: 999px;
-      font-size: 0.75rem;
-      background-color: rgba(52, 152, 219, 0.1);
-      color: #2980b9;
-    }
-
-    /* Formulário de projeto */
-    .form-group {
-      margin-bottom: 12px;
-      font-size: 0.9rem;
-    }
-
-    .form-group label {
-      display: block;
-      margin-bottom: 4px;
-      font-weight: 600;
-      color: var(--primary);
-      font-size: 0.85rem;
-    }
-
-    .form-group small {
-      font-size: 0.75rem;
-      color: var(--gray);
-    }
-
-    .form-control,
-    .form-select,
-    textarea {
-      width: 100%;
-      padding: 8px 10px;
-      border-radius: 6px;
-      border: 1px solid #dcdfe6;
-      font-size: 0.9rem;
-      font-family: "Open Sans", sans-serif;
-      transition: var(--transition);
-      background-color: #fff;
-    }
-
-    .form-control:focus,
-    .form-select:focus,
-    textarea:focus {
-      outline: none;
-      border-color: var(--secondary);
-      box-shadow: 0 0 0 2px rgba(52, 152, 219, 0.15);
-    }
-
-    textarea {
-      resize: vertical;
-      min-height: 70px;
-      max-height: 200px;
-    }
-
-    .form-row-2 {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 10px;
-    }
-
-    @media (max-width: 640px) {
-      .form-row-2 {
-        grid-template-columns: 1fr;
-      }
-    }
-
-    .status-select {
-      width: 100%;
-    }
-
-    .chips {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 4px;
-      margin-top: 6px;
-    }
-
-    .chip {
-      padding: 3px 6px;
-      border-radius: 999px;
-      background-color: #ecf0f1;
-      font-size: 0.75rem;
-    }
-
-    .chip span {
-      cursor: pointer;
-      margin-left: 4px;
-      color: #c0392b;
-    }
-
-    .form-footer {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      gap: 10px;
-      margin-top: 10px;
-    }
-
-    .muted {
-      font-size: 0.75rem;
-      color: var(--gray);
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bemorh - Tecnologia que Conecta Ideias</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* Estilos Gerais */
+        :root {
+            --primary: #2c3e50;
+            --secondary: #3498db;
+            --accent: #e74c3c;
+            --light: #ecf0f1;
+            --dark: #2c3e50;
+            --success: #2ecc71;
+            --warning: #f39c12;
+            --gray: #95a5a6;
+            --shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: #f9f9f9;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 12px 24px;
+            background-color: var(--secondary);
+            color: white;
+            border-radius: 4px;
+            font-weight: 600;
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .btn:hover {
+            background-color: #2980b9;
+            transform: translateY(-2px);
+            box-shadow: var(--shadow);
+        }
+
+        section {
+            padding: 80px 0;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 50px;
+            color: var(--primary);
+            font-size: 2.5rem;
+            position: relative;
+        }
+
+        .section-title:after {
+            content: '';
+            position: absolute;
+            width: 100px;
+            height: 4px;
+            background-color: var(--secondary);
+            bottom: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            border-radius: 2px;
+        }
+
+        /* HEADER */
+        header {
+            background-color: white;
+            box-shadow: var(--shadow);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 20px;
+        }
+
+        .logo-container {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            cursor: pointer;
+            flex-shrink: 0;
+        }
+
+        .logo-visual {
+            width: 80px;
+            height: 80px;
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            background-color: white;
+            border: 1px solid #eee;
+            transition: all 0.3s ease;
+        }
+
+        .logo-visual img {
+            width: 90%;
+            height: 90%;
+            object-fit: contain;
+            padding: 8px;
+            transition: transform 0.3s ease;
+        }
+
+        .logo-container:hover .logo-visual img {
+            transform: scale(1.05);
+        }
+
+        .logo-text {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .logo-main {
+            font-size: 2.2rem;
+            font-weight: 800;
+            color: var(--primary);
+            letter-spacing: 1px;
+            line-height: 1.2;
+        }
+
+        .logo-tagline {
+            font-size: 1rem;
+            color: var(--secondary);
+            font-style: italic;
+            margin-top: 2px;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 30px;
+        }
+
+        nav ul li a {
+            font-weight: 600;
+            color: var(--primary);
+            transition: color 0.3s;
+            cursor: pointer;
+            padding: 5px 0;
+            position: relative;
+            font-size: 1.1rem;
+        }
+
+        nav ul li a:hover { color: var(--secondary); }
+
+        nav ul li a.active {
+            color: var(--secondary);
+            font-weight: 700;
+        }
+
+        nav ul li a.active:after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background-color: var(--secondary);
+        }
+
+        .admin-icon-btn {
+            background: none;
+            border: none;
+            color: var(--gray);
+            font-size: 1.2rem;
+            cursor: pointer;
+            padding: 8px;
+            border-radius: 50%;
+            transition: all 0.3s ease;
+        }
+
+        .admin-icon-btn:hover {
+            color: var(--secondary);
+            background-color: rgba(52, 152, 219, 0.1);
+        }
+
+        /* MODAIS ADMIN */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background-color: rgba(0,0,0,0.7);
+            z-index: 2000;
+            justify-content: center;
+            align-items: center;
+            animation: fadeIn 0.3s ease;
+        }
+
+        .modal-content {
+            background-color: white;
+            width: 100%;
+            max-width: 400px;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            animation: slideIn 0.3s ease;
+        }
+
+        @keyframes fadeIn { from {opacity:0;} to {opacity:1;} }
+        @keyframes slideIn { from {transform:translateY(-50px);opacity:0;} to {transform:translateY(0);opacity:1;} }
+
+        .modal-header {
+            background-color: var(--primary);
+            color: white;
+            padding: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .modal-header h3 { font-size: 1.5rem; }
+
+        .close-modal {
+            background: none;
+            border: none;
+            color: white;
+            font-size: 1.5rem;
+            cursor: pointer;
+            transition: transform 0.3s;
+        }
+        .close-modal:hover { transform: scale(1.2); }
+
+        .modal-body { padding: 30px; }
+
+        .form-group { margin-bottom: 20px; }
+        .form-group label {
+            display:block;
+            margin-bottom:8px;
+            font-weight:600;
+            color:var(--primary);
+        }
+        .form-control {
+            width:100%;
+            padding:12px;
+            border:1px solid #ddd;
+            border-radius:4px;
+            font-size:1rem;
+        }
+        .form-control:focus { outline:none;border-color:var(--secondary); }
+
+        .password-input { position:relative; }
+        .toggle-password {
+            position:absolute;
+            right:10px;
+            top:50%;
+            transform:translateY(-50%);
+            background:none;
+            border:none;
+            color:var(--gray);
+            cursor:pointer;
+        }
+
+        .alert {
+            padding:12px;
+            border-radius:4px;
+            margin-bottom:20px;
+            display:none;
+        }
+        .alert-danger {
+            background-color:rgba(231,76,60,0.1);
+            color:var(--accent);
+            border-left:4px solid var(--accent);
+        }
+        .alert-success {
+            background-color:rgba(46,204,113,0.1);
+            color:var(--success);
+            border-left:4px solid var(--success);
+        }
+
+        /* HERO NOVO */
+        .hero {
+            background-color: #223447;
+            padding: 120px 0 110px;
+            margin-top: 80px;
+            color: white;
+        }
+
+        .hero-inner {
+            display: grid;
+            grid-template-columns: minmax(0,1.1fr) minmax(0,1.1fr);
+            gap: 60px;
+            align-items: center;
+        }
+
+        .hero-left h1 {
+            font-size: 3rem;
+            font-weight: 800;
+            margin-bottom: 20px;
+        }
+
+        .hero-left p {
+            font-size: 1.05rem;
+            line-height: 1.8;
+            max-width: 520px;
+            color: #ecf0f1;
+        }
+
+        .hero-buttons {
+            margin-top: 30px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        .hero-btn-primary {
+            background-color: var(--secondary);
+            color: #fff;
+            padding: 12px 28px;
+            border-radius: 6px;
+            font-weight: 600;
+            border: none;
+            cursor: pointer;
+            box-shadow: 0 10px 24px rgba(52,152,219,0.35);
+            transition: all 0.25s ease;
+        }
+
+        .hero-btn-primary:hover {
+            background-color:#2980b9;
+            transform: translateY(-3px);
+        }
+
+        .hero-btn-secondary {
+            background-color: #2ecc71;
+            color: #fff;
+            padding: 12px 28px;
+            border-radius: 6px;
+            font-weight: 600;
+            border: none;
+            cursor: pointer;
+            box-shadow: 0 10px 24px rgba(46,204,113,0.35);
+            transition: all 0.25s ease;
+        }
+
+        .hero-btn-secondary:hover {
+            background-color:#27ae60;
+            transform: translateY(-3px);
+        }
+
+        .hero-right {
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.45);
+            background-color:#111;
+        }
+
+        .hero-right img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display:block;
+        }
+
+        @media (max-width: 992px) {
+            .hero-inner {
+                grid-template-columns: 1fr;
+            }
+            .hero {
+                padding: 110px 0 90px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .hero-left h1 { font-size: 2.4rem; }
+        }
+
+        /* PROJETOS */
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+        .project-card {
+            background-color: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: transform 0.3s ease;
+        }
+        .project-card:hover { transform: translateY(-10px); }
+        .project-img {
+            height: 200px;
+            background-color: var(--secondary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 3rem;
+        }
+        .project-info { padding: 20px; }
+        .project-info h3 { margin-bottom: 10px; color: var(--primary); }
+        .project-status {
+            display: inline-block;
+            padding: 5px 10px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            margin-bottom: 15px;
+        }
+        .status-completed { background-color:rgba(46,204,113,0.2);color:var(--success); }
+        .status-in-progress { background-color:rgba(52,152,219,0.2);color:var(--secondary); }
+        .status-pending { background-color:rgba(243,156,18,0.2);color:var(--warning); }
+
+        /* SERVIÇOS – 4 cards */
+        .services-section { background-color:#f5f7fa; }
+        .services-grid {
+            max-width: 1100px;
+            margin: 40px auto 0 auto;
+            display:grid;
+            grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
+            gap:25px;
+        }
+        .service-card {
+            background-color:#ffffff;
+            border-radius:12px;
+            box-shadow:0 10px 25px rgba(0,0,0,0.06);
+            padding:30px 24px 28px;
+            text-align:center;
+            transition:transform 0.2s ease, box-shadow 0.2s ease;
+        }
+        .service-card:hover {
+            transform:translateY(-6px);
+            box-shadow:0 16px 35px rgba(0,0,0,0.10);
+        }
+        .service-icon {
+            width:70px;height:70px;border-radius:50%;
+            margin:0 auto 18px auto;
+            background-color:rgba(52,152,219,0.08);
+            display:flex;align-items:center;justify-content:center;
+        }
+        .service-icon i { font-size:1.8rem;color:var(--secondary); }
+        .service-card h3 { font-size:1.3rem;color:var(--primary);margin-bottom:10px; }
+        .service-card p { font-size:0.98rem;color:#555;line-height:1.7; }
+
+        /* SOBRE (cards) */
+        /* usamos estilos inline na seção para evitar mais CSS */
+
+        /* CONTATO */
+        .contact-section { background-color: var(--light); }
+        .contact-container {
+            display:grid;
+            grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
+            gap:40px;
+        }
+        .contact-info {
+            background-color:white;
+            padding:30px;
+            border-radius:10px;
+            box-shadow:var(--shadow);
+        }
+        .contact-info h3 { margin-bottom:20px;color:var(--primary); }
+        .contact-item {
+            display:flex;
+            align-items:flex-start;
+            margin-bottom:20px;
+        }
+        .contact-item i {
+            color:var(--secondary);
+            margin-right:15px;
+            font-size:1.2rem;
+            margin-top:5px;
+        }
+
+        /* BACK TO TOP */
+        .back-to-top {
+            position:fixed;
+            bottom:30px;right:30px;
+            width:50px;height:50px;
+            background-color:var(--secondary);
+            color:white;
+            border-radius:50%;
+            display:flex;
+            align-items:center;
+            justify-content:center;
+            font-size:1.5rem;
+            cursor:pointer;
+            z-index:100;
+            opacity:0;visibility:hidden;
+            transition:all 0.3s ease;
+            box-shadow:var(--shadow);
+        }
+        .back-to-top.show { opacity:1;visibility:visible; }
+        .back-to-top:hover { background-color:#2980b9;transform:translateY(-5px); }
+
+        /* FOOTER */
+        footer {
+            background-color:var(--primary);
+            color:white;
+            padding:60px 0 30px;
+        }
+        .footer-content {
+            display:grid;
+            grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+            gap:40px;
+            margin-bottom:40px;
+        }
+        .footer-column h3 {
+            font-size:1.3rem;
+            margin-bottom:20px;
+            position:relative;
+            padding-bottom:10px;
+        }
+        .footer-column h3:after {
+            content:'';
+            position:absolute;
+            width:40px;
+            height:3px;
+            background-color:var(--secondary);
+            bottom:0;left:0;
+        }
+        .footer-column ul { list-style:none; }
+        .footer-column ul li { margin-bottom:10px; }
+        .footer-column ul li a { cursor:pointer;transition:color 0.3s; }
+        .footer-column ul li a:hover { color:var(--secondary); }
+
+        .copyright {
+            text-align:center;
+            padding-top:30px;
+            border-top:1px solid rgba(255,255,255,0.1);
+            font-size:0.9rem;
+            opacity:0.8;
+        }
+
+        @media (max-width: 992px) {
+            .header-container {
+                flex-direction:column;
+                padding:15px;
+            }
+            nav ul {
+                margin-top:15px;
+                flex-wrap:wrap;
+                justify-content:center;
+            }
+            .logo-container {
+                flex-direction:column;
+                text-align:center;
+                gap:10px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .section-title { font-size:2rem; }
+            .logo-main { font-size:1.8rem; }
+            .logo-visual { width:60px;height:60px; }
+        }
+    </style>
 </head>
 <body>
-  <div class="admin-wrapper">
-    <!-- SIDEBAR -->
-    <aside class="sidebar">
-      <div class="sidebar-header">
-        <div class="sidebar-logo">
-          <img src="imagem.png" alt="Bemorh Logo" onerror="this.style.display='none';this.parentElement.style.background='#3498db';this.parentElement.innerHTML='<span style=&quot;color:#fff;font-weight:bold;&quot;>BH</span>';">
-        </div>
-        <div class="sidebar-title">
-          <span>Bemorh</span>
-          <span>Painel Administrativo</span>
-        </div>
-      </div>
+    <!-- Botão Voltar ao Topo -->
+    <div class="back-to-top" id="backToTop">
+        <i class="fas fa-arrow-up"></i>
+    </div>
 
-      <div class="sidebar-nav">
-        <h4>Menu</h4>
-        <ul class="nav-list">
-          <li class="nav-item active">
-            <i class="fas fa-briefcase"></i>
-            <span>Projetos</span>
-          </li>
-          <li class="nav-item" onclick="window.location.href='index.html'">
-            <i class="fas fa-globe"></i>
-            <span>Ver Site</span>
-          </li>
-        </ul>
-      </div>
-
-      <div class="sidebar-footer">
-        <p>Logado como <strong>admin</strong> (local).</p>
-        <p style="margin-top:5px;">Segurança real deve ser feita no servidor / Firebase Auth.</p>
-      </div>
-    </aside>
-
-    <!-- MAIN -->
-    <main class="main">
-      <header class="main-header">
-        <div class="main-header-left">
-          <h1>Gestão de Projetos</h1>
-          <p>Cadastre, edite e acompanhe os projetos exibidos no site da Bemorh.</p>
-        </div>
-        <div class="main-header-right">
-          <span class="badge">
-            <i class="fas fa-database"></i> Firestore: <span id="firestoreStatus">conectando...</span>
-          </span>
-          <button class="btn btn-small" id="reloadProjectsBtn">
-            <i class="fas fa-rotate"></i> Recarregar
-          </button>
-        </div>
-      </header>
-
-      <!-- RESUMO -->
-      <section class="summary-grid">
-        <div class="summary-card">
-          <div class="summary-icon blue"><i class="fas fa-layer-group"></i></div>
-          <div class="summary-content">
-            <span>Projetos ativos</span>
-            <span id="summaryActive">0</span>
-          </div>
-        </div>
-        <div class="summary-card">
-          <div class="summary-icon green"><i class="fas fa-check-circle"></i></div>
-          <div class="summary-content">
-            <span>Total de projetos</span>
-            <span id="summaryTotal">0</span>
-          </div>
-        </div>
-        <div class="summary-card">
-          <div class="summary-icon orange"><i class="fas fa-box-archive"></i></div>
-          <div class="summary-content">
-            <span>Arquivados / rascunhos</span>
-            <span id="summaryArchived">0</span>
-          </div>
-        </div>
-      </section>
-
-      <!-- TABELA + FORM -->
-      <section class="panel-grid">
-        <!-- Lista de projetos -->
-        <section class="card">
-          <div class="card-header">
-            <div>
-              <h2><i class="fas fa-briefcase"></i> Projetos Cadastrados</h2>
-              <small>Lista em tempo real carregada do Firestore (coleção <code>siteProjects</code>).</small>
+    <!-- Header -->
+    <header>
+        <div class="header-container container">
+            <div class="logo-container" id="logoHome">
+                <div class="logo-visual">
+                    <img src="imagem.png" alt="Bemorh Logo" id="logoImage" onerror="handleLogoError(this)">
+                    <div id="logoText" style="display:none;width:100%;height:100%;background-color:white;color:var(--secondary);font-weight:bold;font-size:2.5rem;align-items:center;justify-content:center;border-radius:15px;">
+                        J
+                    </div>
+                </div>
+                <div class="logo-text">
+                    <div class="logo-main" id="siteLogoTitle">Bemorh</div>
+                    <div class="logo-tagline" id="siteLogoTagline">tecnologia que conecta ideias</div>
+                </div>
             </div>
-          </div>
-
-          <div class="projects-table-wrapper">
-            <table>
-              <thead>
-                <tr>
-                  <th>Projeto</th>
-                  <th>Categoria</th>
-                  <th>Status</th>
-                  <th>Última atualização</th>
-                  <th style="width:80px;">Ações</th>
-                </tr>
-              </thead>
-              <tbody id="projectsTableBody">
-                <tr>
-                  <td colspan="5" style="text-align:center;color:#7f8c8d;padding:20px;">
-                    <i class="fas fa-spinner fa-spin"></i> Carregando projetos...
-                  </td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-        </section>
-
-        <!-- Formulário -->
-        <section class="card">
-          <div class="card-header">
-            <div>
-              <h2 id="formTitle"><i class="fas fa-plus-circle"></i> Novo Projeto</h2>
-              <small id="formSubtitle">Preencha os campos para adicionar um novo projeto ao site.</small>
-            </div>
-            <button class="btn btn-small" id="newProjectBtn">
-              <i class="fas fa-file"></i> Novo
+            <nav>
+                <ul>
+                    <li><a id="navHome" class="active">Início</a></li>
+                    <li><a id="navAbout">Sobre</a></li>
+                    <li><a id="navServices">Serviços</a></li>
+                    <li><a id="navProjects">Projetos</a></li>
+                    <li><a id="navContact">Contato</a></li>
+                </ul>
+            </nav>
+            <button class="admin-icon-btn" id="adminAccessBtn" title="Acesso Administrativo">
+                <i class="fas fa-cogs"></i>
             </button>
-          </div>
+        </div>
+    </header>
 
-          <form id="projectForm">
-            <input type="hidden" id="projectId" />
-
-            <div class="form-group">
-              <label for="projectTitle">Título do Projeto *</label>
-              <input type="text" id="projectTitle" class="form-control" required />
+    <!-- Modal de Login Admin -->
+    <div class="modal" id="adminLoginModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3><i class="fas fa-lock"></i> Acesso Administrativo</h3>
+                <button class="close-modal" id="closeLoginModal">&times;</button>
             </div>
-
-            <div class="form-group">
-              <label for="projectCategory">Categoria *</label>
-              <select id="projectCategory" class="form-select" required>
-                <option value="web">Desenvolvimento Web</option>
-                <option value="mobile">Apps Mobile</option>
-                <option value="design">UI/UX Design</option>
-                <option value="consulting">Consultoria</option>
-                <option value="innovation">Inovação</option>
-              </select>
+            <div class="modal-body">
+                <div class="alert alert-danger" id="loginError">
+                    <i class="fas fa-exclamation-circle"></i> Senha incorreta. Tente novamente.
+                </div>
+                <div class="alert alert-success" id="loginSuccess">
+                    <i class="fas fa-check-circle"></i> Login realizado com sucesso!
+                </div>
+                <form id="adminLoginForm">
+                    <div class="form-group">
+                        <label for="adminUsername">Usuário Administrador</label>
+                        <input type="text" id="adminUsername" class="form-control" value="admin" readonly>
+                    </div>
+                    <div class="form-group">
+                        <label for="adminPassword">Senha</label>
+                        <div class="password-input">
+                            <input type="password" id="adminPassword" class="form-control" placeholder="Digite a senha de administrador" required>
+                            <button type="button" class="toggle-password" id="togglePassword"><i class="fas fa-eye"></i></button>
+                        </div>
+                        <small style="color:var(--gray);margin-top:5px;display:block;">
+                            <i class="fas fa-info-circle"></i> Senha padrão: <code>admin123</code>
+                        </small>
+                    </div>
+                    <button type="submit" class="btn" style="width:100%;">Acessar Painel Administrativo</button>
+                </form>
+                <div style="text-align:center;margin-top:20px;">
+                    <button class="btn btn-warning" id="resetPasswordBtn" style="width:100%;">
+                        <i class="fas fa-key"></i> Alterar Senha Padrão
+                    </button>
+                </div>
             </div>
+        </div>
+    </div>
 
-            <div class="form-row-2">
-              <div class="form-group">
-                <label for="projectStatus">Status *</label>
-                <select id="projectStatus" class="form-select status-select" required>
-                  <option value="active">Ativo (aparece no site)</option>
-                  <option value="draft">Rascunho</option>
-                  <option value="archived">Arquivado</option>
-                </select>
-              </div>
-              <div class="form-group">
-                <label for="projectOrder">Ordem (opcional)</label>
-                <input type="number" min="0" id="projectOrder" class="form-control" placeholder="0 = mais recente" />
-                <small>Usado para ordenar na listagem do site.</small>
-              </div>
+    <!-- Modal de Alterar Senha -->
+    <div class="modal" id="changePasswordModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3><i class="fas fa-key"></i> Alterar Senha de Administrador</h3>
+                <button class="close-modal" id="closePasswordModal">&times;</button>
             </div>
+            <div class="modal-body">
+                <div class="alert alert-danger" id="passwordError">
+                    <i class="fas fa-exclamation-circle"></i> As senhas não coincidem!
+                </div>
+                <div class="alert alert-success" id="passwordSuccess">
+                    <i class="fas fa-check-circle"></i> Senha alterada com sucesso!
+                </div>
+                <form id="changePasswordForm">
+                    <div class="form-group">
+                        <label for="currentPassword">Senha Atual</label>
+                        <div class="password-input">
+                            <input type="password" id="currentPassword" class="form-control" placeholder="Digite a senha atual" required>
+                            <button type="button" class="toggle-password" id="toggleCurrentPassword"><i class="fas fa-eye"></i></button>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="newPassword">Nova Senha</label>
+                        <div class="password-input">
+                            <input type="password" id="newPassword" class="form-control" placeholder="Digite a nova senha" required minlength="6">
+                            <button type="button" class="toggle-password" id="toggleNewPassword"><i class="fas fa-eye"></i></button>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="confirmPassword">Confirmar Nova Senha</label>
+                        <div class="password-input">
+                            <input type="password" id="confirmPassword" class="form-control" placeholder="Confirme a nova senha" required>
+                            <button type="button" class="toggle-password" id="toggleConfirmPassword"><i class="fas fa-eye"></i></button>
+                        </div>
+                    </div>
+                    <button type="submit" class="btn btn-success" style="width:100%;">
+                        <i class="fas fa-save"></i> Salvar Nova Senha
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
 
-            <div class="form-group">
-              <label for="projectDescription">Descrição curta *</label>
-              <textarea id="projectDescription" rows="3" class="form-control" required></textarea>
-              <small>Texto de resumo exibido no card do site.</small>
+    <!-- Conteúdo -->
+    <div class="client-content active">
+        <!-- HERO NOVO -->
+        <section class="hero" id="home">
+            <div class="container">
+                <div class="hero-inner">
+                    <div class="hero-left">
+                        <h1 id="heroTitle">Bemorh</h1>
+                        <p id="heroSubtitle">
+                            Nascemos da crença de que as melhores soluções surgem da conexão de ideias.
+                            Somos uma empresa de tecnologia especializada em desenvolver ferramentas virtuais
+                            que facilitam a colaboração, estimulam a inovação e transformam conceitos em realidade.
+                        </p>
+                        <div class="hero-buttons">
+                            <button class="hero-btn-primary" id="heroProjectsBtn">Nossos Projetos</button>
+                            <button class="hero-btn-secondary" id="heroContactBtn">
+                                <span id="heroContactText">Fale Conosco</span>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="hero-right">
+                        <img src="https://images.unsplash.com/photo-1552664730-d307ca884978?ixlib=rb-4.0.3&auto=format&fit=crop&w=1100&q=80" alt="Equipe colaborando em um projeto">
+                    </div>
+                </div>
             </div>
-
-            <div class="form-group">
-              <label for="projectFeatures">Recursos (separar por vírgula)</label>
-              <input type="text" id="projectFeatures" class="form-control" placeholder="Ex: Integração API, Dashboard em tempo real" />
-              <small>Exibimos até 2 itens no card do site.</small>
-            </div>
-
-            <div class="form-group">
-              <label for="projectImage">URL da imagem (opcional)</label>
-              <input type="url" id="projectImage" class="form-control" placeholder="https://..." />
-              <small>Se vazio, usaremos uma imagem padrão.</small>
-            </div>
-
-            <div class="form-footer">
-              <div class="muted" id="formInfo">Criando novo projeto.</div>
-              <div>
-                <button type="button" class="btn btn-small" id="clearFormBtn">
-                  <i class="fas fa-eraser"></i> Limpar
-                </button>
-                <button type="submit" class="btn btn-small" id="saveBtn">
-                  <i class="fas fa-save"></i> Salvar
-                </button>
-              </div>
-            </div>
-          </form>
         </section>
-      </section>
-    </main>
-  </div>
 
-  <script type="module">
-    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
-    import {
-      getFirestore,
-      collection,
-      addDoc,
-      getDocs,
-      doc,
-      updateDoc,
-      serverTimestamp,
-      orderBy,
-      query
-    } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
+        <!-- Projetos em Destaque -->
+        <section id="projects">
+            <div class="container">
+                <h2 class="section-title" id="projectsTitle">Projetos em Destaque</h2>
+                <div class="projects-grid">
+                    <div class="project-card">
+                        <div class="project-img">
+                            <i class="fas fa-project-diagram"></i>
+                        </div>
+                        <div class="project-info">
+                            <h3 id="project1Title">Sistema de Gestão de Ideias</h3>
+                            <span class="project-status status-completed" id="project1Status">Concluído</span>
+                            <p id="project1Description">
+                                Plataforma colaborativa que organiza e prioriza ideias em projetos executáveis com fluxos visuais intuitivos.
+                            </p>
+                        </div>
+                    </div>
+                    <div class="project-card">
+                        <div class="project-img">
+                            <i class="fas fa-brain"></i>
+                        </div>
+                        <div class="project-info">
+                            <h3 id="project2Title">IA para Inovação</h3>
+                            <span class="project-status status-in-progress" id="project2Status">Em Andamento</span>
+                            <p id="project2Description">
+                                Ferramenta de inteligência artificial que auxilia na geração e refinamento de ideias criativas para negócios.
+                            </p>
+                        </div>
+                    </div>
+                    <div class="project-card">
+                        <div class="project-img">
+                            <i class="fas fa-users-cog"></i>
+                        </div>
+                        <div class="project-info">
+                            <h3 id="project3Title">Plataforma Colaborativa</h3>
+                            <span class="project-status status-pending" id="project3Status">Em Planejamento</span>
+                            <p id="project3Description">
+                                Ambiente virtual para equipes distribuídas colaborarem em tempo real no desenvolvimento de projetos.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
 
-    const firebaseConfig = {
-      apiKey: "AIzaSyAqNKa5jp5UpcTtnAF1_EUVKCXVrGZTFkA",
-      authDomain: "bemorh-bc5a8.firebaseapp.com",
-      projectId: "bemorh-bc5a8",
-      storageBucket: "bemorh-bc5a8.firebasestorage.app",
-      messagingSenderId: "313271255362",
-      appId: "1:313271255362:web:167e42b830f8fdcb9188db"
-    };
+        <!-- Serviços (4 cards alinhados) -->
+        <section id="services" class="services-section">
+            <div class="container">
+                <h2 class="section-title" id="servicesTitle">Nossos Serviços</h2>
+                <div class="services-grid">
+                    <div class="service-card">
+                        <div class="service-icon"><i class="fas fa-laptop-code"></i></div>
+                        <h3 id="service1Title">Desenvolvimento Web</h3>
+                        <p id="service1Description">
+                            Sites, sistemas web e aplicações responsivas com as melhores tecnologias do mercado.
+                        </p>
+                    </div>
+                    <div class="service-card">
+                        <div class="service-icon"><i class="fas fa-mobile-alt"></i></div>
+                        <h3 id="service2Title">Apps Mobile</h3>
+                        <p id="service2Description">
+                            Aplicativos nativos e híbridos para iOS e Android, com designs intuitivos e funcionais.
+                        </p>
+                    </div>
+                    <div class="service-card">
+                        <div class="service-icon"><i class="fas fa-palette"></i></div>
+                        <h3 id="service3Title">UI/UX Design</h3>
+                        <p id="service3Description">
+                            Design centrado no usuário, interfaces intuitivas e experiências digitais memoráveis.
+                        </p>
+                    </div>
+                    <div class="service-card">
+                        <div class="service-icon"><i class="fas fa-lightbulb"></i></div>
+                        <h3 id="service4Title">Consultoria em Inovação</h3>
+                        <p id="service4Description">
+                            Ajudamos sua empresa a implementar processos inovadores e soluções tecnológicas estratégicas.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
 
-    const app = initializeApp(firebaseConfig);
-    const db = getFirestore(app);
-    document.getElementById("firestoreStatus").textContent = "conectado";
+        <!-- Sobre (layout das imagens) -->
+        <section id="about" style="background-color:#eef3f6;padding:80px 0;">
+            <div class="container">
+                <h2 class="section-title" id="aboutTitle" style="margin-bottom:30px;">Sobre a Bemorh</h2>
+                <div style="max-width:900px;margin:0 auto 50px auto;text-align:center;">
+                    <p id="aboutIntro" style="font-size:1.4rem;line-height:1.9;color:#2c3e50;">
+                        A Bemorh nasceu da crença de que as melhores soluções surgem da conexão de ideias.
+                        Somos uma empresa de tecnologia especializada em desenvolver ferramentas virtuais que
+                        facilitam a colaboração, estimulam a inovação e transformam conceitos em realidade.
+                    </p>
+                </div>
+                <div style="
+                    max-width:1100px;
+                    margin:0 auto;
+                    display:grid;
+                    grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+                    gap:25px;
+                ">
+                    <div style="background-color:#ffffff;border-radius:12px;box-shadow:0 10px 25px rgba(0,0,0,0.06);padding:25px 24px 28px;">
+                        <h3 style="display:flex;align-items:center;gap:10px;font-size:1.3rem;color:var(--primary);margin-bottom:12px;">
+                            <i class="fas fa-bullseye" style="color:var(--secondary);font-size:1.5rem;"></i>
+                            <span id="missionTitle">Nossa Missão</span>
+                        </h3>
+                        <p id="missionText" style="font-size:1rem;line-height:1.8;color:#555;">
+                            Conectar pessoas, ideias e tecnologias para criar soluções digitais inovadoras que
+                            transformam negócios e impulsionam resultados.
+                        </p>
+                    </div>
+                    <div style="background-color:#ffffff;border-radius:12px;box-shadow:0 10px 25px rgba(0,0,0,0.06);padding:25px 24px 28px;">
+                        <h3 style="display:flex;align-items:center;gap:10px;font-size:1.3rem;color:var(--primary);margin-bottom:12px;">
+                            <i class="fas fa-eye" style="color:var(--secondary);font-size:1.5rem;"></i>
+                            <span id="visionTitle">Nossa Visão</span>
+                        </h3>
+                        <p id="visionText" style="font-size:1rem;line-height:1.8;color:#555;">
+                            Ser referência em tecnologia conectiva, reconhecida por transformar ideias dispersas em
+                            ecossistemas digitais integrados e eficientes.
+                        </p>
+                    </div>
+                    <div style="background-color:#ffffff;border-radius:12px;box-shadow:0 10px 25px rgba(0,0,0,0.06);padding:25px 24px 28px;">
+                        <h3 style="display:flex;align-items:center;gap:10px;font-size:1.3rem;color:var(--primary);margin-bottom:12px;">
+                            <i class="fas fa-handshake" style="color:var(--secondary);font-size:1.5rem;"></i>
+                            <span id="approachTitle">Nossa Abordagem</span>
+                        </h3>
+                        <p id="approachText" style="font-size:1rem;line-height:1.8;color:#555;">
+                            Trabalhamos em parceria com nossos clientes, entendendo suas necessidades únicas
+                            e co-criando soluções que realmente fazem a diferença.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
 
-    const projectsCol = collection(db, "siteProjects");
+        <!-- Contato -->
+        <section class="contact-section" id="contact">
+            <div class="container">
+                <h2 class="section-title" id="contactTitle">Conecte-se Conosco</h2>
+                <div class="contact-container">
+                    <div class="contact-info">
+                        <h3 id="contactInfoTitle">Informações de Contato</h3>
+                        <div class="contact-item">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <div>
+                                <h4 id="contactAddressTitle">Endereço</h4>
+                                <p id="contactAddressText">
+                                    Av. das Inovações, 123 - Centro de Tecnologia<br>São Paulo - SP, 04538-000
+                                </p>
+                            </div>
+                        </div>
+                        <div class="contact-item">
+                            <i class="fas fa-phone"></i>
+                            <div>
+                                <h4 id="contactPhoneTitle">Telefone</h4>
+                                <p id="contactPhoneText">(11) 3456-7890</p>
+                            </div>
+                        </div>
+                        <div class="contact-item">
+                            <i class="fas fa-envelope"></i>
+                            <div>
+                                <h4 id="contactEmailTitle">Email</h4>
+                                <p id="contactEmailText">contato@bemorh.com.br</p>
+                            </div>
+                        </div>
+                        <div class="contact-item">
+                            <i class="fas fa-clock"></i>
+                            <div>
+                                <h4 id="contactScheduleTitle">Horário de Atendimento</h4>
+                                <p id="contactScheduleText">
+                                    Segunda a Sexta: 8h às 19h<br>Sábado: 9h às 13h
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="contact-info">
+                        <h3 id="contactFormTitle">Envie sua Ideia</h3>
+                        <form id="contactForm">
+                            <div class="form-group">
+                                <label for="contactName" id="contactNameLabel">Nome</label>
+                                <input type="text" id="contactName" class="form-control" placeholder="Seu nome completo" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="contactEmail" id="contactEmailLabel">Email</label>
+                                <input type="email" id="contactEmail" class="form-control" placeholder="seu@email.com" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="contactPhone" id="contactPhoneLabel">Telefone</label>
+                                <input type="text" id="contactPhone" class="form-control" placeholder="(11) 99999-9999">
+                            </div>
+                            <div class="form-group">
+                                <label for="contactMessage" id="contactMessageLabel">Sua Ideia ou Projeto</label>
+                                <textarea id="contactMessage" class="form-control" rows="5" placeholder="Conte-nos sobre sua ideia ou projeto..." required></textarea>
+                            </div>
+                            <button type="submit" class="btn-contact" style="width:100%;">
+                                <i class="fas fa-paper-plane"></i>
+                                <span id="contactSubmitText">Enviar Mensagem</span>
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
 
-    const projectsTableBody = document.getElementById("projectsTableBody");
-    const summaryActive = document.getElementById("summaryActive");
-    const summaryTotal = document.getElementById("summaryTotal");
-    const summaryArchived = document.getElementById("summaryArchived");
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <div class="logo-container" style="margin-bottom:20px;cursor:default;">
+                        <div class="logo-visual" style="width:60px;height:60px;">
+                            <img src="imagem.png" alt="Bemorh Logo" style="width:90%;height:90%;object-fit:contain;padding:8px;" onerror="handleLogoError(this)">
+                        </div>
+                        <div class="logo-text">
+                            <div class="logo-main" style="font-size:1.5rem;" id="footerLogoTitle">Bemorh</div>
+                            <div class="logo-tagline" style="font-size:0.8rem;" id="footerLogoTagline">tecnologia que conecta ideias</div>
+                        </div>
+                    </div>
+                    <p id="footerDescription">
+                        Tecnologia que conecta ideias. Desenvolvemos soluções digitais inovadoras que transformam conceitos em realidade.
+                    </p>
+                    <div style="margin-top:20px;">
+                        <a href="#" style="margin-right:15px;"><i class="fab fa-linkedin fa-lg"></i></a>
+                        <a href="#" style="margin-right:15px;"><i class="fab fa-instagram fa-lg"></i></a>
+                        <a href="#" style="margin-right:15px;"><i class="fab fa-twitter fa-lg"></i></a>
+                        <a href="#"><i class="fab fa-youtube fa-lg"></i></a>
+                    </div>
+                </div>
+                <div class="footer-column">
+                    <h3 id="footerQuickLinksTitle">Links Rápidos</h3>
+                    <ul>
+                        <li><a id="footerHome">Início</a></li>
+                        <li><a id="footerProjects">Projetos</a></li>
+                        <li><a id="footerServices">Serviços</a></li>
+                        <li><a id="footerAbout">Sobre Nós</a></li>
+                        <li><a id="footerContact">Contato</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3 id="footerContactTitle">Contato</h3>
+                    <ul>
+                        <li><i class="fas fa-map-marker-alt"></i><span id="footerAddress"> Av. das Inovações, 123 - São Paulo, SP</span></li>
+                        <li><i class="fas fa-phone"></i><span id="footerPhone"> (11) 3456-7890</span></li>
+                        <li><i class="fas fa-envelope"></i><span id="footerEmail"> contato@bemorh.com.br</span></li>
+                        <li><i class="fas fa-clock"></i><span id="footerSchedule"> Seg-Sex: 8h-19h</span></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Novidades</h3>
+                    <p>Receba nossas ideias e inovações diretamente no seu email.</p>
+                    <div class="form-group" style="margin-top:15px;">
+                        <input type="email" class="form-control" placeholder="Seu email" id="newsletterEmail">
+                        <button class="btn" style="margin-top:10px;width:100%;" id="newsletterBtn">Inscrever-se</button>
+                    </div>
+                </div>
+            </div>
+            <div class="copyright">
+                <p id="footerCopyright">&copy; 2023 Bemorh - Tecnologia que Conecta Ideias. Todos os direitos reservados.</p>
+            </div>
+        </div>
+    </footer>
 
-    const projectForm = document.getElementById("projectForm");
-    const projectIdInput = document.getElementById("projectId");
-    const projectTitleInput = document.getElementById("projectTitle");
-    const projectCategoryInput = document.getElementById("projectCategory");
-    const projectStatusInput = document.getElementById("projectStatus");
-    const projectOrderInput = document.getElementById("projectOrder");
-    const projectDescriptionInput = document.getElementById("projectDescription");
-    const projectFeaturesInput = document.getElementById("projectFeatures");
-    const projectImageInput = document.getElementById("projectImage");
+    <script>
+        // ===== AUTENTICAÇÃO ADMIN =====
+        const adminAuth = {
+            password: localStorage.getItem('adminPassword') || "admin123",
+            login(inputPassword) {
+                if (inputPassword === this.password) {
+                    localStorage.setItem('adminLoggedIn', 'true');
+                    return true;
+                }
+                return false;
+            },
+            changePassword(currentPassword, newPassword) {
+                if (currentPassword === this.password) {
+                    this.password = newPassword;
+                    localStorage.setItem('adminPassword', newPassword);
+                    return true;
+                }
+                return false;
+            }
+        };
 
-    const formTitle = document.getElementById("formTitle");
-    const formSubtitle = document.getElementById("formSubtitle");
-    const formInfo = document.getElementById("formInfo");
-    const newProjectBtn = document.getElementById("newProjectBtn");
-    const clearFormBtn = document.getElementById("clearFormBtn");
-    const saveBtn = document.getElementById("saveBtn");
-    const reloadProjectsBtn = document.getElementById("reloadProjectsBtn");
+        const adminLoginModal = document.getElementById('adminLoginModal');
+        const changePasswordModal = document.getElementById('changePasswordModal');
+        const loginError = document.getElementById('loginError');
+        const loginSuccess = document.getElementById('loginSuccess');
+        const passwordError = document.getElementById('passwordError');
+        const passwordSuccess = document.getElementById('passwordSuccess');
+        const backToTopBtn = document.getElementById('backToTop');
+        const navItems = document.querySelectorAll('nav ul li a');
 
-    async function loadProjects() {
-      projectsTableBody.innerHTML = `
-        <tr>
-          <td colspan="5" style="text-align:center;color:#7f8c8d;padding:20px;">
-            <i class="fas fa-spinner fa-spin"></i> Carregando projetos...
-          </td>
-        </tr>
-      `;
+        function handleLogoError(img) {
+            img.style.display = 'none';
+            let logoText = img.nextElementSibling;
+            if (!logoText || !logoText.id.includes('logoText')) {
+                logoText = document.createElement('div');
+                logoText.id = 'logoText';
+                img.parentElement.appendChild(logoText);
+            }
+            logoText.style.display = 'flex';
+            logoText.style.width = '100%';
+            logoText.style.height = '100%';
+            logoText.style.background = 'white';
+            logoText.style.color = 'var(--secondary)';
+            logoText.style.fontWeight = 'bold';
+            logoText.style.fontSize = '2.5rem';
+            logoText.style.alignItems = 'center';
+            logoText.style.justifyContent = 'center';
+            logoText.style.borderRadius = 'inherit';
+            logoText.style.border = '1px solid #eee';
+            logoText.innerHTML = 'J';
+        }
 
-      try {
-        const q = query(projectsCol, orderBy("timestamp", "desc"));
-        const snap = await getDocs(q);
-        const projects = [];
-        snap.forEach((docSnap) => {
-          const data = docSnap.data();
-          projects.push({ id: docSnap.id, ...data });
+        window.addEventListener('load', function() {
+            const logoImg = document.getElementById('logoImage');
+            if (logoImg && (logoImg.naturalWidth === 0 || logoImg.complete === false)) {
+                handleLogoError(logoImg);
+            }
+            document.querySelectorAll('.logo-visual img').forEach(img => {
+                if (img.naturalWidth === 0) {
+                    handleLogoError(img);
+                }
+            });
         });
 
-        renderProjectsTable(projects);
-        updateSummary(projects);
-      } catch (err) {
-        console.error("Erro ao carregar projetos:", err);
-        projectsTableBody.innerHTML = `
-          <tr>
-            <td colspan="5" style="text-align:center;color:#e74c3c;padding:20px;">
-              <i class="fas fa-exclamation-circle"></i> Erro ao carregar projetos. Verifique o console.
-            </td>
-          </tr>
-        `;
-      }
-    }
+        function scrollToSection(sectionId) {
+            const section = document.getElementById(sectionId);
+            if (section) {
+                const headerHeight = document.querySelector('header').offsetHeight;
+                const sectionPosition = section.offsetTop - headerHeight;
+                window.scrollTo({ top: sectionPosition, behavior: 'smooth' });
+                updateNavigation(sectionId);
+            }
+        }
 
-    function updateSummary(projects) {
-      const total = projects.length;
-      const active = projects.filter((p) => p.status === "active").length;
-      const archived = projects.filter((p) => p.status !== "active").length;
-      summaryTotal.textContent = total;
-      summaryActive.textContent = active;
-      summaryArchived.textContent = archived;
-    }
+        function updateNavigation(activeItem) {
+            navItems.forEach(item => item.classList.remove('active'));
+            const id = 'nav' + activeItem.charAt(0).toUpperCase() + activeItem.slice(1);
+            const nav = document.getElementById(id);
+            if (nav) nav.classList.add('active');
+        }
 
-    function renderProjectsTable(projects) {
-      if (projects.length === 0) {
-        projectsTableBody.innerHTML = `
-          <tr>
-            <td colspan="5" style="text-align:center;color:#7f8c8d;padding:20px;">
-              <i class="fas fa-folder-open"></i> Nenhum projeto cadastrado ainda.
-            </td>
-          </tr>
-        `;
-        return;
-      }
+        window.addEventListener('scroll', () => {
+            backToTopBtn.classList.toggle('show', window.pageYOffset > 300);
+            const sections = ['home','about','services','projects','contact'];
+            let current = 'home';
+            const headerHeight = document.querySelector('header').offsetHeight;
+            sections.forEach(id => {
+                const el = document.getElementById(id);
+                if (el) {
+                    const rect = el.getBoundingClientRect();
+                    if (rect.top <= headerHeight + 100 && rect.bottom >= headerHeight + 100) {
+                        current = id;
+                    }
+                }
+            });
+            updateNavigation(current);
+        });
 
-      projectsTableBody.innerHTML = "";
-      projects.forEach((p) => {
-        const tr = document.createElement("tr");
+        backToTopBtn.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
 
-        const createdAt = p.timestamp?.toDate?.() || null;
-        const dateStr = createdAt
-          ? createdAt.toLocaleDateString("pt-BR", { day: "2-digit", month: "2-digit", year: "numeric" })
-          : "-";
+        // Navegação
+        document.getElementById('logoHome').addEventListener('click', () => scrollToSection('home'));
+        document.getElementById('navHome').addEventListener('click', () => scrollToSection('home'));
+        document.getElementById('navAbout').addEventListener('click', () => scrollToSection('about'));
+        document.getElementById('navServices').addEventListener('click', () => scrollToSection('services'));
+        document.getElementById('navProjects').addEventListener('click', () => scrollToSection('projects'));
+        document.getElementById('navContact').addEventListener('click', () => scrollToSection('contact'));
 
-        let statusClass = "active";
-        if (p.status === "draft") statusClass = "draft";
-        if (p.status === "archived") statusClass = "archived";
+        document.getElementById('footerHome').addEventListener('click', () => scrollToSection('home'));
+        document.getElementById('footerProjects').addEventListener('click', () => scrollToSection('projects'));
+        document.getElementById('footerServices').addEventListener('click', () => scrollToSection('services'));
+        document.getElementById('footerAbout').addEventListener('click', () => scrollToSection('about'));
+        document.getElementById('footerContact').addEventListener('click', () => scrollToSection('contact'));
 
-        const categoryLabels = {
-          web: "Desenvolvimento Web",
-          mobile: "Apps Mobile",
-          design: "UI/UX Design",
-          consulting: "Consultoria",
-          innovation: "Inovação"
+        // Botões do HERO
+        document.getElementById('heroProjectsBtn').addEventListener('click', () => scrollToSection('projects'));
+        document.getElementById('heroContactBtn').addEventListener('click', () => scrollToSection('contact'));
+
+        // Admin modais
+        document.getElementById('adminAccessBtn').addEventListener('click', () => {
+            adminLoginModal.style.display = 'flex';
+            document.getElementById('adminPassword').focus();
+        });
+
+        document.getElementById('closeLoginModal').addEventListener('click', () => {
+            adminLoginModal.style.display = 'none';
+            loginError.style.display = 'none';
+            loginSuccess.style.display = 'none';
+        });
+
+        document.getElementById('closePasswordModal').addEventListener('click', () => {
+            changePasswordModal.style.display = 'none';
+            passwordError.style.display = 'none';
+            passwordSuccess.style.display = 'none';
+        });
+
+        window.addEventListener('click', e => {
+            if (e.target === adminLoginModal) {
+                adminLoginModal.style.display = 'none';
+                loginError.style.display = 'none';
+                loginSuccess.style.display = 'none';
+            }
+            if (e.target === changePasswordModal) {
+                changePasswordModal.style.display = 'none';
+                passwordError.style.display = 'none';
+                passwordSuccess.style.display = 'none';
+            }
+        });
+
+        function bindToggle(btnId, inputId) {
+            document.getElementById(btnId).addEventListener('click', function() {
+                const input = document.getElementById(inputId);
+                const icon = this.querySelector('i');
+                if (input.type === 'password') {
+                    input.type = 'text';
+                    icon.classList.remove('fa-eye');
+                    icon.classList.add('fa-eye-slash');
+                } else {
+                    input.type = 'password';
+                    icon.classList.remove('fa-eye-slash');
+                    icon.classList.add('fa-eye');
+                }
+            });
+        }
+        bindToggle('togglePassword', 'adminPassword');
+        bindToggle('toggleCurrentPassword', 'currentPassword');
+        bindToggle('toggleNewPassword', 'newPassword');
+        bindToggle('toggleConfirmPassword', 'confirmPassword');
+
+        document.getElementById('adminLoginForm').addEventListener('submit', e => {
+            e.preventDefault();
+            const password = document.getElementById('adminPassword').value;
+            loginError.style.display = 'none';
+            loginSuccess.style.display = 'none';
+            if (adminAuth.login(password)) {
+                loginSuccess.style.display = 'block';
+                setTimeout(() => {
+                    adminLoginModal.style.display = 'none';
+                    window.location.href = 'admin.html';
+                    document.getElementById('adminPassword').value = '';
+                }, 1000);
+            } else {
+                loginError.style.display = 'block';
+                document.getElementById('adminPassword').value = '';
+                document.getElementById('adminPassword').focus();
+            }
+        });
+
+        document.getElementById('resetPasswordBtn').addEventListener('click', () => {
+            adminLoginModal.style.display = 'none';
+            changePasswordModal.style.display = 'flex';
+            document.getElementById('currentPassword').focus();
+        });
+
+        document.getElementById('changePasswordForm').addEventListener('submit', e => {
+            e.preventDefault();
+            const currentPassword = document.getElementById('currentPassword').value;
+            const newPassword = document.getElementById('newPassword').value;
+            const confirmPassword = document.getElementById('confirmPassword').value;
+            passwordError.style.display = 'none';
+            passwordSuccess.style.display = 'none';
+            if (newPassword !== confirmPassword) {
+                passwordError.textContent = "As novas senhas não coincidem!";
+                passwordError.style.display = 'block';
+                return;
+            }
+            if (newPassword.length < 6) {
+                passwordError.textContent = "A nova senha deve ter pelo menos 6 caracteres!";
+                passwordError.style.display = 'block';
+                return;
+            }
+            if (adminAuth.changePassword(currentPassword, newPassword)) {
+                passwordSuccess.style.display = 'block';
+                document.getElementById('currentPassword').value = '';
+                document.getElementById('newPassword').value = '';
+                document.getElementById('confirmPassword').value = '';
+                setTimeout(() => {
+                    changePasswordModal.style.display = 'none';
+                    adminLoginModal.style.display = 'flex';
+                }, 2000);
+            } else {
+                passwordError.textContent = "Senha atual incorreta!";
+                passwordError.style.display = 'block';
+                document.getElementById('currentPassword').value = '';
+                document.getElementById('currentPassword').focus();
+            }
+        });
+
+        // Formulário de contato (index)
+        document.getElementById('contactForm').addEventListener('submit', e => {
+            e.preventDefault();
+            const name = document.getElementById('contactName').value;
+            alert(`Obrigado, ${name}! Sua mensagem foi enviada com sucesso. Entraremos em contato em breve.`);
+            document.getElementById('contactForm').reset();
+        });
+
+        document.getElementById('newsletterBtn').addEventListener('click', () => {
+            const email = document.getElementById('newsletterEmail').value;
+            if (email && email.includes('@')) {
+                alert(`Obrigado por se inscrever! Enviaremos nossas inovações para ${email}.`);
+                document.getElementById('newsletterEmail').value = '';
+            } else {
+                alert('Por favor, insira um email válido.');
+            }
+        });
+
+        // ===== CONFIGURAÇÕES DO SITE (bemorhSiteConfig) =====
+        const defaultSiteConfig = {
+            logoTitle:"Bemorh",
+            logoTagline:"tecnologia que conecta ideias",
+            heroTitle:"Bemorh",
+            heroSubtitle:"Nascemos da crença de que as melhores soluções surgem da conexão de ideias. Somos uma empresa de tecnologia especializada em desenvolver ferramentas virtuais que facilitam a colaboração, estimulam a inovação e transformam conceitos em realidade.",
+            heroContactText:"Fale Conosco",
+            projectsTitle:"Projetos em Destaque",
+            project1Title:"Sistema de Gestão de Ideias",
+            project1Status:"Concluído",
+            project1Description:"Plataforma colaborativa que organiza e prioriza ideias em projetos executáveis com fluxos visuais intuitivos.",
+            project2Title:"IA para Inovação",
+            project2Status:"Em Andamento",
+            project2Description:"Ferramenta de inteligência artificial que auxilia na geração e refinamento de ideias criativas para negócios.",
+            project3Title:"Plataforma Colaborativa",
+            project3Status:"Em Planejamento",
+            project3Description:"Ambiente virtual para equipes distribuídas colaborarem em tempo real no desenvolvimento de projetos.",
+            servicesTitle:"Nossos Serviços",
+            service1Title:"Desenvolvimento Web",
+            service1Description:"Sites, sistemas web e aplicações responsivas com as melhores tecnologias do mercado.",
+            service2Title:"Apps Mobile",
+            service2Description:"Aplicativos nativos e híbridos para iOS e Android, com designs intuitivos e funcionais.",
+            service3Title:"UI/UX Design",
+            service3Description:"Design centrado no usuário, interfaces intuitivas e experiências digitais memoráveis.",
+            service4Title:"Consultoria em Inovação",
+            service4Description:"Ajudamos sua empresa a implementar processos inovadores e soluções tecnológicas estratégicas.",
+            aboutTitle:"Sobre a Bemorh",
+            aboutIntro:"A Bemorh nasceu da crença de que as melhores soluções surgem da conexão de ideias. Somos uma empresa de tecnologia especializada em desenvolver ferramentas virtuais que facilitam a colaboração, estimulam a inovação e transformam conceitos em realidade.",
+            missionTitle:"Nossa Missão",
+            missionText:"Conectar pessoas, ideias e tecnologias para criar soluções digitais inovadoras que transformam negócios e impulsionam resultados.",
+            visionTitle:"Nossa Visão",
+            visionText:"Ser referência em tecnologia conectiva, reconhecida por transformar ideias dispersas em ecossistemas digitais integrados e eficientes.",
+            approachTitle:"Nossa Abordagem",
+            approachText:"Trabalhamos em parceria com nossos clientes, entendendo suas necessidades únicas e co-criando soluções que realmente fazem a diferença.",
+            contactTitle:"Conecte-se Conosco",
+            contactInfoTitle:"Informações de Contato",
+            contactAddressTitle:"Endereço",
+            contactAddressText:"Av. das Inovações, 123 - Centro de Tecnologia<br>São Paulo - SP, 04538-000",
+            contactPhoneTitle:"Telefone",
+            contactPhoneText:"(11) 3456-7890",
+            contactEmailTitle:"Email",
+            contactEmailText:"contato@bemorh.com.br",
+            contactScheduleTitle:"Horário de Atendimento",
+            contactScheduleText:"Segunda a Sexta: 8h às 19h<br>Sábado: 9h às 13h",
+            contactFormTitle:"Envie sua Ideia",
+            contactNameLabel:"Nome",
+            contactEmailLabel:"Email",
+            contactPhoneLabel:"Telefone",
+            contactMessageLabel:"Sua Ideia ou Projeto",
+            contactSubmitText:"Enviar Mensagem",
+            footerDescription:"Tecnologia que conecta ideias. Desenvolvemos soluções digitais inovadoras que transformam conceitos em realidade.",
+            footerQuickLinksTitle:"Links Rápidos",
+            footerContactTitle:"Contato",
+            footerAddress:"Av. das Inovações, 123 - São Paulo, SP",
+            footerPhone:"(11) 3456-7890",
+            footerEmail:"contato@bemorh.com.br",
+            footerSchedule:"Seg-Sex: 8h-19h",
+            footerCopyright:"© 2023 Bemorh - Tecnologia que Conecta Ideias. Todos os direitos reservados."
         };
-        const categoryLabel = categoryLabels[p.category] || p.category || "-";
 
-        tr.innerHTML = `
-          <td>
-            <strong>${p.title || "-"}</strong><br>
-            <small style="color:#7f8c8d;">${(p.description || "").slice(0, 60)}${(p.description || "").length > 60 ? "..." : ""}</small>
-          </td>
-          <td>
-            <span class="badge-category"><i class="fas fa-tag"></i> ${categoryLabel}</span>
-          </td>
-          <td>
-            <span class="tag-status ${statusClass}">
-              <i class="fas ${p.status === "active" ? "fa-circle-check" : p.status === "draft" ? "fa-pencil-alt" : "fa-box-archive"}"></i>
-              ${p.status === "active" ? "Ativo" : p.status === "draft" ? "Rascunho" : "Arquivado"}
-            </span>
-          </td>
-          <td>${dateStr}</td>
-          <td>
-            <div class="table-actions">
-              <button class="btn-icon" title="Editar" data-action="edit" data-id="${p.id}">
-                <i class="fas fa-pen"></i>
-              </button>
-              <button class="btn-icon" title="${p.status === "archived" ? "Reativar" : "Arquivar"}" data-action="toggle" data-id="${p.id}">
-                <i class="fas ${p.status === "archived" ? "fa-rotate-left" : "fa-box-archive"}"></i>
-              </button>
-            </div>
-          </td>
-        `;
-
-        projectsTableBody.appendChild(tr);
-      });
-    }
-
-    function resetForm() {
-      projectIdInput.value = "";
-      projectTitleInput.value = "";
-      projectCategoryInput.value = "web";
-      projectStatusInput.value = "active";
-      projectOrderInput.value = "";
-      projectDescriptionInput.value = "";
-      projectFeaturesInput.value = "";
-      projectImageInput.value = "";
-      formTitle.innerHTML = '<i class="fas fa-plus-circle"></i> Novo Projeto';
-      formSubtitle.textContent = "Preencha os campos para adicionar um novo projeto ao site.";
-      formInfo.textContent = "Criando novo projeto.";
-    }
-
-    function fillForm(project) {
-      projectIdInput.value = project.id;
-      projectTitleInput.value = project.title || "";
-      projectCategoryInput.value = project.category || "web";
-      projectStatusInput.value = project.status || "active";
-      projectOrderInput.value = project.order ?? "";
-      projectDescriptionInput.value = project.description || "";
-      projectFeaturesInput.value = (project.features || []).join(", ");
-      projectImageInput.value = (project.images && project.images[0]) || "";
-      formTitle.innerHTML = '<i class="fas fa-pen"></i> Editar Projeto';
-      formSubtitle.textContent = "Atualize as informações do projeto e salve para refletir no site.";
-      formInfo.textContent = `Editando projeto: ${project.title || project.id}`;
-    }
-
-    async function getProjectById(id) {
-      const snap = await getDocs(projectsCol);
-      let found = null;
-      snap.forEach((d) => {
-        if (d.id === id) found = { id: d.id, ...d.data() };
-      });
-      return found;
-    }
-
-    // Eventos
-    reloadProjectsBtn.addEventListener("click", loadProjects);
-    newProjectBtn.addEventListener("click", resetForm);
-    clearFormBtn.addEventListener("click", resetForm);
-
-    projectsTableBody.addEventListener("click", async (e) => {
-      const btn = e.target.closest("button[data-action]");
-      if (!btn) return;
-      const action = btn.dataset.action;
-      const id = btn.dataset.id;
-      if (!id) return;
-
-      if (action === "edit") {
-        const proj = await getProjectById(id);
-        if (proj) fillForm(proj);
-      } else if (action === "toggle") {
-        const proj = await getProjectById(id);
-        if (!proj) return;
-        const newStatus = proj.status === "archived" ? "active" : "archived";
-        if (!confirm(`Tem certeza que deseja ${newStatus === "archived" ? "arquivar" : "reativar"} este projeto?`)) return;
-        try {
-          const ref = doc(db, "siteProjects", id);
-          await updateDoc(ref, {
-            status: newStatus,
-            timestamp: serverTimestamp()
-          });
-          loadProjects();
-        } catch (err) {
-          console.error("Erro ao atualizar status:", err);
-          alert("Erro ao atualizar status. Veja o console.");
+        function loadSiteConfig() {
+            const saved = localStorage.getItem('bemorhSiteConfig');
+            if (!saved) return defaultSiteConfig;
+            try {
+                const parsed = JSON.parse(saved);
+                return { ...defaultSiteConfig, ...parsed };
+            } catch { return defaultSiteConfig; }
         }
-      }
-    });
 
-    projectForm.addEventListener("submit", async (e) => {
-      e.preventDefault();
-      saveBtn.disabled = true;
-      saveBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Salvando...';
+        function applySiteConfig() {
+            const cfg = loadSiteConfig();
+            const setText = (id,v,html=false) => {
+                const el = document.getElementById(id);
+                if (!el || v == null) return;
+                if (html) el.innerHTML = v; else el.textContent = v;
+            };
 
-      const title = projectTitleInput.value.trim();
-      const category = projectCategoryInput.value;
-      const status = projectStatusInput.value;
-      const orderVal = projectOrderInput.value;
-      const description = projectDescriptionInput.value.trim();
-      const featuresRaw = projectFeaturesInput.value.trim();
-      const imageUrl = projectImageInput.value.trim();
+            setText('siteLogoTitle', cfg.logoTitle);
+            setText('siteLogoTagline', cfg.logoTagline);
+            setText('footerLogoTitle', cfg.logoTitle);
+            setText('footerLogoTagline', cfg.logoTagline);
 
-      if (!title || !description) {
-        alert("Preencha pelo menos o título e a descrição.");
-        saveBtn.disabled = false;
-        saveBtn.innerHTML = '<i class="fas fa-save"></i> Salvar';
-        return;
-      }
+            setText('heroTitle', cfg.heroTitle);
+            setText('heroSubtitle', cfg.heroSubtitle);
+            setText('heroContactText', cfg.heroContactText);
 
-      const features = featuresRaw
-        ? featuresRaw.split(",").map((f) => f.trim()).filter((f) => f.length > 0)
-        : [];
+            setText('projectsTitle', cfg.projectsTitle);
+            setText('project1Title', cfg.project1Title);
+            setText('project1Status', cfg.project1Status);
+            setText('project1Description', cfg.project1Description);
+            setText('project2Title', cfg.project2Title);
+            setText('project2Status', cfg.project2Status);
+            setText('project2Description', cfg.project2Description);
+            setText('project3Title', cfg.project3Title);
+            setText('project3Status', cfg.project3Status);
+            setText('project3Description', cfg.project3Description);
 
-      const baseData = {
-        title,
-        category,
-        status,
-        order: orderVal === "" ? null : Number(orderVal),
-        description,
-        features,
-        images: imageUrl ? [imageUrl] : [],
-        updatedAt: serverTimestamp()
-      };
+            setText('servicesTitle', cfg.servicesTitle);
+            setText('service1Title', cfg.service1Title);
+            setText('service1Description', cfg.service1Description);
+            setText('service2Title', cfg.service2Title);
+            setText('service2Description', cfg.service2Description);
+            setText('service3Title', cfg.service3Title);
+            setText('service3Description', cfg.service3Description);
+            setText('service4Title', cfg.service4Title);
+            setText('service4Description', cfg.service4Description);
 
-      try {
-        const existingId = projectIdInput.value;
-        if (existingId) {
-          const ref = doc(db, "siteProjects", existingId);
-          await updateDoc(ref, {
-            ...baseData,
-            timestamp: serverTimestamp()
-          });
-        } else {
-          await addDoc(projectsCol, {
-            ...baseData,
-            timestamp: serverTimestamp()
-          });
-          resetForm();
+            setText('aboutTitle', cfg.aboutTitle);
+            setText('aboutIntro', cfg.aboutIntro);
+            setText('missionTitle', cfg.missionTitle);
+            setText('missionText', cfg.missionText);
+            setText('visionTitle', cfg.visionTitle);
+            setText('visionText', cfg.visionText);
+            setText('approachTitle', cfg.approachTitle);
+            setText('approachText', cfg.approachText);
+
+            setText('contactTitle', cfg.contactTitle);
+            setText('contactInfoTitle', cfg.contactInfoTitle);
+            setText('contactAddressTitle', cfg.contactAddressTitle);
+            setText('contactAddressText', cfg.contactAddressText, true);
+            setText('contactPhoneTitle', cfg.contactPhoneTitle);
+            setText('contactPhoneText', cfg.contactPhoneText);
+            setText('contactEmailTitle', cfg.contactEmailTitle);
+            setText('contactEmailText', cfg.contactEmailText);
+            setText('contactScheduleTitle', cfg.contactScheduleTitle);
+            setText('contactScheduleText', cfg.contactScheduleText, true);
+            setText('contactFormTitle', cfg.contactFormTitle);
+            setText('contactNameLabel', cfg.contactNameLabel);
+            setText('contactEmailLabel', cfg.contactEmailLabel);
+            setText('contactPhoneLabel', cfg.contactPhoneLabel);
+            setText('contactMessageLabel', cfg.contactMessageLabel);
+            setText('contactSubmitText', cfg.contactSubmitText);
+
+            setText('footerDescription', cfg.footerDescription);
+            setText('footerQuickLinksTitle', cfg.footerQuickLinksTitle);
+            setText('footerContactTitle', cfg.footerContactTitle);
+            setText('footerAddress', cfg.footerAddress);
+            setText('footerPhone', cfg.footerPhone);
+            setText('footerEmail', cfg.footerEmail);
+            setText('footerSchedule', cfg.footerSchedule);
+            setText('footerCopyright', cfg.footerCopyright);
         }
-        await loadProjects();
-      } catch (err) {
-        console.error("Erro ao salvar projeto:", err);
-        alert("Erro ao salvar projeto. Veja o console.");
-      } finally {
-        saveBtn.disabled = false;
-        saveBtn.innerHTML = '<i class="fas fa-save"></i> Salvar';
-      }
-    });
 
-    // Início
-    loadProjects();
-  </script>
+        document.addEventListener('DOMContentLoaded', applySiteConfig);
+    </script>
 </body>
 </html>

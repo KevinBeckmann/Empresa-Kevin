@@ -1,1383 +1,1510 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bemorh - Tecnologia que Conecta Ideias</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <style>
-        /* Estilos Gerais */
-        :root {
-            --primary: #2c3e50;
-            --secondary: #3498db;
-            --accent: #e74c3c;
-            --light: #ecf0f1;
-            --dark: #2c3e50;
-            --success: #2ecc71;
-            --warning: #f39c12;
-            --gray: #95a5a6;
-            --shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-        }
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Painel Administrativo - Bemorh</title>
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        }
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
 
-        body {
-            background-color: #f9f9f9;
-            color: #333;
-            line-height: 1.6;
-        }
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Open+Sans:wght@300;400;600&display=swap" rel="stylesheet" />
 
-        a {
-            text-decoration: none;
-            color: inherit;
-        }
+  <style>
+    :root {
+      --primary: #2c3e50;
+      --secondary: #3498db;
+      --accent: #e74c3c;
+      --success: #2ecc71;
+      --warning: #f39c12;
+      --bg: #f3f6fb;
+      --gray: #95a5a6;
+      --shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+      --radius: 10px;
+      --transition: all 0.2s ease;
+    }
 
-        .container {
-            width: 100%;
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 20px;
-        }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
 
-        .btn {
-            display: inline-block;
-            padding: 12px 24px;
-            background-color: var(--secondary);
-            color: white;
-            border-radius: 4px;
-            font-weight: 600;
-            border: none;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
+    body {
+      font-family: "Open Sans", sans-serif;
+      background-color: var(--bg);
+      color: #333;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
 
-        .btn:hover {
-            background-color: #2980b9;
-            transform: translateY(-2px);
-            box-shadow: var(--shadow);
-        }
+    a { text-decoration: none; color: inherit; }
 
-        section {
-            padding: 80px 0;
-        }
+    .admin-wrapper {
+      display: grid;
+      grid-template-columns: 260px minmax(0, 1fr);
+      min-height: 100vh;
+    }
+    @media (max-width: 900px) { .admin-wrapper { grid-template-columns: 1fr; } }
 
-        .section-title {
-            text-align: center;
-            margin-bottom: 50px;
-            color: var(--primary);
-            font-size: 2.5rem;
-            position: relative;
-        }
+    /* SIDEBAR */
+    .sidebar {
+      background-color: #1f2a36;
+      color: #ecf0f1;
+      padding: 20px 18px;
+      display: flex;
+      flex-direction: column;
+      gap: 25px;
+    }
+    .sidebar-header {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 10px;
+    }
+    .sidebar-logo {
+      width: 42px;
+      height: 42px;
+      border-radius: 10px;
+      background: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      box-shadow: var(--shadow);
+    }
+    .sidebar-logo img {
+      width: 90%;
+      height: 90%;
+      object-fit: contain;
+    }
+    .sidebar-title { display: flex; flex-direction: column; }
+    .sidebar-title span:first-child {
+      font-family: "Montserrat", sans-serif;
+      font-weight: 700;
+      font-size: 1.2rem;
+    }
+    .sidebar-title span:last-child {
+      font-size: 0.75rem;
+      color: #bdc3c7;
+    }
+    .sidebar-nav h4 {
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: #95a5a6;
+      margin-bottom: 8px;
+    }
+    .nav-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+    .nav-item {
+      border-radius: 8px;
+      padding: 8px 10px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      cursor: pointer;
+      color: #ecf0f1;
+      font-size: 0.9rem;
+      transition: var(--transition);
+    }
+    .nav-item i { width: 18px; text-align: center; }
+    .nav-item.active,
+    .nav-item:hover {
+      background-color: rgba(52, 152, 219, 0.18);
+      color: #ffffff;
+    }
+    .sidebar-footer {
+      margin-top: auto;
+      font-size: 0.8rem;
+      color: #7f8c8d;
+    }
+    .sidebar-footer a {
+      color: #bdc3c7;
+      text-decoration: underline;
+    }
 
-        .section-title:after {
-            content: '';
-            position: absolute;
-            width: 100px;
-            height: 4px;
-            background-color: var(--secondary);
-            bottom: -15px;
-            left: 50%;
-            transform: translateX(-50%);
-            border-radius: 2px;
-        }
+    /* MAIN */
+    .main {
+      padding: 20px 24px 30px;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+    .main-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 15px;
+    }
+    .main-header-left h1 {
+      font-family: "Montserrat", sans-serif;
+      font-size: 1.8rem;
+      color: var(--primary);
+    }
+    .main-header-left p {
+      font-size: 0.9rem;
+      color: var(--gray);
+    }
+    .main-header-right {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
 
-        /* HEADER */
-        header {
-            background-color: white;
-            box-shadow: var(--shadow);
-            position: fixed;
-            width: 100%;
-            top: 0;
-            z-index: 1000;
-        }
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 6px 10px;
+      border-radius: 999px;
+      font-size: 0.8rem;
+      background-color: rgba(52, 152, 219, 0.1);
+      color: #2980b9;
+    }
 
-        .header-container {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 15px 20px;
-        }
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 8px 14px;
+      border-radius: 999px;
+      font-size: 0.8rem;
+      border: none;
+      cursor: pointer;
+      background-color: var(--secondary);
+      color: white;
+      font-weight: 600;
+      transition: var(--transition);
+    }
+    .btn:hover { background-color:#2980b9; transform:translateY(-1px); box-shadow:var(--shadow); }
+    .btn-neutral { background-color:#7f8c8d; }
+    .btn-neutral:hover { background-color:#636e72; }
+    .btn-danger { background-color:var(--accent); }
+    .btn-danger:hover { background-color:#c0392b; }
 
-        .logo-container {
-            display: flex;
-            align-items: center;
-            gap: 20px;
-            cursor: pointer;
-            flex-shrink: 0;
-        }
+    .icon-button {
+      width: 34px;
+      height: 34px;
+      border-radius: 50%;
+      border: none;
+      background-color: #ecf0f1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      color: #34495e;
+      transition: var(--transition);
+    }
+    .icon-button:hover {
+      background-color:#d0d7de;
+      color:var(--secondary);
+      transform:translateY(-1px);
+      box-shadow:var(--shadow);
+    }
 
-        .logo-visual {
-            width: 80px;
-            height: 80px;
-            border-radius: 15px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            overflow: hidden;
-            box-shadow: var(--shadow);
-            background-color: white;
-            border: 1px solid #eee;
-            transition: all 0.3s ease;
-        }
+    /* RESUMO */
+    .summary-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 15px;
+    }
+    .summary-card {
+      background-color: #ffffff;
+      border-radius: var(--radius);
+      padding: 14px 16px;
+      box-shadow: var(--shadow);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .summary-icon {
+      width: 34px;height:34px;border-radius:50%;
+      display:flex;align-items:center;justify-content:center;
+      color:#fff;font-size:1rem;
+    }
+    .summary-icon.blue { background-color:#3498db; }
+    .summary-icon.green { background-color:#2ecc71; }
+    .summary-icon.orange { background-color:#f39c12; }
+    .summary-content span:first-child {
+      font-size:0.75rem;color:var(--gray);
+    }
+    .summary-content span:last-child {
+      font-size:1.1rem;font-weight:700;color:var(--primary);
+    }
 
-        .logo-visual img {
-            width: 90%;
-            height: 90%;
-            object-fit: contain;
-            padding: 8px;
-            transition: transform 0.3s ease;
-        }
+    /* GRID PROJETOS */
+    .panel-grid {
+      display:grid;
+      grid-template-columns:minmax(0,2fr) minmax(0,1.2fr);
+      gap:20px;
+      align-items:flex-start;
+    }
+    @media (max-width:980px){ .panel-grid { grid-template-columns:1fr; } }
 
-        .logo-container:hover .logo-visual img {
-            transform: scale(1.05);
-        }
+    .card {
+      background-color:#ffffff;
+      border-radius:var(--radius);
+      box-shadow:var(--shadow);
+      padding:18px 18px 20px;
+      margin-top:10px;
+    }
+    .card-header {
+      display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;
+    }
+    .card-header h2 { font-size:1.1rem;color:var(--primary); }
+    .card-header small { font-size:0.8rem;color:var(--gray); }
 
-        .logo-text {
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-        }
+    /* TABELA PROJETOS */
+    .projects-table-wrapper { max-height:420px;overflow-y:auto;margin-top:10px; }
+    table { width:100%;border-collapse:collapse;font-size:0.9rem; }
+    thead { position:sticky;top:0;background-color:#f8f9fc;z-index:1; }
+    th,td { padding:8px 10px;text-align:left;border-bottom:1px solid #ecf0f1;vertical-align:middle; }
+    th { font-weight:600;color:#7f8c8d;font-size:0.8rem;text-transform:uppercase; }
+    tr:hover td { background-color:#f8fbff; }
 
-        .logo-main {
-            font-size: 2.2rem;
-            font-weight: 800;
-            color: var(--primary);
-            letter-spacing: 1px;
-            line-height: 1.2;
-        }
+    .tag-status {
+      display:inline-flex;align-items:center;gap:4px;
+      padding:3px 8px;border-radius:999px;
+      font-size:0.75rem;font-weight:600;
+    }
+    .tag-status.active { background-color:rgba(46,204,113,0.12);color:#27ae60; }
+    .tag-status.draft { background-color:rgba(241,196,15,0.14);color:#f39c12; }
+    .tag-status.archived { background-color:rgba(127,140,141,0.16);color:#7f8c8d; }
 
-        .logo-tagline {
-            font-size: 1rem;
-            color: var(--secondary);
-            font-style: italic;
-            margin-top: 2px;
-        }
+    .badge-category {
+      display:inline-flex;align-items:center;gap:4px;
+      padding:3px 7px;border-radius:999px;
+      font-size:0.75rem;background-color:rgba(52,152,219,0.1);color:#2980b9;
+    }
 
-        nav ul {
-            display: flex;
-            list-style: none;
-            gap: 30px;
-        }
+    .table-actions { display:flex;gap:6px; }
+    .btn-icon {
+      border:none;background:none;cursor:pointer;
+      padding:4px;border-radius:4px;
+      color:#7f8c8d;font-size:0.9rem;transition:var(--transition);
+    }
+    .btn-icon:hover { background-color:#ecf0f1;color:#34495e; }
 
-        nav ul li a {
-            font-weight: 600;
-            color: var(--primary);
-            transition: color 0.3s;
-            cursor: pointer;
-            padding: 5px 0;
-            position: relative;
-            font-size: 1.1rem;
-        }
+    /* FORM PROJETO */
+    .form-group { margin-bottom:12px;font-size:0.9rem; }
+    .form-group label {
+      display:block;margin-bottom:4px;
+      font-weight:600;color:var(--primary);font-size:0.85rem;
+    }
+    .form-group small { font-size:0.75rem;color:var(--gray); }
+    .form-control,.form-select,textarea {
+      width:100%;padding:8px 10px;
+      border-radius:6px;border:1px solid #dcdfe6;
+      font-size:0.9rem;font-family:"Open Sans",sans-serif;
+      transition:var(--transition);background-color:#fff;
+    }
+    .form-control:focus,.form-select:focus,textarea:focus {
+      outline:none;border-color:var(--secondary);
+      box-shadow:0 0 0 2px rgba(52,152,219,0.15);
+    }
+    textarea { resize:vertical;min-height:70px;max-height:200px; }
+    .form-row-2 { display:grid;grid-template-columns:1fr 1fr;gap:10px; }
+    @media (max-width:640px){ .form-row-2 { grid-template-columns:1fr; } }
 
-        nav ul li a:hover { color: var(--secondary); }
+    .form-footer {
+      display:flex;justify-content:space-between;align-items:center;
+      gap:10px;margin-top:10px;
+    }
+    .muted { font-size:0.75rem;color:var(--gray); }
 
-        nav ul li a.active {
-            color: var(--secondary);
-            font-weight: 700;
-        }
+    /* MODAIS GENÉRICOS */
+    .modal-backdrop {
+      position:fixed;
+      inset:0;
+      background:rgba(0,0,0,0.55);
+      display:none;
+      align-items:center;
+      justify-content:center;
+      z-index:1000;
+    }
+    .modal-backdrop.show { display:flex; }
+    .modal-dialog {
+      width:100%;
+      max-width:900px;
+      max-height:90vh;
+      background:#fff;
+      border-radius:12px;
+      box-shadow:0 18px 40px rgba(0,0,0,0.35);
+      display:flex;
+      flex-direction:column;
+      overflow:hidden;
+    }
+    .modal-header {
+      padding:14px 18px;
+      border-bottom:1px solid #dcdfe6;
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      background:linear-gradient(90deg,#2c3e50,#34495e);
+      color:#ecf0f1;
+    }
+    .modal-header h3 {
+      font-size:1.1rem;
+      font-family:"Montserrat",sans-serif;
+    }
+    .modal-body {
+      padding:14px 18px 16px;
+      overflow-y:auto;
+      background-color:#f8fafc;
+    }
+    .close-modal {
+      border:none;
+      background:transparent;
+      color:#ecf0f1;
+      font-size:1.2rem;
+      cursor:pointer;
+    }
 
-        nav ul li a.active:after {
-            content: '';
-            position: absolute;
-            bottom: -5px;
-            left: 0;
-            width: 100%;
-            height: 2px;
-            background-color: var(--secondary);
-        }
+    /* MODAL SENHA MENOR */
+    #passwordModal .modal-dialog { max-width:420px; }
 
-        .admin-icon-btn {
-            background: none;
-            border: none;
-            color: var(--gray);
-            font-size: 1.2rem;
-            cursor: pointer;
-            padding: 8px;
-            border-radius: 50%;
-            transition: all 0.3s ease;
-        }
-
-        .admin-icon-btn:hover {
-            color: var(--secondary);
-            background-color: rgba(52, 152, 219, 0.1);
-        }
-
-        /* MODAIS ADMIN */
-        .modal {
-            display: none;
-            position: fixed;
-            top: 0; left: 0;
-            width: 100%; height: 100%;
-            background-color: rgba(0,0,0,0.7);
-            z-index: 2000;
-            justify-content: center;
-            align-items: center;
-            animation: fadeIn 0.3s ease;
-        }
-
-        .modal-content {
-            background-color: white;
-            width: 100%;
-            max-width: 400px;
-            border-radius: 10px;
-            overflow: hidden;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
-            animation: slideIn 0.3s ease;
-        }
-
-        @keyframes fadeIn { from {opacity:0;} to {opacity:1;} }
-        @keyframes slideIn { from {transform:translateY(-50px);opacity:0;} to {transform:translateY(0);opacity:1;} }
-
-        .modal-header {
-            background-color: var(--primary);
-            color: white;
-            padding: 20px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .modal-header h3 { font-size: 1.5rem; }
-
-        .close-modal {
-            background: none;
-            border: none;
-            color: white;
-            font-size: 1.5rem;
-            cursor: pointer;
-            transition: transform 0.3s;
-        }
-        .close-modal:hover { transform: scale(1.2); }
-
-        .modal-body { padding: 30px; }
-
-        .form-group { margin-bottom: 20px; }
-        .form-group label {
-            display:block;
-            margin-bottom:8px;
-            font-weight:600;
-            color:var(--primary);
-        }
-        .form-control {
-            width:100%;
-            padding:12px;
-            border:1px solid #ddd;
-            border-radius:4px;
-            font-size:1rem;
-        }
-        .form-control:focus { outline:none;border-color:var(--secondary); }
-
-        .password-input { position:relative; }
-        .toggle-password {
-            position:absolute;
-            right:10px;
-            top:50%;
-            transform:translateY(-50%);
-            background:none;
-            border:none;
-            color:var(--gray);
-            cursor:pointer;
-        }
-
-        .alert {
-            padding:12px;
-            border-radius:4px;
-            margin-bottom:20px;
-            display:none;
-        }
-        .alert-danger {
-            background-color:rgba(231,76,60,0.1);
-            color:var(--accent);
-            border-left:4px solid var(--accent);
-        }
-        .alert-success {
-            background-color:rgba(46,204,113,0.1);
-            color:var(--success);
-            border-left:4px solid var(--success);
-        }
-
-        /* HERO NOVO */
-        .hero {
-            background-color: #223447;
-            padding: 120px 0 110px;
-            margin-top: 80px;
-            color: white;
-        }
-
-        .hero-inner {
-            display: grid;
-            grid-template-columns: minmax(0,1.1fr) minmax(0,1.1fr);
-            gap: 60px;
-            align-items: center;
-        }
-
-        .hero-left h1 {
-            font-size: 3rem;
-            font-weight: 800;
-            margin-bottom: 20px;
-        }
-
-        .hero-left p {
-            font-size: 1.05rem;
-            line-height: 1.8;
-            max-width: 520px;
-            color: #ecf0f1;
-        }
-
-        .hero-buttons {
-            margin-top: 30px;
-            display: flex;
-            flex-wrap: wrap;
-            gap: 15px;
-        }
-
-        .hero-btn-primary {
-            background-color: var(--secondary);
-            color: #fff;
-            padding: 12px 28px;
-            border-radius: 6px;
-            font-weight: 600;
-            border: none;
-            cursor: pointer;
-            box-shadow: 0 10px 24px rgba(52,152,219,0.35);
-            transition: all 0.25s ease;
-        }
-
-        .hero-btn-primary:hover {
-            background-color:#2980b9;
-            transform: translateY(-3px);
-        }
-
-        .hero-btn-secondary {
-            background-color: #2ecc71;
-            color: #fff;
-            padding: 12px 28px;
-            border-radius: 6px;
-            font-weight: 600;
-            border: none;
-            cursor: pointer;
-            box-shadow: 0 10px 24px rgba(46,204,113,0.35);
-            transition: all 0.25s ease;
-        }
-
-        .hero-btn-secondary:hover {
-            background-color:#27ae60;
-            transform: translateY(-3px);
-        }
-
-        .hero-right {
-            border-radius: 12px;
-            overflow: hidden;
-            box-shadow: 0 20px 40px rgba(0,0,0,0.45);
-            background-color:#111;
-        }
-
-        .hero-right img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            display:block;
-        }
-
-        @media (max-width: 992px) {
-            .hero-inner {
-                grid-template-columns: 1fr;
-            }
-            .hero {
-                padding: 110px 0 90px;
-            }
-        }
-
-        @media (max-width: 768px) {
-            .hero-left h1 { font-size: 2.4rem; }
-        }
-
-        /* PROJETOS */
-        .projects-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-            gap: 30px;
-            margin-top: 40px;
-        }
-        .project-card {
-            background-color: white;
-            border-radius: 10px;
-            overflow: hidden;
-            box-shadow: var(--shadow);
-            transition: transform 0.3s ease;
-        }
-        .project-card:hover { transform: translateY(-10px); }
-        .project-img {
-            height: 200px;
-            background-color: var(--secondary);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-size: 3rem;
-        }
-        .project-info { padding: 20px; }
-        .project-info h3 { margin-bottom: 10px; color: var(--primary); }
-        .project-status {
-            display: inline-block;
-            padding: 5px 10px;
-            border-radius: 20px;
-            font-size: 0.8rem;
-            font-weight: 600;
-            margin-bottom: 15px;
-        }
-        .status-completed { background-color:rgba(46,204,113,0.2);color:var(--success); }
-        .status-in-progress { background-color:rgba(52,152,219,0.2);color:var(--secondary); }
-        .status-pending { background-color:rgba(243,156,18,0.2);color:var(--warning); }
-
-        /* SERVIÇOS – 4 cards */
-        .services-section { background-color:#f5f7fa; }
-        .services-grid {
-            max-width: 1100px;
-            margin: 40px auto 0 auto;
-            display:grid;
-            grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
-            gap:25px;
-        }
-        .service-card {
-            background-color:#ffffff;
-            border-radius:12px;
-            box-shadow:0 10px 25px rgba(0,0,0,0.06);
-            padding:30px 24px 28px;
-            text-align:center;
-            transition:transform 0.2s ease, box-shadow 0.2s ease;
-        }
-        .service-card:hover {
-            transform:translateY(-6px);
-            box-shadow:0 16px 35px rgba(0,0,0,0.10);
-        }
-        .service-icon {
-            width:70px;height:70px;border-radius:50%;
-            margin:0 auto 18px auto;
-            background-color:rgba(52,152,219,0.08);
-            display:flex;align-items:center;justify-content:center;
-        }
-        .service-icon i { font-size:1.8rem;color:var(--secondary); }
-        .service-card h3 { font-size:1.3rem;color:var(--primary);margin-bottom:10px; }
-        .service-card p { font-size:0.98rem;color:#555;line-height:1.7; }
-
-        /* SOBRE (cards) */
-        /* usamos estilos inline na seção para evitar mais CSS */
-
-        /* CONTATO */
-        .contact-section { background-color: var(--light); }
-        .contact-container {
-            display:grid;
-            grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
-            gap:40px;
-        }
-        .contact-info {
-            background-color:white;
-            padding:30px;
-            border-radius:10px;
-            box-shadow:var(--shadow);
-        }
-        .contact-info h3 { margin-bottom:20px;color:var(--primary); }
-        .contact-item {
-            display:flex;
-            align-items:flex-start;
-            margin-bottom:20px;
-        }
-        .contact-item i {
-            color:var(--secondary);
-            margin-right:15px;
-            font-size:1.2rem;
-            margin-top:5px;
-        }
-
-        /* BACK TO TOP */
-        .back-to-top {
-            position:fixed;
-            bottom:30px;right:30px;
-            width:50px;height:50px;
-            background-color:var(--secondary);
-            color:white;
-            border-radius:50%;
-            display:flex;
-            align-items:center;
-            justify-content:center;
-            font-size:1.5rem;
-            cursor:pointer;
-            z-index:100;
-            opacity:0;visibility:hidden;
-            transition:all 0.3s ease;
-            box-shadow:var(--shadow);
-        }
-        .back-to-top.show { opacity:1;visibility:visible; }
-        .back-to-top:hover { background-color:#2980b9;transform:translateY(-5px); }
-
-        /* FOOTER */
-        footer {
-            background-color:var(--primary);
-            color:white;
-            padding:60px 0 30px;
-        }
-        .footer-content {
-            display:grid;
-            grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
-            gap:40px;
-            margin-bottom:40px;
-        }
-        .footer-column h3 {
-            font-size:1.3rem;
-            margin-bottom:20px;
-            position:relative;
-            padding-bottom:10px;
-        }
-        .footer-column h3:after {
-            content:'';
-            position:absolute;
-            width:40px;
-            height:3px;
-            background-color:var(--secondary);
-            bottom:0;left:0;
-        }
-        .footer-column ul { list-style:none; }
-        .footer-column ul li { margin-bottom:10px; }
-        .footer-column ul li a { cursor:pointer;transition:color 0.3s; }
-        .footer-column ul li a:hover { color:var(--secondary); }
-
-        .copyright {
-            text-align:center;
-            padding-top:30px;
-            border-top:1px solid rgba(255,255,255,0.1);
-            font-size:0.9rem;
-            opacity:0.8;
-        }
-
-        @media (max-width: 992px) {
-            .header-container {
-                flex-direction:column;
-                padding:15px;
-            }
-            nav ul {
-                margin-top:15px;
-                flex-wrap:wrap;
-                justify-content:center;
-            }
-            .logo-container {
-                flex-direction:column;
-                text-align:center;
-                gap:10px;
-            }
-        }
-
-        @media (max-width: 768px) {
-            .section-title { font-size:2rem; }
-            .logo-main { font-size:1.8rem; }
-            .logo-visual { width:60px;height:60px; }
-        }
-    </style>
+    /* FORM CONFIG INDEX (reutilizado) */
+    .config-card { margin-top:4px; }
+    .config-title { font-size:1rem;color:var(--primary);margin-bottom:4px; }
+    .config-subtitle { font-size:0.85rem;color:var(--gray);margin-bottom:8px; }
+    .config-grid-2 {
+      display:grid;
+      grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+      gap:12px 18px;
+    }
+    .config-row { margin-top:12px; }
+    .config-row h3 { font-size:0.95rem;color:var(--primary);margin-bottom:4px; }
+    .config-row small { font-size:0.8rem;color:var(--gray); }
+    .config-actions { margin-top:12px;display:flex;gap:8px;flex-wrap:wrap; }
+    .config-alert {
+      margin-bottom:8px;padding:8px 10px;border-radius:4px;
+      font-size:0.8rem;display:none;
+    }
+    .config-alert-success {
+      background-color:rgba(46,204,113,0.1);
+      color:var(--success);border-left:4px solid var(--success);
+    }
+    .config-alert-error {
+      background-color:rgba(231,76,60,0.1);
+      color:var(--accent);border-left:4px solid var(--accent);
+    }
+  </style>
 </head>
 <body>
-    <!-- Botão Voltar ao Topo -->
-    <div class="back-to-top" id="backToTop">
-        <i class="fas fa-arrow-up"></i>
-    </div>
+  <div class="admin-wrapper">
+    <!-- SIDEBAR -->
+    <aside class="sidebar">
+      <div class="sidebar-header">
+        <div class="sidebar-logo">
+          <img src="imagem.png" alt="Bemorh Logo" onerror="this.style.display='none';this.parentElement.style.background='#3498db';this.parentElement.innerHTML='<span style=&quot;color:#fff;font-weight:bold;&quot;>BH</span>';">
+        </div>
+        <div class="sidebar-title">
+          <span>Bemorh</span>
+          <span>Painel Administrativo</span>
+        </div>
+      </div>
 
-    <!-- Header -->
-    <header>
-        <div class="header-container container">
-            <div class="logo-container" id="logoHome">
-                <div class="logo-visual">
-                    <img src="imagem.png" alt="Bemorh Logo" id="logoImage" onerror="handleLogoError(this)">
-                    <div id="logoText" style="display:none;width:100%;height:100%;background-color:white;color:var(--secondary);font-weight:bold;font-size:2.5rem;align-items:center;justify-content:center;border-radius:15px;">
-                        J
-                    </div>
-                </div>
-                <div class="logo-text">
-                    <div class="logo-main" id="siteLogoTitle">Bemorh</div>
-                    <div class="logo-tagline" id="siteLogoTagline">tecnologia que conecta ideias</div>
-                </div>
+      <div class="sidebar-nav">
+        <h4>Menu</h4>
+        <ul class="nav-list">
+          <li class="nav-item active">
+            <i class="fas fa-briefcase"></i>
+            <span>Projetos</span>
+          </li>
+          <li class="nav-item" onclick="window.location.href='index.html'">
+            <i class="fas fa-globe"></i>
+            <span>Ver Site</span>
+          </li>
+        </ul>
+      </div>
+
+      <div class="sidebar-footer">
+        <p>Logado como <strong>admin</strong> (local).</p>
+        <p style="margin-top:5px;">Autenticação real deve ser feita com servidor/Firebase Auth.</p>
+      </div>
+    </aside>
+
+    <!-- MAIN -->
+    <main class="main">
+      <header class="main-header">
+        <div class="main-header-left">
+          <h1>Gestão de Projetos</h1>
+          <p>Cadastre, edite e acompanhe os projetos exibidos no site da Bemorh.</p>
+        </div>
+        <div class="main-header-right">
+          <span class="badge">
+            <i class="fas fa-database"></i> Firestore: <span id="firestoreStatus">conectando...</span>
+          </span>
+          <button class="btn-neutral btn" id="reloadProjectsBtn">
+            <i class="fas fa-rotate"></i> Recarregar
+          </button>
+          <!-- Ícone de alterar senha -->
+          <button class="icon-button" id="openPasswordBtn" title="Alterar senha do admin">
+            <i class="fas fa-key"></i>
+          </button>
+          <!-- Ícone que abre o formulário de textos do index -->
+          <button class="icon-button" id="openConfigBtn" title="Configurações do Index">
+            <i class="fas fa-sliders-h"></i>
+          </button>
+        </div>
+      </header>
+
+      <!-- RESUMO -->
+      <section class="summary-grid">
+        <div class="summary-card">
+          <div class="summary-icon blue"><i class="fas fa-layer-group"></i></div>
+          <div class="summary-content">
+            <span>Projetos ativos</span>
+            <span id="summaryActive">0</span>
+          </div>
+        </div>
+        <div class="summary-card">
+          <div class="summary-icon green"><i class="fas fa-check-circle"></i></div>
+          <div class="summary-content">
+            <span>Total de projetos</span>
+            <span id="summaryTotal">0</span>
+          </div>
+        </div>
+        <div class="summary-card">
+          <div class="summary-icon orange"><i class="fas fa-box-archive"></i></div>
+          <div class="summary-content">
+            <span>Arquivados / rascunhos</span>
+            <span id="summaryArchived">0</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- TABELA + FORM PROJETOS -->
+      <section class="panel-grid">
+        <!-- Lista de projetos -->
+        <section class="card">
+          <div class="card-header">
+            <div>
+              <h2><i class="fas fa-briefcase"></i> Projetos Cadastrados</h2>
+              <small>Carregados da coleção <code>siteProjects</code> do Firestore.</small>
             </div>
-            <nav>
-                <ul>
-                    <li><a id="navHome" class="active">Início</a></li>
-                    <li><a id="navAbout">Sobre</a></li>
-                    <li><a id="navServices">Serviços</a></li>
-                    <li><a id="navProjects">Projetos</a></li>
-                    <li><a id="navContact">Contato</a></li>
-                </ul>
-            </nav>
-            <button class="admin-icon-btn" id="adminAccessBtn" title="Acesso Administrativo">
-                <i class="fas fa-cogs"></i>
+          </div>
+
+          <div class="projects-table-wrapper">
+            <table>
+              <thead>
+                <tr>
+                  <th>Projeto</th>
+                  <th>Categoria</th>
+                  <th>Status</th>
+                  <th>Última atualização</th>
+                  <th style="width:80px;">Ações</th>
+                </tr>
+              </thead>
+              <tbody id="projectsTableBody">
+                <tr>
+                  <td colspan="5" style="text-align:center;color:#7f8c8d;padding:20px;">
+                    <i class="fas fa-spinner fa-spin"></i> Carregando projetos...
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+        <!-- Formulário projeto -->
+        <section class="card">
+          <div class="card-header">
+            <div>
+              <h2 id="formTitle"><i class="fas fa-plus-circle"></i> Novo Projeto</h2>
+              <small id="formSubtitle">Preencha os campos para adicionar um novo projeto ao site.</small>
+            </div>
+            <button class="btn" id="newProjectBtn">
+              <i class="fas fa-file"></i> Novo
             </button>
-        </div>
-    </header>
+          </div>
 
-    <!-- Modal de Login Admin -->
-    <div class="modal" id="adminLoginModal">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h3><i class="fas fa-lock"></i> Acesso Administrativo</h3>
-                <button class="close-modal" id="closeLoginModal">&times;</button>
+          <form id="projectForm">
+            <input type="hidden" id="projectId" />
+
+            <div class="form-group">
+              <label for="projectTitle">Título do Projeto *</label>
+              <input type="text" id="projectTitle" class="form-control" required />
             </div>
-            <div class="modal-body">
-                <div class="alert alert-danger" id="loginError">
-                    <i class="fas fa-exclamation-circle"></i> Senha incorreta. Tente novamente.
-                </div>
-                <div class="alert alert-success" id="loginSuccess">
-                    <i class="fas fa-check-circle"></i> Login realizado com sucesso!
-                </div>
-                <form id="adminLoginForm">
-                    <div class="form-group">
-                        <label for="adminUsername">Usuário Administrador</label>
-                        <input type="text" id="adminUsername" class="form-control" value="admin" readonly>
-                    </div>
-                    <div class="form-group">
-                        <label for="adminPassword">Senha</label>
-                        <div class="password-input">
-                            <input type="password" id="adminPassword" class="form-control" placeholder="Digite a senha de administrador" required>
-                            <button type="button" class="toggle-password" id="togglePassword"><i class="fas fa-eye"></i></button>
-                        </div>
-                        <small style="color:var(--gray);margin-top:5px;display:block;">
-                            <i class="fas fa-info-circle"></i> Senha padrão: <code>admin123</code>
-                        </small>
-                    </div>
-                    <button type="submit" class="btn" style="width:100%;">Acessar Painel Administrativo</button>
-                </form>
-                <div style="text-align:center;margin-top:20px;">
-                    <button class="btn btn-warning" id="resetPasswordBtn" style="width:100%;">
-                        <i class="fas fa-key"></i> Alterar Senha Padrão
-                    </button>
-                </div>
+
+            <div class="form-group">
+              <label for="projectCategory">Categoria *</label>
+              <select id="projectCategory" class="form-select" required>
+                <option value="web">Desenvolvimento Web</option>
+                <option value="mobile">Apps Mobile</option>
+                <option value="design">UI/UX Design</option>
+                <option value="consulting">Consultoria</option>
+                <option value="innovation">Inovação</option>
+              </select>
             </div>
+
+            <div class="form-row-2">
+              <div class="form-group">
+                <label for="projectStatus">Status *</label>
+                <select id="projectStatus" class="form-select" required>
+                  <option value="active">Ativo (aparece no site)</option>
+                  <option value="draft">Rascunho</option>
+                  <option value="archived">Arquivado</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label for="projectOrder">Ordem (opcional)</label>
+                <input type="number" min="0" id="projectOrder" class="form-control" placeholder="0 = mais recente" />
+                <small>Usado para ordenar na listagem do site.</small>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="projectDescription">Descrição curta *</label>
+              <textarea id="projectDescription" rows="3" class="form-control" required></textarea>
+              <small>Texto de resumo exibido no card do site.</small>
+            </div>
+
+            <div class="form-group">
+              <label for="projectFeatures">Recursos (separar por vírgula)</label>
+              <input type="text" id="projectFeatures" class="form-control" placeholder="Ex: Integração API, Dashboard em tempo real" />
+              <small>Exibimos até 2 itens no card do site.</small>
+            </div>
+
+            <div class="form-group">
+              <label for="projectImage">URL da imagem (opcional)</label>
+              <input type="url" id="projectImage" class="form-control" placeholder="https://..." />
+              <small>Se vazio, usamos uma imagem padrão.</small>
+            </div>
+
+            <div class="form-footer">
+              <div class="muted" id="formInfo">Criando novo projeto.</div>
+              <div>
+                <button type="button" class="btn btn-neutral" id="clearFormBtn">
+                  <i class="fas fa-eraser"></i> Limpar
+                </button>
+                <button type="submit" class="btn" id="saveBtn">
+                  <i class="fas fa-save"></i> Salvar
+                </button>
+              </div>
+            </div>
+          </form>
+        </section>
+      </section>
+    </main>
+  </div>
+
+  <!-- MODAL CONFIG INDEX (TEXTOS) -->
+  <div class="modal-backdrop" id="configModal">
+    <div class="modal-dialog">
+      <div class="modal-header">
+        <h3><i class="fas fa-sliders-h"></i> Configurações do Index (Textos)</h3>
+        <button class="close-modal" id="closeConfigBtn" title="Fechar">
+          <i class="fas fa-times"></i>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="config-card">
+          <div class="config-title">Textos Gerais</div>
+          <div class="config-subtitle">
+            Ajuste aqui textos do <strong>index.html</strong>. As alterações são salvas apenas neste navegador
+            (via <code>localStorage.bemorhSiteConfig</code>) e o site lê esses valores.
+          </div>
+
+          <div class="config-alert config-alert-success" id="cfgSuccess">
+            <i class="fas fa-check-circle"></i> Configurações salvas com sucesso.
+          </div>
+          <div class="config-alert config-alert-error" id="cfgError">
+            <i class="fas fa-exclamation-circle"></i> Erro ao salvar configurações.
+          </div>
+
+          <!-- IDENTIDADE -->
+          <div class="config-row">
+            <h3>Identidade do Site</h3>
+            <small>Nome e slogan exibidos na logo e rodapé.</small>
+            <div class="config-grid-2" style="margin-top:6px;">
+              <div class="form-group">
+                <label for="cfg_logoTitle_idx">Título / Marca</label>
+                <input type="text" id="cfg_logoTitle_idx" class="form-control">
+              </div>
+              <div class="form-group">
+                <label for="cfg_logoTagline_idx">Slogan</label>
+                <input type="text" id="cfg_logoTagline_idx" class="form-control">
+              </div>
+            </div>
+          </div>
+
+          <!-- HERO -->
+          <div class="config-row">
+            <h3>Hero (Topo do Index)</h3>
+            <small>Título, subtítulo e texto do botão principal.</small>
+            <div class="form-group" style="margin-top:6px;">
+              <label for="cfg_heroTitle_idx">Título</label>
+              <input type="text" id="cfg_heroTitle_idx" class="form-control">
+            </div>
+            <div class="form-group">
+              <label for="cfg_heroSubtitle_idx">Subtítulo</label>
+              <textarea id="cfg_heroSubtitle_idx" rows="2" class="form-control"></textarea>
+            </div>
+            <div class="form-group">
+              <label for="cfg_heroContactText_idx">Texto do Botão Verde</label>
+              <input type="text" id="cfg_heroContactText_idx" class="form-control">
+            </div>
+          </div>
+
+          <!-- SERVIÇOS -->
+          <div class="config-row">
+            <h3>Serviços (Index)</h3>
+            <small>Título da seção e descrições dos 4 serviços.</small>
+            <div class="form-group" style="margin-top:6px;">
+              <label for="cfg_servicesTitle_idx">Título da Seção</label>
+              <input type="text" id="cfg_servicesTitle_idx" class="form-control">
+            </div>
+            <div class="config-grid-2">
+              <div>
+                <strong>Serviço 1</strong>
+                <div class="form-group">
+                  <label for="cfg_service1Title_idx">Título</label>
+                  <input type="text" id="cfg_service1Title_idx" class="form-control">
+                </div>
+                <div class="form-group">
+                  <label for="cfg_service1Description_idx">Descrição</label>
+                  <textarea id="cfg_service1Description_idx" rows="2" class="form-control"></textarea>
+                </div>
+              </div>
+              <div>
+                <strong>Serviço 2</strong>
+                <div class="form-group">
+                  <label for="cfg_service2Title_idx">Título</label>
+                  <input type="text" id="cfg_service2Title_idx" class="form-control">
+                </div>
+                <div class="form-group">
+                  <label for="cfg_service2Description_idx">Descrição</label>
+                  <textarea id="cfg_service2Description_idx" rows="2" class="form-control"></textarea>
+                </div>
+              </div>
+            </div>
+            <div class="config-grid-2">
+              <div>
+                <strong>Serviço 3</strong>
+                <div class="form-group">
+                  <label for="cfg_service3Title_idx">Título</label>
+                  <input type="text" id="cfg_service3Title_idx" class="form-control">
+                </div>
+                <div class="form-group">
+                  <label for="cfg_service3Description_idx">Descrição</label>
+                  <textarea id="cfg_service3Description_idx" rows="2" class="form-control"></textarea>
+                </div>
+              </div>
+              <div>
+                <strong>Serviço 4</strong>
+                <div class="form-group">
+                  <label for="cfg_service4Title_idx">Título</label>
+                  <input type="text" id="cfg_service4Title_idx" class="form-control">
+                </div>
+                <div class="form-group">
+                  <label for="cfg_service4Description_idx">Descrição</label>
+                  <textarea id="cfg_service4Description_idx" rows="2" class="form-control"></textarea>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- SOBRE -->
+          <div class="config-row">
+            <h3>Sobre (Index)</h3>
+            <small>Título, introdução e textos de Missão, Visão e Abordagem.</small>
+            <div class="form-group" style="margin-top:6px;">
+              <label for="cfg_aboutTitle_idx">Título da Seção</label>
+              <input type="text" id="cfg_aboutTitle_idx" class="form-control">
+            </div>
+            <div class="form-group">
+              <label for="cfg_aboutIntro_idx">Texto de Introdução</label>
+              <textarea id="cfg_aboutIntro_idx" rows="2" class="form-control"></textarea>
+            </div>
+            <div class="config-grid-2">
+              <div>
+                <strong>Missão</strong>
+                <div class="form-group">
+                  <label for="cfg_missionTitle_idx">Título</label>
+                  <input type="text" id="cfg_missionTitle_idx" class="form-control">
+                </div>
+                <div class="form-group">
+                  <label for="cfg_missionText_idx">Texto</label>
+                  <textarea id="cfg_missionText_idx" rows="2" class="form-control"></textarea>
+                </div>
+              </div>
+              <div>
+                <strong>Visão</strong>
+                <div class="form-group">
+                  <label for="cfg_visionTitle_idx">Título</label>
+                  <input type="text" id="cfg_visionTitle_idx" class="form-control">
+                </div>
+                <div class="form-group">
+                  <label for="cfg_visionText_idx">Texto</label>
+                  <textarea id="cfg_visionText_idx" rows="2" class="form-control"></textarea>
+                </div>
+              </div>
+            </div>
+            <div class="config-grid-2">
+              <div>
+                <strong>Abordagem</strong>
+                <div class="form-group">
+                  <label for="cfg_approachTitle_idx">Título</label>
+                  <input type="text" id="cfg_approachTitle_idx" class="form-control">
+                </div>
+                <div class="form-group">
+                  <label for="cfg_approachText_idx">Texto</label>
+                  <textarea id="cfg_approachText_idx" rows="2" class="form-control"></textarea>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- CONTATO / RODAPÉ -->
+          <div class="config-row">
+            <h3>Contato e Rodapé (Index)</h3>
+            <small>Títulos e textos da seção de contato e rodapé.</small>
+            <div class="config-grid-2" style="margin-top:6px;">
+              <div>
+                <div class="form-group">
+                  <label for="cfg_contactTitle_idx">Título Seção Contato</label>
+                  <input type="text" id="cfg_contactTitle_idx" class="form-control">
+                </div>
+                <div class="form-group">
+                  <label for="cfg_contactInfoTitle_idx">Título Bloco Informações</label>
+                  <input type="text" id="cfg_contactInfoTitle_idx" class="form-control">
+                </div>
+                <div class="form-group">
+                  <label for="cfg_contactAddressTitle_idx">Título Endereço</label>
+                  <input type="text" id="cfg_contactAddressTitle_idx" class="form-control">
+                </div>
+                <div class="form-group">
+                  <label for="cfg_contactAddressText_idx">Texto Endereço (pode usar &lt;br&gt;)</label>
+                  <textarea id="cfg_contactAddressText_idx" rows="2" class="form-control"></textarea>
+                </div>
+                <div class="form-group">
+                  <label for="cfg_contactPhoneTitle_idx">Título Telefone</label>
+                  <input type="text" id="cfg_contactPhoneTitle_idx" class="form-control">
+                </div>
+                <div class="form-group">
+                  <label for="cfg_contactPhoneText_idx">Texto Telefone</label>
+                  <input type="text" id="cfg_contactPhoneText_idx" class="form-control">
+                </div>
+                <div class="form-group">
+                  <label for="cfg_contactEmailTitle_idx">Título Email</label>
+                  <input type="text" id="cfg_contactEmailTitle_idx" class="form-control">
+                </div>
+                <div class="form-group">
+                  <label for="cfg_contactEmailText_idx">Texto Email</label>
+                  <input type="text" id="cfg_contactEmailText_idx" class="form-control">
+                </div>
+                <div class="form-group">
+                  <label for="cfg_contactScheduleTitle_idx">Título Horário</label>
+                  <input type="text" id="cfg_contactScheduleTitle_idx" class="form-control">
+                </div>
+                <div class="form-group">
+                  <label for="cfg_contactScheduleText_idx">Texto Horário (pode usar &lt;br&gt;)</label>
+                  <textarea id="cfg_contactScheduleText_idx" rows="2" class="form-control"></textarea>
+                </div>
+              </div>
+              <div>
+                <div class="form-group">
+                  <label for="cfg_contactFormTitle_idx">Título Formulário</label>
+                  <input type="text" id="cfg_contactFormTitle_idx" class="form-control">
+                </div>
+                <div class="form-group">
+                  <label for="cfg_contactNameLabel_idx">Label Nome</label>
+                  <input type="text" id="cfg_contactNameLabel_idx" class="form-control">
+                </div>
+                <div class="form-group">
+                  <label for="cfg_contactEmailLabel_idx">Label Email</label>
+                  <input type="text" id="cfg_contactEmailLabel_idx" class="form-control">
+                </div>
+                <div class="form-group">
+                  <label for="cfg_contactPhoneLabel_idx">Label Telefone</label>
+                  <input type="text" id="cfg_contactPhoneLabel_idx" class="form-control">
+                </div>
+                <div class="form-group">
+                  <label for="cfg_contactMessageLabel_idx">Label Mensagem</label>
+                  <input type="text" id="cfg_contactMessageLabel_idx" class="form-control">
+                </div>
+                <div class="form-group">
+                  <label for="cfg_contactSubmitText_idx">Texto Botão Enviar</label>
+                  <input type="text" id="cfg_contactSubmitText_idx" class="form-control">
+                </div>
+                <div class="form-group">
+                  <label for="cfg_footerDescription_idx">Texto Rodapé (descrição)</label>
+                  <textarea id="cfg_footerDescription_idx" rows="2" class="form-control"></textarea>
+                </div>
+                <div class="form-group">
+                  <label for="cfg_footerQuickLinksTitle_idx">Título "Links Rápidos"</label>
+                  <input type="text" id="cfg_footerQuickLinksTitle_idx" class="form-control">
+                </div>
+                <div class="form-group">
+                  <label for="cfg_footerContactTitle_idx">Título "Contato" Rodapé</label>
+                  <input type="text" id="cfg_footerContactTitle_idx" class="form-control">
+                </div>
+                <div class="form-group">
+                  <label for="cfg_footerAddress_idx">Endereço Rodapé</label>
+                  <input type="text" id="cfg_footerAddress_idx" class="form-control">
+                </div>
+                <div class="form-group">
+                  <label for="cfg_footerPhone_idx">Telefone Rodapé</label>
+                  <input type="text" id="cfg_footerPhone_idx" class="form-control">
+                </div>
+                <div class="form-group">
+                  <label for="cfg_footerEmail_idx">Email Rodapé</label>
+                  <input type="text" id="cfg_footerEmail_idx" class="form-control">
+                </div>
+                <div class="form-group">
+                  <label for="cfg_footerSchedule_idx">Horário Rodapé</label>
+                  <input type="text" id="cfg_footerSchedule_idx" class="form-control">
+                </div>
+                <div class="form-group">
+                  <label for="cfg_footerCopyright_idx">Texto de Copyright</label>
+                  <textarea id="cfg_footerCopyright_idx" rows="2" class="form-control"></textarea>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="config-actions">
+            <button class="btn" id="saveIndexConfigBtn"><i class="fas fa-save"></i> Salvar Configurações</button>
+            <button class="btn btn-neutral" id="reloadIndexConfigBtn"><i class="fas fa-sync-alt"></i> Recarregar</button>
+            <button class="btn btn-danger" id="resetIndexConfigBtn"><i class="fas fa-undo"></i> Restaurar Padrão</button>
+          </div>
         </div>
+      </div>
     </div>
+  </div>
 
-    <!-- Modal de Alterar Senha -->
-    <div class="modal" id="changePasswordModal">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h3><i class="fas fa-key"></i> Alterar Senha de Administrador</h3>
-                <button class="close-modal" id="closePasswordModal">&times;</button>
-            </div>
-            <div class="modal-body">
-                <div class="alert alert-danger" id="passwordError">
-                    <i class="fas fa-exclamation-circle"></i> As senhas não coincidem!
-                </div>
-                <div class="alert alert-success" id="passwordSuccess">
-                    <i class="fas fa-check-circle"></i> Senha alterada com sucesso!
-                </div>
-                <form id="changePasswordForm">
-                    <div class="form-group">
-                        <label for="currentPassword">Senha Atual</label>
-                        <div class="password-input">
-                            <input type="password" id="currentPassword" class="form-control" placeholder="Digite a senha atual" required>
-                            <button type="button" class="toggle-password" id="toggleCurrentPassword"><i class="fas fa-eye"></i></button>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label for="newPassword">Nova Senha</label>
-                        <div class="password-input">
-                            <input type="password" id="newPassword" class="form-control" placeholder="Digite a nova senha" required minlength="6">
-                            <button type="button" class="toggle-password" id="toggleNewPassword"><i class="fas fa-eye"></i></button>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label for="confirmPassword">Confirmar Nova Senha</label>
-                        <div class="password-input">
-                            <input type="password" id="confirmPassword" class="form-control" placeholder="Confirme a nova senha" required>
-                            <button type="button" class="toggle-password" id="toggleConfirmPassword"><i class="fas fa-eye"></i></button>
-                        </div>
-                    </div>
-                    <button type="submit" class="btn btn-success" style="width:100%;">
-                        <i class="fas fa-save"></i> Salvar Nova Senha
-                    </button>
-                </form>
-            </div>
+  <!-- MODAL ALTERAR SENHA -->
+  <div class="modal-backdrop" id="passwordModal">
+    <div class="modal-dialog">
+      <div class="modal-header">
+        <h3><i class="fas fa-key"></i> Alterar Senha do Administrador</h3>
+        <button class="close-modal" id="closePasswordBtn" title="Fechar">
+          <i class="fas fa-times"></i>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="config-alert config-alert-error" id="pwdError">
+          <i class="fas fa-exclamation-circle"></i> Erro ao alterar a senha.
         </div>
-    </div>
-
-    <!-- Conteúdo -->
-    <div class="client-content active">
-        <!-- HERO NOVO -->
-        <section class="hero" id="home">
-            <div class="container">
-                <div class="hero-inner">
-                    <div class="hero-left">
-                        <h1 id="heroTitle">Bemorh</h1>
-                        <p id="heroSubtitle">
-                            Nascemos da crença de que as melhores soluções surgem da conexão de ideias.
-                            Somos uma empresa de tecnologia especializada em desenvolver ferramentas virtuais
-                            que facilitam a colaboração, estimulam a inovação e transformam conceitos em realidade.
-                        </p>
-                        <div class="hero-buttons">
-                            <button class="hero-btn-primary" id="heroProjectsBtn">Nossos Projetos</button>
-                            <button class="hero-btn-secondary" id="heroContactBtn">
-                                <span id="heroContactText">Fale Conosco</span>
-                            </button>
-                        </div>
-                    </div>
-                    <div class="hero-right">
-                        <img src="https://images.unsplash.com/photo-1552664730-d307ca884978?ixlib=rb-4.0.3&auto=format&fit=crop&w=1100&q=80" alt="Equipe colaborando em um projeto">
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Projetos em Destaque -->
-        <section id="projects">
-            <div class="container">
-                <h2 class="section-title" id="projectsTitle">Projetos em Destaque</h2>
-                <div class="projects-grid">
-                    <div class="project-card">
-                        <div class="project-img">
-                            <i class="fas fa-project-diagram"></i>
-                        </div>
-                        <div class="project-info">
-                            <h3 id="project1Title">Sistema de Gestão de Ideias</h3>
-                            <span class="project-status status-completed" id="project1Status">Concluído</span>
-                            <p id="project1Description">
-                                Plataforma colaborativa que organiza e prioriza ideias em projetos executáveis com fluxos visuais intuitivos.
-                            </p>
-                        </div>
-                    </div>
-                    <div class="project-card">
-                        <div class="project-img">
-                            <i class="fas fa-brain"></i>
-                        </div>
-                        <div class="project-info">
-                            <h3 id="project2Title">IA para Inovação</h3>
-                            <span class="project-status status-in-progress" id="project2Status">Em Andamento</span>
-                            <p id="project2Description">
-                                Ferramenta de inteligência artificial que auxilia na geração e refinamento de ideias criativas para negócios.
-                            </p>
-                        </div>
-                    </div>
-                    <div class="project-card">
-                        <div class="project-img">
-                            <i class="fas fa-users-cog"></i>
-                        </div>
-                        <div class="project-info">
-                            <h3 id="project3Title">Plataforma Colaborativa</h3>
-                            <span class="project-status status-pending" id="project3Status">Em Planejamento</span>
-                            <p id="project3Description">
-                                Ambiente virtual para equipes distribuídas colaborarem em tempo real no desenvolvimento de projetos.
-                            </p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Serviços (4 cards alinhados) -->
-        <section id="services" class="services-section">
-            <div class="container">
-                <h2 class="section-title" id="servicesTitle">Nossos Serviços</h2>
-                <div class="services-grid">
-                    <div class="service-card">
-                        <div class="service-icon"><i class="fas fa-laptop-code"></i></div>
-                        <h3 id="service1Title">Desenvolvimento Web</h3>
-                        <p id="service1Description">
-                            Sites, sistemas web e aplicações responsivas com as melhores tecnologias do mercado.
-                        </p>
-                    </div>
-                    <div class="service-card">
-                        <div class="service-icon"><i class="fas fa-mobile-alt"></i></div>
-                        <h3 id="service2Title">Apps Mobile</h3>
-                        <p id="service2Description">
-                            Aplicativos nativos e híbridos para iOS e Android, com designs intuitivos e funcionais.
-                        </p>
-                    </div>
-                    <div class="service-card">
-                        <div class="service-icon"><i class="fas fa-palette"></i></div>
-                        <h3 id="service3Title">UI/UX Design</h3>
-                        <p id="service3Description">
-                            Design centrado no usuário, interfaces intuitivas e experiências digitais memoráveis.
-                        </p>
-                    </div>
-                    <div class="service-card">
-                        <div class="service-icon"><i class="fas fa-lightbulb"></i></div>
-                        <h3 id="service4Title">Consultoria em Inovação</h3>
-                        <p id="service4Description">
-                            Ajudamos sua empresa a implementar processos inovadores e soluções tecnológicas estratégicas.
-                        </p>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Sobre (layout das imagens) -->
-        <section id="about" style="background-color:#eef3f6;padding:80px 0;">
-            <div class="container">
-                <h2 class="section-title" id="aboutTitle" style="margin-bottom:30px;">Sobre a Bemorh</h2>
-                <div style="max-width:900px;margin:0 auto 50px auto;text-align:center;">
-                    <p id="aboutIntro" style="font-size:1.4rem;line-height:1.9;color:#2c3e50;">
-                        A Bemorh nasceu da crença de que as melhores soluções surgem da conexão de ideias.
-                        Somos uma empresa de tecnologia especializada em desenvolver ferramentas virtuais que
-                        facilitam a colaboração, estimulam a inovação e transformam conceitos em realidade.
-                    </p>
-                </div>
-                <div style="
-                    max-width:1100px;
-                    margin:0 auto;
-                    display:grid;
-                    grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
-                    gap:25px;
-                ">
-                    <div style="background-color:#ffffff;border-radius:12px;box-shadow:0 10px 25px rgba(0,0,0,0.06);padding:25px 24px 28px;">
-                        <h3 style="display:flex;align-items:center;gap:10px;font-size:1.3rem;color:var(--primary);margin-bottom:12px;">
-                            <i class="fas fa-bullseye" style="color:var(--secondary);font-size:1.5rem;"></i>
-                            <span id="missionTitle">Nossa Missão</span>
-                        </h3>
-                        <p id="missionText" style="font-size:1rem;line-height:1.8;color:#555;">
-                            Conectar pessoas, ideias e tecnologias para criar soluções digitais inovadoras que
-                            transformam negócios e impulsionam resultados.
-                        </p>
-                    </div>
-                    <div style="background-color:#ffffff;border-radius:12px;box-shadow:0 10px 25px rgba(0,0,0,0.06);padding:25px 24px 28px;">
-                        <h3 style="display:flex;align-items:center;gap:10px;font-size:1.3rem;color:var(--primary);margin-bottom:12px;">
-                            <i class="fas fa-eye" style="color:var(--secondary);font-size:1.5rem;"></i>
-                            <span id="visionTitle">Nossa Visão</span>
-                        </h3>
-                        <p id="visionText" style="font-size:1rem;line-height:1.8;color:#555;">
-                            Ser referência em tecnologia conectiva, reconhecida por transformar ideias dispersas em
-                            ecossistemas digitais integrados e eficientes.
-                        </p>
-                    </div>
-                    <div style="background-color:#ffffff;border-radius:12px;box-shadow:0 10px 25px rgba(0,0,0,0.06);padding:25px 24px 28px;">
-                        <h3 style="display:flex;align-items:center;gap:10px;font-size:1.3rem;color:var(--primary);margin-bottom:12px;">
-                            <i class="fas fa-handshake" style="color:var(--secondary);font-size:1.5rem;"></i>
-                            <span id="approachTitle">Nossa Abordagem</span>
-                        </h3>
-                        <p id="approachText" style="font-size:1rem;line-height:1.8;color:#555;">
-                            Trabalhamos em parceria com nossos clientes, entendendo suas necessidades únicas
-                            e co-criando soluções que realmente fazem a diferença.
-                        </p>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Contato -->
-        <section class="contact-section" id="contact">
-            <div class="container">
-                <h2 class="section-title" id="contactTitle">Conecte-se Conosco</h2>
-                <div class="contact-container">
-                    <div class="contact-info">
-                        <h3 id="contactInfoTitle">Informações de Contato</h3>
-                        <div class="contact-item">
-                            <i class="fas fa-map-marker-alt"></i>
-                            <div>
-                                <h4 id="contactAddressTitle">Endereço</h4>
-                                <p id="contactAddressText">
-                                    Av. das Inovações, 123 - Centro de Tecnologia<br>São Paulo - SP, 04538-000
-                                </p>
-                            </div>
-                        </div>
-                        <div class="contact-item">
-                            <i class="fas fa-phone"></i>
-                            <div>
-                                <h4 id="contactPhoneTitle">Telefone</h4>
-                                <p id="contactPhoneText">(11) 3456-7890</p>
-                            </div>
-                        </div>
-                        <div class="contact-item">
-                            <i class="fas fa-envelope"></i>
-                            <div>
-                                <h4 id="contactEmailTitle">Email</h4>
-                                <p id="contactEmailText">contato@bemorh.com.br</p>
-                            </div>
-                        </div>
-                        <div class="contact-item">
-                            <i class="fas fa-clock"></i>
-                            <div>
-                                <h4 id="contactScheduleTitle">Horário de Atendimento</h4>
-                                <p id="contactScheduleText">
-                                    Segunda a Sexta: 8h às 19h<br>Sábado: 9h às 13h
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="contact-info">
-                        <h3 id="contactFormTitle">Envie sua Ideia</h3>
-                        <form id="contactForm">
-                            <div class="form-group">
-                                <label for="contactName" id="contactNameLabel">Nome</label>
-                                <input type="text" id="contactName" class="form-control" placeholder="Seu nome completo" required>
-                            </div>
-                            <div class="form-group">
-                                <label for="contactEmail" id="contactEmailLabel">Email</label>
-                                <input type="email" id="contactEmail" class="form-control" placeholder="seu@email.com" required>
-                            </div>
-                            <div class="form-group">
-                                <label for="contactPhone" id="contactPhoneLabel">Telefone</label>
-                                <input type="text" id="contactPhone" class="form-control" placeholder="(11) 99999-9999">
-                            </div>
-                            <div class="form-group">
-                                <label for="contactMessage" id="contactMessageLabel">Sua Ideia ou Projeto</label>
-                                <textarea id="contactMessage" class="form-control" rows="5" placeholder="Conte-nos sobre sua ideia ou projeto..." required></textarea>
-                            </div>
-                            <button type="submit" class="btn-contact" style="width:100%;">
-                                <i class="fas fa-paper-plane"></i>
-                                <span id="contactSubmitText">Enviar Mensagem</span>
-                            </button>
-                        </form>
-                    </div>
-                </div>
-            </div>
-        </section>
-    </div>
-
-    <!-- Footer -->
-    <footer>
-        <div class="container">
-            <div class="footer-content">
-                <div class="footer-column">
-                    <div class="logo-container" style="margin-bottom:20px;cursor:default;">
-                        <div class="logo-visual" style="width:60px;height:60px;">
-                            <img src="imagem.png" alt="Bemorh Logo" style="width:90%;height:90%;object-fit:contain;padding:8px;" onerror="handleLogoError(this)">
-                        </div>
-                        <div class="logo-text">
-                            <div class="logo-main" style="font-size:1.5rem;" id="footerLogoTitle">Bemorh</div>
-                            <div class="logo-tagline" style="font-size:0.8rem;" id="footerLogoTagline">tecnologia que conecta ideias</div>
-                        </div>
-                    </div>
-                    <p id="footerDescription">
-                        Tecnologia que conecta ideias. Desenvolvemos soluções digitais inovadoras que transformam conceitos em realidade.
-                    </p>
-                    <div style="margin-top:20px;">
-                        <a href="#" style="margin-right:15px;"><i class="fab fa-linkedin fa-lg"></i></a>
-                        <a href="#" style="margin-right:15px;"><i class="fab fa-instagram fa-lg"></i></a>
-                        <a href="#" style="margin-right:15px;"><i class="fab fa-twitter fa-lg"></i></a>
-                        <a href="#"><i class="fab fa-youtube fa-lg"></i></a>
-                    </div>
-                </div>
-                <div class="footer-column">
-                    <h3 id="footerQuickLinksTitle">Links Rápidos</h3>
-                    <ul>
-                        <li><a id="footerHome">Início</a></li>
-                        <li><a id="footerProjects">Projetos</a></li>
-                        <li><a id="footerServices">Serviços</a></li>
-                        <li><a id="footerAbout">Sobre Nós</a></li>
-                        <li><a id="footerContact">Contato</a></li>
-                    </ul>
-                </div>
-                <div class="footer-column">
-                    <h3 id="footerContactTitle">Contato</h3>
-                    <ul>
-                        <li><i class="fas fa-map-marker-alt"></i><span id="footerAddress"> Av. das Inovações, 123 - São Paulo, SP</span></li>
-                        <li><i class="fas fa-phone"></i><span id="footerPhone"> (11) 3456-7890</span></li>
-                        <li><i class="fas fa-envelope"></i><span id="footerEmail"> contato@bemorh.com.br</span></li>
-                        <li><i class="fas fa-clock"></i><span id="footerSchedule"> Seg-Sex: 8h-19h</span></li>
-                    </ul>
-                </div>
-                <div class="footer-column">
-                    <h3>Novidades</h3>
-                    <p>Receba nossas ideias e inovações diretamente no seu email.</p>
-                    <div class="form-group" style="margin-top:15px;">
-                        <input type="email" class="form-control" placeholder="Seu email" id="newsletterEmail">
-                        <button class="btn" style="margin-top:10px;width:100%;" id="newsletterBtn">Inscrever-se</button>
-                    </div>
-                </div>
-            </div>
-            <div class="copyright">
-                <p id="footerCopyright">&copy; 2023 Bemorh - Tecnologia que Conecta Ideias. Todos os direitos reservados.</p>
-            </div>
+        <div class="config-alert config-alert-success" id="pwdSuccess">
+          <i class="fas fa-check-circle"></i> Senha alterada com sucesso.
         </div>
-    </footer>
 
-    <script>
-        // ===== AUTENTICAÇÃO ADMIN =====
-        const adminAuth = {
-            password: localStorage.getItem('adminPassword') || "admin123",
-            login(inputPassword) {
-                if (inputPassword === this.password) {
-                    localStorage.setItem('adminLoggedIn', 'true');
-                    return true;
-                }
-                return false;
-            },
-            changePassword(currentPassword, newPassword) {
-                if (currentPassword === this.password) {
-                    this.password = newPassword;
-                    localStorage.setItem('adminPassword', newPassword);
-                    return true;
-                }
-                return false;
-            }
+        <form id="passwordForm">
+          <div class="form-group">
+            <label for="currentPasswordAdmin">Senha Atual *</label>
+            <input type="password" id="currentPasswordAdmin" class="form-control" required>
+          </div>
+          <div class="form-group">
+            <label for="newPasswordAdmin">Nova Senha *</label>
+            <input type="password" id="newPasswordAdmin" class="form-control" minlength="6" required>
+            <small>Mínimo de 6 caracteres.</small>
+          </div>
+          <div class="form-group">
+            <label for="confirmPasswordAdmin">Confirmar Nova Senha *</label>
+            <input type="password" id="confirmPasswordAdmin" class="form-control" required>
+          </div>
+
+          <div class="config-actions" style="justify-content:flex-end;margin-top:10px;">
+            <button type="button" class="btn-neutral btn" id="cancelPasswordBtn">
+              <i class="fas fa-times"></i> Cancelar
+            </button>
+            <button type="submit" class="btn" id="savePasswordBtn">
+              <i class="fas fa-save"></i> Salvar Nova Senha
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- JS: Firestore + Projetos + Config Index + Senha -->
+  <script type="module">
+    // ====== AUTENTICAÇÃO LOCAL DO ADMIN (MESMA DO INDEX) ======
+    const adminAuth = {
+      password: localStorage.getItem('adminPassword') || "admin123",
+
+      login(inputPassword) {
+        return inputPassword === this.password;
+      },
+
+      changePassword(currentPassword, newPassword) {
+        if (currentPassword === this.password) {
+          this.password = newPassword;
+          localStorage.setItem('adminPassword', newPassword);
+          return true;
+        }
+        return false;
+      }
+    };
+
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+    import {
+      getFirestore,
+      collection,
+      addDoc,
+      getDocs,
+      doc,
+      updateDoc,
+      serverTimestamp,
+      orderBy,
+      query
+    } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
+
+    const firebaseConfig = {
+      apiKey: "AIzaSyAqNKa5jp5UpcTtnAF1_EUVKCXVrGZTFkA",
+      authDomain: "bemorh-bc5a8.firebaseapp.com",
+      projectId: "bemorh-bc5a8",
+      storageBucket: "bemorh-bc5a8.firebasestorage.app",
+      messagingSenderId: "313271255362",
+      appId: "1:313271255362:web:167e42b830f8fdcb9188db"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const db = getFirestore(app);
+    document.getElementById("firestoreStatus").textContent = "conectado";
+
+    const projectsCol = collection(db, "siteProjects");
+    const projectsTableBody = document.getElementById("projectsTableBody");
+    const summaryActive = document.getElementById("summaryActive");
+    const summaryTotal = document.getElementById("summaryTotal");
+    const summaryArchived = document.getElementById("summaryArchived");
+
+    const projectForm = document.getElementById("projectForm");
+    const projectIdInput = document.getElementById("projectId");
+    const projectTitleInput = document.getElementById("projectTitle");
+    const projectCategoryInput = document.getElementById("projectCategory");
+    const projectStatusInput = document.getElementById("projectStatus");
+    const projectOrderInput = document.getElementById("projectOrder");
+    const projectDescriptionInput = document.getElementById("projectDescription");
+    const projectFeaturesInput = document.getElementById("projectFeatures");
+    const projectImageInput = document.getElementById("projectImage");
+
+    const formTitle = document.getElementById("formTitle");
+    const formSubtitle = document.getElementById("formSubtitle");
+    const formInfo = document.getElementById("formInfo");
+    const newProjectBtn = document.getElementById("newProjectBtn");
+    const clearFormBtn = document.getElementById("clearFormBtn");
+    const saveBtn = document.getElementById("saveBtn");
+    const reloadProjectsBtn = document.getElementById("reloadProjectsBtn");
+
+    async function loadProjects() {
+      projectsTableBody.innerHTML = `
+        <tr>
+          <td colspan="5" style="text-align:center;color:#7f8c8d;padding:20px;">
+            <i class="fas fa-spinner fa-spin"></i> Carregando projetos...
+          </td>
+        </tr>
+      `;
+      try {
+        const q = query(projectsCol, orderBy("timestamp", "desc"));
+        const snap = await getDocs(q);
+        const projects = [];
+        snap.forEach((docSnap) => {
+          const data = docSnap.data();
+          projects.push({ id: docSnap.id, ...data });
+        });
+        renderProjectsTable(projects);
+        updateSummary(projects);
+      } catch (err) {
+        console.error("Erro ao carregar projetos:", err);
+        projectsTableBody.innerHTML = `
+          <tr>
+            <td colspan="5" style="text-align:center;color:#e74c3c;padding:20px;">
+              <i class="fas fa-exclamation-circle"></i> Erro ao carregar projetos. Verifique o console.
+            </td>
+          </tr>
+        `;
+      }
+    }
+
+    function updateSummary(projects) {
+      const total = projects.length;
+      const active = projects.filter((p) => p.status === "active").length;
+      const archived = projects.filter((p) => p.status !== "active").length;
+      summaryTotal.textContent = total;
+      summaryActive.textContent = active;
+      summaryArchived.textContent = archived;
+    }
+
+    function renderProjectsTable(projects) {
+      if (projects.length === 0) {
+        projectsTableBody.innerHTML = `
+          <tr>
+            <td colspan="5" style="text-align:center;color:#7f8c8d;padding:20px;">
+              <i class="fas fa-folder-open"></i> Nenhum projeto cadastrado ainda.
+            </td>
+          </tr>
+        `;
+        return;
+      }
+      projectsTableBody.innerHTML = "";
+      projects.forEach((p) => {
+        const tr = document.createElement("tr");
+        const createdAt = p.timestamp?.toDate?.() || null;
+        const dateStr = createdAt
+          ? createdAt.toLocaleDateString("pt-BR", { day: "2-digit", month: "2-digit", year: "numeric" })
+          : "-";
+        let statusClass = "active";
+        if (p.status === "draft") statusClass = "draft";
+        if (p.status === "archived") statusClass = "archived";
+
+        const categoryLabels = {
+          web: "Desenvolvimento Web",
+          mobile: "Apps Mobile",
+          design: "UI/UX Design",
+          consulting: "Consultoria",
+          innovation: "Inovação"
         };
+        const categoryLabel = categoryLabels[p.category] || p.category || "-";
 
-        const adminLoginModal = document.getElementById('adminLoginModal');
-        const changePasswordModal = document.getElementById('changePasswordModal');
-        const loginError = document.getElementById('loginError');
-        const loginSuccess = document.getElementById('loginSuccess');
-        const passwordError = document.getElementById('passwordError');
-        const passwordSuccess = document.getElementById('passwordSuccess');
-        const backToTopBtn = document.getElementById('backToTop');
-        const navItems = document.querySelectorAll('nav ul li a');
+        tr.innerHTML = `
+          <td>
+            <strong>${p.title || "-"}</strong><br>
+            <small style="color:#7f8c8d;">${(p.description || "").slice(0, 60)}${(p.description || "").length > 60 ? "..." : ""}</small>
+          </td>
+          <td>
+            <span class="badge-category"><i class="fas fa-tag"></i> ${categoryLabel}</span>
+          </td>
+          <td>
+            <span class="tag-status ${statusClass}">
+              <i class="fas ${p.status === "active" ? "fa-circle-check" : p.status === "draft" ? "fa-pencil-alt" : "fa-box-archive"}"></i>
+              ${p.status === "active" ? "Ativo" : p.status === "draft" ? "Rascunho" : "Arquivado"}
+            </span>
+          </td>
+          <td>${dateStr}</td>
+          <td>
+            <div class="table-actions">
+              <button class="btn-icon" title="Editar" data-action="edit" data-id="${p.id}">
+                <i class="fas fa-pen"></i>
+              </button>
+              <button class="btn-icon" title="${p.status === "archived" ? "Reativar" : "Arquivar"}" data-action="toggle" data-id="${p.id}">
+                <i class="fas ${p.status === "archived" ? "fa-rotate-left" : "fa-box-archive"}"></i>
+              </button>
+            </div>
+          </td>
+        `;
+        projectsTableBody.appendChild(tr);
+      });
+    }
 
-        function handleLogoError(img) {
-            img.style.display = 'none';
-            let logoText = img.nextElementSibling;
-            if (!logoText || !logoText.id.includes('logoText')) {
-                logoText = document.createElement('div');
-                logoText.id = 'logoText';
-                img.parentElement.appendChild(logoText);
-            }
-            logoText.style.display = 'flex';
-            logoText.style.width = '100%';
-            logoText.style.height = '100%';
-            logoText.style.background = 'white';
-            logoText.style.color = 'var(--secondary)';
-            logoText.style.fontWeight = 'bold';
-            logoText.style.fontSize = '2.5rem';
-            logoText.style.alignItems = 'center';
-            logoText.style.justifyContent = 'center';
-            logoText.style.borderRadius = 'inherit';
-            logoText.style.border = '1px solid #eee';
-            logoText.innerHTML = 'J';
+    function resetForm() {
+      projectIdInput.value = "";
+      projectTitleInput.value = "";
+      projectCategoryInput.value = "web";
+      projectStatusInput.value = "active";
+      projectOrderInput.value = "";
+      projectDescriptionInput.value = "";
+      projectFeaturesInput.value = "";
+      projectImageInput.value = "";
+      formTitle.innerHTML = '<i class="fas fa-plus-circle"></i> Novo Projeto';
+      formSubtitle.textContent = "Preencha os campos para adicionar um novo projeto ao site.";
+      formInfo.textContent = "Criando novo projeto.";
+    }
+
+    function fillForm(project) {
+      projectIdInput.value = project.id;
+      projectTitleInput.value = project.title || "";
+      projectCategoryInput.value = project.category || "web";
+      projectStatusInput.value = project.status || "active";
+      projectOrderInput.value = project.order ?? "";
+      projectDescriptionInput.value = project.description || "";
+      projectFeaturesInput.value = (project.features || []).join(", ");
+      projectImageInput.value = (project.images && project.images[0]) || "";
+      formTitle.innerHTML = '<i class="fas fa-pen"></i> Editar Projeto';
+      formSubtitle.textContent = "Atualize as informações do projeto e salve para refletir no site.";
+      formInfo.textContent = `Editando projeto: ${project.title || project.id}`;
+    }
+
+    async function getProjectById(id) {
+      const snap = await getDocs(projectsCol);
+      let found = null;
+      snap.forEach((d) => {
+        if (d.id === id) found = { id: d.id, ...d.data() };
+      });
+      return found;
+    }
+
+    reloadProjectsBtn.addEventListener("click", loadProjects);
+    newProjectBtn.addEventListener("click", resetForm);
+    clearFormBtn.addEventListener("click", resetForm);
+
+    projectsTableBody.addEventListener("click", async (e) => {
+      const btn = e.target.closest("button[data-action]");
+      if (!btn) return;
+      const action = btn.dataset.action;
+      const id = btn.dataset.id;
+      if (!id) return;
+
+      if (action === "edit") {
+        const proj = await getProjectById(id);
+        if (proj) fillForm(proj);
+      } else if (action === "toggle") {
+        const proj = await getProjectById(id);
+        if (!proj) return;
+        const newStatus = proj.status === "archived" ? "active" : "archived";
+        if (!confirm(`Tem certeza que deseja ${newStatus === "archived" ? "arquivar" : "reativar"} este projeto?`)) return;
+        try {
+          const ref = doc(db, "siteProjects", id);
+          await updateDoc(ref, {
+            status: newStatus,
+            timestamp: serverTimestamp()
+          });
+          loadProjects();
+        } catch (err) {
+          console.error("Erro ao atualizar status:", err);
+          alert("Erro ao atualizar status. Veja o console.");
         }
+      }
+    });
 
-        window.addEventListener('load', function() {
-            const logoImg = document.getElementById('logoImage');
-            if (logoImg && (logoImg.naturalWidth === 0 || logoImg.complete === false)) {
-                handleLogoError(logoImg);
-            }
-            document.querySelectorAll('.logo-visual img').forEach(img => {
-                if (img.naturalWidth === 0) {
-                    handleLogoError(img);
-                }
-            });
-        });
+    projectForm.addEventListener("submit", async (e) => {
+      e.preventDefault();
+      saveBtn.disabled = true;
+      saveBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Salvando...';
 
-        function scrollToSection(sectionId) {
-            const section = document.getElementById(sectionId);
-            if (section) {
-                const headerHeight = document.querySelector('header').offsetHeight;
-                const sectionPosition = section.offsetTop - headerHeight;
-                window.scrollTo({ top: sectionPosition, behavior: 'smooth' });
-                updateNavigation(sectionId);
-            }
+      const title = projectTitleInput.value.trim();
+      const category = projectCategoryInput.value;
+      const status = projectStatusInput.value;
+      const orderVal = projectOrderInput.value;
+      const description = projectDescriptionInput.value.trim();
+      const featuresRaw = projectFeaturesInput.value.trim();
+      const imageUrl = projectImageInput.value.trim();
+
+      if (!title || !description) {
+        alert("Preencha pelo menos o título e a descrição.");
+        saveBtn.disabled = false;
+        saveBtn.innerHTML = '<i class="fas fa-save"></i> Salvar';
+        return;
+      }
+
+      const features = featuresRaw
+        ? featuresRaw.split(",").map((f) => f.trim()).filter((f) => f.length > 0)
+        : [];
+
+      const baseData = {
+        title,
+        category,
+        status,
+        order: orderVal === "" ? null : Number(orderVal),
+        description,
+        features,
+        images: imageUrl ? [imageUrl] : [],
+        updatedAt: serverTimestamp()
+      };
+
+      try {
+        const existingId = projectIdInput.value;
+        if (existingId) {
+          const ref = doc(db, "siteProjects", existingId);
+          await updateDoc(ref, {
+            ...baseData,
+            timestamp: serverTimestamp()
+          });
+        } else {
+          await addDoc(projectsCol, {
+            ...baseData,
+            timestamp: serverTimestamp()
+          });
+          resetForm();
         }
+        await loadProjects();
+      } catch (err) {
+        console.error("Erro ao salvar projeto:", err);
+        alert("Erro ao salvar projeto. Veja o console.");
+      } finally {
+        saveBtn.disabled = false;
+        saveBtn.innerHTML = '<i class="fas fa-save"></i> Salvar';
+      }
+    });
 
-        function updateNavigation(activeItem) {
-            navItems.forEach(item => item.classList.remove('active'));
-            const id = 'nav' + activeItem.charAt(0).toUpperCase() + activeItem.slice(1);
-            const nav = document.getElementById(id);
-            if (nav) nav.classList.add('active');
-        }
+    // ======= MODAL CONFIG INDEX (LOCALSTORAGE) =======
+    const configModal = document.getElementById("configModal");
+    const openConfigBtn = document.getElementById("openConfigBtn");
+    const closeConfigBtn = document.getElementById("closeConfigBtn");
 
-        window.addEventListener('scroll', () => {
-            backToTopBtn.classList.toggle('show', window.pageYOffset > 300);
-            const sections = ['home','about','services','projects','contact'];
-            let current = 'home';
-            const headerHeight = document.querySelector('header').offsetHeight;
-            sections.forEach(id => {
-                const el = document.getElementById(id);
-                if (el) {
-                    const rect = el.getBoundingClientRect();
-                    if (rect.top <= headerHeight + 100 && rect.bottom >= headerHeight + 100) {
-                        current = id;
-                    }
-                }
-            });
-            updateNavigation(current);
-        });
+    openConfigBtn.addEventListener("click", () => {
+      configModal.classList.add("show");
+    });
+    closeConfigBtn.addEventListener("click", () => {
+      configModal.classList.remove("show");
+    });
+    configModal.addEventListener("click", (e) => {
+      if (e.target === configModal) configModal.classList.remove("show");
+    });
 
-        backToTopBtn.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+    const defaultSiteConfig = {
+      logoTitle:"Bemorh",
+      logoTagline:"tecnologia que conecta ideias",
+      heroTitle:"Bemorh",
+      heroSubtitle:"Nascemos da crença de que as melhores soluções surgem da conexão de ideias. Somos uma empresa de tecnologia especializada em desenvolver ferramentas virtuais que facilitam a colaboração, estimulam a inovação e transformam conceitos em realidade.",
+      heroContactText:"Fale Conosco",
+      servicesTitle:"Nossos Serviços",
+      service1Title:"Desenvolvimento Web",
+      service1Description:"Sites, sistemas web e aplicações responsivas com as melhores tecnologias do mercado.",
+      service2Title:"Apps Mobile",
+      service2Description:"Aplicativos nativos e híbridos para iOS e Android, com designs intuitivos e funcionais.",
+      service3Title:"UI/UX Design",
+      service3Description:"Design centrado no usuário, interfaces intuitivas e experiências digitais memoráveis.",
+      service4Title:"Consultoria em Inovação",
+      service4Description:"Ajudamos sua empresa a implementar processos inovadores e soluções tecnológicas estratégicas.",
+      aboutTitle:"Sobre a Bemorh",
+      aboutIntro:"A Bemorh nasceu da crença de que as melhores soluções surgem da conexão de ideias. Somos uma empresa de tecnologia especializada em desenvolver ferramentas virtuais que facilitam a colaboração, estimulam a inovação e transformam conceitos em realidade.",
+      missionTitle:"Nossa Missão",
+      missionText:"Conectar pessoas, ideias e tecnologias para criar soluções digitais inovadoras que transformam negócios e impulsionam resultados.",
+      visionTitle:"Nossa Visão",
+      visionText:"Ser referência em tecnologia conectiva, reconhecida por transformar ideias dispersas em ecossistemas digitais integrados e eficientes.",
+      approachTitle:"Nossa Abordagem",
+      approachText:"Trabalhamos em parceria com nossos clientes, entendendo suas necessidades únicas e co-criando soluções que realmente fazem a diferença.",
+      contactTitle:"Conecte-se Conosco",
+      contactInfoTitle:"Informações de Contato",
+      contactAddressTitle:"Endereço",
+      contactAddressText:"Av. das Inovações, 123 - Centro de Tecnologia<br>São Paulo - SP, 04538-000",
+      contactPhoneTitle:"Telefone",
+      contactPhoneText:"(11) 3456-7890",
+      contactEmailTitle:"Email",
+      contactEmailText:"contato@bemorh.com.br",
+      contactScheduleTitle:"Horário de Atendimento",
+      contactScheduleText:"Segunda a Sexta: 8h às 19h<br>Sábado: 9h às 13h",
+      contactFormTitle:"Envie sua Ideia",
+      contactNameLabel:"Nome",
+      contactEmailLabel:"Email",
+      contactPhoneLabel:"Telefone",
+      contactMessageLabel:"Sua Ideia ou Projeto",
+      contactSubmitText:"Enviar Mensagem",
+      footerDescription:"Tecnologia que conecta ideias. Desenvolvemos soluções digitais inovadoras que transformam conceitos em realidade.",
+      footerQuickLinksTitle:"Links Rápidos",
+      footerContactTitle:"Contato",
+      footerAddress:"Av. das Inovações, 123 - São Paulo, SP",
+      footerPhone:"(11) 3456-7890",
+      footerEmail:"contato@bemorh.com.br",
+      footerSchedule:"Seg-Sex: 8h-19h",
+      footerCopyright:"© 2023 Bemorh - Tecnologia que Conecta Ideias. Todos os direitos reservados."
+    };
 
-        // Navegação
-        document.getElementById('logoHome').addEventListener('click', () => scrollToSection('home'));
-        document.getElementById('navHome').addEventListener('click', () => scrollToSection('home'));
-        document.getElementById('navAbout').addEventListener('click', () => scrollToSection('about'));
-        document.getElementById('navServices').addEventListener('click', () => scrollToSection('services'));
-        document.getElementById('navProjects').addEventListener('click', () => scrollToSection('projects'));
-        document.getElementById('navContact').addEventListener('click', () => scrollToSection('contact'));
+    function loadIndexConfig() {
+      const saved = localStorage.getItem("bemorhSiteConfig");
+      if (!saved) return defaultSiteConfig;
+      try {
+        const parsed = JSON.parse(saved);
+        return { ...defaultSiteConfig, ...parsed };
+      } catch {
+        return defaultSiteConfig;
+      }
+    }
 
-        document.getElementById('footerHome').addEventListener('click', () => scrollToSection('home'));
-        document.getElementById('footerProjects').addEventListener('click', () => scrollToSection('projects'));
-        document.getElementById('footerServices').addEventListener('click', () => scrollToSection('services'));
-        document.getElementById('footerAbout').addEventListener('click', () => scrollToSection('about'));
-        document.getElementById('footerContact').addEventListener('click', () => scrollToSection('contact'));
+    const setVal = (id,v) => { const el = document.getElementById(id); if (el && v != null) el.value = v; };
+    const getVal = (id) => (document.getElementById(id) || {}).value || "";
 
-        // Botões do HERO
-        document.getElementById('heroProjectsBtn').addEventListener('click', () => scrollToSection('projects'));
-        document.getElementById('heroContactBtn').addEventListener('click', () => scrollToSection('contact'));
+    function fillIndexConfigForm(cfg) {
+      setVal("cfg_logoTitle_idx", cfg.logoTitle);
+      setVal("cfg_logoTagline_idx", cfg.logoTagline);
+      setVal("cfg_heroTitle_idx", cfg.heroTitle);
+      setVal("cfg_heroSubtitle_idx", cfg.heroSubtitle);
+      setVal("cfg_heroContactText_idx", cfg.heroContactText);
+      setVal("cfg_servicesTitle_idx", cfg.servicesTitle);
+      setVal("cfg_service1Title_idx", cfg.service1Title);
+      setVal("cfg_service1Description_idx", cfg.service1Description);
+      setVal("cfg_service2Title_idx", cfg.service2Title);
+      setVal("cfg_service2Description_idx", cfg.service2Description);
+      setVal("cfg_service3Title_idx", cfg.service3Title);
+      setVal("cfg_service3Description_idx", cfg.service3Description);
+      setVal("cfg_service4Title_idx", cfg.service4Title);
+      setVal("cfg_service4Description_idx", cfg.service4Description);
+      setVal("cfg_aboutTitle_idx", cfg.aboutTitle);
+      setVal("cfg_aboutIntro_idx", cfg.aboutIntro);
+      setVal("cfg_missionTitle_idx", cfg.missionTitle);
+      setVal("cfg_missionText_idx", cfg.missionText);
+      setVal("cfg_visionTitle_idx", cfg.visionTitle);
+      setVal("cfg_visionText_idx", cfg.visionText);
+      setVal("cfg_approachTitle_idx", cfg.approachTitle);
+      setVal("cfg_approachText_idx", cfg.approachText);
+      setVal("cfg_contactTitle_idx", cfg.contactTitle);
+      setVal("cfg_contactInfoTitle_idx", cfg.contactInfoTitle);
+      setVal("cfg_contactAddressTitle_idx", cfg.contactAddressTitle);
+      setVal("cfg_contactAddressText_idx", cfg.contactAddressText);
+      setVal("cfg_contactPhoneTitle_idx", cfg.contactPhoneTitle);
+      setVal("cfg_contactPhoneText_idx", cfg.contactPhoneText);
+      setVal("cfg_contactEmailTitle_idx", cfg.contactEmailTitle);
+      setVal("cfg_contactEmailText_idx", cfg.contactEmailText);
+      setVal("cfg_contactScheduleTitle_idx", cfg.contactScheduleTitle);
+      setVal("cfg_contactScheduleText_idx", cfg.contactScheduleText);
+      setVal("cfg_contactFormTitle_idx", cfg.contactFormTitle);
+      setVal("cfg_contactNameLabel_idx", cfg.contactNameLabel);
+      setVal("cfg_contactEmailLabel_idx", cfg.contactEmailLabel);
+      setVal("cfg_contactPhoneLabel_idx", cfg.contactPhoneLabel);
+      setVal("cfg_contactMessageLabel_idx", cfg.contactMessageLabel);
+      setVal("cfg_contactSubmitText_idx", cfg.contactSubmitText);
+      setVal("cfg_footerDescription_idx", cfg.footerDescription);
+      setVal("cfg_footerQuickLinksTitle_idx", cfg.footerQuickLinksTitle);
+      setVal("cfg_footerContactTitle_idx", cfg.footerContactTitle);
+      setVal("cfg_footerAddress_idx", cfg.footerAddress);
+      setVal("cfg_footerPhone_idx", cfg.footerPhone);
+      setVal("cfg_footerEmail_idx", cfg.footerEmail);
+      setVal("cfg_footerSchedule_idx", cfg.footerSchedule);
+      setVal("cfg_footerCopyright_idx", cfg.footerCopyright);
+    }
 
-        // Admin modais
-        document.getElementById('adminAccessBtn').addEventListener('click', () => {
-            adminLoginModal.style.display = 'flex';
-            document.getElementById('adminPassword').focus();
-        });
+    function collectIndexConfigForm() {
+      return {
+        logoTitle:getVal("cfg_logoTitle_idx"),
+        logoTagline:getVal("cfg_logoTagline_idx"),
+        heroTitle:getVal("cfg_heroTitle_idx"),
+        heroSubtitle:getVal("cfg_heroSubtitle_idx"),
+        heroContactText:getVal("cfg_heroContactText_idx"),
+        servicesTitle:getVal("cfg_servicesTitle_idx"),
+        service1Title:getVal("cfg_service1Title_idx"),
+        service1Description:getVal("cfg_service1Description_idx"),
+        service2Title:getVal("cfg_service2Title_idx"),
+        service2Description:getVal("cfg_service2Description_idx"),
+        service3Title:getVal("cfg_service3Title_idx"),
+        service3Description:getVal("cfg_service3Description_idx"),
+        service4Title:getVal("cfg_service4Title_idx"),
+        service4Description:getVal("cfg_service4Description_idx"),
+        aboutTitle:getVal("cfg_aboutTitle_idx"),
+        aboutIntro:getVal("cfg_aboutIntro_idx"),
+        missionTitle:getVal("cfg_missionTitle_idx"),
+        missionText:getVal("cfg_missionText_idx"),
+        visionTitle:getVal("cfg_visionTitle_idx"),
+        visionText:getVal("cfg_visionText_idx"),
+        approachTitle:getVal("cfg_approachTitle_idx"),
+        approachText:getVal("cfg_approachText_idx"),
+        contactTitle:getVal("cfg_contactTitle_idx"),
+        contactInfoTitle:getVal("cfg_contactInfoTitle_idx"),
+        contactAddressTitle:getVal("cfg_contactAddressTitle_idx"),
+        contactAddressText:getVal("cfg_contactAddressText_idx"),
+        contactPhoneTitle:getVal("cfg_contactPhoneTitle_idx"),
+        contactPhoneText:getVal("cfg_contactPhoneText_idx"),
+        contactEmailTitle:getVal("cfg_contactEmailTitle_idx"),
+        contactEmailText:getVal("cfg_contactEmailText_idx"),
+        contactScheduleTitle:getVal("cfg_contactScheduleTitle_idx"),
+        contactScheduleText:getVal("cfg_contactScheduleText_idx"),
+        contactFormTitle:getVal("cfg_contactFormTitle_idx"),
+        contactNameLabel:getVal("cfg_contactNameLabel_idx"),
+        contactEmailLabel:getVal("cfg_contactEmailLabel_idx"),
+        contactPhoneLabel:getVal("cfg_contactPhoneLabel_idx"),
+        contactMessageLabel:getVal("cfg_contactMessageLabel_idx"),
+        contactSubmitText:getVal("cfg_contactSubmitText_idx"),
+        footerDescription:getVal("cfg_footerDescription_idx"),
+        footerQuickLinksTitle:getVal("cfg_footerQuickLinksTitle_idx"),
+        footerContactTitle:getVal("cfg_footerContactTitle_idx"),
+        footerAddress:getVal("cfg_footerAddress_idx"),
+        footerPhone:getVal("cfg_footerPhone_idx"),
+        footerEmail:getVal("cfg_footerEmail_idx"),
+        footerSchedule:getVal("cfg_footerSchedule_idx"),
+        footerCopyright:getVal("cfg_footerCopyright_idx")
+      };
+    }
 
-        document.getElementById('closeLoginModal').addEventListener('click', () => {
-            adminLoginModal.style.display = 'none';
-            loginError.style.display = 'none';
-            loginSuccess.style.display = 'none';
-        });
+    const cfgSuccess = document.getElementById("cfgSuccess");
+    const cfgError = document.getElementById("cfgError");
+    const saveIndexConfigBtn = document.getElementById("saveIndexConfigBtn");
+    const reloadIndexConfigBtn = document.getElementById("reloadIndexConfigBtn");
+    const resetIndexConfigBtn = document.getElementById("resetIndexConfigBtn");
 
-        document.getElementById('closePasswordModal').addEventListener('click', () => {
-            changePasswordModal.style.display = 'none';
-            passwordError.style.display = 'none';
-            passwordSuccess.style.display = 'none';
-        });
+    function showCfgAlert(el, show) { if (el) el.style.display = show ? "block" : "none"; }
 
-        window.addEventListener('click', e => {
-            if (e.target === adminLoginModal) {
-                adminLoginModal.style.display = 'none';
-                loginError.style.display = 'none';
-                loginSuccess.style.display = 'none';
-            }
-            if (e.target === changePasswordModal) {
-                changePasswordModal.style.display = 'none';
-                passwordError.style.display = 'none';
-                passwordSuccess.style.display = 'none';
-            }
-        });
+    fillIndexConfigForm(loadIndexConfig());
 
-        function bindToggle(btnId, inputId) {
-            document.getElementById(btnId).addEventListener('click', function() {
-                const input = document.getElementById(inputId);
-                const icon = this.querySelector('i');
-                if (input.type === 'password') {
-                    input.type = 'text';
-                    icon.classList.remove('fa-eye');
-                    icon.classList.add('fa-eye-slash');
-                } else {
-                    input.type = 'password';
-                    icon.classList.remove('fa-eye-slash');
-                    icon.classList.add('fa-eye');
-                }
-            });
-        }
-        bindToggle('togglePassword', 'adminPassword');
-        bindToggle('toggleCurrentPassword', 'currentPassword');
-        bindToggle('toggleNewPassword', 'newPassword');
-        bindToggle('toggleConfirmPassword', 'confirmPassword');
+    saveIndexConfigBtn.addEventListener("click", () => {
+      showCfgAlert(cfgSuccess, false);
+      showCfgAlert(cfgError, false);
+      try {
+        const cfg = collectIndexConfigForm();
+        localStorage.setItem("bemorhSiteConfig", JSON.stringify(cfg));
+        showCfgAlert(cfgSuccess, true);
+        setTimeout(() => showCfgAlert(cfgSuccess, false), 4000);
+      } catch (e) {
+        console.error(e);
+        showCfgAlert(cfgError, true);
+      }
+    });
 
-        document.getElementById('adminLoginForm').addEventListener('submit', e => {
-            e.preventDefault();
-            const password = document.getElementById('adminPassword').value;
-            loginError.style.display = 'none';
-            loginSuccess.style.display = 'none';
-            if (adminAuth.login(password)) {
-                loginSuccess.style.display = 'block';
-                setTimeout(() => {
-                    adminLoginModal.style.display = 'none';
-                    window.location.href = 'admin.html';
-                    document.getElementById('adminPassword').value = '';
-                }, 1000);
-            } else {
-                loginError.style.display = 'block';
-                document.getElementById('adminPassword').value = '';
-                document.getElementById('adminPassword').focus();
-            }
-        });
+    reloadIndexConfigBtn.addEventListener("click", () => {
+      fillIndexConfigForm(loadIndexConfig());
+      showCfgAlert(cfgSuccess, false);
+      showCfgAlert(cfgError, false);
+    });
 
-        document.getElementById('resetPasswordBtn').addEventListener('click', () => {
-            adminLoginModal.style.display = 'none';
-            changePasswordModal.style.display = 'flex';
-            document.getElementById('currentPassword').focus();
-        });
+    resetIndexConfigBtn.addEventListener("click", () => {
+      if (!confirm("Tem certeza que deseja restaurar os textos padrão do index?")) return;
+      localStorage.removeItem("bemorhSiteConfig");
+      fillIndexConfigForm(defaultSiteConfig);
+      showCfgAlert(cfgSuccess, false);
+      showCfgAlert(cfgError, false);
+      alert("Padrão restaurado. Recarregue o index.html para ver o resultado.");
+    });
 
-        document.getElementById('changePasswordForm').addEventListener('submit', e => {
-            e.preventDefault();
-            const currentPassword = document.getElementById('currentPassword').value;
-            const newPassword = document.getElementById('newPassword').value;
-            const confirmPassword = document.getElementById('confirmPassword').value;
-            passwordError.style.display = 'none';
-            passwordSuccess.style.display = 'none';
-            if (newPassword !== confirmPassword) {
-                passwordError.textContent = "As novas senhas não coincidem!";
-                passwordError.style.display = 'block';
-                return;
-            }
-            if (newPassword.length < 6) {
-                passwordError.textContent = "A nova senha deve ter pelo menos 6 caracteres!";
-                passwordError.style.display = 'block';
-                return;
-            }
-            if (adminAuth.changePassword(currentPassword, newPassword)) {
-                passwordSuccess.style.display = 'block';
-                document.getElementById('currentPassword').value = '';
-                document.getElementById('newPassword').value = '';
-                document.getElementById('confirmPassword').value = '';
-                setTimeout(() => {
-                    changePasswordModal.style.display = 'none';
-                    adminLoginModal.style.display = 'flex';
-                }, 2000);
-            } else {
-                passwordError.textContent = "Senha atual incorreta!";
-                passwordError.style.display = 'block';
-                document.getElementById('currentPassword').value = '';
-                document.getElementById('currentPassword').focus();
-            }
-        });
+    // ===== MODAL DE ALTERAR SENHA NO ADMIN =====
+    const passwordModal = document.getElementById('passwordModal');
+    const openPasswordBtn = document.getElementById('openPasswordBtn');
+    const closePasswordBtn = document.getElementById('closePasswordBtn');
+    const cancelPasswordBtn = document.getElementById('cancelPasswordBtn');
+    const passwordForm = document.getElementById('passwordForm');
+    const pwdError = document.getElementById('pwdError');
+    const pwdSuccess = document.getElementById('pwdSuccess');
 
-        // Formulário de contato (index)
-        document.getElementById('contactForm').addEventListener('submit', e => {
-            e.preventDefault();
-            const name = document.getElementById('contactName').value;
-            alert(`Obrigado, ${name}! Sua mensagem foi enviada com sucesso. Entraremos em contato em breve.`);
-            document.getElementById('contactForm').reset();
-        });
+    function openPasswordModal() {
+      pwdError.style.display = 'none';
+      pwdSuccess.style.display = 'none';
+      document.getElementById('currentPasswordAdmin').value = '';
+      document.getElementById('newPasswordAdmin').value = '';
+      document.getElementById('confirmPasswordAdmin').value = '';
+      passwordModal.classList.add('show');
+      document.getElementById('currentPasswordAdmin').focus();
+    }
 
-        document.getElementById('newsletterBtn').addEventListener('click', () => {
-            const email = document.getElementById('newsletterEmail').value;
-            if (email && email.includes('@')) {
-                alert(`Obrigado por se inscrever! Enviaremos nossas inovações para ${email}.`);
-                document.getElementById('newsletterEmail').value = '';
-            } else {
-                alert('Por favor, insira um email válido.');
-            }
-        });
+    function closePasswordModal() {
+      passwordModal.classList.remove('show');
+    }
 
-        // ===== CONFIGURAÇÕES DO SITE (bemorhSiteConfig) =====
-        const defaultSiteConfig = {
-            logoTitle:"Bemorh",
-            logoTagline:"tecnologia que conecta ideias",
-            heroTitle:"Bemorh",
-            heroSubtitle:"Nascemos da crença de que as melhores soluções surgem da conexão de ideias. Somos uma empresa de tecnologia especializada em desenvolver ferramentas virtuais que facilitam a colaboração, estimulam a inovação e transformam conceitos em realidade.",
-            heroContactText:"Fale Conosco",
-            projectsTitle:"Projetos em Destaque",
-            project1Title:"Sistema de Gestão de Ideias",
-            project1Status:"Concluído",
-            project1Description:"Plataforma colaborativa que organiza e prioriza ideias em projetos executáveis com fluxos visuais intuitivos.",
-            project2Title:"IA para Inovação",
-            project2Status:"Em Andamento",
-            project2Description:"Ferramenta de inteligência artificial que auxilia na geração e refinamento de ideias criativas para negócios.",
-            project3Title:"Plataforma Colaborativa",
-            project3Status:"Em Planejamento",
-            project3Description:"Ambiente virtual para equipes distribuídas colaborarem em tempo real no desenvolvimento de projetos.",
-            servicesTitle:"Nossos Serviços",
-            service1Title:"Desenvolvimento Web",
-            service1Description:"Sites, sistemas web e aplicações responsivas com as melhores tecnologias do mercado.",
-            service2Title:"Apps Mobile",
-            service2Description:"Aplicativos nativos e híbridos para iOS e Android, com designs intuitivos e funcionais.",
-            service3Title:"UI/UX Design",
-            service3Description:"Design centrado no usuário, interfaces intuitivas e experiências digitais memoráveis.",
-            service4Title:"Consultoria em Inovação",
-            service4Description:"Ajudamos sua empresa a implementar processos inovadores e soluções tecnológicas estratégicas.",
-            aboutTitle:"Sobre a Bemorh",
-            aboutIntro:"A Bemorh nasceu da crença de que as melhores soluções surgem da conexão de ideias. Somos uma empresa de tecnologia especializada em desenvolver ferramentas virtuais que facilitam a colaboração, estimulam a inovação e transformam conceitos em realidade.",
-            missionTitle:"Nossa Missão",
-            missionText:"Conectar pessoas, ideias e tecnologias para criar soluções digitais inovadoras que transformam negócios e impulsionam resultados.",
-            visionTitle:"Nossa Visão",
-            visionText:"Ser referência em tecnologia conectiva, reconhecida por transformar ideias dispersas em ecossistemas digitais integrados e eficientes.",
-            approachTitle:"Nossa Abordagem",
-            approachText:"Trabalhamos em parceria com nossos clientes, entendendo suas necessidades únicas e co-criando soluções que realmente fazem a diferença.",
-            contactTitle:"Conecte-se Conosco",
-            contactInfoTitle:"Informações de Contato",
-            contactAddressTitle:"Endereço",
-            contactAddressText:"Av. das Inovações, 123 - Centro de Tecnologia<br>São Paulo - SP, 04538-000",
-            contactPhoneTitle:"Telefone",
-            contactPhoneText:"(11) 3456-7890",
-            contactEmailTitle:"Email",
-            contactEmailText:"contato@bemorh.com.br",
-            contactScheduleTitle:"Horário de Atendimento",
-            contactScheduleText:"Segunda a Sexta: 8h às 19h<br>Sábado: 9h às 13h",
-            contactFormTitle:"Envie sua Ideia",
-            contactNameLabel:"Nome",
-            contactEmailLabel:"Email",
-            contactPhoneLabel:"Telefone",
-            contactMessageLabel:"Sua Ideia ou Projeto",
-            contactSubmitText:"Enviar Mensagem",
-            footerDescription:"Tecnologia que conecta ideias. Desenvolvemos soluções digitais inovadoras que transformam conceitos em realidade.",
-            footerQuickLinksTitle:"Links Rápidos",
-            footerContactTitle:"Contato",
-            footerAddress:"Av. das Inovações, 123 - São Paulo, SP",
-            footerPhone:"(11) 3456-7890",
-            footerEmail:"contato@bemorh.com.br",
-            footerSchedule:"Seg-Sex: 8h-19h",
-            footerCopyright:"© 2023 Bemorh - Tecnologia que Conecta Ideias. Todos os direitos reservados."
-        };
+    openPasswordBtn.addEventListener('click', openPasswordModal);
+    closePasswordBtn.addEventListener('click', closePasswordModal);
+    cancelPasswordBtn.addEventListener('click', closePasswordModal);
 
-        function loadSiteConfig() {
-            const saved = localStorage.getItem('bemorhSiteConfig');
-            if (!saved) return defaultSiteConfig;
-            try {
-                const parsed = JSON.parse(saved);
-                return { ...defaultSiteConfig, ...parsed };
-            } catch { return defaultSiteConfig; }
-        }
+    passwordModal.addEventListener('click', (e) => {
+      if (e.target === passwordModal) closePasswordModal();
+    });
 
-        function applySiteConfig() {
-            const cfg = loadSiteConfig();
-            const setText = (id,v,html=false) => {
-                const el = document.getElementById(id);
-                if (!el || v == null) return;
-                if (html) el.innerHTML = v; else el.textContent = v;
-            };
+    passwordForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+      pwdError.style.display = 'none';
+      pwdSuccess.style.display = 'none';
 
-            setText('siteLogoTitle', cfg.logoTitle);
-            setText('siteLogoTagline', cfg.logoTagline);
-            setText('footerLogoTitle', cfg.logoTitle);
-            setText('footerLogoTagline', cfg.logoTagline);
+      const currentPwd = document.getElementById('currentPasswordAdmin').value;
+      const newPwd = document.getElementById('newPasswordAdmin').value;
+      const confirmPwd = document.getElementById('confirmPasswordAdmin').value;
 
-            setText('heroTitle', cfg.heroTitle);
-            setText('heroSubtitle', cfg.heroSubtitle);
-            setText('heroContactText', cfg.heroContactText);
+      if (newPwd.length < 6) {
+        pwdError.textContent = "A nova senha deve ter pelo menos 6 caracteres.";
+        pwdError.style.display = 'block';
+        return;
+      }
 
-            setText('projectsTitle', cfg.projectsTitle);
-            setText('project1Title', cfg.project1Title);
-            setText('project1Status', cfg.project1Status);
-            setText('project1Description', cfg.project1Description);
-            setText('project2Title', cfg.project2Title);
-            setText('project2Status', cfg.project2Status);
-            setText('project2Description', cfg.project2Description);
-            setText('project3Title', cfg.project3Title);
-            setText('project3Status', cfg.project3Status);
-            setText('project3Description', cfg.project3Description);
+      if (newPwd !== confirmPwd) {
+        pwdError.textContent = "As novas senhas não coincidem.";
+        pwdError.style.display = 'block';
+        return;
+      }
 
-            setText('servicesTitle', cfg.servicesTitle);
-            setText('service1Title', cfg.service1Title);
-            setText('service1Description', cfg.service1Description);
-            setText('service2Title', cfg.service2Title);
-            setText('service2Description', cfg.service2Description);
-            setText('service3Title', cfg.service3Title);
-            setText('service3Description', cfg.service3Description);
-            setText('service4Title', cfg.service4Title);
-            setText('service4Description', cfg.service4Description);
+      if (!adminAuth.changePassword(currentPwd, newPwd)) {
+        pwdError.textContent = "Senha atual incorreta.";
+        pwdError.style.display = 'block';
+        return;
+      }
 
-            setText('aboutTitle', cfg.aboutTitle);
-            setText('aboutIntro', cfg.aboutIntro);
-            setText('missionTitle', cfg.missionTitle);
-            setText('missionText', cfg.missionText);
-            setText('visionTitle', cfg.visionTitle);
-            setText('visionText', cfg.visionText);
-            setText('approachTitle', cfg.approachTitle);
-            setText('approachText', cfg.approachText);
+      pwdSuccess.style.display = 'block';
+      setTimeout(() => {
+        closePasswordModal();
+      }, 1200);
+    });
 
-            setText('contactTitle', cfg.contactTitle);
-            setText('contactInfoTitle', cfg.contactInfoTitle);
-            setText('contactAddressTitle', cfg.contactAddressTitle);
-            setText('contactAddressText', cfg.contactAddressText, true);
-            setText('contactPhoneTitle', cfg.contactPhoneTitle);
-            setText('contactPhoneText', cfg.contactPhoneText);
-            setText('contactEmailTitle', cfg.contactEmailTitle);
-            setText('contactEmailText', cfg.contactEmailText);
-            setText('contactScheduleTitle', cfg.contactScheduleTitle);
-            setText('contactScheduleText', cfg.contactScheduleText, true);
-            setText('contactFormTitle', cfg.contactFormTitle);
-            setText('contactNameLabel', cfg.contactNameLabel);
-            setText('contactEmailLabel', cfg.contactEmailLabel);
-            setText('contactPhoneLabel', cfg.contactPhoneLabel);
-            setText('contactMessageLabel', cfg.contactMessageLabel);
-            setText('contactSubmitText', cfg.contactSubmitText);
-
-            setText('footerDescription', cfg.footerDescription);
-            setText('footerQuickLinksTitle', cfg.footerQuickLinksTitle);
-            setText('footerContactTitle', cfg.footerContactTitle);
-            setText('footerAddress', cfg.footerAddress);
-            setText('footerPhone', cfg.footerPhone);
-            setText('footerEmail', cfg.footerEmail);
-            setText('footerSchedule', cfg.footerSchedule);
-            setText('footerCopyright', cfg.footerCopyright);
-        }
-
-        document.addEventListener('DOMContentLoaded', applySiteConfig);
-    </script>
+    // Carrega projetos ao iniciar
+    loadProjects();
+  </script>
 </body>
 </html>

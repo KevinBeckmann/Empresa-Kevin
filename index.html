@@ -62,18 +62,6 @@
             box-shadow: var(--shadow);
         }
 
-        .btn-danger {
-            background-color: var(--accent);
-        }
-
-        .btn-success {
-            background-color: var(--success);
-        }
-
-        .btn-warning {
-            background-color: var(--warning);
-        }
-
         section {
             padding: 80px 0;
         }
@@ -98,7 +86,7 @@
             border-radius: 2px;
         }
 
-        /* HEADER - LOGO CORRETO SEM FUNDO AZUL */
+        /* HEADER */
         header {
             background-color: white;
             box-shadow: var(--shadow);
@@ -115,7 +103,6 @@
             padding: 15px 20px;
         }
 
-        /* LOGO GRANDE COM CORES ORIGINAIS */
         .logo-container {
             display: flex;
             align-items: center;
@@ -133,7 +120,7 @@
             justify-content: center;
             overflow: hidden;
             box-shadow: var(--shadow);
-            background-color: white; /* FUNDO BRANCO - SEM AZUL */
+            background-color: white;
             border: 1px solid #eee;
             transition: all 0.3s ease;
         }
@@ -171,7 +158,6 @@
             margin-top: 2px;
         }
 
-        /* NAVEGAÇÃO */
         nav ul {
             display: flex;
             list-style: none;
@@ -207,7 +193,6 @@
             background-color: var(--secondary);
         }
 
-        /* BOTÃO ADMIN */
         .admin-icon-btn {
             background: none;
             border: none;
@@ -224,7 +209,7 @@
             background-color: rgba(52, 152, 219, 0.1);
         }
 
-        /* MODAL */
+        /* MODAIS ADMIN */
         .modal {
             display: none;
             position: fixed;
@@ -249,15 +234,8 @@
             animation: slideIn 0.3s ease;
         }
 
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
-        }
-
-        @keyframes slideIn {
-            from { transform: translateY(-50px); opacity: 0; }
-            to { transform: translateY(0); opacity: 1; }
-        }
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+        @keyframes slideIn { from { transform: translateY(-50px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
 
         .modal-header {
             background-color: var(--primary);
@@ -268,9 +246,7 @@
             align-items: center;
         }
 
-        .modal-header h3 {
-            font-size: 1.5rem;
-        }
+        .modal-header h3 { font-size: 1.5rem; }
 
         .close-modal {
             background: none;
@@ -280,27 +256,17 @@
             cursor: pointer;
             transition: transform 0.3s;
         }
+        .close-modal:hover { transform: scale(1.2); }
 
-        .close-modal:hover {
-            transform: scale(1.2);
-        }
+        .modal-body { padding: 30px; }
 
-        .modal-body {
-            padding: 30px;
-        }
-
-        /* FORMULÁRIOS */
-        .form-group {
-            margin-bottom: 20px;
-        }
-
+        .form-group { margin-bottom: 20px; }
         .form-group label {
             display: block;
             margin-bottom: 8px;
             font-weight: 600;
             color: var(--primary);
         }
-
         .form-control {
             width: 100%;
             padding: 12px;
@@ -308,16 +274,9 @@
             border-radius: 4px;
             font-size: 1rem;
         }
+        .form-control:focus { outline: none; border-color: var(--secondary); }
 
-        .form-control:focus {
-            outline: none;
-            border-color: var(--secondary);
-        }
-
-        .password-input {
-            position: relative;
-        }
-
+        .password-input { position: relative; }
         .toggle-password {
             position: absolute;
             right: 10px;
@@ -335,20 +294,18 @@
             margin-bottom: 20px;
             display: none;
         }
-
         .alert-danger {
             background-color: rgba(231, 76, 60, 0.1);
             color: var(--accent);
             border-left: 4px solid var(--accent);
         }
-
         .alert-success {
             background-color: rgba(46, 204, 113, 0.1);
             color: var(--success);
             border-left: 4px solid var(--success);
         }
 
-        /* HERO SECTION */
+        /* HERO */
         .hero {
             background: linear-gradient(135deg, var(--primary) 0%, #1a2530 100%);
             color: white;
@@ -356,12 +313,7 @@
             text-align: center;
             margin-top: 80px;
         }
-
-        .hero h1 {
-            font-size: 3.5rem;
-            margin-bottom: 20px;
-        }
-
+        .hero h1 { font-size: 3.5rem; margin-bottom: 20px; }
         .hero p {
             font-size: 1.2rem;
             max-width: 800px;
@@ -369,7 +321,6 @@
             opacity: 0.9;
         }
 
-        /* BOTÃO DE CONTATO - AZUL PERMANENTE */
         .btn-contact {
             background-color: var(--secondary);
             color: white;
@@ -385,15 +336,10 @@
             align-items: center;
             gap: 10px;
         }
-
         .btn-contact:hover {
             background-color: #2980b9;
             transform: translateY(-5px);
             box-shadow: 0 12px 25px rgba(52, 152, 219, 0.35);
-        }
-
-        .btn-contact:active {
-            transform: translateY(-2px);
         }
 
         /* PROJETOS */
@@ -403,7 +349,6 @@
             gap: 30px;
             margin-top: 40px;
         }
-
         .project-card {
             background-color: white;
             border-radius: 10px;
@@ -411,11 +356,7 @@
             box-shadow: var(--shadow);
             transition: transform 0.3s ease;
         }
-
-        .project-card:hover {
-            transform: translateY(-10px);
-        }
-
+        .project-card:hover { transform: translateY(-10px); }
         .project-img {
             height: 200px;
             background-color: var(--secondary);
@@ -425,16 +366,8 @@
             color: white;
             font-size: 3rem;
         }
-
-        .project-info {
-            padding: 20px;
-        }
-
-        .project-info h3 {
-            margin-bottom: 10px;
-            color: var(--primary);
-        }
-
+        .project-info { padding: 20px; }
+        .project-info h3 { margin-bottom: 10px; color: var(--primary); }
         .project-status {
             display: inline-block;
             padding: 5px 10px;
@@ -443,51 +376,75 @@
             font-weight: 600;
             margin-bottom: 15px;
         }
+        .status-completed { background-color: rgba(46, 204, 113, 0.2); color: var(--success); }
+        .status-in-progress { background-color: rgba(52, 152, 219, 0.2); color: var(--secondary); }
+        .status-pending { background-color: rgba(243, 156, 18, 0.2); color: var(--warning); }
 
-        .status-completed {
-            background-color: rgba(46, 204, 113, 0.2);
-            color: var(--success);
+        /* SERVIÇOS – 4 CARDS */
+        .services-section { background-color: #f5f7fa; }
+        .services-grid {
+            max-width: 1100px;
+            margin: 40px auto 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 25px;
+        }
+        .service-card {
+            background-color: #ffffff;
+            border-radius: 12px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.06);
+            padding: 30px 24px 28px;
+            text-align: center;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+        .service-card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 16px 35px rgba(0,0,0,0.10);
+        }
+        .service-icon {
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            margin: 0 auto 18px auto;
+            background-color: rgba(52,152,219,0.08);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .service-icon i { font-size: 1.8rem; color: var(--secondary); }
+        .service-card h3 {
+            font-size: 1.3rem;
+            color: var(--primary);
+            margin-bottom: 10px;
+        }
+        .service-card p {
+            font-size: 0.98rem;
+            color: #555;
+            line-height: 1.7;
         }
 
-        .status-in-progress {
-            background-color: rgba(52, 152, 219, 0.2);
-            color: var(--secondary);
-        }
-
-        .status-pending {
-            background-color: rgba(243, 156, 18, 0.2);
-            color: var(--warning);
-        }
+        /* SOBRE – NOVO LAYOUT */
+        /* (estilos em linha na seção, só mantemos gerais aqui) */
 
         /* CONTATO */
-        .contact-section {
-            background-color: var(--light);
-        }
-
+        .contact-section { background-color: var(--light); }
         .contact-container {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
             gap: 40px;
         }
-
         .contact-info {
             background-color: white;
             padding: 30px;
             border-radius: 10px;
             box-shadow: var(--shadow);
         }
-
-        .contact-info h3 {
-            margin-bottom: 20px;
-            color: var(--primary);
-        }
-
+        .contact-info h3 { margin-bottom: 20px; color: var(--primary); }
         .contact-item {
             display: flex;
             align-items: flex-start;
             margin-bottom: 20px;
         }
-
         .contact-item i {
             color: var(--secondary);
             margin-right: 15px;
@@ -516,12 +473,7 @@
             transition: all 0.3s ease;
             box-shadow: var(--shadow);
         }
-
-        .back-to-top.show {
-            opacity: 1;
-            visibility: visible;
-        }
-
+        .back-to-top.show { opacity: 1; visibility: visible; }
         .back-to-top:hover {
             background-color: #2980b9;
             transform: translateY(-5px);
@@ -533,21 +485,18 @@
             color: white;
             padding: 60px 0 30px;
         }
-
         .footer-content {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
             gap: 40px;
             margin-bottom: 40px;
         }
-
         .footer-column h3 {
             font-size: 1.3rem;
             margin-bottom: 20px;
             position: relative;
             padding-bottom: 10px;
         }
-
         .footer-column h3:after {
             content: '';
             position: absolute;
@@ -557,23 +506,10 @@
             bottom: 0;
             left: 0;
         }
-
-        .footer-column ul {
-            list-style: none;
-        }
-
-        .footer-column ul li {
-            margin-bottom: 10px;
-        }
-
-        .footer-column ul li a {
-            cursor: pointer;
-            transition: color 0.3s;
-        }
-
-        .footer-column ul li a:hover {
-            color: var(--secondary);
-        }
+        .footer-column ul { list-style: none; }
+        .footer-column ul li { margin-bottom: 10px; }
+        .footer-column ul li a { cursor: pointer; transition: color 0.3s; }
+        .footer-column ul li a:hover { color: var(--secondary); }
 
         .copyright {
             text-align: center;
@@ -583,31 +519,18 @@
             opacity: 0.8;
         }
 
-        /* RESPONSIVIDADE */
         @media (max-width: 992px) {
             .header-container {
                 flex-direction: column;
                 padding: 15px;
             }
-            
             nav ul {
                 margin-top: 15px;
                 flex-wrap: wrap;
                 justify-content: center;
             }
-            
-            nav ul li {
-                margin: 0 10px;
-            }
-            
-            .hero h1 {
-                font-size: 2.8rem;
-            }
-            
-            .admin-icon-btn {
-                margin-top: 15px;
-            }
-            
+            .hero h1 { font-size: 2.8rem; }
+            .admin-icon-btn { margin-top: 15px; }
             .logo-container {
                 flex-direction: column;
                 text-align: center;
@@ -616,26 +539,11 @@
         }
 
         @media (max-width: 768px) {
-            .hero {
-                padding: 120px 0 80px;
-            }
-            
-            .hero h1 {
-                font-size: 2.2rem;
-            }
-            
-            .section-title {
-                font-size: 2rem;
-            }
-            
-            .logo-main {
-                font-size: 1.8rem;
-            }
-            
-            .logo-visual {
-                width: 60px;
-                height: 60px;
-            }
+            .hero { padding: 120px 0 80px; }
+            .hero h1 { font-size: 2.2rem; }
+            .section-title { font-size: 2rem; }
+            .logo-main { font-size: 1.8rem; }
+            .logo-visual { width: 60px; height: 60px; }
         }
     </style>
 </head>
@@ -649,10 +557,9 @@
     <header>
         <div class="header-container container">
             <div class="logo-container" id="logoHome">
-                <!-- LOGO GRANDE COM CORES ORIGINAIS -->
                 <div class="logo-visual">
                     <img src="imagem.png" alt="Bemorh Logo" id="logoImage" onerror="handleLogoError(this)">
-                    <div id="logoText" style="display: none; width: 100%; height: 100%; background-color: white; color: var(--secondary); font-weight: bold; font-size: 2.5rem; align-items: center; justify-content: center; border-radius: 15px;">
+                    <div id="logoText" style="display:none;width:100%;height:100%;background-color:white;color:var(--secondary);font-weight:bold;font-size:2.5rem;align-items:center;justify-content:center;border-radius:15px;">
                         J
                     </div>
                 </div>
@@ -676,7 +583,7 @@
         </div>
     </header>
 
-    <!-- Modal de Login Admin -->
+    <!-- Modais de Login/Admin -->
     <div class="modal" id="adminLoginModal">
         <div class="modal-content">
             <div class="modal-header">
@@ -699,18 +606,16 @@
                         <label for="adminPassword">Senha</label>
                         <div class="password-input">
                             <input type="password" id="adminPassword" class="form-control" placeholder="Digite a senha de administrador" required>
-                            <button type="button" class="toggle-password" id="togglePassword">
-                                <i class="fas fa-eye"></i>
-                            </button>
+                            <button type="button" class="toggle-password" id="togglePassword"><i class="fas fa-eye"></i></button>
                         </div>
-                        <small style="color: var(--gray); margin-top: 5px; display: block;">
+                        <small style="color:var(--gray);margin-top:5px;display:block;">
                             <i class="fas fa-info-circle"></i> Senha padrão: <code>admin123</code>
                         </small>
                     </div>
-                    <button type="submit" class="btn" style="width: 100%;">Acessar Painel Administrativo</button>
+                    <button type="submit" class="btn" style="width:100%;">Acessar Painel Administrativo</button>
                 </form>
-                <div style="text-align: center; margin-top: 20px;">
-                    <button class="btn btn-warning" id="resetPasswordBtn" style="width: 100%;">
+                <div style="text-align:center;margin-top:20px;">
+                    <button class="btn btn-warning" id="resetPasswordBtn" style="width:100%;">
                         <i class="fas fa-key"></i> Alterar Senha Padrão
                     </button>
                 </div>
@@ -718,7 +623,6 @@
         </div>
     </div>
 
-    <!-- Modal de Alterar Senha -->
     <div class="modal" id="changePasswordModal">
         <div class="modal-content">
             <div class="modal-header">
@@ -737,30 +641,24 @@
                         <label for="currentPassword">Senha Atual</label>
                         <div class="password-input">
                             <input type="password" id="currentPassword" class="form-control" placeholder="Digite a senha atual" required>
-                            <button type="button" class="toggle-password" id="toggleCurrentPassword">
-                                <i class="fas fa-eye"></i>
-                            </button>
+                            <button type="button" class="toggle-password" id="toggleCurrentPassword"><i class="fas fa-eye"></i></button>
                         </div>
                     </div>
                     <div class="form-group">
                         <label for="newPassword">Nova Senha</label>
                         <div class="password-input">
                             <input type="password" id="newPassword" class="form-control" placeholder="Digite a nova senha" required minlength="6">
-                            <button type="button" class="toggle-password" id="toggleNewPassword">
-                                <i class="fas fa-eye"></i>
-                            </button>
+                            <button type="button" class="toggle-password" id="toggleNewPassword"><i class="fas fa-eye"></i></button>
                         </div>
                     </div>
                     <div class="form-group">
                         <label for="confirmPassword">Confirmar Nova Senha</label>
                         <div class="password-input">
                             <input type="password" id="confirmPassword" class="form-control" placeholder="Confirme a nova senha" required>
-                            <button type="button" class="toggle-password" id="toggleConfirmPassword">
-                                <i class="fas fa-eye"></i>
-                            </button>
+                            <button type="button" class="toggle-password" id="toggleConfirmPassword"><i class="fas fa-eye"></i></button>
                         </div>
                     </div>
-                    <button type="submit" class="btn btn-success" style="width: 100%;">
+                    <button type="submit" class="btn btn-success" style="width:100%;">
                         <i class="fas fa-save"></i> Salvar Nova Senha
                     </button>
                 </form>
@@ -768,23 +666,22 @@
         </div>
     </div>
 
-    <!-- Conteúdo do Site -->
+    <!-- Conteúdo -->
     <div class="client-content active">
-        <!-- Hero Section -->
+        <!-- Hero -->
         <section class="hero" id="home">
             <div class="container">
                 <h1 id="heroTitle">Tecnologia que Conecta Ideias</h1>
                 <p id="heroSubtitle">
                     Na Bemorh, transformamos conceitos em soluções digitais inovadoras. Desenvolvemos ferramentas virtuais que conectam pessoas, processos e tecnologias para impulsionar o seu negócio.
                 </p>
-                <!-- BOTÃO DE CONTATO EM AZUL -->
                 <button class="btn-contact" id="heroContactBtn">
                     <i class="fas fa-envelope"></i> <span id="heroContactText">Entre em Contato</span>
                 </button>
             </div>
         </section>
 
-        <!-- Projetos em Destaque -->
+        <!-- Projetos -->
         <section id="projects">
             <div class="container">
                 <h2 class="section-title" id="projectsTitle">Projetos em Destaque</h2>
@@ -829,90 +726,90 @@
             </div>
         </section>
 
-        <!-- Serviços -->
-        <section id="services">
+        <!-- Serviços (4 cards) -->
+        <section id="services" class="services-section">
             <div class="container">
                 <h2 class="section-title" id="servicesTitle">Nossos Serviços</h2>
-                <div class="projects-grid">
-                    <div class="project-card">
-                        <div class="project-img" style="background-color: #9b59b6;">
-                            <i class="fas fa-lightbulb"></i>
-                        </div>
-                        <div class="project-info">
-                            <h3 id="service1Title">Consultoria em Inovação</h3>
-                            <p id="service1Description">
-                                Ajudamos sua empresa a identificar oportunidades e transformar ideias em projetos viáveis com metodologias ágeis.
-                            </p>
-                        </div>
+                <div class="services-grid">
+                    <div class="service-card">
+                        <div class="service-icon"><i class="fas fa-laptop-code"></i></div>
+                        <h3 id="service1Title">Desenvolvimento Web</h3>
+                        <p id="service1Description">
+                            Sites, sistemas web e aplicações responsivas com as melhores tecnologias do mercado.
+                        </p>
                     </div>
-                    <div class="project-card">
-                        <div class="project-img" style="background-color: #1abc9c;">
-                            <i class="fas fa-code-branch"></i>
-                        </div>
-                        <div class="project-info">
-                            <h3 id="service2Title">Desenvolvimento Ágil</h3>
-                            <p id="service2Description">
-                                Criamos soluções personalizadas com metodologias ágeis, garantindo entrega rápida e adaptação contínua.
-                            </p>
-                        </div>
+                    <div class="service-card">
+                        <div class="service-icon"><i class="fas fa-mobile-alt"></i></div>
+                        <h3 id="service2Title">Apps Mobile</h3>
+                        <p id="service2Description">
+                            Aplicativos nativos e híbridos para iOS e Android, com designs intuitivos e funcionais.
+                        </p>
                     </div>
-                    <div class="project-card">
-                        <div class="project-img" style="background-color: #e67e22;">
-                            <i class="fas fa-project-diagram"></i>
-                        </div>
-                        <div class="project-info">
-                            <h3 id="service3Title">Integração de Sistemas</h3>
-                            <p id="service3Description">
-                                Conectamos diferentes tecnologias e plataformas para criar ecossistemas digitais coesos e eficientes.
-                            </p>
-                        </div>
+                    <div class="service-card">
+                        <div class="service-icon"><i class="fas fa-palette"></i></div>
+                        <h3 id="service3Title">UI/UX Design</h3>
+                        <p id="service3Description">
+                            Design centrado no usuário, interfaces intuitivas e experiências digitais memoráveis.
+                        </p>
+                    </div>
+                    <div class="service-card">
+                        <div class="service-icon"><i class="fas fa-lightbulb"></i></div>
+                        <h3 id="service4Title">Consultoria em Inovação</h3>
+                        <p id="service4Description">
+                            Ajudamos sua empresa a implementar processos inovadores e soluções tecnológicas estratégicas.
+                        </p>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- Sobre Nós -->
-        <section id="about" style="background-color: var(--light);">
+        <!-- Sobre (layout das imagens) -->
+        <section id="about" style="background-color:#eef3f6;padding:80px 0;">
             <div class="container">
-                <h2 class="section-title" id="aboutTitle">Sobre a Bemorh</h2>
-                <div style="max-width: 800px; margin: 0 auto; text-align: center;">
-                    <p id="aboutIntro" style="font-size: 1.2rem; margin-bottom: 30px;">
-                        A <strong>Bemorh</strong> nasceu da crença de que as melhores soluções surgem da conexão de ideias. Somos uma empresa de tecnologia especializada em desenvolver ferramentas virtuais que facilitam a colaboração, estimulam a inovação e transformam conceitos em realidade.
+                <h2 class="section-title" id="aboutTitle" style="margin-bottom:30px;">Sobre a Bemorh</h2>
+                <div style="max-width:900px;margin:0 auto 50px auto;text-align:center;">
+                    <p id="aboutIntro" style="font-size:1.4rem;line-height:1.9;color:#2c3e50;">
+                        A Bemorh nasceu da crença de que as melhores soluções surgem da conexão de ideias.
+                        Somos uma empresa de tecnologia especializada em desenvolver ferramentas virtuais que
+                        facilitam a colaboração, estimulam a inovação e transformam conceitos em realidade.
                     </p>
-                    <div class="projects-grid">
-                        <div class="project-card" style="text-align: left;">
-                            <div class="project-info">
-                                <h3>
-                                    <i class="fas fa-bullseye" style="color: var(--secondary);"></i>
-                                    <span id="missionTitle"> Nossa Missão</span>
-                                </h3>
-                                <p id="missionText">
-                                    Conectar pessoas, ideias e tecnologias para criar soluções digitais inovadoras que transformam negócios e impulsionam resultados.
-                                </p>
-                            </div>
-                        </div>
-                        <div class="project-card" style="text-align: left;">
-                            <div class="project-info">
-                                <h3>
-                                    <i class="fas fa-eye" style="color: var(--secondary);"></i>
-                                    <span id="visionTitle"> Nossa Visão</span>
-                                </h3>
-                                <p id="visionText">
-                                    Ser referência em tecnologia conectiva, reconhecida por transformar ideias dispersas em ecossistemas digitais integrados e eficientes.
-                                </p>
-                            </div>
-                        </div>
-                        <div class="project-card" style="text-align: left;">
-                            <div class="project-info">
-                                <h3>
-                                    <i class="fas fa-handshake" style="color: var(--secondary);"></i>
-                                    <span id="approachTitle"> Nossa Abordagem</span>
-                                </h3>
-                                <p id="approachText">
-                                    Trabalhamos em parceria com nossos clientes, entendendo suas necessidades únicas e co-criando soluções que realmente fazem a diferença.
-                                </p>
-                            </div>
-                        </div>
+                </div>
+                <div style="
+                    max-width:1100px;
+                    margin:0 auto;
+                    display:grid;
+                    grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+                    gap:25px;
+                ">
+                    <div style="background-color:#ffffff;border-radius:12px;box-shadow:0 10px 25px rgba(0,0,0,0.06);padding:25px 24px 28px;">
+                        <h3 style="display:flex;align-items:center;gap:10px;font-size:1.3rem;color:var(--primary);margin-bottom:12px;">
+                            <i class="fas fa-bullseye" style="color:var(--secondary);font-size:1.5rem;"></i>
+                            <span id="missionTitle">Nossa Missão</span>
+                        </h3>
+                        <p id="missionText" style="font-size:1rem;line-height:1.8;color:#555;">
+                            Conectar pessoas, ideias e tecnologias para criar soluções digitais inovadoras que
+                            transformam negócios e impulsionam resultados.
+                        </p>
+                    </div>
+                    <div style="background-color:#ffffff;border-radius:12px;box-shadow:0 10px 25px rgba(0,0,0,0.06);padding:25px 24px 28px;">
+                        <h3 style="display:flex;align-items:center;gap:10px;font-size:1.3rem;color:var(--primary);margin-bottom:12px;">
+                            <i class="fas fa-eye" style="color:var(--secondary);font-size:1.5rem;"></i>
+                            <span id="visionTitle">Nossa Visão</span>
+                        </h3>
+                        <p id="visionText" style="font-size:1rem;line-height:1.8;color:#555;">
+                            Ser referência em tecnologia conectiva, reconhecida por transformar ideias dispersas em
+                            ecossistemas digitais integrados e eficientes.
+                        </p>
+                    </div>
+                    <div style="background-color:#ffffff;border-radius:12px;box-shadow:0 10px 25px rgba(0,0,0,0.06);padding:25px 24px 28px;">
+                        <h3 style="display:flex;align-items:center;gap:10px;font-size:1.3rem;color:var(--primary);margin-bottom:12px;">
+                            <i class="fas fa-handshake" style="color:var(--secondary);font-size:1.5rem;"></i>
+                            <span id="approachTitle">Nossa Abordagem</span>
+                        </h3>
+                        <p id="approachText" style="font-size:1rem;line-height:1.8;color:#555;">
+                            Trabalhamos em parceria com nossos clientes, entendendo suas necessidades únicas
+                            e co-criando soluções que realmente fazem a diferença.
+                        </p>
                     </div>
                 </div>
             </div>
@@ -977,7 +874,7 @@
                                 <label for="contactMessage" id="contactMessageLabel">Sua Ideia ou Projeto</label>
                                 <textarea id="contactMessage" class="form-control" rows="5" placeholder="Conte-nos sobre sua ideia ou projeto..." required></textarea>
                             </div>
-                            <button type="submit" class="btn-contact" style="width: 100%;">
+                            <button type="submit" class="btn-contact" style="width:100%;">
                                 <i class="fas fa-paper-plane"></i>
                                 <span id="contactSubmitText">Enviar Mensagem</span>
                             </button>
@@ -993,22 +890,22 @@
         <div class="container">
             <div class="footer-content">
                 <div class="footer-column">
-                    <div class="logo-container" style="margin-bottom: 20px; cursor: default;">
-                        <div class="logo-visual" style="width: 60px; height: 60px;">
-                            <img src="imagem.png" alt="Bemorh Logo" style="width: 90%; height: 90%; object-fit: contain; padding: 8px;" onerror="handleLogoError(this)">
+                    <div class="logo-container" style="margin-bottom:20px;cursor:default;">
+                        <div class="logo-visual" style="width:60px;height:60px;">
+                            <img src="imagem.png" alt="Bemorh Logo" style="width:90%;height:90%;object-fit:contain;padding:8px;" onerror="handleLogoError(this)">
                         </div>
                         <div class="logo-text">
-                            <div class="logo-main" style="font-size: 1.5rem;" id="footerLogoTitle">Bemorh</div>
-                            <div class="logo-tagline" style="font-size: 0.8rem;" id="footerLogoTagline">tecnologia que conecta ideias</div>
+                            <div class="logo-main" style="font-size:1.5rem;" id="footerLogoTitle">Bemorh</div>
+                            <div class="logo-tagline" style="font-size:0.8rem;" id="footerLogoTagline">tecnologia que conecta ideias</div>
                         </div>
                     </div>
                     <p id="footerDescription">
                         Tecnologia que conecta ideias. Desenvolvemos soluções digitais inovadoras que transformam conceitos em realidade.
                     </p>
-                    <div style="margin-top: 20px;">
-                        <a href="#" style="margin-right: 15px;"><i class="fab fa-linkedin fa-lg"></i></a>
-                        <a href="#" style="margin-right: 15px;"><i class="fab fa-instagram fa-lg"></i></a>
-                        <a href="#" style="margin-right: 15px;"><i class="fab fa-twitter fa-lg"></i></a>
+                    <div style="margin-top:20px;">
+                        <a href="#" style="margin-right:15px;"><i class="fab fa-linkedin fa-lg"></i></a>
+                        <a href="#" style="margin-right:15px;"><i class="fab fa-instagram fa-lg"></i></a>
+                        <a href="#" style="margin-right:15px;"><i class="fab fa-twitter fa-lg"></i></a>
                         <a href="#"><i class="fab fa-youtube fa-lg"></i></a>
                     </div>
                 </div>
@@ -1034,9 +931,9 @@
                 <div class="footer-column">
                     <h3>Novidades</h3>
                     <p>Receba nossas ideias e inovações diretamente no seu email.</p>
-                    <div class="form-group" style="margin-top: 15px;">
+                    <div class="form-group" style="margin-top:15px;">
                         <input type="email" class="form-control" placeholder="Seu email" id="newsletterEmail">
-                        <button class="btn" style="margin-top: 10px; width: 100%;" id="newsletterBtn">Inscrever-se</button>
+                        <button class="btn" style="margin-top:10px;width:100%;" id="newsletterBtn">Inscrever-se</button>
                     </div>
                 </div>
             </div>
@@ -1047,19 +944,17 @@
     </footer>
 
     <script>
-        // Sistema de Autenticação
+        // ===== AUTENTICAÇÃO ADMIN =====
         const adminAuth = {
             password: localStorage.getItem('adminPassword') || "admin123",
-            
-            login: function(inputPassword) {
+            login(inputPassword) {
                 if (inputPassword === this.password) {
                     localStorage.setItem('adminLoggedIn', 'true');
                     return true;
                 }
                 return false;
             },
-            
-            changePassword: function(currentPassword, newPassword) {
+            changePassword(currentPassword, newPassword) {
                 if (currentPassword === this.password) {
                     this.password = newPassword;
                     localStorage.setItem('adminPassword', newPassword);
@@ -1069,7 +964,6 @@
             }
         };
 
-        // Elementos do DOM
         const adminLoginModal = document.getElementById('adminLoginModal');
         const changePasswordModal = document.getElementById('changePasswordModal');
         const loginError = document.getElementById('loginError');
@@ -1079,25 +973,19 @@
         const backToTopBtn = document.getElementById('backToTop');
         const navItems = document.querySelectorAll('nav ul li a');
 
-        // Função para tratar erro na logo - COM CORES ORIGINAIS
-        function handleLogoError(imgElement) {
-            console.log("Erro ao carregar logo, usando fallback...");
-            
-            imgElement.style.display = 'none';
-            
-            let logoText = imgElement.nextElementSibling;
+        function handleLogoError(img) {
+            img.style.display = 'none';
+            let logoText = img.nextElementSibling;
             if (!logoText || !logoText.id.includes('logoText')) {
                 logoText = document.createElement('div');
                 logoText.id = 'logoText';
-                imgElement.parentElement.appendChild(logoText);
+                img.parentElement.appendChild(logoText);
             }
-            
-            // CORES ORIGINAIS - FUNDO BRANCO, TEXTO AZUL
             logoText.style.display = 'flex';
             logoText.style.width = '100%';
             logoText.style.height = '100%';
-            logoText.style.background = 'white'; // FUNDO BRANCO
-            logoText.style.color = 'var(--secondary)'; // TEXTO AZUL
+            logoText.style.background = 'white';
+            logoText.style.color = 'var(--secondary)';
             logoText.style.fontWeight = 'bold';
             logoText.style.fontSize = '2.5rem';
             logoText.style.alignItems = 'center';
@@ -1107,13 +995,11 @@
             logoText.innerHTML = 'J';
         }
 
-        // Verificar logo ao carregar
         window.addEventListener('load', function() {
             const logoImg = document.getElementById('logoImage');
             if (logoImg && (logoImg.naturalWidth === 0 || logoImg.complete === false)) {
                 handleLogoError(logoImg);
             }
-            
             document.querySelectorAll('.logo-visual img').forEach(img => {
                 if (img.naturalWidth === 0) {
                     handleLogoError(img);
@@ -1121,47 +1007,28 @@
             });
         });
 
-        // Navegação do Site
         function scrollToSection(sectionId) {
             const section = document.getElementById(sectionId);
             if (section) {
                 const headerHeight = document.querySelector('header').offsetHeight;
                 const sectionPosition = section.offsetTop - headerHeight;
-                
-                window.scrollTo({
-                    top: sectionPosition,
-                    behavior: 'smooth'
-                });
-                
+                window.scrollTo({ top: sectionPosition, behavior: 'smooth' });
                 updateNavigation(sectionId);
             }
         }
 
         function updateNavigation(activeItem) {
             navItems.forEach(item => item.classList.remove('active'));
-            
-            const activeNav = document.getElementById(`nav${capitalizeFirstLetter(activeItem)}`);
-            if (activeNav) activeNav.classList.add('active');
+            const id = 'nav' + activeItem.charAt(0).toUpperCase() + activeItem.slice(1);
+            const nav = document.getElementById(id);
+            if (nav) nav.classList.add('active');
         }
 
-        function capitalizeFirstLetter(string) {
-            return string.charAt(0).toUpperCase() + string.slice(1);
-        }
-
-        // Botão Voltar ao Topo
         window.addEventListener('scroll', () => {
-            if (window.pageYOffset > 300) {
-                backToTopBtn.classList.add('show');
-            } else {
-                backToTopBtn.classList.remove('show');
-            }
+            backToTopBtn.classList.toggle('show', window.pageYOffset > 300);
         });
+        backToTopBtn.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
 
-        backToTopBtn.addEventListener('click', () => {
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-        });
-
-        // Configurar navegação
         document.getElementById('logoHome').addEventListener('click', () => scrollToSection('home'));
         document.getElementById('navHome').addEventListener('click', () => scrollToSection('home'));
         document.getElementById('navProjects').addEventListener('click', () => scrollToSection('projects'));
@@ -1170,94 +1037,69 @@
         document.getElementById('navContact').addEventListener('click', () => scrollToSection('contact'));
         document.getElementById('heroContactBtn').addEventListener('click', () => scrollToSection('contact'));
 
-        // Footer navigation
         document.getElementById('footerHome').addEventListener('click', () => scrollToSection('home'));
         document.getElementById('footerProjects').addEventListener('click', () => scrollToSection('projects'));
         document.getElementById('footerServices').addEventListener('click', () => scrollToSection('services'));
         document.getElementById('footerAbout').addEventListener('click', () => scrollToSection('about'));
         document.getElementById('footerContact').addEventListener('click', () => scrollToSection('contact'));
 
-        // Botão de acesso admin
-        document.getElementById('adminAccessBtn').addEventListener('click', function() {
+        document.getElementById('adminAccessBtn').addEventListener('click', () => {
             adminLoginModal.style.display = 'flex';
             document.getElementById('adminPassword').focus();
         });
 
-        // Fechar modais
-        document.getElementById('closeLoginModal').addEventListener('click', function() {
+        document.getElementById('closeLoginModal').addEventListener('click', () => {
             adminLoginModal.style.display = 'none';
             loginError.style.display = 'none';
             loginSuccess.style.display = 'none';
         });
-
-        document.getElementById('closePasswordModal').addEventListener('click', function() {
+        document.getElementById('closePasswordModal').addEventListener('click', () => {
             changePasswordModal.style.display = 'none';
             passwordError.style.display = 'none';
             passwordSuccess.style.display = 'none';
         });
 
-        // Fechar modais ao clicar fora
-        window.addEventListener('click', function(event) {
-            if (event.target === adminLoginModal) {
+        window.addEventListener('click', e => {
+            if (e.target === adminLoginModal) {
                 adminLoginModal.style.display = 'none';
                 loginError.style.display = 'none';
                 loginSuccess.style.display = 'none';
             }
-            if (event.target === changePasswordModal) {
+            if (e.target === changePasswordModal) {
                 changePasswordModal.style.display = 'none';
                 passwordError.style.display = 'none';
                 passwordSuccess.style.display = 'none';
             }
         });
 
-        // Mostrar/ocultar senha
-        document.getElementById('togglePassword').addEventListener('click', function() {
-            const passwordInput = document.getElementById('adminPassword');
-            const icon = this.querySelector('i');
-            togglePassword(passwordInput, icon);
-        });
-
-        document.getElementById('toggleCurrentPassword').addEventListener('click', function() {
-            const passwordInput = document.getElementById('currentPassword');
-            const icon = this.querySelector('i');
-            togglePassword(passwordInput, icon);
-        });
-
-        document.getElementById('toggleNewPassword').addEventListener('click', function() {
-            const passwordInput = document.getElementById('newPassword');
-            const icon = this.querySelector('i');
-            togglePassword(passwordInput, icon);
-        });
-
-        document.getElementById('toggleConfirmPassword').addEventListener('click', function() {
-            const passwordInput = document.getElementById('confirmPassword');
-            const icon = this.querySelector('i');
-            togglePassword(passwordInput, icon);
-        });
-
-        function togglePassword(passwordInput, icon) {
-            if (passwordInput.type === 'password') {
-                passwordInput.type = 'text';
-                icon.classList.remove('fa-eye');
-                icon.classList.add('fa-eye-slash');
-            } else {
-                passwordInput.type = 'password';
-                icon.classList.remove('fa-eye-slash');
-                icon.classList.add('fa-eye');
-            }
+        function bindToggle(btnId, inputId) {
+            document.getElementById(btnId).addEventListener('click', function() {
+                const input = document.getElementById(inputId);
+                const icon = this.querySelector('i');
+                if (input.type === 'password') {
+                    input.type = 'text';
+                    icon.classList.remove('fa-eye');
+                    icon.classList.add('fa-eye-slash');
+                } else {
+                    input.type = 'password';
+                    icon.classList.remove('fa-eye-slash');
+                    icon.classList.add('fa-eye');
+                }
+            });
         }
+        bindToggle('togglePassword', 'adminPassword');
+        bindToggle('toggleCurrentPassword', 'currentPassword');
+        bindToggle('toggleNewPassword', 'newPassword');
+        bindToggle('toggleConfirmPassword', 'confirmPassword');
 
-        // Login administrativo
-        document.getElementById('adminLoginForm').addEventListener('submit', function(e) {
+        document.getElementById('adminLoginForm').addEventListener('submit', e => {
             e.preventDefault();
             const password = document.getElementById('adminPassword').value;
-            
             loginError.style.display = 'none';
             loginSuccess.style.display = 'none';
-            
             if (adminAuth.login(password)) {
                 loginSuccess.style.display = 'block';
-                setTimeout(function() {
+                setTimeout(() => {
                     adminLoginModal.style.display = 'none';
                     window.location.href = 'admin.html';
                     document.getElementById('adminPassword').value = '';
@@ -1269,43 +1111,35 @@
             }
         });
 
-        // Botão para alterar senha
-        document.getElementById('resetPasswordBtn').addEventListener('click', function() {
+        document.getElementById('resetPasswordBtn').addEventListener('click', () => {
             adminLoginModal.style.display = 'none';
             changePasswordModal.style.display = 'flex';
             document.getElementById('currentPassword').focus();
         });
 
-        // Alterar senha
-        document.getElementById('changePasswordForm').addEventListener('submit', function(e) {
+        document.getElementById('changePasswordForm').addEventListener('submit', e => {
             e.preventDefault();
-            
             const currentPassword = document.getElementById('currentPassword').value;
             const newPassword = document.getElementById('newPassword').value;
             const confirmPassword = document.getElementById('confirmPassword').value;
-            
             passwordError.style.display = 'none';
             passwordSuccess.style.display = 'none';
-            
             if (newPassword !== confirmPassword) {
                 passwordError.textContent = "As novas senhas não coincidem!";
                 passwordError.style.display = 'block';
                 return;
             }
-            
             if (newPassword.length < 6) {
                 passwordError.textContent = "A nova senha deve ter pelo menos 6 caracteres!";
                 passwordError.style.display = 'block';
                 return;
             }
-            
             if (adminAuth.changePassword(currentPassword, newPassword)) {
                 passwordSuccess.style.display = 'block';
                 document.getElementById('currentPassword').value = '';
                 document.getElementById('newPassword').value = '';
                 document.getElementById('confirmPassword').value = '';
-                
-                setTimeout(function() {
+                setTimeout(() => {
                     changePasswordModal.style.display = 'none';
                     adminLoginModal.style.display = 'flex';
                 }, 2000);
@@ -1317,23 +1151,15 @@
             }
         });
 
-        // Formulário de contato
-        document.getElementById('contactForm').addEventListener('submit', function(e) {
+        document.getElementById('contactForm').addEventListener('submit', e => {
             e.preventDefault();
-            
             const name = document.getElementById('contactName').value;
-            const email = document.getElementById('contactEmail').value;
-            const phone = document.getElementById('contactPhone').value;
-            const message = document.getElementById('contactMessage').value;
-            
             alert(`Obrigado, ${name}! Sua mensagem foi enviada com sucesso. Entraremos em contato em breve.`);
             document.getElementById('contactForm').reset();
         });
 
-        // Newsletter
-        document.getElementById('newsletterBtn').addEventListener('click', function() {
+        document.getElementById('newsletterBtn').addEventListener('click', () => {
             const email = document.getElementById('newsletterEmail').value;
-            
             if (email && email.includes('@')) {
                 alert(`Obrigado por se inscrever! Enviaremos nossas inovações para ${email}.`);
                 document.getElementById('newsletterEmail').value = '';
@@ -1342,88 +1168,80 @@
             }
         });
 
-        // Detectar seção ativa no scroll
-        window.addEventListener('scroll', function() {
-            const sections = ['home', 'projects', 'services', 'about', 'contact'];
-            let currentSection = 'home';
-            
-            sections.forEach(section => {
-                const element = document.getElementById(section);
-                if (element) {
-                    const rect = element.getBoundingClientRect();
-                    const headerHeight = document.querySelector('header').offsetHeight;
-                    
+        window.addEventListener('scroll', () => {
+            const sections = ['home','projects','services','about','contact'];
+            let current = 'home';
+            const headerHeight = document.querySelector('header').offsetHeight;
+            sections.forEach(id => {
+                const el = document.getElementById(id);
+                if (el) {
+                    const rect = el.getBoundingClientRect();
                     if (rect.top <= headerHeight + 100 && rect.bottom >= headerHeight + 100) {
-                        currentSection = section;
+                        current = id;
                     }
                 }
             });
-            
-            updateNavigation(currentSection);
+            updateNavigation(current);
         });
 
-        // ====== CONFIGURAÇÕES DO SITE (lidas do localStorage, gravadas no admin) ======
+        // ===== CONFIGURAÇÕES DO SITE (LIDAS DO ADMIN) =====
         const defaultSiteConfig = {
-            logoTitle: "Bemorh",
-            logoTagline: "tecnologia que conecta ideias",
-
-            heroTitle: "Tecnologia que Conecta Ideias",
-            heroSubtitle: "Na Bemorh, transformamos conceitos em soluções digitais inovadoras. Desenvolvemos ferramentas virtuais que conectam pessoas, processos e tecnologias para impulsionar o seu negócio.",
-            heroContactText: "Entre em Contato",
-
-            projectsTitle: "Projetos em Destaque",
-            project1Title: "Sistema de Gestão de Ideias",
-            project1Status: "Concluído",
-            project1Description: "Plataforma colaborativa que organiza e prioriza ideias em projetos executáveis com fluxos visuais intuitivos.",
-            project2Title: "IA para Inovação",
-            project2Status: "Em Andamento",
-            project2Description: "Ferramenta de inteligência artificial que auxilia na geração e refinamento de ideias criativas para negócios.",
-            project3Title: "Plataforma Colaborativa",
-            project3Status: "Em Planejamento",
-            project3Description: "Ambiente virtual para equipes distribuídas colaborarem em tempo real no desenvolvimento de projetos.",
-
-            servicesTitle: "Nossos Serviços",
-            service1Title: "Consultoria em Inovação",
-            service1Description: "Ajudamos sua empresa a identificar oportunidades e transformar ideias em projetos viáveis com metodologias ágeis.",
-            service2Title: "Desenvolvimento Ágil",
-            service2Description: "Criamos soluções personalizadas com metodologias ágeis, garantindo entrega rápida e adaptação contínua.",
-            service3Title: "Integração de Sistemas",
-            service3Description: "Conectamos diferentes tecnologias e plataformas para criar ecossistemas digitais coesos e eficientes.",
-
-            aboutTitle: "Sobre a Bemorh",
-            aboutIntro: "A Bemorh nasceu da crença de que as melhores soluções surgem da conexão de ideias. Somos uma empresa de tecnologia especializada em desenvolver ferramentas virtuais que facilitam a colaboração, estimulam a inovação e transformam conceitos em realidade.",
-            missionTitle: "Nossa Missão",
-            missionText: "Conectar pessoas, ideias e tecnologias para criar soluções digitais inovadoras que transformam negócios e impulsionam resultados.",
-            visionTitle: "Nossa Visão",
-            visionText: "Ser referência em tecnologia conectiva, reconhecida por transformar ideias dispersas em ecossistemas digitais integrados e eficientes.",
-            approachTitle: "Nossa Abordagem",
-            approachText: "Trabalhamos em parceria com nossos clientes, entendendo suas necessidades únicas e co-criando soluções que realmente fazem a diferença.",
-
-            contactTitle: "Conecte-se Conosco",
-            contactInfoTitle: "Informações de Contato",
-            contactAddressTitle: "Endereço",
-            contactAddressText: "Av. das Inovações, 123 - Centro de Tecnologia<br>São Paulo - SP, 04538-000",
-            contactPhoneTitle: "Telefone",
-            contactPhoneText: "(11) 3456-7890",
-            contactEmailTitle: "Email",
-            contactEmailText: "contato@bemorh.com.br",
-            contactScheduleTitle: "Horário de Atendimento",
-            contactScheduleText: "Segunda a Sexta: 8h às 19h<br>Sábado: 9h às 13h",
-            contactFormTitle: "Envie sua Ideia",
-            contactNameLabel: "Nome",
-            contactEmailLabel: "Email",
-            contactPhoneLabel: "Telefone",
-            contactMessageLabel: "Sua Ideia ou Projeto",
-            contactSubmitText: "Enviar Mensagem",
-
-            footerDescription: "Tecnologia que conecta ideias. Desenvolvemos soluções digitais inovadoras que transformam conceitos em realidade.",
-            footerQuickLinksTitle: "Links Rápidos",
-            footerContactTitle: "Contato",
-            footerAddress: "Av. das Inovações, 123 - São Paulo, SP",
-            footerPhone: "(11) 3456-7890",
-            footerEmail: "contato@bemorh.com.br",
-            footerSchedule: "Seg-Sex: 8h-19h",
-            footerCopyright: "© 2023 Bemorh - Tecnologia que Conecta Ideias. Todos os direitos reservados."
+            logoTitle:"Bemorh",
+            logoTagline:"tecnologia que conecta ideias",
+            heroTitle:"Tecnologia que Conecta Ideias",
+            heroSubtitle:"Na Bemorh, transformamos conceitos em soluções digitais inovadoras. Desenvolvemos ferramentas virtuais que conectam pessoas, processos e tecnologias para impulsionar o seu negócio.",
+            heroContactText:"Entre em Contato",
+            projectsTitle:"Projetos em Destaque",
+            project1Title:"Sistema de Gestão de Ideias",
+            project1Status:"Concluído",
+            project1Description:"Plataforma colaborativa que organiza e prioriza ideias em projetos executáveis com fluxos visuais intuitivos.",
+            project2Title:"IA para Inovação",
+            project2Status:"Em Andamento",
+            project2Description:"Ferramenta de inteligência artificial que auxilia na geração e refinamento de ideias criativas para negócios.",
+            project3Title:"Plataforma Colaborativa",
+            project3Status:"Em Planejamento",
+            project3Description:"Ambiente virtual para equipes distribuídas colaborarem em tempo real no desenvolvimento de projetos.",
+            servicesTitle:"Nossos Serviços",
+            service1Title:"Desenvolvimento Web",
+            service1Description:"Sites, sistemas web e aplicações responsivas com as melhores tecnologias do mercado.",
+            service2Title:"Apps Mobile",
+            service2Description:"Aplicativos nativos e híbridos para iOS e Android, com designs intuitivos e funcionais.",
+            service3Title:"UI/UX Design",
+            service3Description:"Design centrado no usuário, interfaces intuitivas e experiências digitais memoráveis.",
+            service4Title:"Consultoria em Inovação",
+            service4Description:"Ajudamos sua empresa a implementar processos inovadores e soluções tecnológicas estratégicas.",
+            aboutTitle:"Sobre a Bemorh",
+            aboutIntro:"A Bemorh nasceu da crença de que as melhores soluções surgem da conexão de ideias. Somos uma empresa de tecnologia especializada em desenvolver ferramentas virtuais que facilitam a colaboração, estimulam a inovação e transformam conceitos em realidade.",
+            missionTitle:"Nossa Missão",
+            missionText:"Conectar pessoas, ideias e tecnologias para criar soluções digitais inovadoras que transformam negócios e impulsionam resultados.",
+            visionTitle:"Nossa Visão",
+            visionText:"Ser referência em tecnologia conectiva, reconhecida por transformar ideias dispersas em ecossistemas digitais integrados e eficientes.",
+            approachTitle:"Nossa Abordagem",
+            approachText:"Trabalhamos em parceria com nossos clientes, entendendo suas necessidades únicas e co-criando soluções que realmente fazem a diferença.",
+            contactTitle:"Conecte-se Conosco",
+            contactInfoTitle:"Informações de Contato",
+            contactAddressTitle:"Endereço",
+            contactAddressText:"Av. das Inovações, 123 - Centro de Tecnologia<br>São Paulo - SP, 04538-000",
+            contactPhoneTitle:"Telefone",
+            contactPhoneText:"(11) 3456-7890",
+            contactEmailTitle:"Email",
+            contactEmailText:"contato@bemorh.com.br",
+            contactScheduleTitle:"Horário de Atendimento",
+            contactScheduleText:"Segunda a Sexta: 8h às 19h<br>Sábado: 9h às 13h",
+            contactFormTitle:"Envie sua Ideia",
+            contactNameLabel:"Nome",
+            contactEmailLabel:"Email",
+            contactPhoneLabel:"Telefone",
+            contactMessageLabel:"Sua Ideia ou Projeto",
+            contactSubmitText:"Enviar Mensagem",
+            footerDescription:"Tecnologia que conecta ideias. Desenvolvemos soluções digitais inovadoras que transformam conceitos em realidade.",
+            footerQuickLinksTitle:"Links Rápidos",
+            footerContactTitle:"Contato",
+            footerAddress:"Av. das Inovações, 123 - São Paulo, SP",
+            footerPhone:"(11) 3456-7890",
+            footerEmail:"contato@bemorh.com.br",
+            footerSchedule:"Seg-Sex: 8h-19h",
+            footerCopyright:"© 2023 Bemorh - Tecnologia que Conecta Ideias. Todos os direitos reservados."
         };
 
         function loadSiteConfig() {
@@ -1432,32 +1250,26 @@
             try {
                 const parsed = JSON.parse(saved);
                 return { ...defaultSiteConfig, ...parsed };
-            } catch (e) {
-                console.error("Erro ao ler bemorhSiteConfig:", e);
-                return defaultSiteConfig;
-            }
+            } catch { return defaultSiteConfig; }
         }
 
         function applySiteConfig() {
             const cfg = loadSiteConfig();
-            const setText = (id, v, html) => {
+            const setText = (id, v, html=false) => {
                 const el = document.getElementById(id);
                 if (!el || v == null) return;
                 if (html) el.innerHTML = v; else el.textContent = v;
             };
 
-            // Logo
             setText('siteLogoTitle', cfg.logoTitle);
             setText('siteLogoTagline', cfg.logoTagline);
             setText('footerLogoTitle', cfg.logoTitle);
             setText('footerLogoTagline', cfg.logoTagline);
 
-            // Hero
             setText('heroTitle', cfg.heroTitle);
             setText('heroSubtitle', cfg.heroSubtitle);
             setText('heroContactText', cfg.heroContactText);
 
-            // Projetos
             setText('projectsTitle', cfg.projectsTitle);
             setText('project1Title', cfg.project1Title);
             setText('project1Status', cfg.project1Status);
@@ -1469,7 +1281,6 @@
             setText('project3Status', cfg.project3Status);
             setText('project3Description', cfg.project3Description);
 
-            // Serviços
             setText('servicesTitle', cfg.servicesTitle);
             setText('service1Title', cfg.service1Title);
             setText('service1Description', cfg.service1Description);
@@ -1477,8 +1288,9 @@
             setText('service2Description', cfg.service2Description);
             setText('service3Title', cfg.service3Title);
             setText('service3Description', cfg.service3Description);
+            setText('service4Title', cfg.service4Title);
+            setText('service4Description', cfg.service4Description);
 
-            // Sobre
             setText('aboutTitle', cfg.aboutTitle);
             setText('aboutIntro', cfg.aboutIntro);
             setText('missionTitle', cfg.missionTitle);
@@ -1488,7 +1300,6 @@
             setText('approachTitle', cfg.approachTitle);
             setText('approachText', cfg.approachText);
 
-            // Contato
             setText('contactTitle', cfg.contactTitle);
             setText('contactInfoTitle', cfg.contactInfoTitle);
             setText('contactAddressTitle', cfg.contactAddressTitle);
@@ -1506,7 +1317,6 @@
             setText('contactMessageLabel', cfg.contactMessageLabel);
             setText('contactSubmitText', cfg.contactSubmitText);
 
-            // Footer
             setText('footerDescription', cfg.footerDescription);
             setText('footerQuickLinksTitle', cfg.footerQuickLinksTitle);
             setText('footerContactTitle', cfg.footerContactTitle);
@@ -1517,13 +1327,7 @@
             setText('footerCopyright', cfg.footerCopyright);
         }
 
-        // Inicializar
-        document.addEventListener('DOMContentLoaded', function() {
-            applySiteConfig();
-            if (localStorage.getItem('adminLoggedIn') === 'true') {
-                // window.location.href = 'admin.html';
-            }
-        });
+        document.addEventListener('DOMContentLoaded', applySiteConfig);
     </script>
 </body>
 </html>

@@ -589,25 +589,25 @@
                 flex-direction: column;
                 padding: 15px;
             }
-            
+
             nav ul {
                 margin-top: 15px;
                 flex-wrap: wrap;
                 justify-content: center;
             }
-            
+
             nav ul li {
                 margin: 0 10px;
             }
-            
+
             .hero h1 {
                 font-size: 2.8rem;
             }
-            
+
             .admin-icon-btn {
                 margin-top: 15px;
             }
-            
+
             .logo-container {
                 flex-direction: column;
                 text-align: center;
@@ -619,19 +619,19 @@
             .hero {
                 padding: 120px 0 80px;
             }
-            
+
             .hero h1 {
                 font-size: 2.2rem;
             }
-            
+
             .section-title {
                 font-size: 2rem;
             }
-            
+
             .logo-main {
                 font-size: 1.8rem;
             }
-            
+
             .logo-visual {
                 width: 60px;
                 height: 60px;
@@ -657,8 +657,8 @@
                     </div>
                 </div>
                 <div class="logo-text">
-                    <div class="logo-main">Bemorh</div>
-                    <div class="logo-tagline">tecnologia que conecta ideias</div>
+                    <div class="logo-main" id="siteLogoTitle">Bemorh</div>
+                    <div class="logo-tagline" id="siteLogoTagline">tecnologia que conecta ideias</div>
                 </div>
             </div>
             <nav>
@@ -773,11 +773,13 @@
         <!-- Hero Section -->
         <section class="hero" id="home">
             <div class="container">
-                <h1>Tecnologia que Conecta Ideias</h1>
-                <p>Na Bemorh, transformamos conceitos em soluções digitais inovadoras. Desenvolvemos ferramentas virtuais que conectam pessoas, processos e tecnologias para impulsionar o seu negócio.</p>
+                <h1 id="heroTitle">Tecnologia que Conecta Ideias</h1>
+                <p id="heroSubtitle">
+                    Na Bemorh, transformamos conceitos em soluções digitais inovadoras. Desenvolvemos ferramentas virtuais que conectam pessoas, processos e tecnologias para impulsionar o seu negócio.
+                </p>
                 <!-- BOTÃO DE CONTATO EM AZUL -->
                 <button class="btn-contact" id="heroContactBtn">
-                    <i class="fas fa-envelope"></i> Entre em Contato
+                    <i class="fas fa-envelope"></i> <span id="heroContactText">Entre em Contato</span>
                 </button>
             </div>
         </section>
@@ -785,16 +787,18 @@
         <!-- Projetos em Destaque -->
         <section id="projects">
             <div class="container">
-                <h2 class="section-title">Projetos em Destaque</h2>
+                <h2 class="section-title" id="projectsTitle">Projetos em Destaque</h2>
                 <div class="projects-grid">
                     <div class="project-card">
                         <div class="project-img">
                             <i class="fas fa-project-diagram"></i>
                         </div>
                         <div class="project-info">
-                            <h3>Sistema de Gestão de Ideias</h3>
-                            <span class="project-status status-completed">Concluído</span>
-                            <p>Plataforma colaborativa que organiza e prioriza ideias em projetos executáveis com fluxos visuais intuitivos.</p>
+                            <h3 id="project1Title">Sistema de Gestão de Ideias</h3>
+                            <span class="project-status status-completed" id="project1Status">Concluído</span>
+                            <p id="project1Description">
+                                Plataforma colaborativa que organiza e prioriza ideias em projetos executáveis com fluxos visuais intuitivos.
+                            </p>
                         </div>
                     </div>
                     <div class="project-card">
@@ -802,9 +806,11 @@
                             <i class="fas fa-brain"></i>
                         </div>
                         <div class="project-info">
-                            <h3>IA para Inovação</h3>
-                            <span class="project-status status-in-progress">Em Andamento</span>
-                            <p>Ferramenta de inteligência artificial que auxilia na geração e refinamento de ideias criativas para negócios.</p>
+                            <h3 id="project2Title">IA para Inovação</h3>
+                            <span class="project-status status-in-progress" id="project2Status">Em Andamento</span>
+                            <p id="project2Description">
+                                Ferramenta de inteligência artificial que auxilia na geração e refinamento de ideias criativas para negócios.
+                            </p>
                         </div>
                     </div>
                     <div class="project-card">
@@ -812,9 +818,11 @@
                             <i class="fas fa-users-cog"></i>
                         </div>
                         <div class="project-info">
-                            <h3>Plataforma Colaborativa</h3>
-                            <span class="project-status status-pending">Em Planejamento</span>
-                            <p>Ambiente virtual para equipes distribuídas colaborarem em tempo real no desenvolvimento de projetos.</p>
+                            <h3 id="project3Title">Plataforma Colaborativa</h3>
+                            <span class="project-status status-pending" id="project3Status">Em Planejamento</span>
+                            <p id="project3Description">
+                                Ambiente virtual para equipes distribuídas colaborarem em tempo real no desenvolvimento de projetos.
+                            </p>
                         </div>
                     </div>
                 </div>
@@ -824,15 +832,17 @@
         <!-- Serviços -->
         <section id="services">
             <div class="container">
-                <h2 class="section-title">Nossos Serviços</h2>
+                <h2 class="section-title" id="servicesTitle">Nossos Serviços</h2>
                 <div class="projects-grid">
                     <div class="project-card">
                         <div class="project-img" style="background-color: #9b59b6;">
                             <i class="fas fa-lightbulb"></i>
                         </div>
                         <div class="project-info">
-                            <h3>Consultoria em Inovação</h3>
-                            <p>Ajudamos sua empresa a identificar oportunidades e transformar ideias em projetos viáveis com metodologias ágeis.</p>
+                            <h3 id="service1Title">Consultoria em Inovação</h3>
+                            <p id="service1Description">
+                                Ajudamos sua empresa a identificar oportunidades e transformar ideias em projetos viáveis com metodologias ágeis.
+                            </p>
                         </div>
                     </div>
                     <div class="project-card">
@@ -840,8 +850,10 @@
                             <i class="fas fa-code-branch"></i>
                         </div>
                         <div class="project-info">
-                            <h3>Desenvolvimento Ágil</h3>
-                            <p>Criamos soluções personalizadas com metodologias ágeis, garantindo entrega rápida e adaptação contínua.</p>
+                            <h3 id="service2Title">Desenvolvimento Ágil</h3>
+                            <p id="service2Description">
+                                Criamos soluções personalizadas com metodologias ágeis, garantindo entrega rápida e adaptação contínua.
+                            </p>
                         </div>
                     </div>
                     <div class="project-card">
@@ -849,8 +861,10 @@
                             <i class="fas fa-project-diagram"></i>
                         </div>
                         <div class="project-info">
-                            <h3>Integração de Sistemas</h3>
-                            <p>Conectamos diferentes tecnologias e plataformas para criar ecossistemas digitais coesos e eficientes.</p>
+                            <h3 id="service3Title">Integração de Sistemas</h3>
+                            <p id="service3Description">
+                                Conectamos diferentes tecnologias e plataformas para criar ecossistemas digitais coesos e eficientes.
+                            </p>
                         </div>
                     </div>
                 </div>
@@ -860,28 +874,43 @@
         <!-- Sobre Nós -->
         <section id="about" style="background-color: var(--light);">
             <div class="container">
-                <h2 class="section-title">Sobre a Bemorh</h2>
+                <h2 class="section-title" id="aboutTitle">Sobre a Bemorh</h2>
                 <div style="max-width: 800px; margin: 0 auto; text-align: center;">
-                    <p style="font-size: 1.2rem; margin-bottom: 30px;">
+                    <p id="aboutIntro" style="font-size: 1.2rem; margin-bottom: 30px;">
                         A <strong>Bemorh</strong> nasceu da crença de que as melhores soluções surgem da conexão de ideias. Somos uma empresa de tecnologia especializada em desenvolver ferramentas virtuais que facilitam a colaboração, estimulam a inovação e transformam conceitos em realidade.
                     </p>
                     <div class="projects-grid">
                         <div class="project-card" style="text-align: left;">
                             <div class="project-info">
-                                <h3><i class="fas fa-bullseye" style="color: var(--secondary);"></i> Nossa Missão</h3>
-                                <p>Conectar pessoas, ideias e tecnologias para criar soluções digitais inovadoras que transformam negócios e impulsionam resultados.</p>
+                                <h3>
+                                    <i class="fas fa-bullseye" style="color: var(--secondary);"></i>
+                                    <span id="missionTitle"> Nossa Missão</span>
+                                </h3>
+                                <p id="missionText">
+                                    Conectar pessoas, ideias e tecnologias para criar soluções digitais inovadoras que transformam negócios e impulsionam resultados.
+                                </p>
                             </div>
                         </div>
                         <div class="project-card" style="text-align: left;">
                             <div class="project-info">
-                                <h3><i class="fas fa-eye" style="color: var(--secondary);"></i> Nossa Visão</h3>
-                                <p>Ser referência em tecnologia conectiva, reconhecida por transformar ideias dispersas em ecossistemas digitais integrados e eficientes.</p>
+                                <h3>
+                                    <i class="fas fa-eye" style="color: var(--secondary);"></i>
+                                    <span id="visionTitle"> Nossa Visão</span>
+                                </h3>
+                                <p id="visionText">
+                                    Ser referência em tecnologia conectiva, reconhecida por transformar ideias dispersas em ecossistemas digitais integrados e eficientes.
+                                </p>
                             </div>
                         </div>
                         <div class="project-card" style="text-align: left;">
                             <div class="project-info">
-                                <h3><i class="fas fa-handshake" style="color: var(--secondary);"></i> Nossa Abordagem</h3>
-                                <p>Trabalhamos em parceria com nossos clientes, entendendo suas necessidades únicas e co-criando soluções que realmente fazem a diferença.</p>
+                                <h3>
+                                    <i class="fas fa-handshake" style="color: var(--secondary);"></i>
+                                    <span id="approachTitle"> Nossa Abordagem</span>
+                                </h3>
+                                <p id="approachText">
+                                    Trabalhamos em parceria com nossos clientes, entendendo suas necessidades únicas e co-criando soluções que realmente fazem a diferença.
+                                </p>
                             </div>
                         </div>
                     </div>
@@ -892,60 +921,65 @@
         <!-- Contato -->
         <section class="contact-section" id="contact">
             <div class="container">
-                <h2 class="section-title">Conecte-se Conosco</h2>
+                <h2 class="section-title" id="contactTitle">Conecte-se Conosco</h2>
                 <div class="contact-container">
                     <div class="contact-info">
-                        <h3>Informações de Contato</h3>
+                        <h3 id="contactInfoTitle">Informações de Contato</h3>
                         <div class="contact-item">
                             <i class="fas fa-map-marker-alt"></i>
                             <div>
-                                <h4>Endereço</h4>
-                                <p>Av. das Inovações, 123 - Centro de Tecnologia<br>São Paulo - SP, 04538-000</p>
+                                <h4 id="contactAddressTitle">Endereço</h4>
+                                <p id="contactAddressText">
+                                    Av. das Inovações, 123 - Centro de Tecnologia<br>São Paulo - SP, 04538-000
+                                </p>
                             </div>
                         </div>
                         <div class="contact-item">
                             <i class="fas fa-phone"></i>
                             <div>
-                                <h4>Telefone</h4>
-                                <p>(11) 3456-7890</p>
+                                <h4 id="contactPhoneTitle">Telefone</h4>
+                                <p id="contactPhoneText">(11) 3456-7890</p>
                             </div>
                         </div>
                         <div class="contact-item">
                             <i class="fas fa-envelope"></i>
                             <div>
-                                <h4>Email</h4>
-                                <p>contato@bemorh.com.br</p>
+                                <h4 id="contactEmailTitle">Email</h4>
+                                <p id="contactEmailText">contato@bemorh.com.br</p>
                             </div>
                         </div>
                         <div class="contact-item">
                             <i class="fas fa-clock"></i>
                             <div>
-                                <h4>Horário de Atendimento</h4>
-                                <p>Segunda a Sexta: 8h às 19h<br>Sábado: 9h às 13h</p>
+                                <h4 id="contactScheduleTitle">Horário de Atendimento</h4>
+                                <p id="contactScheduleText">
+                                    Segunda a Sexta: 8h às 19h<br>Sábado: 9h às 13h
+                                </p>
                             </div>
                         </div>
                     </div>
                     <div class="contact-info">
-                        <h3>Envie sua Ideia</h3>
+                        <h3 id="contactFormTitle">Envie sua Ideia</h3>
                         <form id="contactForm">
                             <div class="form-group">
-                                <label for="contactName">Nome</label>
+                                <label for="contactName" id="contactNameLabel">Nome</label>
                                 <input type="text" id="contactName" class="form-control" placeholder="Seu nome completo" required>
                             </div>
                             <div class="form-group">
-                                <label for="contactEmail">Email</label>
+                                <label for="contactEmail" id="contactEmailLabel">Email</label>
                                 <input type="email" id="contactEmail" class="form-control" placeholder="seu@email.com" required>
                             </div>
                             <div class="form-group">
-                                <label for="contactPhone">Telefone</label>
+                                <label for="contactPhone" id="contactPhoneLabel">Telefone</label>
                                 <input type="text" id="contactPhone" class="form-control" placeholder="(11) 99999-9999">
                             </div>
                             <div class="form-group">
-                                <label for="contactMessage">Sua Ideia ou Projeto</label>
+                                <label for="contactMessage" id="contactMessageLabel">Sua Ideia ou Projeto</label>
                                 <textarea id="contactMessage" class="form-control" rows="5" placeholder="Conte-nos sobre sua ideia ou projeto..." required></textarea>
                             </div>
                             <button type="submit" class="btn-contact" style="width: 100%;">
-                                <i class="fas fa-paper-plane"></i> Enviar Mensagem
+                                <i class="fas fa-paper-plane"></i>
+                                <span id="contactSubmitText">Enviar Mensagem</span>
                             </button>
                         </form>
                     </div>
@@ -964,11 +998,13 @@
                             <img src="imagem.png" alt="Bemorh Logo" style="width: 90%; height: 90%; object-fit: contain; padding: 8px;" onerror="handleLogoError(this)">
                         </div>
                         <div class="logo-text">
-                            <div class="logo-main" style="font-size: 1.5rem;">Bemorh</div>
-                            <div class="logo-tagline" style="font-size: 0.8rem;">tecnologia que conecta ideias</div>
+                            <div class="logo-main" style="font-size: 1.5rem;" id="footerLogoTitle">Bemorh</div>
+                            <div class="logo-tagline" style="font-size: 0.8rem;" id="footerLogoTagline">tecnologia que conecta ideias</div>
                         </div>
                     </div>
-                    <p>Tecnologia que conecta ideias. Desenvolvemos soluções digitais inovadoras que transformam conceitos em realidade.</p>
+                    <p id="footerDescription">
+                        Tecnologia que conecta ideias. Desenvolvemos soluções digitais inovadoras que transformam conceitos em realidade.
+                    </p>
                     <div style="margin-top: 20px;">
                         <a href="#" style="margin-right: 15px;"><i class="fab fa-linkedin fa-lg"></i></a>
                         <a href="#" style="margin-right: 15px;"><i class="fab fa-instagram fa-lg"></i></a>
@@ -977,7 +1013,7 @@
                     </div>
                 </div>
                 <div class="footer-column">
-                    <h3>Links Rápidos</h3>
+                    <h3 id="footerQuickLinksTitle">Links Rápidos</h3>
                     <ul>
                         <li><a id="footerHome">Início</a></li>
                         <li><a id="footerProjects">Projetos</a></li>
@@ -987,12 +1023,20 @@
                     </ul>
                 </div>
                 <div class="footer-column">
-                    <h3>Contato</h3>
+                    <h3 id="footerContactTitle">Contato</h3>
                     <ul>
-                        <li><i class="fas fa-map-marker-alt"></i> Av. das Inovações, 123 - São Paulo, SP</li>
-                        <li><i class="fas fa-phone"></i> (11) 3456-7890</li>
-                        <li><i class="fas fa-envelope"></i> contato@bemorh.com.br</li>
-                        <li><i class="fas fa-clock"></i> Seg-Sex: 8h-19h</li>
+                        <li><i class="fas fa-map-marker-alt"></i>
+                            <span id="footerAddress"> Av. das Inovações, 123 - São Paulo, SP</span>
+                        </li>
+                        <li><i class="fas fa-phone"></i>
+                            <span id="footerPhone"> (11) 3456-7890</span>
+                        </li>
+                        <li><i class="fas fa-envelope"></i>
+                            <span id="footerEmail"> contato@bemorh.com.br</span>
+                        </li>
+                        <li><i class="fas fa-clock"></i>
+                            <span id="footerSchedule"> Seg-Sex: 8h-19h</span>
+                        </li>
                     </ul>
                 </div>
                 <div class="footer-column">
@@ -1005,7 +1049,9 @@
                 </div>
             </div>
             <div class="copyright">
-                <p>&copy; 2023 Bemorh - Tecnologia que Conecta Ideias. Todos os direitos reservados.</p>
+                <p id="footerCopyright">
+                    &copy; 2023 Bemorh - Tecnologia que Conecta Ideias. Todos os direitos reservados.
+                </p>
             </div>
         </div>
     </footer>
@@ -1326,10 +1372,173 @@
             updateNavigation(currentSection);
         });
 
+        // =========================
+        // CONFIGURAÇÕES DO SITE (TEXTOS DINÂMICOS)
+        // =========================
+
+        const defaultSiteConfig = {
+            logoTitle: "Bemorh",
+            logoTagline: "tecnologia que conecta ideias",
+
+            heroTitle: "Tecnologia que Conecta Ideias",
+            heroSubtitle: "Na Bemorh, transformamos conceitos em soluções digitais inovadoras. Desenvolvemos ferramentas virtuais que conectam pessoas, processos e tecnologias para impulsionar o seu negócio.",
+            heroContactText: "Entre em Contato",
+
+            projectsTitle: "Projetos em Destaque",
+            project1Title: "Sistema de Gestão de Ideias",
+            project1Status: "Concluído",
+            project1Description: "Plataforma colaborativa que organiza e prioriza ideias em projetos executáveis com fluxos visuais intuitivos.",
+            project2Title: "IA para Inovação",
+            project2Status: "Em Andamento",
+            project2Description: "Ferramenta de inteligência artificial que auxilia na geração e refinamento de ideias criativas para negócios.",
+            project3Title: "Plataforma Colaborativa",
+            project3Status: "Em Planejamento",
+            project3Description: "Ambiente virtual para equipes distribuídas colaborarem em tempo real no desenvolvimento de projetos.",
+
+            servicesTitle: "Nossos Serviços",
+            service1Title: "Consultoria em Inovação",
+            service1Description: "Ajudamos sua empresa a identificar oportunidades e transformar ideias em projetos viáveis com metodologias ágeis.",
+            service2Title: "Desenvolvimento Ágil",
+            service2Description: "Criamos soluções personalizadas com metodologias ágeis, garantindo entrega rápida e adaptação contínua.",
+            service3Title: "Integração de Sistemas",
+            service3Description: "Conectamos diferentes tecnologias e plataformas para criar ecossistemas digitais coesos e eficientes.",
+
+            aboutTitle: "Sobre a Bemorh",
+            aboutIntro: "A Bemorh nasceu da crença de que as melhores soluções surgem da conexão de ideias. Somos uma empresa de tecnologia especializada em desenvolver ferramentas virtuais que facilitam a colaboração, estimulam a inovação e transformam conceitos em realidade.",
+            missionTitle: "Nossa Missão",
+            missionText: "Conectar pessoas, ideias e tecnologias para criar soluções digitais inovadoras que transformam negócios e impulsionam resultados.",
+            visionTitle: "Nossa Visão",
+            visionText: "Ser referência em tecnologia conectiva, reconhecida por transformar ideias dispersas em ecossistemas digitais integrados e eficientes.",
+            approachTitle: "Nossa Abordagem",
+            approachText: "Trabalhamos em parceria com nossos clientes, entendendo suas necessidades únicas e co-criando soluções que realmente fazem a diferença.",
+
+            contactTitle: "Conecte-se Conosco",
+            contactInfoTitle: "Informações de Contato",
+            contactAddressTitle: "Endereço",
+            contactAddressText: "Av. das Inovações, 123 - Centro de Tecnologia<br>São Paulo - SP, 04538-000",
+            contactPhoneTitle: "Telefone",
+            contactPhoneText: "(11) 3456-7890",
+            contactEmailTitle: "Email",
+            contactEmailText: "contato@bemorh.com.br",
+            contactScheduleTitle: "Horário de Atendimento",
+            contactScheduleText: "Segunda a Sexta: 8h às 19h<br>Sábado: 9h às 13h",
+            contactFormTitle: "Envie sua Ideia",
+            contactNameLabel: "Nome",
+            contactEmailLabel: "Email",
+            contactPhoneLabel: "Telefone",
+            contactMessageLabel: "Sua Ideia ou Projeto",
+            contactSubmitText: "Enviar Mensagem",
+
+            footerDescription: "Tecnologia que conecta ideias. Desenvolvemos soluções digitais inovadoras que transformam conceitos em realidade.",
+            footerQuickLinksTitle: "Links Rápidos",
+            footerContactTitle: "Contato",
+            footerAddress: "Av. das Inovações, 123 - São Paulo, SP",
+            footerPhone: "(11) 3456-7890",
+            footerEmail: "contato@bemorh.com.br",
+            footerSchedule: "Seg-Sex: 8h-19h",
+            footerCopyright: "© 2023 Bemorh - Tecnologia que Conecta Ideias. Todos os direitos reservados."
+        };
+
+        function loadSiteConfig() {
+            const savedConfig = localStorage.getItem('bemorhSiteConfig');
+            if (!savedConfig) return defaultSiteConfig;
+
+            try {
+                const parsed = JSON.parse(savedConfig);
+                return { ...defaultSiteConfig, ...parsed };
+            } catch (e) {
+                console.error("Erro ao ler bemorhSiteConfig:", e);
+                return defaultSiteConfig;
+            }
+        }
+
+        function applySiteConfig() {
+            const cfg = loadSiteConfig();
+
+            const setText = (id, value, isHtml = false) => {
+                const el = document.getElementById(id);
+                if (!el || value == null) return;
+                if (isHtml) el.innerHTML = value;
+                else el.textContent = value;
+            };
+
+            // Logo
+            setText('siteLogoTitle', cfg.logoTitle);
+            setText('siteLogoTagline', cfg.logoTagline);
+            setText('footerLogoTitle', cfg.logoTitle);
+            setText('footerLogoTagline', cfg.logoTagline);
+
+            // Hero
+            setText('heroTitle', cfg.heroTitle);
+            setText('heroSubtitle', cfg.heroSubtitle);
+            setText('heroContactText', cfg.heroContactText);
+
+            // Projetos
+            setText('projectsTitle', cfg.projectsTitle);
+            setText('project1Title', cfg.project1Title);
+            setText('project1Status', cfg.project1Status);
+            setText('project1Description', cfg.project1Description);
+            setText('project2Title', cfg.project2Title);
+            setText('project2Status', cfg.project2Status);
+            setText('project2Description', cfg.project2Description);
+            setText('project3Title', cfg.project3Title);
+            setText('project3Status', cfg.project3Status);
+            setText('project3Description', cfg.project3Description);
+
+            // Serviços
+            setText('servicesTitle', cfg.servicesTitle);
+            setText('service1Title', cfg.service1Title);
+            setText('service1Description', cfg.service1Description);
+            setText('service2Title', cfg.service2Title);
+            setText('service2Description', cfg.service2Description);
+            setText('service3Title', cfg.service3Title);
+            setText('service3Description', cfg.service3Description);
+
+            // Sobre
+            setText('aboutTitle', cfg.aboutTitle);
+            setText('aboutIntro', cfg.aboutIntro);
+            setText('missionTitle', cfg.missionTitle);
+            setText('missionText', cfg.missionText);
+            setText('visionTitle', cfg.visionTitle);
+            setText('visionText', cfg.visionText);
+            setText('approachTitle', cfg.approachTitle);
+            setText('approachText', cfg.approachText);
+
+            // Contato (seção)
+            setText('contactTitle', cfg.contactTitle);
+            setText('contactInfoTitle', cfg.contactInfoTitle);
+            setText('contactAddressTitle', cfg.contactAddressTitle);
+            setText('contactAddressText', cfg.contactAddressText, true);
+            setText('contactPhoneTitle', cfg.contactPhoneTitle);
+            setText('contactPhoneText', cfg.contactPhoneText);
+            setText('contactEmailTitle', cfg.contactEmailTitle);
+            setText('contactEmailText', cfg.contactEmailText);
+            setText('contactScheduleTitle', cfg.contactScheduleTitle);
+            setText('contactScheduleText', cfg.contactScheduleText, true);
+            setText('contactFormTitle', cfg.contactFormTitle);
+            setText('contactNameLabel', cfg.contactNameLabel);
+            setText('contactEmailLabel', cfg.contactEmailLabel);
+            setText('contactPhoneLabel', cfg.contactPhoneLabel);
+            setText('contactMessageLabel', cfg.contactMessageLabel);
+            setText('contactSubmitText', cfg.contactSubmitText);
+
+            // Footer
+            setText('footerDescription', cfg.footerDescription);
+            setText('footerQuickLinksTitle', cfg.footerQuickLinksTitle);
+            setText('footerContactTitle', cfg.footerContactTitle);
+            setText('footerAddress', cfg.footerAddress);
+            setText('footerPhone', cfg.footerPhone);
+            setText('footerEmail', cfg.footerEmail);
+            setText('footerSchedule', cfg.footerSchedule);
+            setText('footerCopyright', cfg.footerCopyright);
+        }
+
         // Inicializar
         document.addEventListener('DOMContentLoaded', function() {
+            applySiteConfig();
+
             if (localStorage.getItem('adminLoggedIn') === 'true') {
-                // Se já logado, redirecionar direto para admin
+                // Se já logado, poderia redirecionar direto para admin, mas mantive comentado
                 // window.location.href = 'admin.html';
             }
         });

@@ -589,25 +589,25 @@
                 flex-direction: column;
                 padding: 15px;
             }
-
+            
             nav ul {
                 margin-top: 15px;
                 flex-wrap: wrap;
                 justify-content: center;
             }
-
+            
             nav ul li {
                 margin: 0 10px;
             }
-
+            
             .hero h1 {
                 font-size: 2.8rem;
             }
-
+            
             .admin-icon-btn {
                 margin-top: 15px;
             }
-
+            
             .logo-container {
                 flex-direction: column;
                 text-align: center;
@@ -619,19 +619,19 @@
             .hero {
                 padding: 120px 0 80px;
             }
-
+            
             .hero h1 {
                 font-size: 2.2rem;
             }
-
+            
             .section-title {
                 font-size: 2rem;
             }
-
+            
             .logo-main {
                 font-size: 1.8rem;
             }
-
+            
             .logo-visual {
                 width: 60px;
                 height: 60px;
@@ -1025,18 +1025,10 @@
                 <div class="footer-column">
                     <h3 id="footerContactTitle">Contato</h3>
                     <ul>
-                        <li><i class="fas fa-map-marker-alt"></i>
-                            <span id="footerAddress"> Av. das Inovações, 123 - São Paulo, SP</span>
-                        </li>
-                        <li><i class="fas fa-phone"></i>
-                            <span id="footerPhone"> (11) 3456-7890</span>
-                        </li>
-                        <li><i class="fas fa-envelope"></i>
-                            <span id="footerEmail"> contato@bemorh.com.br</span>
-                        </li>
-                        <li><i class="fas fa-clock"></i>
-                            <span id="footerSchedule"> Seg-Sex: 8h-19h</span>
-                        </li>
+                        <li><i class="fas fa-map-marker-alt"></i><span id="footerAddress"> Av. das Inovações, 123 - São Paulo, SP</span></li>
+                        <li><i class="fas fa-phone"></i><span id="footerPhone"> (11) 3456-7890</span></li>
+                        <li><i class="fas fa-envelope"></i><span id="footerEmail"> contato@bemorh.com.br</span></li>
+                        <li><i class="fas fa-clock"></i><span id="footerSchedule"> Seg-Sex: 8h-19h</span></li>
                     </ul>
                 </div>
                 <div class="footer-column">
@@ -1049,9 +1041,7 @@
                 </div>
             </div>
             <div class="copyright">
-                <p id="footerCopyright">
-                    &copy; 2023 Bemorh - Tecnologia que Conecta Ideias. Todos os direitos reservados.
-                </p>
+                <p id="footerCopyright">&copy; 2023 Bemorh - Tecnologia que Conecta Ideias. Todos os direitos reservados.</p>
             </div>
         </div>
     </footer>
@@ -1372,10 +1362,7 @@
             updateNavigation(currentSection);
         });
 
-        // =========================
-        // CONFIGURAÇÕES DO SITE (TEXTOS DINÂMICOS)
-        // =========================
-
+        // ====== CONFIGURAÇÕES DO SITE (lidas do localStorage, gravadas no admin) ======
         const defaultSiteConfig = {
             logoTitle: "Bemorh",
             logoTagline: "tecnologia que conecta ideias",
@@ -1440,11 +1427,10 @@
         };
 
         function loadSiteConfig() {
-            const savedConfig = localStorage.getItem('bemorhSiteConfig');
-            if (!savedConfig) return defaultSiteConfig;
-
+            const saved = localStorage.getItem('bemorhSiteConfig');
+            if (!saved) return defaultSiteConfig;
             try {
-                const parsed = JSON.parse(savedConfig);
+                const parsed = JSON.parse(saved);
                 return { ...defaultSiteConfig, ...parsed };
             } catch (e) {
                 console.error("Erro ao ler bemorhSiteConfig:", e);
@@ -1454,12 +1440,10 @@
 
         function applySiteConfig() {
             const cfg = loadSiteConfig();
-
-            const setText = (id, value, isHtml = false) => {
+            const setText = (id, v, html) => {
                 const el = document.getElementById(id);
-                if (!el || value == null) return;
-                if (isHtml) el.innerHTML = value;
-                else el.textContent = value;
+                if (!el || v == null) return;
+                if (html) el.innerHTML = v; else el.textContent = v;
             };
 
             // Logo
@@ -1504,7 +1488,7 @@
             setText('approachTitle', cfg.approachTitle);
             setText('approachText', cfg.approachText);
 
-            // Contato (seção)
+            // Contato
             setText('contactTitle', cfg.contactTitle);
             setText('contactInfoTitle', cfg.contactInfoTitle);
             setText('contactAddressTitle', cfg.contactAddressTitle);
@@ -1536,9 +1520,7 @@
         // Inicializar
         document.addEventListener('DOMContentLoaded', function() {
             applySiteConfig();
-
             if (localStorage.getItem('adminLoggedIn') === 'true') {
-                // Se já logado, poderia redirecionar direto para admin, mas mantive comentado
                 // window.location.href = 'admin.html';
             }
         });

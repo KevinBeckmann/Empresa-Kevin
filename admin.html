@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Painel Administrativo - Bemorh</title>
+    <title>Bemorh - Tecnologia que Conecta Ideias</title>
     
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -12,6 +12,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&family=Open+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
     
     <style>
+        /* Estilos COMPARTILHADOS */
         :root {
             --primary: #2c3e50;
             --secondary: #3498db;
@@ -35,7 +36,7 @@
             font-family: 'Open Sans', sans-serif;
             line-height: 1.6;
             color: #333;
-            background-color: #f5f7fa;
+            background-color: #f9f9f9;
         }
 
         h1, h2, h3, h4, h5, h6 {
@@ -45,11 +46,6 @@
             margin-bottom: 15px;
         }
 
-        a {
-            text-decoration: none;
-            color: inherit;
-        }
-
         .container {
             width: 100%;
             max-width: 1200px;
@@ -57,9 +53,31 @@
             padding: 0 20px;
         }
 
+        .section {
+            padding: 80px 0;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        .section-header h2 {
+            font-size: 2.5rem;
+            color: var(--primary);
+            margin-bottom: 15px;
+        }
+
+        .section-header p {
+            font-size: 1.1rem;
+            color: var(--gray);
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
         .btn {
             display: inline-block;
-            padding: 10px 20px;
+            padding: 14px 28px;
             background-color: var(--secondary);
             color: white;
             border: none;
@@ -67,40 +85,23 @@
             font-weight: 600;
             cursor: pointer;
             transition: var(--transition);
-            font-size: 0.95rem;
+            text-decoration: none;
+            font-size: 1rem;
         }
 
         .btn:hover {
             background-color: #2980b9;
-            transform: translateY(-1px);
+            transform: translateY(-2px);
             box-shadow: var(--shadow);
         }
 
-        .btn-danger {
-            background-color: var(--accent);
-        }
-
-        .btn-danger:hover {
-            background-color: #c0392b;
-        }
-
-        .btn-success {
+        .btn-contact {
             background-color: var(--success);
+            width: 100%;
         }
 
-        .btn-success:hover {
+        .btn-contact:hover {
             background-color: #27ae60;
-        }
-
-        .btn-outline {
-            background-color: transparent;
-            color: var(--secondary);
-            border: 1px solid var(--secondary);
-        }
-
-        .btn-outline:hover {
-            background-color: var(--secondary);
-            color: white;
         }
 
         /* Header/Navbar */
@@ -117,7 +118,7 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 12px 0;
+            padding: 15px 0;
         }
 
         .logo {
@@ -132,10 +133,6 @@
             border-radius: 10px;
             overflow: hidden;
             box-shadow: var(--shadow);
-            background-color: white;
-            display: flex;
-            align-items: center;
-            justify-content: center;
         }
 
         .logo-img img {
@@ -151,325 +148,487 @@
         }
 
         .logo-main {
-            font-size: 1.4rem;
+            font-size: 2rem;
             font-weight: 800;
             color: var(--primary);
             letter-spacing: 1px;
         }
 
         .logo-tagline {
-            font-size: 0.8rem;
+            font-size: 0.9rem;
             color: var(--secondary);
             font-style: italic;
-            margin-top: -3px;
+            margin-top: -5px;
         }
 
-        .nav-actions {
+        .nav-links {
             display: flex;
-            align-items: center;
-            gap: 10px;
+            list-style: none;
+            gap: 30px;
         }
 
-        .page-wrapper {
-            padding-top: 80px;
-            padding-bottom: 40px;
-        }
-
-        .page-header {
-            margin-bottom: 25px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            gap: 10px;
-            flex-wrap: wrap;
-        }
-
-        .page-header h1 {
-            font-size: 1.8rem;
+        .nav-links a {
+            text-decoration: none;
             color: var(--primary);
-        }
-
-        .page-header small {
-            color: var(--gray);
-            font-size: 0.9rem;
-        }
-
-        /* Layout de abas */
-        .tabs {
-            display: flex;
-            gap: 10px;
-            margin-bottom: 20px;
-            flex-wrap: wrap;
-        }
-
-        .tab-btn {
-            padding: 10px 15px;
-            border-radius: 4px;
-            background-color: white;
-            border: 1px solid #ddd;
-            color: var(--primary);
-            cursor: pointer;
             font-weight: 600;
-            font-size: 0.95rem;
-            display: flex;
-            align-items: center;
-            gap: 6px;
+            font-size: 1rem;
+            transition: var(--transition);
+            position: relative;
+        }
+
+        .nav-links a:hover {
+            color: var(--secondary);
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            background-color: var(--secondary);
+            bottom: -5px;
+            left: 0;
             transition: var(--transition);
         }
 
-        .tab-btn.active {
-            background-color: var(--secondary);
-            border-color: var(--secondary);
-            color: white;
-            box-shadow: var(--shadow);
+        .nav-links a:hover::after {
+            width: 100%;
         }
 
-        .tab-content {
+        .mobile-menu-btn {
             display: none;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            color: var(--primary);
+            cursor: pointer;
         }
 
-        .tab-content.active {
-            display: block;
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, var(--primary) 0%, #1a2530 100%);
+            color: white;
+            padding: 150px 0 100px;
+            margin-top: 80px;
         }
 
-        /* Cards / blocos */
-        .card {
-            background-color: white;
-            border-radius: 8px;
-            box-shadow: var(--shadow);
-            padding: 20px 20px 25px;
+        .hero-content {
+            display: flex;
+            align-items: center;
+            gap: 50px;
+        }
+
+        .hero-text {
+            flex: 1;
+        }
+
+        .hero-text h1 {
+            font-size: 3.5rem;
+            color: white;
             margin-bottom: 20px;
         }
 
-        .card-header {
-            margin-bottom: 15px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            gap: 10px;
-            flex-wrap: wrap;
+        .hero-text p {
+            font-size: 1.2rem;
+            margin-bottom: 30px;
+            opacity: 0.9;
         }
 
-        .card-header h2 {
+        .hero-image {
+            flex: 1;
+        }
+
+        .hero-image img {
+            width: 100%;
+            border-radius: 10px;
+            box-shadow: var(--shadow);
+        }
+
+        /* Serviços */
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .service-card {
+            background-color: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+            text-align: center;
+        }
+
+        .service-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+        }
+
+        .service-icon {
+            width: 80px;
+            height: 80px;
+            background-color: rgba(52, 152, 219, 0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+        }
+
+        .service-icon i {
+            font-size: 2rem;
+            color: var(--secondary);
+        }
+
+        .service-card h3 {
+            font-size: 1.5rem;
+            color: var(--primary);
+        }
+
+        /* Projetos */
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .project-card {
+            background-color: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+        }
+
+        .project-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+        }
+
+        .project-image {
+            height: 200px;
+            overflow: hidden;
+        }
+
+        .project-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: var(--transition);
+        }
+
+        .project-card:hover .project-image img {
+            transform: scale(1.1);
+        }
+
+        .project-content {
+            padding: 25px;
+        }
+
+        .project-content h3 {
+            font-size: 1.3rem;
+            color: var(--primary);
+        }
+
+        .project-category {
+            display: inline-block;
+            background-color: rgba(52, 152, 219, 0.1);
+            color: var(--secondary);
+            padding: 5px 10px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            margin: 10px 0;
+        }
+
+        /* Contato */
+        .contact-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 50px;
+            margin-top: 40px;
+        }
+
+        .contact-info {
+            background-color: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: var(--shadow);
+        }
+
+        .info-item {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 25px;
+        }
+
+        .info-icon {
+            width: 50px;
+            height: 50px;
+            background-color: rgba(52, 152, 219, 0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 15px;
+            flex-shrink: 0;
+        }
+
+        .info-icon i {
+            color: var(--secondary);
+            font-size: 1.2rem;
+        }
+
+        .info-content h3 {
             font-size: 1.2rem;
             color: var(--primary);
-            margin-bottom: 0;
+            margin-bottom: 5px;
         }
 
-        .card-header p {
-            font-size: 0.9rem;
-            color: var(--gray);
-        }
-
-        .card-body {
-            margin-top: 10px;
-        }
-
-        .section-title-small {
-            font-size: 1rem;
-            font-weight: 700;
-            color: var(--primary);
-            margin-bottom: 10px;
-            border-left: 4px solid var(--secondary);
-            padding-left: 8px;
-        }
-
-        .section-description-small {
-            font-size: 0.9rem;
-            color: var(--gray);
-            margin-bottom: 15px;
-        }
-
-        /* Formulários */
-        .form-grid-2 {
-            display: grid;
-            grid-template-columns: repeat(2, minmax(0, 1fr));
-            gap: 15px 20px;
-        }
-
-        .form-grid-3 {
-            display: grid;
-            grid-template-columns: repeat(3, minmax(0, 1fr));
-            gap: 15px 20px;
-        }
-
-        .form-grid-1 {
-            display: grid;
-            grid-template-columns: 1fr;
-            gap: 15px;
-        }
-
-        @media (max-width: 900px) {
-            .form-grid-2,
-            .form-grid-3 {
-                grid-template-columns: 1fr;
-            }
+        .contact-form {
+            background-color: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: var(--shadow);
         }
 
         .form-group {
-            margin-bottom: 10px;
+            margin-bottom: 20px;
         }
 
         .form-group label {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            margin-bottom: 6px;
+            display: block;
+            margin-bottom: 8px;
             font-weight: 600;
             color: var(--primary);
-            font-size: 0.9rem;
-        }
-
-        .label-hint {
-            font-weight: normal;
-            font-size: 0.8rem;
-            color: var(--gray);
         }
 
         .form-group input,
+        .form-group select,
         .form-group textarea {
             width: 100%;
-            padding: 8px 10px;
+            padding: 12px;
             border: 1px solid #ddd;
             border-radius: 4px;
             font-family: 'Open Sans', sans-serif;
-            font-size: 0.9rem;
+            font-size: 1rem;
             transition: var(--transition);
-            background-color: #fbfbfb;
-        }
-
-        .form-group textarea {
-            resize: vertical;
-            min-height: 70px;
         }
 
         .form-group input:focus,
+        .form-group select:focus,
         .form-group textarea:focus {
             outline: none;
             border-color: var(--secondary);
-            box-shadow: 0 0 0 2px rgba(52, 152, 219, 0.15);
-            background-color: #fff;
+            box-shadow: 0 0 0 2px rgba(52, 152, 219, 0.2);
         }
 
-        .form-actions {
-            margin-top: 15px;
-            display: flex;
-            gap: 10px;
-            justify-content: flex-end;
-            flex-wrap: wrap;
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
         }
 
-        /* Alertas */
+        /* Alert Messages */
         .alert {
-            padding: 10px 12px;
+            padding: 12px;
             border-radius: 4px;
-            margin-bottom: 10px;
-            font-size: 0.9rem;
+            margin-bottom: 20px;
             display: none;
         }
 
         .alert-success {
-            background-color: rgba(46, 204, 113, 0.08);
+            background-color: rgba(46, 204, 113, 0.1);
             color: var(--success);
             border-left: 4px solid var(--success);
         }
 
         .alert-danger {
-            background-color: rgba(231, 76, 60, 0.08);
+            background-color: rgba(231, 76, 60, 0.1);
             color: var(--accent);
             border-left: 4px solid var(--accent);
         }
 
-        .alert-info {
-            background-color: rgba(52, 152, 219, 0.08);
-            color: var(--secondary);
-            border-left: 4px solid var(--secondary);
-        }
-
-        .badge {
-            display: inline-block;
-            padding: 3px 8px;
-            border-radius: 10px;
-            font-size: 0.75rem;
-            font-weight: 600;
-        }
-
-        .badge-success {
-            background-color: rgba(46, 204, 113, 0.15);
-            color: var(--success);
-        }
-
-        .badge-warning {
-            background-color: rgba(243, 156, 18, 0.15);
-            color: var(--warning);
-        }
-
-        .badge-secondary {
-            background-color: rgba(52, 152, 219, 0.15);
-            color: var(--secondary);
-        }
-
-        /* Rodapé */
+        /* Footer */
         footer {
-            margin-top: 20px;
-            padding-top: 15px;
-            border-top: 1px solid #dde1e7;
-            text-align: center;
-            font-size: 0.85rem;
-            color: var(--gray);
+            background-color: var(--primary);
+            color: white;
+            padding: 50px 0 20px;
         }
 
-        /* Tabela simples para contatos/projetos (placeholder) */
-        .table {
-            width: 100%;
-            border-collapse: collapse;
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        .footer-column h3 {
+            color: white;
+            font-size: 1.3rem;
+            margin-bottom: 20px;
+        }
+
+        .footer-column p {
+            color: rgba(255, 255, 255, 0.8);
+            line-height: 1.6;
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 10px;
+        }
+
+        .footer-links a {
+            color: rgba(255, 255, 255, 0.8);
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .footer-links a:hover {
+            color: white;
+            padding-left: 5px;
+        }
+
+        .copyright {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: rgba(255, 255, 255, 0.6);
             font-size: 0.9rem;
         }
 
-        .table thead {
-            background-color: #f1f4f9;
-        }
+        /* Responsividade */
+        @media (max-width: 992px) {
+            .hero-content {
+                flex-direction: column;
+                text-align: center;
+            }
 
-        .table th,
-        .table td {
-            padding: 8px 10px;
-            text-align: left;
-            border-bottom: 1px solid #e0e4eb;
-        }
+            .hero-text h1 {
+                font-size: 2.8rem;
+            }
 
-        .table th {
-            font-weight: 600;
-            color: var(--primary);
-        }
-
-        .table tbody tr:hover {
-            background-color: #f7f9fc;
-        }
-
-        .text-right { text-align: right; }
-        .text-center { text-align: center; }
-
-        .muted {
-            color: var(--gray);
-            font-size: 0.85rem;
+            .section-header h2 {
+                font-size: 2.2rem;
+            }
         }
 
         @media (max-width: 768px) {
-            .navbar {
-                flex-direction: column;
-                align-items: flex-start;
-                gap: 10px;
-            }
-
-            .page-header {
-                flex-direction: column;
-                align-items: flex-start;
-            }
-
-            .nav-actions {
+            .nav-links {
+                display: none;
+                position: absolute;
+                top: 100%;
+                left: 0;
                 width: 100%;
-                justify-content: flex-start;
+                background-color: white;
+                flex-direction: column;
+                padding: 20px;
+                box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
             }
+
+            .nav-links.active {
+                display: flex;
+            }
+
+            .mobile-menu-btn {
+                display: block;
+            }
+
+            .hero {
+                padding: 120px 0 80px;
+            }
+
+            .hero-text h1 {
+                font-size: 2.2rem;
+            }
+
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+
+            .section-header h2 {
+                font-size: 1.8rem;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .hero-text h1 {
+                font-size: 1.8rem;
+            }
+
+            .section {
+                padding: 60px 0;
+            }
+
+            .service-card, .project-card, .contact-form, .contact-info {
+                padding: 20px;
+            }
+        }
+
+        /* ====== EXTRA: Layout simples para bloco de configurações ====== */
+        .config-card {
+            margin-top: 40px;
+            background-color: #ffffff;
+            border-radius: 10px;
+            box-shadow: var(--shadow);
+            padding: 25px 20px 30px;
+        }
+        .config-title {
+            font-size: 1.4rem;
+            color: var(--primary);
+            margin-bottom: 5px;
+        }
+        .config-subtitle {
+            font-size: 0.95rem;
+            color: var(--gray);
+            margin-bottom: 20px;
+        }
+        .config-grid-2 {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 15px 20px;
+        }
+        .config-row {
+            margin-top: 20px;
+        }
+        .config-row h3 {
+            font-size: 1.1rem;
+            color: var(--primary);
+            margin-bottom: 8px;
+        }
+        .config-row small {
+            color: var(--gray);
+            font-size: 0.85rem;
+        }
+        .config-actions {
+            margin-top: 20px;
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+        .config-alert {
+            margin-bottom: 10px;
+            padding: 10px 12px;
+            border-radius: 4px;
+            font-size: 0.9rem;
+            display: none;
+        }
+        .config-alert-success {
+            background-color: rgba(46, 204, 113, 0.1);
+            color: var(--success);
+            border-left: 4px solid var(--success);
+        }
+        .config-alert-error {
+            background-color: rgba(231, 76, 60, 0.1);
+            color: var(--accent);
+            border-left: 4px solid var(--accent);
         }
     </style>
 </head>
@@ -480,839 +639,1136 @@
             <nav class="navbar">
                 <div class="logo">
                     <div class="logo-img">
-                        <img src="imagem.png" alt="Bemorh Logo" id="logoImage" onerror="handleAdminLogoError(this)">
+                        <img src="imagem.png" alt="Bemorh Logo" id="logoImage" onerror="handleLogoError(this)">
                         <div id="logoText" style="display: none; width: 100%; height: 100%; background: linear-gradient(135deg, var(--secondary), var(--primary)); color: white; font-weight: bold; font-size: 1.5rem; display: flex; align-items: center; justify-content: center;">
                             BH
                         </div>
                     </div>
                     <div class="logo-text">
-                        <div class="logo-main" id="adminLogoTitle">Bemorh</div>
-                        <div class="logo-tagline" id="adminLogoTagline">tecnologia que conecta ideias</div>
+                        <div class="logo-main" id="companyNameDisplay">Bemorh</div>
+                        <div class="logo-tagline" id="companyTaglineDisplay">tecnologia que conecta ideias</div>
                     </div>
                 </div>
                 
-                <div class="nav-actions">
-                    <a href="index.html" class="btn btn-outline">
-                        <i class="fas fa-arrow-left"></i> Voltar ao Site
-                    </a>
-                    <button id="logoutBtn" class="btn btn-danger">
-                        <i class="fas fa-sign-out-alt"></i> Sair
-                    </button>
-                </div>
+                <ul class="nav-links" id="navLinks">
+                    <li><a href="#home">Início</a></li>
+                    <li><a href="#sobre">Sobre</a></li>
+                    <li><a href="#servicos">Serviços</a></li>
+                    <li><a href="#projetos">Projetos</a></li>
+                    <li><a href="#contato">Contato</a></li>
+                    <li><a href="admin.html" class="btn" style="padding: 8px 16px; font-size: 0.9rem;">
+                        <i class="fas fa-lock"></i> Admin
+                    </a></li>
+                </ul>
+                
+                <button class="mobile-menu-btn" id="mobileMenuBtn">
+                    <i class="fas fa-bars"></i>
+                </button>
             </nav>
         </div>
     </header>
 
-    <div class="page-wrapper">
+    <!-- Hero Section -->
+    <section id="home" class="hero">
         <div class="container">
-            <div class="page-header">
-                <div>
-                    <h1><i class="fas fa-sliders-h"></i> Painel Administrativo</h1>
-                    <small>Gerencie os textos exibidos na página inicial do site.</small>
-                </div>
-                <div class="muted">
-                    <i class="fas fa-user-shield"></i> Sessão administrativa local (usa <code>localStorage</code> do navegador)
-                </div>
-            </div>
-
-            <!-- Abas -->
-            <div class="tabs">
-                <button class="tab-btn active" data-tab="tab-config">
-                    <i class="fas fa-font"></i> Configurações do Site (Index)
-                </button>
-                <button class="tab-btn" data-tab="tab-contatos">
-                    <i class="fas fa-envelope-open-text"></i> Contatos Recebidos (informativo)
-                </button>
-                <button class="tab-btn" data-tab="tab-ajuda">
-                    <i class="fas fa-question-circle"></i> Ajuda Rápida
-                </button>
-            </div>
-
-            <!-- TAB: CONFIGURAÇÕES DO SITE -->
-            <div id="tab-config" class="tab-content active">
-                <div class="card">
-                    <div class="card-header">
-                        <div>
-                            <h2>Textos da Página Inicial</h2>
-                            <p>Altere aqui todos os títulos, parágrafos e textos que aparecem no <strong>index.html</strong>.</p>
-                        </div>
-                        <button id="resetConfigBtn" class="btn btn-outline btn-sm">
-                            <i class="fas fa-undo"></i> Restaurar Padrão
-                        </button>
-                    </div>
-                    <div class="card-body">
-                        <div class="alert alert-success" id="configSuccess">
-                            <i class="fas fa-check-circle"></i> Configurações salvas com sucesso!
-                        </div>
-                        <div class="alert alert-danger" id="configError">
-                            <i class="fas fa-exclamation-circle"></i> Erro ao salvar configurações. Tente novamente.
-                        </div>
-
-                        <!-- LOGO / GERAL -->
-                        <div class="section-title-small">Identidade do Site</div>
-                        <div class="section-description-small">
-                            Nome e slogan que aparecem no topo e rodapé do site.
-                        </div>
-                        <div class="form-grid-2">
-                            <div class="form-group">
-                                <label for="cfg_logoTitle">
-                                    Título / Nome da Marca
-                                    <span class="label-hint">ex: Bemorh</span>
-                                </label>
-                                <input type="text" id="cfg_logoTitle">
-                            </div>
-                            <div class="form-group">
-                                <label for="cfg_logoTagline">
-                                    Slogan / Tagline
-                                    <span class="label-hint">ex: tecnologia que conecta ideias</span>
-                                </label>
-                                <input type="text" id="cfg_logoTagline">
-                            </div>
-                        </div>
-
-                        <!-- HERO -->
-                        <div class="section-title-small" style="margin-top:20px;">Seção Hero (Topo do Site)</div>
-                        <div class="section-description-small">
-                            Título principal, parágrafo e texto do botão da primeira dobra do site.
-                        </div>
-                        <div class="form-grid-1">
-                            <div class="form-group">
-                                <label for="cfg_heroTitle">
-                                    Título (H1)
-                                </label>
-                                <input type="text" id="cfg_heroTitle">
-                            </div>
-                            <div class="form-group">
-                                <label for="cfg_heroSubtitle">
-                                    Subtítulo / Descrição
-                                </label>
-                                <textarea id="cfg_heroSubtitle" rows="3"></textarea>
-                            </div>
-                            <div class="form-group">
-                                <label for="cfg_heroContactText">
-                                    Texto do Botão
-                                </label>
-                                <input type="text" id="cfg_heroContactText">
-                            </div>
-                        </div>
-
-                        <!-- PROJETOS -->
-                        <div class="section-title-small" style="margin-top:20px;">Seção Projetos em Destaque</div>
-                        <div class="section-description-small">
-                            Título da seção e textos dos três cards de projetos.
-                        </div>
-
-                        <div class="form-group">
-                            <label for="cfg_projectsTitle">Título da Seção</label>
-                            <input type="text" id="cfg_projectsTitle">
-                        </div>
-
-                        <div class="form-grid-3">
-                            <!-- Projeto 1 -->
-                            <div>
-                                <div class="badge badge-secondary">Projeto 1</div>
-                                <div class="form-group">
-                                    <label for="cfg_project1Title">Título</label>
-                                    <input type="text" id="cfg_project1Title">
-                                </div>
-                                <div class="form-group">
-                                    <label for="cfg_project1Status">Status (texto)</label>
-                                    <input type="text" id="cfg_project1Status">
-                                </div>
-                                <div class="form-group">
-                                    <label for="cfg_project1Description">Descrição</label>
-                                    <textarea id="cfg_project1Description" rows="3"></textarea>
-                                </div>
-                            </div>
-
-                            <!-- Projeto 2 -->
-                            <div>
-                                <div class="badge badge-secondary">Projeto 2</div>
-                                <div class="form-group">
-                                    <label for="cfg_project2Title">Título</label>
-                                    <input type="text" id="cfg_project2Title">
-                                </div>
-                                <div class="form-group">
-                                    <label for="cfg_project2Status">Status (texto)</label>
-                                    <input type="text" id="cfg_project2Status">
-                                </div>
-                                <div class="form-group">
-                                    <label for="cfg_project2Description">Descrição</label>
-                                    <textarea id="cfg_project2Description" rows="3"></textarea>
-                                </div>
-                            </div>
-
-                            <!-- Projeto 3 -->
-                            <div>
-                                <div class="badge badge-secondary">Projeto 3</div>
-                                <div class="form-group">
-                                    <label for="cfg_project3Title">Título</label>
-                                    <input type="text" id="cfg_project3Title">
-                                </div>
-                                <div class="form-group">
-                                    <label for="cfg_project3Status">Status (texto)</label>
-                                    <input type="text" id="cfg_project3Status">
-                                </div>
-                                <div class="form-group">
-                                    <label for="cfg_project3Description">Descrição</label>
-                                    <textarea id="cfg_project3Description" rows="3"></textarea>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- SERVIÇOS -->
-                        <div class="section-title-small" style="margin-top:20px;">Seção Serviços</div>
-                        <div class="section-description-small">
-                            Título da seção e textos dos três serviços.
-                        </div>
-
-                        <div class="form-group">
-                            <label for="cfg_servicesTitle">Título da Seção</label>
-                            <input type="text" id="cfg_servicesTitle">
-                        </div>
-
-                        <div class="form-grid-3">
-                            <!-- Serviço 1 -->
-                            <div>
-                                <div class="badge badge-secondary">Serviço 1</div>
-                                <div class="form-group">
-                                    <label for="cfg_service1Title">Título</label>
-                                    <input type="text" id="cfg_service1Title">
-                                </div>
-                                <div class="form-group">
-                                    <label for="cfg_service1Description">Descrição</label>
-                                    <textarea id="cfg_service1Description" rows="3"></textarea>
-                                </div>
-                            </div>
-
-                            <!-- Serviço 2 -->
-                            <div>
-                                <div class="badge badge-secondary">Serviço 2</div>
-                                <div class="form-group">
-                                    <label for="cfg_service2Title">Título</label>
-                                    <input type="text" id="cfg_service2Title">
-                                </div>
-                                <div class="form-group">
-                                    <label for="cfg_service2Description">Descrição</label>
-                                    <textarea id="cfg_service2Description" rows="3"></textarea>
-                                </div>
-                            </div>
-
-                            <!-- Serviço 3 -->
-                            <div>
-                                <div class="badge badge-secondary">Serviço 3</div>
-                                <div class="form-group">
-                                    <label for="cfg_service3Title">Título</label>
-                                    <input type="text" id="cfg_service3Title">
-                                </div>
-                                <div class="form-group">
-                                    <label for="cfg_service3Description">Descrição</label>
-                                    <textarea id="cfg_service3Description" rows="3"></textarea>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- SOBRE -->
-                        <div class="section-title-small" style="margin-top:20px;">Seção Sobre</div>
-                        <div class="section-description-small">
-                            Título da seção, parágrafo principal e blocos de missão, visão e abordagem.
-                        </div>
-
-                        <div class="form-group">
-                            <label for="cfg_aboutTitle">Título da Seção</label>
-                            <input type="text" id="cfg_aboutTitle">
-                        </div>
-
-                        <div class="form-group">
-                            <label for="cfg_aboutIntro">Texto de Introdução</label>
-                            <textarea id="cfg_aboutIntro" rows="3"></textarea>
-                        </div>
-
-                        <div class="form-grid-3">
-                            <div>
-                                <div class="badge badge-secondary">Missão</div>
-                                <div class="form-group">
-                                    <label for="cfg_missionTitle">Título</label>
-                                    <input type="text" id="cfg_missionTitle">
-                                </div>
-                                <div class="form-group">
-                                    <label for="cfg_missionText">Texto</label>
-                                    <textarea id="cfg_missionText" rows="3"></textarea>
-                                </div>
-                            </div>
-                            <div>
-                                <div class="badge badge-secondary">Visão</div>
-                                <div class="form-group">
-                                    <label for="cfg_visionTitle">Título</label>
-                                    <input type="text" id="cfg_visionTitle">
-                                </div>
-                                <div class="form-group">
-                                    <label for="cfg_visionText">Texto</label>
-                                    <textarea id="cfg_visionText" rows="3"></textarea>
-                                </div>
-                            </div>
-                            <div>
-                                <div class="badge badge-secondary">Abordagem</div>
-                                <div class="form-group">
-                                    <label for="cfg_approachTitle">Título</label>
-                                    <input type="text" id="cfg_approachTitle">
-                                </div>
-                                <div class="form-group">
-                                    <label for="cfg_approachText">Texto</label>
-                                    <textarea id="cfg_approachText" rows="3"></textarea>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- CONTATO -->
-                        <div class="section-title-small" style="margin-top:20px;">Seção Contato</div>
-                        <div class="section-description-small">
-                            Título da seção, dados de contato e textos do formulário.
-                        </div>
-
-                        <div class="form-group">
-                            <label for="cfg_contactTitle">Título da Seção</label>
-                            <input type="text" id="cfg_contactTitle">
-                        </div>
-
-                        <div class="form-grid-2">
-                            <div>
-                                <div class="badge badge-secondary">Bloco de Informações</div>
-                                <div class="form-group">
-                                    <label for="cfg_contactInfoTitle">Título do Bloco</label>
-                                    <input type="text" id="cfg_contactInfoTitle">
-                                </div>
-                                <div class="form-group">
-                                    <label for="cfg_contactAddressTitle">Título Endereço</label>
-                                    <input type="text" id="cfg_contactAddressTitle">
-                                </div>
-                                <div class="form-group">
-                                    <label for="cfg_contactAddressText">
-                                        Texto Endereço
-                                        <span class="label-hint">Você pode usar &lt;br&gt; para quebrar linha</span>
-                                    </label>
-                                    <textarea id="cfg_contactAddressText" rows="2"></textarea>
-                                </div>
-                                <div class="form-group">
-                                    <label for="cfg_contactPhoneTitle">Título Telefone</label>
-                                    <input type="text" id="cfg_contactPhoneTitle">
-                                </div>
-                                <div class="form-group">
-                                    <label for="cfg_contactPhoneText">Texto Telefone</label>
-                                    <input type="text" id="cfg_contactPhoneText">
-                                </div>
-                                <div class="form-group">
-                                    <label for="cfg_contactEmailTitle">Título Email</label>
-                                    <input type="text" id="cfg_contactEmailTitle">
-                                </div>
-                                <div class="form-group">
-                                    <label for="cfg_contactEmailText">Texto Email</label>
-                                    <input type="text" id="cfg_contactEmailText">
-                                </div>
-                                <div class="form-group">
-                                    <label for="cfg_contactScheduleTitle">Título Horário</label>
-                                    <input type="text" id="cfg_contactScheduleTitle">
-                                </div>
-                                <div class="form-group">
-                                    <label for="cfg_contactScheduleText">
-                                        Texto Horário
-                                        <span class="label-hint">Você pode usar &lt;br&gt; para quebrar linha</span>
-                                    </label>
-                                    <textarea id="cfg_contactScheduleText" rows="2"></textarea>
-                                </div>
-                            </div>
-
-                            <div>
-                                <div class="badge badge-secondary">Formulário</div>
-                                <div class="form-group">
-                                    <label for="cfg_contactFormTitle">Título do Formulário</label>
-                                    <input type="text" id="cfg_contactFormTitle">
-                                </div>
-                                <div class="form-group">
-                                    <label for="cfg_contactNameLabel">Label Nome</label>
-                                    <input type="text" id="cfg_contactNameLabel">
-                                </div>
-                                <div class="form-group">
-                                    <label for="cfg_contactEmailLabel">Label Email</label>
-                                    <input type="text" id="cfg_contactEmailLabel">
-                                </div>
-                                <div class="form-group">
-                                    <label for="cfg_contactPhoneLabel">Label Telefone</label>
-                                    <input type="text" id="cfg_contactPhoneLabel">
-                                </div>
-                                <div class="form-group">
-                                    <label for="cfg_contactMessageLabel">Label Mensagem</label>
-                                    <input type="text" id="cfg_contactMessageLabel">
-                                </div>
-                                <div class="form-group">
-                                    <label for="cfg_contactSubmitText">Texto do Botão Enviar</label>
-                                    <input type="text" id="cfg_contactSubmitText">
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- FOOTER -->
-                        <div class="section-title-small" style="margin-top:20px;">Rodapé (Footer)</div>
-                        <div class="section-description-small">
-                            Textos do rodapé do site.
-                        </div>
-
-                        <div class="form-grid-2">
-                            <div>
-                                <div class="form-group">
-                                    <label for="cfg_footerDescription">Texto descritivo</label>
-                                    <textarea id="cfg_footerDescription" rows="3"></textarea>
-                                </div>
-                                <div class="form-group">
-                                    <label for="cfg_footerQuickLinksTitle">Título "Links Rápidos"</label>
-                                    <input type="text" id="cfg_footerQuickLinksTitle">
-                                </div>
-                                <div class="form-group">
-                                    <label for="cfg_footerContactTitle">Título "Contato"</label>
-                                    <input type="text" id="cfg_footerContactTitle">
-                                </div>
-                            </div>
-
-                            <div>
-                                <div class="form-group">
-                                    <label for="cfg_footerAddress">Endereço</label>
-                                    <input type="text" id="cfg_footerAddress">
-                                </div>
-                                <div class="form-group">
-                                    <label for="cfg_footerPhone">Telefone</label>
-                                    <input type="text" id="cfg_footerPhone">
-                                </div>
-                                <div class="form-group">
-                                    <label for="cfg_footerEmail">Email</label>
-                                    <input type="text" id="cfg_footerEmail">
-                                </div>
-                                <div class="form-group">
-                                    <label for="cfg_footerSchedule">Horário</label>
-                                    <input type="text" id="cfg_footerSchedule">
-                                </div>
-                                <div class="form-group">
-                                    <label for="cfg_footerCopyright">
-                                        Texto de Copyright
-                                    </label>
-                                    <textarea id="cfg_footerCopyright" rows="2"></textarea>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="form-actions">
-                            <button id="saveConfigBtn" class="btn btn-success">
-                                <i class="fas fa-save"></i> Salvar Configurações
-                            </button>
-                            <button id="reloadConfigBtn" class="btn btn-outline">
-                                <i class="fas fa-sync-alt"></i> Recarregar do Navegador
-                            </button>
-                        </div>
+            <div class="hero-content">
+                <div class="hero-text">
+                    <h1 id="companyNameHero">Bemorh</h1>
+                    <p id="companyAboutDisplay">
+                        Nascemos da crença de que as melhores soluções surgem da conexão de ideias. Somos uma empresa de tecnologia especializada em desenvolver ferramentas virtuais que facilitam a colaboração, estimulam a inovação e transformam conceitos em realidade.
+                    </p>
+                    <div style="display: flex; gap: 15px;">
+                        <a href="#projetos" class="btn">Nossos Projetos</a>
+                        <a href="#contato" class="btn" style="background-color: var(--success);">Fale Conosco</a>
                     </div>
                 </div>
-            </div>
-
-            <!-- TAB: CONTATOS (INFORMATIVO/FIREBASE FUTURO) -->
-            <div id="tab-contatos" class="tab-content">
-                <div class="card">
-                    <div class="card-header">
-                        <div>
-                            <h2>Contatos Recebidos</h2>
-                            <p>Esta seção é um espaço para, futuramente, integrar a listagem de contatos (Firebase / backend).</p>
-                        </div>
-                        <span class="badge badge-warning">
-                            <i class="fas fa-tools"></i> Em desenvolvimento
-                        </span>
-                    </div>
-                    <div class="card-body">
-                        <p class="muted">
-                            No momento, o <strong>index.html</strong> apenas exibe um <code>alert()</code> ao enviar o formulário.
-                            Quando você quiser evoluir este painel, podemos integrar com o Firebase (como já está no outro admin que você tinha)
-                            para listar contatos reais aqui.
-                        </p>
-                        <table class="table" style="margin-top:15px;">
-                            <thead>
-                                <tr>
-                                    <th>Data/Hora</th>
-                                    <th>Nome</th>
-                                    <th>Email</th>
-                                    <th>Telefone</th>
-                                    <th>Mensagem</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td colspan="5" class="text-center muted">
-                                        Nenhum contato armazenado nesta versão. Use o formulário no site apenas para teste visual.
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
+                <div class="hero-image">
+                    <img src="https://images.unsplash.com/photo-1552664730-d307ca884978?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80" alt="Inovação e Tecnologia">
                 </div>
             </div>
-
-            <!-- TAB: AJUDA -->
-            <div id="tab-ajuda" class="tab-content">
-                <div class="card">
-                    <div class="card-header">
-                        <h2>Ajuda Rápida</h2>
-                    </div>
-                    <div class="card-body">
-                        <div class="section-title-small">Como funciona este painel?</div>
-                        <p class="section-description-small">
-                            Todas as configurações são salvas no <strong>localStorage</strong> do navegador, na chave
-                            <code>bemorhSiteConfig</code>. Isso significa que:
-                        </p>
-                        <ul class="section-description-small" style="margin-left:18px; list-style:disc;">
-                            <li>As alterações afetam imediatamente a página <strong>index.html</strong> neste mesmo navegador.</li>
-                            <li>Se você abrir o site em outro navegador/computador, será necessário configurar novamente.</li>
-                            <li>Para tornar isso definitivo para todos os visitantes, o ideal é futuramente salvar isso em um backend
-                                (ex: Firebase) e carregar os dados de lá.</li>
-                        </ul>
-
-                        <div class="section-title-small" style="margin-top:20px;">Restaurar tudo ao padrão</div>
-                        <p class="section-description-small">
-                            Use o botão <strong>"Restaurar Padrão"</strong> na aba de Configurações. Isso irá:
-                        </p>
-                        <ul class="section-description-small" style="margin-left:18px; list-style:disc;">
-                            <li>Apagar a configuração salva em <code>localStorage</code>;</li>
-                            <li>Recarregar todos os campos com os textos padrão que vieram no código original.</li>
-                        </ul>
-
-                        <div class="section-title-small" style="margin-top:20px;">Problemas comuns</div>
-                        <ul class="section-description-small" style="margin-left:18px; list-style:disc;">
-                            <li><strong>Textos não mudam no site:</strong> verifique se você salvou as alterações (botão "Salvar Configurações") e depois
-                                recarregue o <strong>index.html</strong> no navegador (F5).</li>
-                            <li><strong>Erros estranhos:</strong> clique em "Restaurar Padrão" e depois salve novamente.</li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-
-            <footer>
-                &copy; 2023 Bemorh - Painel Administrativo Local. Desenvolvido para edição de textos do site.
-            </footer>
         </div>
-    </div>
+    </section>
 
-    <script>
-        // Função para tratar erro na logo no painel admin
-        function handleAdminLogoError(element) {
-            element.style.display = 'none';
-            const logoText = element.nextElementSibling;
-            if (logoText && logoText.id === 'logoText') {
-                logoText.style.display = 'flex';
-            }
-        }
+    <!-- Sobre -->
+    <section id="sobre" class="section">
+        <div class="container">
+            <div class="section-header">
+                <h2>Sobre Nós</h2>
+                <p>Conheça mais sobre nossa missão, visão e valores</p>
+            </div>
+            <div style="max-width: 800px; margin: 0 auto;">
+                <div style="background-color: white; padding: 40px; border-radius: 10px; box-shadow: var(--shadow);">
+                    <h3 style="color: var(--primary); margin-bottom: 20px;">Nossa História</h3>
+                    <p style="margin-bottom: 20px; font-size: 1.1rem; line-height: 1.8;">
+                        A <strong>Bemorh</strong> surgiu em 2020 com o objetivo de conectar pessoas através da tecnologia. 
+                        Percebemos que muitas empresas têm ideias brilhantes, mas falta uma estrutura para desenvolvê-las.
+                    </p>
+                    <p style="margin-bottom: 20px; font-size: 1.1rem; line-height: 1.8;">
+                        Começamos como uma pequena startup e hoje somos referência em desenvolvimento de soluções 
+                        tecnológicas que promovem colaboração e inovação.
+                    </p>
+                    
+                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px; margin-top: 40px;">
+                        <div style="text-align: center; padding: 20px; background-color: rgba(52, 152, 219, 0.05); border-radius: 10px;">
+                            <div style="font-size: 2.5rem; color: var(--secondary); font-weight: bold;">3+</div>
+                            <div style="font-weight: 600; color: var(--primary);">Anos de Mercado</div>
+                        </div>
+                        <div style="text-align: center; padding: 20px; background-color: rgba(52, 152, 219, 0.05); border-radius: 10px;">
+                            <div style="font-size: 2.5rem; color: var(--secondary); font-weight: bold;" id="projectCountDisplay">20+</div>
+                            <div style="font-weight: 600; color: var(--primary);">Projetos Concluídos</div>
+                        </div>
+                        <div style="text-align: center; padding: 20px; background-color: rgba(52, 152, 219, 0.05); border-radius: 10px;">
+                            <div style="font-size: 2.5rem; color: var(--secondary); font-weight: bold;" id="clientCountDisplay">15+</div>
+                            <div style="font-weight: 600; color: var(--primary);">Clientes Satisfeitos</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 
-        // Mesma configuração padrão usada no index (precisamos aqui para preencher os campos)
-        const defaultSiteConfig = {
-            logoTitle: "Bemorh",
-            logoTagline: "tecnologia que conecta ideias",
+    <!-- Serviços -->
+    <section id="servicos" class="section" style="background-color: #f5f7fa;">
+        <div class="container">
+            <div class="section-header">
+                <h2>Nossos Serviços</h2>
+                <p>Soluções tecnológicas personalizadas para o seu negócio</p>
+            </div>
+            <div class="services-grid">
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-laptop-code"></i>
+                    </div>
+                    <h3>Desenvolvimento Web</h3>
+                    <p>Sites, sistemas web e aplicações responsivas com as melhores tecnologias do mercado.</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-mobile-alt"></i>
+                    </div>
+                    <h3>Apps Mobile</h3>
+                    <p>Aplicativos nativos e híbridos para iOS e Android, com designs intuitivos e funcionais.</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-palette"></i>
+                    </div>
+                    <h3>UI/UX Design</h3>
+                    <p>Design centrado no usuário, interfaces intuitivas e experiências digitais memoráveis.</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-lightbulb"></i>
+                    </div>
+                    <h3>Consultoria em Inovação</h3>
+                    <p>Ajudo sua empresa a implementar processos inovadores e soluções tecnológicas estratégicas.</p>
+                </div>
+            </div>
+        </div>
+    </section>
 
-            heroTitle: "Tecnologia que Conecta Ideias",
-            heroSubtitle: "Na Bemorh, transformamos conceitos em soluções digitais inovadoras. Desenvolvemos ferramentas virtuais que conectam pessoas, processos e tecnologias para impulsionar o seu negócio.",
-            heroContactText: "Entre em Contato",
+    <!-- Projetos -->
+    <section id="projetos" class="section">
+        <div class="container">
+            <div class="section-header">
+                <h2>Projetos Recentes</h2>
+                <p>Conheça alguns dos nossos trabalhos mais recentes</p>
+            </div>
+            <div class="projects-grid" id="projectsGrid">
+                <!-- Projetos serão carregados dinamicamente aqui -->
+                <div style="grid-column: 1 / -1; text-align: center; padding: 40px; color: var(--gray);">
+                    <i class="fas fa-spinner fa-spin"></i> Carregando projetos...
+                </div>
+            </div>
+        </div>
+    </section>
 
-            projectsTitle: "Projetos em Destaque",
-            project1Title: "Sistema de Gestão de Ideias",
-            project1Status: "Concluído",
-            project1Description: "Plataforma colaborativa que organiza e prioriza ideias em projetos executáveis com fluxos visuais intuitivos.",
-            project2Title: "IA para Inovação",
-            project2Status: "Em Andamento",
-            project2Description: "Ferramenta de inteligência artificial que auxilia na geração e refinamento de ideias criativas para negócios.",
-            project3Title: "Plataforma Colaborativa",
-            project3Status: "Em Planejamento",
-            project3Description: "Ambiente virtual para equipes distribuídas colaborarem em tempo real no desenvolvimento de projetos.",
+    <!-- Contato -->
+    <section id="contato" class="section" style="background-color: #f5f7fa;">
+        <div class="container">
+            <div class="section-header">
+                <h2>Entre em Contato</h2>
+                <p>Estamos prontos para transformar suas ideias em realidade. Entre em contato e vamos conversar sobre seu projeto.</p>
+            </div>
+            
+            <div class="contact-container">
+                <!-- Informações de Contato -->
+                <div class="contact-info">
+                    <div class="info-item">
+                        <div class="info-icon">
+                            <i class="fas fa-map-marker-alt"></i>
+                        </div>
+                        <div class="info-content">
+                            <h3>Endereço</h3>
+                            <p id="companyAddressDisplay">Av. das Inovações, 123 - Centro de Tecnologia, São Paulo - SP</p>
+                        </div>
+                    </div>
+                    <div class="info-item">
+                        <div class="info-icon">
+                            <i class="fas fa-phone"></i>
+                        </div>
+                        <div class="info-content">
+                            <h3>Telefone</h3>
+                            <p id="companyPhoneDisplay">(11) 3456-7890</p>
+                        </div>
+                    </div>
+                    <div class="info-item">
+                        <div class="info-icon">
+                            <i class="fas fa-envelope"></i>
+                        </div>
+                        <div class="info-content">
+                            <h3>Email</h3>
+                            <p id="companyEmailDisplay">contato@bemorh.com.br</p>
+                        </div>
+                    </div>
+                    <div class="info-item">
+                        <div class="info-icon">
+                            <i class="fas fa-clock"></i>
+                        </div>
+                        <div class="info-content">
+                            <h3>Horário de Atendimento</h3>
+                            <p>Segunda a Sexta: 9h às 18h</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Formulário de Contato -->
+                <div class="contact-form">
+                    <form id="contactForm">
+                        <div class="alert alert-success" id="contactSuccess" style="display: none;">
+                            <i class="fas fa-check-circle"></i> Mensagem enviada com sucesso! Entraremos em contato em breve.
+                        </div>
+                        <div class="alert alert-danger" id="contactError" style="display: none;">
+                            <i class="fas fa-exclamation-circle"></i> Erro ao enviar mensagem. Tente novamente.
+                        </div>
+                        
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="contactName">Nome *</label>
+                                <input type="text" id="contactName" name="name" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="contactEmail">Email *</label>
+                                <input type="email" id="contactEmail" name="email" required>
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="contactPhone">Telefone</label>
+                            <input type="text" id="contactPhone" name="phone">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="contactSubject">Assunto *</label>
+                            <select id="contactSubject" name="subject" required>
+                                <option value="">Selecione um assunto</option>
+                                <option value="orcamento">Orçamento de Projeto</option>
+                                <option value="duvida">Dúvida sobre Serviços</option>
+                                <option value="parceria">Proposta de Parceria</option>
+                                <option value="suporte">Suporte Técnico</option>
+                                <option value="outro">Outro</option>
+                            </select>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="contactMessage">Mensagem *</label>
+                            <textarea id="contactMessage" name="message" rows="5" required></textarea>
+                        </div>
+                        
+                        <button type="submit" class="btn btn-contact" id="submitBtn">
+                            <span id="submitText">Enviar Mensagem</span>
+                            <span id="submitLoading" style="display: none;">
+                                <i class="fas fa-spinner fa-spin"></i> Enviando...
+                            </span>
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
 
-            servicesTitle: "Nossos Serviços",
-            service1Title: "Consultoria em Inovação",
-            service1Description: "Ajudamos sua empresa a identificar oportunidades e transformar ideias em projetos viáveis com metodologias ágeis.",
-            service2Title: "Desenvolvimento Ágil",
-            service2Description: "Criamos soluções personalizadas com metodologias ágeis, garantindo entrega rápida e adaptação contínua.",
-            service3Title: "Integração de Sistemas",
-            service3Description: "Conectamos diferentes tecnologias e plataformas para criar ecossistemas digitais coesos e eficientes.",
+        <!-- BLOCO DE CONFIGURAÇÕES DO INDEX -->
+        <div class="container">
+            <div class="config-card" id="indexConfigCard">
+                <div class="config-title"><i class="fas fa-sliders-h"></i> Configurações do Site (Página Inicial)</div>
+                <div class="config-subtitle">
+                    Edite abaixo os textos que aparecem no <strong>index.html</strong>. As mudanças são salvas neste navegador e refletirão na página inicial.
+                </div>
 
-            aboutTitle: "Sobre a Bemorh",
-            aboutIntro: "A Bemorh nasceu da crença de que as melhores soluções surgem da conexão de ideias. Somos uma empresa de tecnologia especializada em desenvolver ferramentas virtuais que facilitam a colaboração, estimulam a inovação e transformam conceitos em realidade.",
-            missionTitle: "Nossa Missão",
-            missionText: "Conectar pessoas, ideias e tecnologias para criar soluções digitais inovadoras que transformam negócios e impulsionam resultados.",
-            visionTitle: "Nossa Visão",
-            visionText: "Ser referência em tecnologia conectiva, reconhecida por transformar ideias dispersas em ecossistemas digitais integrados e eficientes.",
-            approachTitle: "Nossa Abordagem",
-            approachText: "Trabalhamos em parceria com nossos clientes, entendendo suas necessidades únicas e co-criando soluções que realmente fazem a diferença.",
+                <div class="config-alert config-alert-success" id="cfgSuccess">
+                    <i class="fas fa-check-circle"></i> Configurações salvas com sucesso.
+                </div>
+                <div class="config-alert config-alert-error" id="cfgError">
+                    <i class="fas fa-exclamation-circle"></i> Ocorreu um erro ao salvar as configurações.
+                </div>
 
-            contactTitle: "Conecte-se Conosco",
-            contactInfoTitle: "Informações de Contato",
-            contactAddressTitle: "Endereço",
-            contactAddressText: "Av. das Inovações, 123 - Centro de Tecnologia<br>São Paulo - SP, 04538-000",
-            contactPhoneTitle: "Telefone",
-            contactPhoneText: "(11) 3456-7890",
-            contactEmailTitle: "Email",
-            contactEmailText: "contato@bemorh.com.br",
-            contactScheduleTitle: "Horário de Atendimento",
-            contactScheduleText: "Segunda a Sexta: 8h às 19h<br>Sábado: 9h às 13h",
-            contactFormTitle: "Envie sua Ideia",
-            contactNameLabel: "Nome",
-            contactEmailLabel: "Email",
-            contactPhoneLabel: "Telefone",
-            contactMessageLabel: "Sua Ideia ou Projeto",
-            contactSubmitText: "Enviar Mensagem",
+                <!-- Identidade -->
+                <div class="config-row">
+                    <h3>Identidade do Site</h3>
+                    <small>Nome e slogan exibidos na logo e rodapé do index.</small>
+                    <div class="config-grid-2" style="margin-top:10px;">
+                        <div class="form-group">
+                            <label for="cfg_logoTitle_idx">Título / Marca</label>
+                            <input type="text" id="cfg_logoTitle_idx">
+                        </div>
+                        <div class="form-group">
+                            <label for="cfg_logoTagline_idx">Slogan</label>
+                            <input type="text" id="cfg_logoTagline_idx">
+                        </div>
+                    </div>
+                </div>
 
-            footerDescription: "Tecnologia que conecta ideias. Desenvolvemos soluções digitais inovadoras que transformam conceitos em realidade.",
-            footerQuickLinksTitle: "Links Rápidos",
-            footerContactTitle: "Contato",
-            footerAddress: "Av. das Inovações, 123 - São Paulo, SP",
-            footerPhone: "(11) 3456-7890",
-            footerEmail: "contato@bemorh.com.br",
-            footerSchedule: "Seg-Sex: 8h-19h",
-            footerCopyright: "© 2023 Bemorh - Tecnologia que Conecta Ideias. Todos os direitos reservados."
+                <!-- Hero -->
+                <div class="config-row">
+                    <h3>Hero (Topo do Index)</h3>
+                    <small>Título, subtítulo e texto do botão principal do index.</small>
+                    <div class="form-group" style="margin-top:10px;">
+                        <label for="cfg_heroTitle_idx">Título</label>
+                        <input type="text" id="cfg_heroTitle_idx">
+                    </div>
+                    <div class="form-group">
+                        <label for="cfg_heroSubtitle_idx">Subtítulo</label>
+                        <textarea id="cfg_heroSubtitle_idx" rows="2"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="cfg_heroContactText_idx">Texto Botão</label>
+                        <input type="text" id="cfg_heroContactText_idx">
+                    </div>
+                </div>
+
+                <!-- Projetos -->
+                <div class="config-row">
+                    <h3>Projetos em Destaque</h3>
+                    <small>Título da seção e textos dos 3 cards.</small>
+                    <div class="form-group" style="margin-top:10px;">
+                        <label for="cfg_projectsTitle_idx">Título da Seção</label>
+                        <input type="text" id="cfg_projectsTitle_idx">
+                    </div>
+                    <div class="config-grid-2">
+                        <div>
+                            <strong>Projeto 1</strong>
+                            <div class="form-group">
+                                <label for="cfg_project1Title_idx">Título</label>
+                                <input type="text" id="cfg_project1Title_idx">
+                            </div>
+                            <div class="form-group">
+                                <label for="cfg_project1Status_idx">Status</label>
+                                <input type="text" id="cfg_project1Status_idx">
+                            </div>
+                            <div class="form-group">
+                                <label for="cfg_project1Description_idx">Descrição</label>
+                                <textarea id="cfg_project1Description_idx" rows="2"></textarea>
+                            </div>
+                        </div>
+                        <div>
+                            <strong>Projeto 2</strong>
+                            <div class="form-group">
+                                <label for="cfg_project2Title_idx">Título</label>
+                                <input type="text" id="cfg_project2Title_idx">
+                            </div>
+                            <div class="form-group">
+                                <label for="cfg_project2Status_idx">Status</label>
+                                <input type="text" id="cfg_project2Status_idx">
+                            </div>
+                            <div class="form-group">
+                                <label for="cfg_project2Description_idx">Descrição</label>
+                                <textarea id="cfg_project2Description_idx" rows="2"></textarea>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="config-grid-2">
+                        <div>
+                            <strong>Projeto 3</strong>
+                            <div class="form-group">
+                                <label for="cfg_project3Title_idx">Título</label>
+                                <input type="text" id="cfg_project3Title_idx">
+                            </div>
+                            <div class="form-group">
+                                <label for="cfg_project3Status_idx">Status</label>
+                                <input type="text" id="cfg_project3Status_idx">
+                            </div>
+                            <div class="form-group">
+                                <label for="cfg_project3Description_idx">Descrição</label>
+                                <textarea id="cfg_project3Description_idx" rows="2"></textarea>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Serviços -->
+                <div class="config-row">
+                    <h3>Serviços (Index)</h3>
+                    <small>Título e descrições dos 3 serviços do index.</small>
+                    <div class="form-group" style="margin-top:10px;">
+                        <label for="cfg_servicesTitle_idx">Título da Seção</label>
+                        <input type="text" id="cfg_servicesTitle_idx">
+                    </div>
+                    <div class="config-grid-2">
+                        <div>
+                            <strong>Serviço 1</strong>
+                            <div class="form-group">
+                                <label for="cfg_service1Title_idx">Título</label>
+                                <input type="text" id="cfg_service1Title_idx">
+                            </div>
+                            <div class="form-group">
+                                <label for="cfg_service1Description_idx">Descrição</label>
+                                <textarea id="cfg_service1Description_idx" rows="2"></textarea>
+                            </div>
+                        </div>
+                        <div>
+                            <strong>Serviço 2</strong>
+                            <div class="form-group">
+                                <label for="cfg_service2Title_idx">Título</label>
+                                <input type="text" id="cfg_service2Title_idx">
+                            </div>
+                            <div class="form-group">
+                                <label for="cfg_service2Description_idx">Descrição</label>
+                                <textarea id="cfg_service2Description_idx" rows="2"></textarea>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="config-grid-2">
+                        <div>
+                            <strong>Serviço 3</strong>
+                            <div class="form-group">
+                                <label for="cfg_service3Title_idx">Título</label>
+                                <input type="text" id="cfg_service3Title_idx">
+                            </div>
+                            <div class="form-group">
+                                <label for="cfg_service3Description_idx">Descrição</label>
+                                <textarea id="cfg_service3Description_idx" rows="2"></textarea>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Sobre -->
+                <div class="config-row">
+                    <h3>Sobre (Index)</h3>
+                    <small>Título, introdução e textos de Missão, Visão e Abordagem.</small>
+                    <div class="form-group" style="margin-top:10px;">
+                        <label for="cfg_aboutTitle_idx">Título da Seção</label>
+                        <input type="text" id="cfg_aboutTitle_idx">
+                    </div>
+                    <div class="form-group">
+                        <label for="cfg_aboutIntro_idx">Texto de Introdução</label>
+                        <textarea id="cfg_aboutIntro_idx" rows="2"></textarea>
+                    </div>
+                    <div class="config-grid-2">
+                        <div>
+                            <strong>Missão</strong>
+                            <div class="form-group">
+                                <label for="cfg_missionTitle_idx">Título</label>
+                                <input type="text" id="cfg_missionTitle_idx">
+                            </div>
+                            <div class="form-group">
+                                <label for="cfg_missionText_idx">Texto</label>
+                                <textarea id="cfg_missionText_idx" rows="2"></textarea>
+                            </div>
+                        </div>
+                        <div>
+                            <strong>Visão</strong>
+                            <div class="form-group">
+                                <label for="cfg_visionTitle_idx">Título</label>
+                                <input type="text" id="cfg_visionTitle_idx">
+                            </div>
+                            <div class="form-group">
+                                <label for="cfg_visionText_idx">Texto</label>
+                                <textarea id="cfg_visionText_idx" rows="2"></textarea>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="config-grid-2">
+                        <div>
+                            <strong>Abordagem</strong>
+                            <div class="form-group">
+                                <label for="cfg_approachTitle_idx">Título</label>
+                                <input type="text" id="cfg_approachTitle_idx">
+                            </div>
+                            <div class="form-group">
+                                <label for="cfg_approachText_idx">Texto</label>
+                                <textarea id="cfg_approachText_idx" rows="2"></textarea>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Contato e rodapé -->
+                <div class="config-row">
+                    <h3>Contato e Rodapé (Index)</h3>
+                    <small>Títulos e textos de contato e rodapé.</small>
+                    <div class="config-grid-2" style="margin-top:10px;">
+                        <div>
+                            <div class="form-group">
+                                <label for="cfg_contactTitle_idx">Título Seção Contato</label>
+                                <input type="text" id="cfg_contactTitle_idx">
+                            </div>
+                            <div class="form-group">
+                                <label for="cfg_contactInfoTitle_idx">Título Bloco Informações</label>
+                                <input type="text" id="cfg_contactInfoTitle_idx">
+                            </div>
+                            <div class="form-group">
+                                <label for="cfg_contactAddressTitle_idx">Título Endereço</label>
+                                <input type="text" id="cfg_contactAddressTitle_idx">
+                            </div>
+                            <div class="form-group">
+                                <label for="cfg_contactAddressText_idx">Texto Endereço (pode usar &lt;br&gt;)</label>
+                                <textarea id="cfg_contactAddressText_idx" rows="2"></textarea>
+                            </div>
+                            <div class="form-group">
+                                <label for="cfg_contactPhoneTitle_idx">Título Telefone</label>
+                                <input type="text" id="cfg_contactPhoneTitle_idx">
+                            </div>
+                            <div class="form-group">
+                                <label for="cfg_contactPhoneText_idx">Texto Telefone</label>
+                                <input type="text" id="cfg_contactPhoneText_idx">
+                            </div>
+                            <div class="form-group">
+                                <label for="cfg_contactEmailTitle_idx">Título Email</label>
+                                <input type="text" id="cfg_contactEmailTitle_idx">
+                            </div>
+                            <div class="form-group">
+                                <label for="cfg_contactEmailText_idx">Texto Email</label>
+                                <input type="text" id="cfg_contactEmailText_idx">
+                            </div>
+                            <div class="form-group">
+                                <label for="cfg_contactScheduleTitle_idx">Título Horário</label>
+                                <input type="text" id="cfg_contactScheduleTitle_idx">
+                            </div>
+                            <div class="form-group">
+                                <label for="cfg_contactScheduleText_idx">Texto Horário (pode usar &lt;br&gt;)</label>
+                                <textarea id="cfg_contactScheduleText_idx" rows="2"></textarea>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="form-group">
+                                <label for="cfg_contactFormTitle_idx">Título Formulário</label>
+                                <input type="text" id="cfg_contactFormTitle_idx">
+                            </div>
+                            <div class="form-group">
+                                <label for="cfg_contactNameLabel_idx">Label Nome</label>
+                                <input type="text" id="cfg_contactNameLabel_idx">
+                            </div>
+                            <div class="form-group">
+                                <label for="cfg_contactEmailLabel_idx">Label Email</label>
+                                <input type="text" id="cfg_contactEmailLabel_idx">
+                            </div>
+                            <div class="form-group">
+                                <label for="cfg_contactPhoneLabel_idx">Label Telefone</label>
+                                <input type="text" id="cfg_contactPhoneLabel_idx">
+                            </div>
+                            <div class="form-group">
+                                <label for="cfg_contactMessageLabel_idx">Label Mensagem</label>
+                                <input type="text" id="cfg_contactMessageLabel_idx">
+                            </div>
+                            <div class="form-group">
+                                <label for="cfg_contactSubmitText_idx">Texto Botão Enviar</label>
+                                <input type="text" id="cfg_contactSubmitText_idx">
+                            </div>
+                            <div class="form-group">
+                                <label for="cfg_footerDescription_idx">Texto Rodapé (descrição)</label>
+                                <textarea id="cfg_footerDescription_idx" rows="2"></textarea>
+                            </div>
+                            <div class="form-group">
+                                <label for="cfg_footerQuickLinksTitle_idx">Título "Links Rápidos"</label>
+                                <input type="text" id="cfg_footerQuickLinksTitle_idx">
+                            </div>
+                            <div class="form-group">
+                                <label for="cfg_footerContactTitle_idx">Título "Contato" Rodapé</label>
+                                <input type="text" id="cfg_footerContactTitle_idx">
+                            </div>
+                            <div class="form-group">
+                                <label for="cfg_footerAddress_idx">Endereço Rodapé</label>
+                                <input type="text" id="cfg_footerAddress_idx">
+                            </div>
+                            <div class="form-group">
+                                <label for="cfg_footerPhone_idx">Telefone Rodapé</label>
+                                <input type="text" id="cfg_footerPhone_idx">
+                            </div>
+                            <div class="form-group">
+                                <label for="cfg_footerEmail_idx">Email Rodapé</label>
+                                <input type="text" id="cfg_footerEmail_idx">
+                            </div>
+                            <div class="form-group">
+                                <label for="cfg_footerSchedule_idx">Horário Rodapé</label>
+                                <input type="text" id="cfg_footerSchedule_idx">
+                            </div>
+                            <div class="form-group">
+                                <label for="cfg_footerCopyright_idx">Texto de Copyright</label>
+                                <textarea id="cfg_footerCopyright_idx" rows="2"></textarea>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="config-actions">
+                    <button class="btn" id="saveIndexConfigBtn"><i class="fas fa-save"></i> Salvar Configurações do Index</button>
+                    <button class="btn" style="background-color:#7f8c8d;" id="reloadIndexConfigBtn"><i class="fas fa-sync-alt"></i> Recarregar Configurações Salvas</button>
+                    <button class="btn" style="background-color:#e74c3c;" id="resetIndexConfigBtn"><i class="fas fa-undo"></i> Restaurar Padrão</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>Bemorh</h3>
+                    <p>Tecnologia que conecta ideias e transforma conceitos em realidade digital.</p>
+                    <div style="display: flex; gap: 15px; margin-top: 20px;">
+                        <a href="#" style="color: white; font-size: 1.2rem;"><i class="fab fa-facebook"></i></a>
+                        <a href="#" style="color: white; font-size: 1.2rem;"><i class="fab fa-instagram"></i></a>
+                        <a href="#" style="color: white; font-size: 1.2rem;"><i class="fab fa-linkedin"></i></a>
+                        <a href="#" style="color: white; font-size: 1.2rem;"><i class="fab fa-twitter"></i></a>
+                    </div>
+                </div>
+                <div class="footer-column">
+                    <h3>Links Rápidos</h3>
+                    <ul class="footer-links">
+                        <li><a href="#home">Início</a></li>
+                        <li><a href="#sobre">Sobre Nós</a></li>
+                        <li><a href="#servicos">Serviços</a></li>
+                        <li><a href="#projetos">Projetos</a></li>
+                        <li><a href="#contato">Contato</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Serviços</h3>
+                    <ul class="footer-links">
+                        <li><a href="#servicos">Desenvolvimento Web</a></li>
+                        <li><a href="#servicos">Apps Mobile</a></li>
+                        <li><a href="#servicos">UI/UX Design</a></li>
+                        <li><a href="#servicos">Consultoria</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2023 Bemorh. Todos os direitos reservados.</p>
+                <p style="margin-top: 5px;">
+                    <a href="admin.html" style="color: rgba(255, 255, 255, 0.6); text-decoration: none;">
+                        <i class="fas fa-lock"></i> Painel Administrativo
+                    </a>
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Firebase SDK (versão modular) -->
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+        import { 
+            getFirestore, 
+            collection, 
+            addDoc, 
+            getDocs, 
+            query, 
+            orderBy, 
+            serverTimestamp 
+        } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
+
+        const firebaseConfig = {
+            apiKey: "AIzaSyAqNKa5jp5UpcTtnAF1_EUVKCXVrGZTFkA",
+            authDomain: "bemorh-bc5a8.firebaseapp.com",
+            projectId: "bemorh-bc5a8",
+            storageBucket: "bemorh-bc5a8.firebasestorage.app",
+            messagingSenderId: "313271255362",
+            appId: "1:313271255362:web:167e42b830f8fdcb9188db"
         };
 
-        function loadSiteConfig() {
-            const savedConfig = localStorage.getItem('bemorhSiteConfig');
-            if (!savedConfig) return defaultSiteConfig;
+        const app = initializeApp(firebaseConfig);
+        const db = getFirestore(app);
+
+        async function saveContactToFirebase(contactData) {
             try {
-                const parsed = JSON.parse(savedConfig);
-                return { ...defaultSiteConfig, ...parsed };
-            } catch (e) {
-                console.error("Erro ao ler bemorhSiteConfig:", e);
-                return defaultSiteConfig;
+                const contactWithTimestamp = {
+                    ...contactData,
+                    timestamp: serverTimestamp(),
+                    status: "novo",
+                    read: false
+                };
+                delete contactWithTimestamp.date;
+                const docRef = await addDoc(collection(db, "contacts"), contactWithTimestamp);
+                console.log("Contato salvo com ID: ", docRef.id);
+                return { success: true, id: docRef.id };
+            } catch (error) {
+                console.error("Erro ao salvar contato: ", error);
+                return { success: false, error: error.message };
             }
         }
 
-        function saveSiteConfig(config) {
+        async function loadProjectsFromFirebase() {
             try {
-                localStorage.setItem('bemorhSiteConfig', JSON.stringify(config));
-                return true;
-            } catch (e) {
-                console.error("Erro ao salvar bemorhSiteConfig:", e);
-                return false;
+                const projectsGrid = document.getElementById('projectsGrid');
+                const cachedProjects = localStorage.getItem('bemorhSiteProjects');
+                if (cachedProjects) {
+                    const projects = JSON.parse(cachedProjects);
+                    displayProjects(projects.filter(p => p.status === 'active'));
+                }
+                const querySnapshot = await getDocs(
+                    query(collection(db, "siteProjects"), orderBy("timestamp", "desc"))
+                );
+                const projects = [];
+                querySnapshot.forEach((doc) => {
+                    const project = doc.data();
+                    project.id = doc.id;
+                    projects.push(project);
+                });
+                if (projects.length > 0) {
+                    localStorage.setItem('bemorhSiteProjects', JSON.stringify(projects));
+                    displayProjects(projects.filter(p => p.status === 'active'));
+                }
+            } catch (error) {
+                console.error("Erro ao carregar projetos:", error);
+                const localProjects = JSON.parse(localStorage.getItem('bemorhSiteProjects') || '[]');
+                displayProjects(localProjects.filter(p => p.status === 'active'));
             }
         }
 
-        function fillFormFromConfig(cfg) {
-            const setVal = (id, value) => {
-                const el = document.getElementById(id);
-                if (el && value != null) el.value = value;
-            };
-
-            // Logo / Geral
-            setVal('cfg_logoTitle', cfg.logoTitle);
-            setVal('cfg_logoTagline', cfg.logoTagline);
-
-            // Atualiza cabeçalho do painel
-            document.getElementById('adminLogoTitle').textContent = cfg.logoTitle;
-            document.getElementById('adminLogoTagline').textContent = cfg.logoTagline;
-
-            // Hero
-            setVal('cfg_heroTitle', cfg.heroTitle);
-            setVal('cfg_heroSubtitle', cfg.heroSubtitle);
-            setVal('cfg_heroContactText', cfg.heroContactText);
-
-            // Projetos
-            setVal('cfg_projectsTitle', cfg.projectsTitle);
-            setVal('cfg_project1Title', cfg.project1Title);
-            setVal('cfg_project1Status', cfg.project1Status);
-            setVal('cfg_project1Description', cfg.project1Description);
-            setVal('cfg_project2Title', cfg.project2Title);
-            setVal('cfg_project2Status', cfg.project2Status);
-            setVal('cfg_project2Description', cfg.project2Description);
-            setVal('cfg_project3Title', cfg.project3Title);
-            setVal('cfg_project3Status', cfg.project3Status);
-            setVal('cfg_project3Description', cfg.project3Description);
-
-            // Serviços
-            setVal('cfg_servicesTitle', cfg.servicesTitle);
-            setVal('cfg_service1Title', cfg.service1Title);
-            setVal('cfg_service1Description', cfg.service1Description);
-            setVal('cfg_service2Title', cfg.service2Title);
-            setVal('cfg_service2Description', cfg.service2Description);
-            setVal('cfg_service3Title', cfg.service3Title);
-            setVal('cfg_service3Description', cfg.service3Description);
-
-            // Sobre
-            setVal('cfg_aboutTitle', cfg.aboutTitle);
-            setVal('cfg_aboutIntro', cfg.aboutIntro);
-            setVal('cfg_missionTitle', cfg.missionTitle);
-            setVal('cfg_missionText', cfg.missionText);
-            setVal('cfg_visionTitle', cfg.visionTitle);
-            setVal('cfg_visionText', cfg.visionText);
-            setVal('cfg_approachTitle', cfg.approachTitle);
-            setVal('cfg_approachText', cfg.approachText);
-
-            // Contato
-            setVal('cfg_contactTitle', cfg.contactTitle);
-            setVal('cfg_contactInfoTitle', cfg.contactInfoTitle);
-            setVal('cfg_contactAddressTitle', cfg.contactAddressTitle);
-            setVal('cfg_contactAddressText', cfg.contactAddressText);
-            setVal('cfg_contactPhoneTitle', cfg.contactPhoneTitle);
-            setVal('cfg_contactPhoneText', cfg.contactPhoneText);
-            setVal('cfg_contactEmailTitle', cfg.contactEmailTitle);
-            setVal('cfg_contactEmailText', cfg.contactEmailText);
-            setVal('cfg_contactScheduleTitle', cfg.contactScheduleTitle);
-            setVal('cfg_contactScheduleText', cfg.contactScheduleText);
-            setVal('cfg_contactFormTitle', cfg.contactFormTitle);
-            setVal('cfg_contactNameLabel', cfg.contactNameLabel);
-            setVal('cfg_contactEmailLabel', cfg.contactEmailLabel);
-            setVal('cfg_contactPhoneLabel', cfg.contactPhoneLabel);
-            setVal('cfg_contactMessageLabel', cfg.contactMessageLabel);
-            setVal('cfg_contactSubmitText', cfg.contactSubmitText);
-
-            // Footer
-            setVal('cfg_footerDescription', cfg.footerDescription);
-            setVal('cfg_footerQuickLinksTitle', cfg.footerQuickLinksTitle);
-            setVal('cfg_footerContactTitle', cfg.footerContactTitle);
-            setVal('cfg_footerAddress', cfg.footerAddress);
-            setVal('cfg_footerPhone', cfg.footerPhone);
-            setVal('cfg_footerEmail', cfg.footerEmail);
-            setVal('cfg_footerSchedule', cfg.footerSchedule);
-            setVal('cfg_footerCopyright', cfg.footerCopyright);
-        }
-
-        function collectConfigFromForm() {
-            const v = id => {
-                const el = document.getElementById(id);
-                return el ? el.value : '';
-            };
-
-            return {
-                logoTitle: v('cfg_logoTitle'),
-                logoTagline: v('cfg_logoTagline'),
-
-                heroTitle: v('cfg_heroTitle'),
-                heroSubtitle: v('cfg_heroSubtitle'),
-                heroContactText: v('cfg_heroContactText'),
-
-                projectsTitle: v('cfg_projectsTitle'),
-                project1Title: v('cfg_project1Title'),
-                project1Status: v('cfg_project1Status'),
-                project1Description: v('cfg_project1Description'),
-                project2Title: v('cfg_project2Title'),
-                project2Status: v('cfg_project2Status'),
-                project2Description: v('cfg_project2Description'),
-                project3Title: v('cfg_project3Title'),
-                project3Status: v('cfg_project3Status'),
-                project3Description: v('cfg_project3Description'),
-
-                servicesTitle: v('cfg_servicesTitle'),
-                service1Title: v('cfg_service1Title'),
-                service1Description: v('cfg_service1Description'),
-                service2Title: v('cfg_service2Title'),
-                service2Description: v('cfg_service2Description'),
-                service3Title: v('cfg_service3Title'),
-                service3Description: v('cfg_service3Description'),
-
-                aboutTitle: v('cfg_aboutTitle'),
-                aboutIntro: v('cfg_aboutIntro'),
-                missionTitle: v('cfg_missionTitle'),
-                missionText: v('cfg_missionText'),
-                visionTitle: v('cfg_visionTitle'),
-                visionText: v('cfg_visionText'),
-                approachTitle: v('cfg_approachTitle'),
-                approachText: v('cfg_approachText'),
-
-                contactTitle: v('cfg_contactTitle'),
-                contactInfoTitle: v('cfg_contactInfoTitle'),
-                contactAddressTitle: v('cfg_contactAddressTitle'),
-                contactAddressText: v('cfg_contactAddressText'),
-                contactPhoneTitle: v('cfg_contactPhoneTitle'),
-                contactPhoneText: v('cfg_contactPhoneText'),
-                contactEmailTitle: v('cfg_contactEmailTitle'),
-                contactEmailText: v('cfg_contactEmailText'),
-                contactScheduleTitle: v('cfg_contactScheduleTitle'),
-                contactScheduleText: v('cfg_contactScheduleText'),
-                contactFormTitle: v('cfg_contactFormTitle'),
-                contactNameLabel: v('cfg_contactNameLabel'),
-                contactEmailLabel: v('cfg_contactEmailLabel'),
-                contactPhoneLabel: v('cfg_contactPhoneLabel'),
-                contactMessageLabel: v('cfg_contactMessageLabel'),
-                contactSubmitText: v('cfg_contactSubmitText'),
-
-                footerDescription: v('cfg_footerDescription'),
-                footerQuickLinksTitle: v('cfg_footerQuickLinksTitle'),
-                footerContactTitle: v('cfg_footerContactTitle'),
-                footerAddress: v('cfg_footerAddress'),
-                footerPhone: v('cfg_footerPhone'),
-                footerEmail: v('cfg_footerEmail'),
-                footerSchedule: v('cfg_footerSchedule'),
-                footerCopyright: v('cfg_footerCopyright')
-            };
-        }
-
-        function showAlert(id, show) {
-            const el = document.getElementById(id);
-            if (!el) return;
-            el.style.display = show ? 'block' : 'none';
+        function displayProjects(projects) {
+            const projectsGrid = document.getElementById('projectsGrid');
+            if (!projects || projects.length === 0) {
+                projectsGrid.innerHTML = `
+                    <div style="grid-column: 1 / -1; text-align: center; padding: 40px; color: var(--gray);">
+                        <i class="fas fa-folder-open"></i>
+                        <p style="margin-top: 10px;">Nenhum projeto disponível no momento.</p>
+                        <p style="font-size: 0.9rem; margin-top: 5px;">Adicione projetos no painel administrativo.</p>
+                    </div>
+                `;
+                return;
+            }
+            projectsGrid.innerHTML = '';
+            const displayProjectsList = projects.slice(0, 6);
+            displayProjectsList.forEach(project => {
+                const projectCard = document.createElement('div');
+                projectCard.className = 'project-card';
+                const categoryText = {
+                    'web': 'Desenvolvimento Web',
+                    'mobile': 'Apps Mobile',
+                    'design': 'UI/UX Design',
+                    'consulting': 'Consultoria',
+                    'innovation': 'Inovação'
+                }[project.category] || project.category;
+                const imageUrl = project.images && project.images.length > 0 
+                    ? project.images[0] 
+                    : 'https://images.unsplash.com/photo-1551650975-87deedd944c3?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80';
+                
+                projectCard.innerHTML = `
+                    <div class="project-image">
+                        <img src="${imageUrl}" alt="${project.title}" loading="lazy">
+                    </div>
+                    <div class="project-content">
+                        <h3>${project.title}</h3>
+                        <span class="project-category">${categoryText}</span>
+                        <p>${project.description.substring(0, 100)}...</p>
+                        <div style="margin-top: 15px;">
+                            ${project.features && project.features.length > 0 
+                                ? `<small><strong>Recursos:</strong> ${project.features.slice(0, 2).join(', ')}</small>` 
+                                : ''}
+                        </div>
+                    </div>
+                `;
+                projectsGrid.appendChild(projectCard);
+            });
         }
 
         document.addEventListener('DOMContentLoaded', function() {
-            // Checa se está logado (se quiser forçar)
-            const isLogged = localStorage.getItem('adminLoggedIn') === 'true';
-            if (!isLogged) {
-                // Opcional: redirecionar se não logado
-                // window.location.href = 'index.html';
+            const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+            const navLinks = document.getElementById('navLinks');
+            
+            if (mobileMenuBtn) {
+                mobileMenuBtn.addEventListener('click', function() {
+                    navLinks.classList.toggle('active');
+                });
             }
-
-            // Tabs
-            document.querySelectorAll('.tab-btn').forEach(btn => {
-                btn.addEventListener('click', function() {
-                    const tabId = this.getAttribute('data-tab');
-                    document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
-                    document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
-
-                    this.classList.add('active');
-                    const content = document.getElementById(tabId);
-                    if (content) content.classList.add('active');
+            
+            document.querySelectorAll('.nav-links a').forEach(link => {
+                link.addEventListener('click', function() {
+                    navLinks.classList.remove('active');
+                });
+            });
+            
+            const contactForm = document.getElementById('contactForm');
+            const contactSuccess = document.getElementById('contactSuccess');
+            const contactError = document.getElementById('contactError');
+            const submitBtn = document.getElementById('submitBtn');
+            const submitText = document.getElementById('submitText');
+            const submitLoading = document.getElementById('submitLoading');
+            
+            if (contactForm) {
+                contactForm.addEventListener('submit', async function(e) {
+                    e.preventDefault();
+                    const name = document.getElementById('contactName').value.trim();
+                    const email = document.getElementById('contactEmail').value.trim();
+                    const subject = document.getElementById('contactSubject').value;
+                    const message = document.getElementById('contactMessage').value.trim();
+                    
+                    if (!name || !email || !subject || !message) {
+                        contactError.textContent = "Por favor, preencha todos os campos obrigatórios.";
+                        contactError.style.display = 'block';
+                        return;
+                    }
+                    
+                    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                    if (!emailRegex.test(email)) {
+                        contactError.textContent = "Por favor, insira um email válido.";
+                        contactError.style.display = 'block';
+                        return;
+                    }
+                    
+                    submitText.style.display = 'none';
+                    submitLoading.style.display = 'inline';
+                    submitBtn.disabled = true;
+                    
+                    const contactData = {
+                        name: name,
+                        email: email,
+                        phone: document.getElementById('contactPhone').value.trim() || '',
+                        subject: subject,
+                        message: message,
+                        date: new Date().toLocaleString('pt-BR'),
+                        page: window.location.href
+                    };
+                    
+                    const result = await saveContactToFirebase(contactData);
+                    
+                    if (result.success) {
+                        contactSuccess.style.display = 'block';
+                        contactError.style.display = 'none';
+                        contactForm.reset();
+                        setTimeout(() => {
+                            contactSuccess.style.display = 'none';
+                        }, 5000);
+                    } else {
+                        contactError.textContent = "Erro ao enviar mensagem. Por favor, tente novamente mais tarde.";
+                        contactError.style.display = 'block';
+                        contactSuccess.style.display = 'none';
+                    }
+                    
+                    submitText.style.display = 'inline';
+                    submitLoading.style.display = 'none';
+                    submitBtn.disabled = false;
+                });
+            }
+            
+            window.handleLogoError = function(element) {
+                element.style.display = 'none';
+                const logoText = element.nextElementSibling;
+                if (logoText && logoText.id === 'logoText') {
+                    logoText.style.display = 'flex';
+                }
+            };
+            
+            function loadCompanyInfo() {
+                const savedName = localStorage.getItem('bemorhCompanyName');
+                if (savedName) {
+                    document.getElementById('companyNameDisplay').textContent = savedName;
+                    document.getElementById('companyNameHero').textContent = savedName;
+                }
+                
+                const savedTagline = localStorage.getItem('bemorhCompanyTagline');
+                if (savedTagline) {
+                    document.getElementById('companyTaglineDisplay').textContent = savedTagline;
+                }
+                
+                const savedAbout = localStorage.getItem('bemorhCompanyAbout');
+                if (savedAbout) {
+                    document.getElementById('companyAboutDisplay').textContent = savedAbout;
+                }
+                
+                const savedEmail = localStorage.getItem('bemorhCompanyEmail');
+                const savedPhone = localStorage.getItem('bemorhCompanyPhone');
+                const savedAddress = localStorage.getItem('bemorhCompanyAddress');
+                
+                if (savedEmail) document.getElementById('companyEmailDisplay').textContent = savedEmail;
+                if (savedPhone) document.getElementById('companyPhoneDisplay').textContent = savedPhone;
+                if (savedAddress) document.getElementById('companyAddressDisplay').textContent = savedAddress;
+                
+                const customLogo = localStorage.getItem('bemorhLogo');
+                if (customLogo) {
+                    const logoImage = document.getElementById('logoImage');
+                    if (logoImage) {
+                        logoImage.src = customLogo;
+                    }
+                }
+            }
+            
+            loadCompanyInfo();
+            loadProjectsFromFirebase();
+            
+            function updateCounters() {
+                const projects = JSON.parse(localStorage.getItem('bemorhSiteProjects') || '[]');
+                const activeProjects = projects.filter(p => p.status === 'active').length;
+                
+                const clients = JSON.parse(localStorage.getItem('bemorhClients') || '[]');
+                const activeClients = clients.length;
+                
+                document.getElementById('projectCountDisplay').textContent = activeProjects > 0 ? `${activeProjects}+` : '20+';
+                document.getElementById('clientCountDisplay').textContent = activeClients > 0 ? `${activeClients}+` : '15+';
+            }
+            
+            updateCounters();
+            
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const targetId = this.getAttribute('href');
+                    if (targetId === '#') return;
+                    const targetElement = document.querySelector(targetId);
+                    if (targetElement) {
+                        window.scrollTo({
+                            top: targetElement.offsetTop - 80,
+                            behavior: 'smooth'
+                        });
+                    }
                 });
             });
 
-            // Carrega config
-            const cfg = loadSiteConfig();
-            fillFormFromConfig(cfg);
+            // ====== CONFIGURAÇÕES DO INDEX (localStorage.bemorhSiteConfig) ======
+            const defaultSiteConfig = {
+                logoTitle: "Bemorh",
+                logoTagline: "tecnologia que conecta ideias",
 
-            // Botão salvar
-            document.getElementById('saveConfigBtn').addEventListener('click', function() {
-                showAlert('configSuccess', false);
-                showAlert('configError', false);
+                heroTitle: "Tecnologia que Conecta Ideias",
+                heroSubtitle: "Na Bemorh, transformamos conceitos em soluções digitais inovadoras. Desenvolvemos ferramentas virtuais que conectam pessoas, processos e tecnologias para impulsionar o seu negócio.",
+                heroContactText: "Entre em Contato",
 
-                const newCfg = collectConfigFromForm();
-                const ok = saveSiteConfig(newCfg);
-                if (ok) {
-                    showAlert('configSuccess', true);
-                    document.getElementById('adminLogoTitle').textContent = newCfg.logoTitle || defaultSiteConfig.logoTitle;
-                    document.getElementById('adminLogoTagline').textContent = newCfg.logoTagline || defaultSiteConfig.logoTagline;
-                    setTimeout(() => showAlert('configSuccess', false), 4000);
-                } else {
-                    showAlert('configError', true);
+                projectsTitle: "Projetos em Destaque",
+                project1Title: "Sistema de Gestão de Ideias",
+                project1Status: "Concluído",
+                project1Description: "Plataforma colaborativa que organiza e prioriza ideias em projetos executáveis com fluxos visuais intuitivos.",
+                project2Title: "IA para Inovação",
+                project2Status: "Em Andamento",
+                project2Description: "Ferramenta de inteligência artificial que auxilia na geração e refinamento de ideias criativas para negócios.",
+                project3Title: "Plataforma Colaborativa",
+                project3Status: "Em Planejamento",
+                project3Description: "Ambiente virtual para equipes distribuídas colaborarem em tempo real no desenvolvimento de projetos.",
+
+                servicesTitle: "Nossos Serviços",
+                service1Title: "Consultoria em Inovação",
+                service1Description: "Ajudamos sua empresa a identificar oportunidades e transformar ideias em projetos viáveis com metodologias ágeis.",
+                service2Title: "Desenvolvimento Ágil",
+                service2Description: "Criamos soluções personalizadas com metodologias ágeis, garantindo entrega rápida e adaptação contínua.",
+                service3Title: "Integração de Sistemas",
+                service3Description: "Conectamos diferentes tecnologias e plataformas para criar ecossistemas digitais coesos e eficientes.",
+
+                aboutTitle: "Sobre a Bemorh",
+                aboutIntro: "A Bemorh nasceu da crença de que as melhores soluções surgem da conexão de ideias. Somos uma empresa de tecnologia especializada em desenvolver ferramentas virtuais que facilitam a colaboração, estimulam a inovação e transformam conceitos em realidade.",
+                missionTitle: "Nossa Missão",
+                missionText: "Conectar pessoas, ideias e tecnologias para criar soluções digitais inovadoras que transformam negócios e impulsionam resultados.",
+                visionTitle: "Nossa Visão",
+                visionText: "Ser referência em tecnologia conectiva, reconhecida por transformar ideias dispersas em ecossistemas digitais integrados e eficientes.",
+                approachTitle: "Nossa Abordagem",
+                approachText: "Trabalhamos em parceria com nossos clientes, entendendo suas necessidades únicas e co-criando soluções que realmente fazem a diferença.",
+
+                contactTitle: "Conecte-se Conosco",
+                contactInfoTitle: "Informações de Contato",
+                contactAddressTitle: "Endereço",
+                contactAddressText: "Av. das Inovações, 123 - Centro de Tecnologia<br>São Paulo - SP, 04538-000",
+                contactPhoneTitle: "Telefone",
+                contactPhoneText: "(11) 3456-7890",
+                contactEmailTitle: "Email",
+                contactEmailText: "contato@bemorh.com.br",
+                contactScheduleTitle: "Horário de Atendimento",
+                contactScheduleText: "Segunda a Sexta: 8h às 19h<br>Sábado: 9h às 13h",
+                contactFormTitle: "Envie sua Ideia",
+                contactNameLabel: "Nome",
+                contactEmailLabel: "Email",
+                contactPhoneLabel: "Telefone",
+                contactMessageLabel: "Sua Ideia ou Projeto",
+                contactSubmitText: "Enviar Mensagem",
+
+                footerDescription: "Tecnologia que conecta ideias. Desenvolvemos soluções digitais inovadoras que transformam conceitos em realidade.",
+                footerQuickLinksTitle: "Links Rápidos",
+                footerContactTitle: "Contato",
+                footerAddress: "Av. das Inovações, 123 - São Paulo, SP",
+                footerPhone: "(11) 3456-7890",
+                footerEmail: "contato@bemorh.com.br",
+                footerSchedule: "Seg-Sex: 8h-19h",
+                footerCopyright: "© 2023 Bemorh - Tecnologia que Conecta Ideias. Todos os direitos reservados."
+            };
+
+            function loadIndexConfig() {
+                const saved = localStorage.getItem('bemorhSiteConfig');
+                if (!saved) return defaultSiteConfig;
+                try {
+                    const parsed = JSON.parse(saved);
+                    return { ...defaultSiteConfig, ...parsed };
+                } catch (e) {
+                    console.error("Erro ao ler bemorhSiteConfig:", e);
+                    return defaultSiteConfig;
+                }
+            }
+
+            function fillIndexConfigForm(cfg) {
+                const set = (id, v) => {
+                    const el = document.getElementById(id);
+                    if (el && v != null) el.value = v;
+                };
+                set('cfg_logoTitle_idx', cfg.logoTitle);
+                set('cfg_logoTagline_idx', cfg.logoTagline);
+                set('cfg_heroTitle_idx', cfg.heroTitle);
+                set('cfg_heroSubtitle_idx', cfg.heroSubtitle);
+                set('cfg_heroContactText_idx', cfg.heroContactText);
+
+                set('cfg_projectsTitle_idx', cfg.projectsTitle);
+                set('cfg_project1Title_idx', cfg.project1Title);
+                set('cfg_project1Status_idx', cfg.project1Status);
+                set('cfg_project1Description_idx', cfg.project1Description);
+                set('cfg_project2Title_idx', cfg.project2Title);
+                set('cfg_project2Status_idx', cfg.project2Status);
+                set('cfg_project2Description_idx', cfg.project2Description);
+                set('cfg_project3Title_idx', cfg.project3Title);
+                set('cfg_project3Status_idx', cfg.project3Status);
+                set('cfg_project3Description_idx', cfg.project3Description);
+
+                set('cfg_servicesTitle_idx', cfg.servicesTitle);
+                set('cfg_service1Title_idx', cfg.service1Title);
+                set('cfg_service1Description_idx', cfg.service1Description);
+                set('cfg_service2Title_idx', cfg.service2Title);
+                set('cfg_service2Description_idx', cfg.service2Description);
+                set('cfg_service3Title_idx', cfg.service3Title);
+                set('cfg_service3Description_idx', cfg.service3Description);
+
+                set('cfg_aboutTitle_idx', cfg.aboutTitle);
+                set('cfg_aboutIntro_idx', cfg.aboutIntro);
+                set('cfg_missionTitle_idx', cfg.missionTitle);
+                set('cfg_missionText_idx', cfg.missionText);
+                set('cfg_visionTitle_idx', cfg.visionTitle);
+                set('cfg_visionText_idx', cfg.visionText);
+                set('cfg_approachTitle_idx', cfg.approachTitle);
+                set('cfg_approachText_idx', cfg.approachText);
+
+                set('cfg_contactTitle_idx', cfg.contactTitle);
+                set('cfg_contactInfoTitle_idx', cfg.contactInfoTitle);
+                set('cfg_contactAddressTitle_idx', cfg.contactAddressTitle);
+                set('cfg_contactAddressText_idx', cfg.contactAddressText);
+                set('cfg_contactPhoneTitle_idx', cfg.contactPhoneTitle);
+                set('cfg_contactPhoneText_idx', cfg.contactPhoneText);
+                set('cfg_contactEmailTitle_idx', cfg.contactEmailTitle);
+                set('cfg_contactEmailText_idx', cfg.contactEmailText);
+                set('cfg_contactScheduleTitle_idx', cfg.contactScheduleTitle);
+                set('cfg_contactScheduleText_idx', cfg.contactScheduleText);
+                set('cfg_contactFormTitle_idx', cfg.contactFormTitle);
+                set('cfg_contactNameLabel_idx', cfg.contactNameLabel);
+                set('cfg_contactEmailLabel_idx', cfg.contactEmailLabel);
+                set('cfg_contactPhoneLabel_idx', cfg.contactPhoneLabel);
+                set('cfg_contactMessageLabel_idx', cfg.contactMessageLabel);
+                set('cfg_contactSubmitText_idx', cfg.contactSubmitText);
+
+                set('cfg_footerDescription_idx', cfg.footerDescription);
+                set('cfg_footerQuickLinksTitle_idx', cfg.footerQuickLinksTitle);
+                set('cfg_footerContactTitle_idx', cfg.footerContactTitle);
+                set('cfg_footerAddress_idx', cfg.footerAddress);
+                set('cfg_footerPhone_idx', cfg.footerPhone);
+                set('cfg_footerEmail_idx', cfg.footerEmail);
+                set('cfg_footerSchedule_idx', cfg.footerSchedule);
+                set('cfg_footerCopyright_idx', cfg.footerCopyright);
+            }
+
+            function collectIndexConfigForm() {
+                const get = id => (document.getElementById(id) || {}).value || '';
+                return {
+                    logoTitle: get('cfg_logoTitle_idx'),
+                    logoTagline: get('cfg_logoTagline_idx'),
+                    heroTitle: get('cfg_heroTitle_idx'),
+                    heroSubtitle: get('cfg_heroSubtitle_idx'),
+                    heroContactText: get('cfg_heroContactText_idx'),
+
+                    projectsTitle: get('cfg_projectsTitle_idx'),
+                    project1Title: get('cfg_project1Title_idx'),
+                    project1Status: get('cfg_project1Status_idx'),
+                    project1Description: get('cfg_project1Description_idx'),
+                    project2Title: get('cfg_project2Title_idx'),
+                    project2Status: get('cfg_project2Status_idx'),
+                    project2Description: get('cfg_project2Description_idx'),
+                    project3Title: get('cfg_project3Title_idx'),
+                    project3Status: get('cfg_project3Status_idx'),
+                    project3Description: get('cfg_project3Description_idx'),
+
+                    servicesTitle: get('cfg_servicesTitle_idx'),
+                    service1Title: get('cfg_service1Title_idx'),
+                    service1Description: get('cfg_service1Description_idx'),
+                    service2Title: get('cfg_service2Title_idx'),
+                    service2Description: get('cfg_service2Description_idx'),
+                    service3Title: get('cfg_service3Title_idx'),
+                    service3Description: get('cfg_service3Description_idx'),
+
+                    aboutTitle: get('cfg_aboutTitle_idx'),
+                    aboutIntro: get('cfg_aboutIntro_idx'),
+                    missionTitle: get('cfg_missionTitle_idx'),
+                    missionText: get('cfg_missionText_idx'),
+                    visionTitle: get('cfg_visionTitle_idx'),
+                    visionText: get('cfg_visionText_idx'),
+                    approachTitle: get('cfg_approachTitle_idx'),
+                    approachText: get('cfg_approachText_idx'),
+
+                    contactTitle: get('cfg_contactTitle_idx'),
+                    contactInfoTitle: get('cfg_contactInfoTitle_idx'),
+                    contactAddressTitle: get('cfg_contactAddressTitle_idx'),
+                    contactAddressText: get('cfg_contactAddressText_idx'),
+                    contactPhoneTitle: get('cfg_contactPhoneTitle_idx'),
+                    contactPhoneText: get('cfg_contactPhoneText_idx'),
+                    contactEmailTitle: get('cfg_contactEmailTitle_idx'),
+                    contactEmailText: get('cfg_contactEmailText_idx'),
+                    contactScheduleTitle: get('cfg_contactScheduleTitle_idx'),
+                    contactScheduleText: get('cfg_contactScheduleText_idx'),
+                    contactFormTitle: get('cfg_contactFormTitle_idx'),
+                    contactNameLabel: get('cfg_contactNameLabel_idx'),
+                    contactEmailLabel: get('cfg_contactEmailLabel_idx'),
+                    contactPhoneLabel: get('cfg_contactPhoneLabel_idx'),
+                    contactMessageLabel: get('cfg_contactMessageLabel_idx'),
+                    contactSubmitText: get('cfg_contactSubmitText_idx'),
+
+                    footerDescription: get('cfg_footerDescription_idx'),
+                    footerQuickLinksTitle: get('cfg_footerQuickLinksTitle_idx'),
+                    footerContactTitle: get('cfg_footerContactTitle_idx'),
+                    footerAddress: get('cfg_footerAddress_idx'),
+                    footerPhone: get('cfg_footerPhone_idx'),
+                    footerEmail: get('cfg_footerEmail_idx'),
+                    footerSchedule: get('cfg_footerSchedule_idx'),
+                    footerCopyright: get('cfg_footerCopyright_idx')
+                };
+            }
+
+            function showCfgAlert(id, show) {
+                const el = document.getElementById(id);
+                if (!el) return;
+                el.style.display = show ? 'block' : 'none';
+            }
+
+            // Inicializa formulário de config com valor salvo ou default
+            const initialCfg = loadIndexConfig();
+            fillIndexConfigForm(initialCfg);
+
+            document.getElementById('saveIndexConfigBtn').addEventListener('click', () => {
+                showCfgAlert('cfgSuccess', false);
+                showCfgAlert('cfgError', false);
+                try {
+                    const cfg = collectIndexConfigForm();
+                    localStorage.setItem('bemorhSiteConfig', JSON.stringify(cfg));
+                    showCfgAlert('cfgSuccess', true);
+                    setTimeout(() => showCfgAlert('cfgSuccess', false), 4000);
+                } catch (e) {
+                    console.error(e);
+                    showCfgAlert('cfgError', true);
                 }
             });
 
-            // Botão recarregar do navegador
-            document.getElementById('reloadConfigBtn').addEventListener('click', function() {
-                showAlert('configSuccess', false);
-                showAlert('configError', false);
-                const cfg = loadSiteConfig();
-                fillFormFromConfig(cfg);
+            document.getElementById('reloadIndexConfigBtn').addEventListener('click', () => {
+                const cfg = loadIndexConfig();
+                fillIndexConfigForm(cfg);
+                showCfgAlert('cfgSuccess', false);
+                showCfgAlert('cfgError', false);
             });
 
-            // Botão reset (apagar config e voltar ao default)
-            document.getElementById('resetConfigBtn').addEventListener('click', function() {
-                if (!confirm('Tem certeza que deseja restaurar os textos padrão? Isso apagará as configurações salvas neste navegador.')) {
-                    return;
-                }
+            document.getElementById('resetIndexConfigBtn').addEventListener('click', () => {
+                if (!confirm("Tem certeza que deseja restaurar todos os textos do index para o padrão?")) return;
                 localStorage.removeItem('bemorhSiteConfig');
-                const cfg = loadSiteConfig();
-                fillFormFromConfig(cfg);
-                showAlert('configSuccess', false);
-                showAlert('configError', false);
-                alert('Configurações restauradas para o padrão. Recarregue o index.html para ver o resultado.');
-            });
-
-            // Logout
-            document.getElementById('logoutBtn').addEventListener('click', function() {
-                localStorage.removeItem('adminLoggedIn');
-                window.location.href = 'index.html';
+                fillIndexConfigForm(defaultSiteConfig);
+                showCfgAlert('cfgSuccess', false);
+                showCfgAlert('cfgError', false);
+                alert("Padrão restaurado. Recarregue o index.html para ver o resultado.");
             });
         });
     </script>

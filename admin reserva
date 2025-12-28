@@ -25,11 +25,7 @@
       --transition: all 0.2s ease;
     }
 
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
 
     body {
       font-family: "Open Sans", sans-serif;
@@ -40,25 +36,16 @@
       flex-direction: column;
     }
 
-    a {
-      text-decoration: none;
-      color: inherit;
-    }
+    a { text-decoration: none; color: inherit; }
 
-    /* Layout geral */
     .admin-wrapper {
       display: grid;
       grid-template-columns: 260px minmax(0, 1fr);
       min-height: 100vh;
     }
+    @media (max-width: 900px) { .admin-wrapper { grid-template-columns: 1fr; } }
 
-    @media (max-width: 900px) {
-      .admin-wrapper {
-        grid-template-columns: 1fr;
-      }
-    }
-
-    /* Sidebar */
+    /* SIDEBAR */
     .sidebar {
       background-color: #1f2a36;
       color: #ecf0f1;
@@ -67,14 +54,12 @@
       flex-direction: column;
       gap: 25px;
     }
-
     .sidebar-header {
       display: flex;
       align-items: center;
       gap: 12px;
       margin-bottom: 10px;
     }
-
     .sidebar-logo {
       width: 42px;
       height: 42px;
@@ -86,33 +71,21 @@
       overflow: hidden;
       box-shadow: var(--shadow);
     }
-
     .sidebar-logo img {
       width: 90%;
       height: 90%;
       object-fit: contain;
     }
-
-    .sidebar-title {
-      display: flex;
-      flex-direction: column;
-    }
-
+    .sidebar-title { display: flex; flex-direction: column; }
     .sidebar-title span:first-child {
       font-family: "Montserrat", sans-serif;
       font-weight: 700;
       font-size: 1.2rem;
     }
-
     .sidebar-title span:last-child {
       font-size: 0.75rem;
       color: #bdc3c7;
     }
-
-    .sidebar-nav {
-      margin-top: 10px;
-    }
-
     .sidebar-nav h4 {
       font-size: 0.8rem;
       text-transform: uppercase;
@@ -120,14 +93,12 @@
       color: #95a5a6;
       margin-bottom: 8px;
     }
-
     .nav-list {
       list-style: none;
       display: flex;
       flex-direction: column;
       gap: 4px;
     }
-
     .nav-item {
       border-radius: 8px;
       padding: 8px 10px;
@@ -139,59 +110,48 @@
       font-size: 0.9rem;
       transition: var(--transition);
     }
-
-    .nav-item i {
-      width: 18px;
-      text-align: center;
-    }
-
+    .nav-item i { width: 18px; text-align: center; }
     .nav-item.active,
     .nav-item:hover {
       background-color: rgba(52, 152, 219, 0.18);
       color: #ffffff;
     }
-
     .sidebar-footer {
       margin-top: auto;
       font-size: 0.8rem;
       color: #7f8c8d;
     }
-
     .sidebar-footer a {
       color: #bdc3c7;
       text-decoration: underline;
     }
 
-    /* Conteúdo principal */
+    /* MAIN */
     .main {
       padding: 20px 24px 30px;
       display: flex;
       flex-direction: column;
       gap: 20px;
     }
-
     .main-header {
       display: flex;
       justify-content: space-between;
       align-items: center;
       gap: 15px;
     }
-
     .main-header-left h1 {
       font-family: "Montserrat", sans-serif;
       font-size: 1.8rem;
       color: var(--primary);
     }
-
     .main-header-left p {
       font-size: 0.9rem;
       color: var(--gray);
     }
-
     .main-header-right {
       display: flex;
       align-items: center;
-      gap: 10px;
+      gap: 8px;
     }
 
     .badge {
@@ -205,27 +165,52 @@
       color: #2980b9;
     }
 
-    .btn-small {
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
       padding: 8px 14px;
       border-radius: 999px;
       font-size: 0.8rem;
+      border: none;
+      cursor: pointer;
+      background-color: var(--secondary);
+      color: white;
+      font-weight: 600;
+      transition: var(--transition);
+    }
+    .btn:hover { background-color:#2980b9; transform:translateY(-1px); box-shadow:var(--shadow); }
+    .btn-neutral { background-color:#7f8c8d; }
+    .btn-neutral:hover { background-color:#636e72; }
+    .btn-danger { background-color:var(--accent); }
+    .btn-danger:hover { background-color:#c0392b; }
+
+    .icon-button {
+      width: 34px;
+      height: 34px;
+      border-radius: 50%;
+      border: none;
+      background-color: #ecf0f1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      color: #34495e;
+      transition: var(--transition);
+    }
+    .icon-button:hover {
+      background-color:#d0d7de;
+      color:var(--secondary);
+      transform:translateY(-1px);
+      box-shadow:var(--shadow);
     }
 
-    .btn-danger {
-      background-color: var(--accent);
-    }
-
-    .btn-danger:hover {
-      background-color: #c0392b;
-    }
-
-    /* Cards de resumo */
+    /* RESUMO */
     .summary-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
       gap: 15px;
     }
-
     .summary-card {
       background-color: #ffffff;
       border-radius: var(--radius);
@@ -235,268 +220,176 @@
       align-items: center;
       gap: 10px;
     }
-
     .summary-icon {
-      width: 34px;
-      height: 34px;
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: #fff;
-      font-size: 1rem;
+      width: 34px;height:34px;border-radius:50%;
+      display:flex;align-items:center;justify-content:center;
+      color:#fff;font-size:1rem;
     }
-
-    .summary-icon.blue {
-      background-color: #3498db;
-    }
-
-    .summary-icon.green {
-      background-color: #2ecc71;
-    }
-
-    .summary-icon.orange {
-      background-color: #f39c12;
-    }
-
+    .summary-icon.blue { background-color:#3498db; }
+    .summary-icon.green { background-color:#2ecc71; }
+    .summary-icon.orange { background-color:#f39c12; }
     .summary-content span:first-child {
-      font-size: 0.75rem;
-      color: var(--gray);
+      font-size:0.75rem;color:var(--gray);
     }
-
     .summary-content span:last-child {
-      font-size: 1.1rem;
-      font-weight: 700;
-      color: var(--primary);
+      font-size:1.1rem;font-weight:700;color:var(--primary);
     }
 
-    /* Layout principal: tabela + formulário */
+    /* GRID PROJETOS */
     .panel-grid {
-      display: grid;
-      grid-template-columns: minmax(0, 2fr) minmax(0, 1.2fr);
-      gap: 20px;
-      align-items: flex-start;
+      display:grid;
+      grid-template-columns:minmax(0,2fr) minmax(0,1.2fr);
+      gap:20px;
+      align-items:flex-start;
     }
-
-    @media (max-width: 980px) {
-      .panel-grid {
-        grid-template-columns: 1fr;
-      }
-    }
+    @media (max-width:980px){ .panel-grid { grid-template-columns:1fr; } }
 
     .card {
-      background-color: #ffffff;
-      border-radius: var(--radius);
-      box-shadow: var(--shadow);
-      padding: 18px 18px 20px;
+      background-color:#ffffff;
+      border-radius:var(--radius);
+      box-shadow:var(--shadow);
+      padding:18px 18px 20px;
+      margin-top:10px;
     }
-
     .card-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 10px;
+      display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;
     }
+    .card-header h2 { font-size:1.1rem;color:var(--primary); }
+    .card-header small { font-size:0.8rem;color:var(--gray); }
 
-    .card-header h2 {
-      font-size: 1.1rem;
-      color: var(--primary);
-    }
-
-    .card-header small {
-      font-size: 0.8rem;
-      color: var(--gray);
-    }
-
-    /* Tabela de projetos */
-    .projects-table-wrapper {
-      max-height: 420px;
-      overflow-y: auto;
-      margin-top: 10px;
-    }
-
-    table {
-      width: 100%;
-      border-collapse: collapse;
-      font-size: 0.9rem;
-    }
-
-    thead {
-      position: sticky;
-      top: 0;
-      background-color: #f8f9fc;
-      z-index: 1;
-    }
-
-    th,
-    td {
-      padding: 8px 10px;
-      text-align: left;
-      border-bottom: 1px solid #ecf0f1;
-      vertical-align: middle;
-    }
-
-    th {
-      font-weight: 600;
-      color: #7f8c8d;
-      font-size: 0.8rem;
-      text-transform: uppercase;
-    }
-
-    tr:hover td {
-      background-color: #f8fbff;
-    }
+    /* TABELA PROJETOS */
+    .projects-table-wrapper { max-height:420px;overflow-y:auto;margin-top:10px; }
+    table { width:100%;border-collapse:collapse;font-size:0.9rem; }
+    thead { position:sticky;top:0;background-color:#f8f9fc;z-index:1; }
+    th,td { padding:8px 10px;text-align:left;border-bottom:1px solid #ecf0f1;vertical-align:middle; }
+    th { font-weight:600;color:#7f8c8d;font-size:0.8rem;text-transform:uppercase; }
+    tr:hover td { background-color:#f8fbff; }
 
     .tag-status {
-      display: inline-flex;
-      align-items: center;
-      gap: 4px;
-      padding: 3px 8px;
-      border-radius: 999px;
-      font-size: 0.75rem;
-      font-weight: 600;
+      display:inline-flex;align-items:center;gap:4px;
+      padding:3px 8px;border-radius:999px;
+      font-size:0.75rem;font-weight:600;
     }
-
-    .tag-status.active {
-      background-color: rgba(46, 204, 113, 0.12);
-      color: #27ae60;
-    }
-
-    .tag-status.draft {
-      background-color: rgba(241, 196, 15, 0.14);
-      color: #f39c12;
-    }
-
-    .tag-status.archived {
-      background-color: rgba(127, 140, 141, 0.16);
-      color: #7f8c8d;
-    }
-
-    .table-actions {
-      display: flex;
-      gap: 6px;
-    }
-
-    .btn-icon {
-      border: none;
-      background: none;
-      cursor: pointer;
-      padding: 4px;
-      border-radius: 4px;
-      color: #7f8c8d;
-      transition: var(--transition);
-      font-size: 0.9rem;
-    }
-
-    .btn-icon:hover {
-      background-color: #ecf0f1;
-      color: #34495e;
-    }
+    .tag-status.active { background-color:rgba(46,204,113,0.12);color:#27ae60; }
+    .tag-status.draft { background-color:rgba(241,196,15,0.14);color:#f39c12; }
+    .tag-status.archived { background-color:rgba(127,140,141,0.16);color:#7f8c8d; }
 
     .badge-category {
-      display: inline-flex;
-      align-items: center;
-      gap: 4px;
-      padding: 3px 7px;
-      border-radius: 999px;
-      font-size: 0.75rem;
-      background-color: rgba(52, 152, 219, 0.1);
-      color: #2980b9;
+      display:inline-flex;align-items:center;gap:4px;
+      padding:3px 7px;border-radius:999px;
+      font-size:0.75rem;background-color:rgba(52,152,219,0.1);color:#2980b9;
     }
 
-    /* Formulário de projeto */
-    .form-group {
-      margin-bottom: 12px;
-      font-size: 0.9rem;
+    .table-actions { display:flex;gap:6px; }
+    .btn-icon {
+      border:none;background:none;cursor:pointer;
+      padding:4px;border-radius:4px;
+      color:#7f8c8d;font-size:0.9rem;transition:var(--transition);
     }
+    .btn-icon:hover { background-color:#ecf0f1;color:#34495e; }
 
+    /* FORM PROJETO */
+    .form-group { margin-bottom:12px;font-size:0.9rem; }
     .form-group label {
-      display: block;
-      margin-bottom: 4px;
-      font-weight: 600;
-      color: var(--primary);
-      font-size: 0.85rem;
+      display:block;margin-bottom:4px;
+      font-weight:600;color:var(--primary);font-size:0.85rem;
     }
-
-    .form-group small {
-      font-size: 0.75rem;
-      color: var(--gray);
+    .form-group small { font-size:0.75rem;color:var(--gray); }
+    .form-control,.form-select,textarea {
+      width:100%;padding:8px 10px;
+      border-radius:6px;border:1px solid #dcdfe6;
+      font-size:0.9rem;font-family:"Open Sans",sans-serif;
+      transition:var(--transition);background-color:#fff;
     }
-
-    .form-control,
-    .form-select,
-    textarea {
-      width: 100%;
-      padding: 8px 10px;
-      border-radius: 6px;
-      border: 1px solid #dcdfe6;
-      font-size: 0.9rem;
-      font-family: "Open Sans", sans-serif;
-      transition: var(--transition);
-      background-color: #fff;
+    .form-control:focus,.form-select:focus,textarea:focus {
+      outline:none;border-color:var(--secondary);
+      box-shadow:0 0 0 2px rgba(52,152,219,0.15);
     }
-
-    .form-control:focus,
-    .form-select:focus,
-    textarea:focus {
-      outline: none;
-      border-color: var(--secondary);
-      box-shadow: 0 0 0 2px rgba(52, 152, 219, 0.15);
-    }
-
-    textarea {
-      resize: vertical;
-      min-height: 70px;
-      max-height: 200px;
-    }
-
-    .form-row-2 {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 10px;
-    }
-
-    @media (max-width: 640px) {
-      .form-row-2 {
-        grid-template-columns: 1fr;
-      }
-    }
-
-    .status-select {
-      width: 100%;
-    }
-
-    .chips {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 4px;
-      margin-top: 6px;
-    }
-
-    .chip {
-      padding: 3px 6px;
-      border-radius: 999px;
-      background-color: #ecf0f1;
-      font-size: 0.75rem;
-    }
-
-    .chip span {
-      cursor: pointer;
-      margin-left: 4px;
-      color: #c0392b;
-    }
+    textarea { resize:vertical;min-height:70px;max-height:200px; }
+    .form-row-2 { display:grid;grid-template-columns:1fr 1fr;gap:10px; }
+    @media (max-width:640px){ .form-row-2 { grid-template-columns:1fr; } }
 
     .form-footer {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      gap: 10px;
-      margin-top: 10px;
+      display:flex;justify-content:space-between;align-items:center;
+      gap:10px;margin-top:10px;
+    }
+    .muted { font-size:0.75rem;color:var(--gray); }
+
+    /* MODAIS GENÉRICOS */
+    .modal-backdrop {
+      position:fixed;
+      inset:0;
+      background:rgba(0,0,0,0.55);
+      display:none;
+      align-items:center;
+      justify-content:center;
+      z-index:1000;
+    }
+    .modal-backdrop.show { display:flex; }
+    .modal-dialog {
+      width:100%;
+      max-width:900px;
+      max-height:90vh;
+      background:#fff;
+      border-radius:12px;
+      box-shadow:0 18px 40px rgba(0,0,0,0.35);
+      display:flex;
+      flex-direction:column;
+      overflow:hidden;
+    }
+    .modal-header {
+      padding:14px 18px;
+      border-bottom:1px solid #dcdfe6;
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      background:linear-gradient(90deg,#2c3e50,#34495e);
+      color:#ecf0f1;
+    }
+    .modal-header h3 {
+      font-size:1.1rem;
+      font-family:"Montserrat",sans-serif;
+    }
+    .modal-body {
+      padding:14px 18px 16px;
+      overflow-y:auto;
+      background-color:#f8fafc;
+    }
+    .close-modal {
+      border:none;
+      background:transparent;
+      color:#ecf0f1;
+      font-size:1.2rem;
+      cursor:pointer;
     }
 
-    .muted {
-      font-size: 0.75rem;
-      color: var(--gray);
+    /* MODAL SENHA MENOR */
+    #passwordModal .modal-dialog { max-width:420px; }
+
+    /* FORM CONFIG INDEX (reutilizado) */
+    .config-card { margin-top:4px; }
+    .config-title { font-size:1rem;color:var(--primary);margin-bottom:4px; }
+    .config-subtitle { font-size:0.85rem;color:var(--gray);margin-bottom:8px; }
+    .config-grid-2 {
+      display:grid;
+      grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+      gap:12px 18px;
+    }
+    .config-row { margin-top:12px; }
+    .config-row h3 { font-size:0.95rem;color:var(--primary);margin-bottom:4px; }
+    .config-row small { font-size:0.8rem;color:var(--gray); }
+    .config-actions { margin-top:12px;display:flex;gap:8px;flex-wrap:wrap; }
+    .config-alert {
+      margin-bottom:8px;padding:8px 10px;border-radius:4px;
+      font-size:0.8rem;display:none;
+    }
+    .config-alert-success {
+      background-color:rgba(46,204,113,0.1);
+      color:var(--success);border-left:4px solid var(--success);
+    }
+    .config-alert-error {
+      background-color:rgba(231,76,60,0.1);
+      color:var(--accent);border-left:4px solid var(--accent);
     }
   </style>
 </head>
@@ -530,7 +423,7 @@
 
       <div class="sidebar-footer">
         <p>Logado como <strong>admin</strong> (local).</p>
-        <p style="margin-top:5px;">Segurança real deve ser feita no servidor / Firebase Auth.</p>
+        <p style="margin-top:5px;">Autenticação real deve ser feita com servidor/Firebase Auth.</p>
       </div>
     </aside>
 
@@ -545,8 +438,16 @@
           <span class="badge">
             <i class="fas fa-database"></i> Firestore: <span id="firestoreStatus">conectando...</span>
           </span>
-          <button class="btn btn-small" id="reloadProjectsBtn">
+          <button class="btn-neutral btn" id="reloadProjectsBtn">
             <i class="fas fa-rotate"></i> Recarregar
+          </button>
+          <!-- Ícone de alterar senha -->
+          <button class="icon-button" id="openPasswordBtn" title="Alterar senha do admin">
+            <i class="fas fa-key"></i>
+          </button>
+          <!-- Ícone que abre o formulário de textos do index -->
+          <button class="icon-button" id="openConfigBtn" title="Configurações do Index">
+            <i class="fas fa-sliders-h"></i>
           </button>
         </div>
       </header>
@@ -576,14 +477,14 @@
         </div>
       </section>
 
-      <!-- TABELA + FORM -->
+      <!-- TABELA + FORM PROJETOS -->
       <section class="panel-grid">
         <!-- Lista de projetos -->
         <section class="card">
           <div class="card-header">
             <div>
               <h2><i class="fas fa-briefcase"></i> Projetos Cadastrados</h2>
-              <small>Lista em tempo real carregada do Firestore (coleção <code>siteProjects</code>).</small>
+              <small>Carregados da coleção <code>siteProjects</code> do Firestore.</small>
             </div>
           </div>
 
@@ -609,14 +510,14 @@
           </div>
         </section>
 
-        <!-- Formulário -->
+        <!-- Formulário projeto -->
         <section class="card">
           <div class="card-header">
             <div>
               <h2 id="formTitle"><i class="fas fa-plus-circle"></i> Novo Projeto</h2>
               <small id="formSubtitle">Preencha os campos para adicionar um novo projeto ao site.</small>
             </div>
-            <button class="btn btn-small" id="newProjectBtn">
+            <button class="btn" id="newProjectBtn">
               <i class="fas fa-file"></i> Novo
             </button>
           </div>
@@ -643,7 +544,7 @@
             <div class="form-row-2">
               <div class="form-group">
                 <label for="projectStatus">Status *</label>
-                <select id="projectStatus" class="form-select status-select" required>
+                <select id="projectStatus" class="form-select" required>
                   <option value="active">Ativo (aparece no site)</option>
                   <option value="draft">Rascunho</option>
                   <option value="archived">Arquivado</option>
@@ -671,16 +572,16 @@
             <div class="form-group">
               <label for="projectImage">URL da imagem (opcional)</label>
               <input type="url" id="projectImage" class="form-control" placeholder="https://..." />
-              <small>Se vazio, usaremos uma imagem padrão.</small>
+              <small>Se vazio, usamos uma imagem padrão.</small>
             </div>
 
             <div class="form-footer">
               <div class="muted" id="formInfo">Criando novo projeto.</div>
               <div>
-                <button type="button" class="btn btn-small" id="clearFormBtn">
+                <button type="button" class="btn btn-neutral" id="clearFormBtn">
                   <i class="fas fa-eraser"></i> Limpar
                 </button>
-                <button type="submit" class="btn btn-small" id="saveBtn">
+                <button type="submit" class="btn" id="saveBtn">
                   <i class="fas fa-save"></i> Salvar
                 </button>
               </div>
@@ -691,7 +592,356 @@
     </main>
   </div>
 
+  <!-- MODAL CONFIG INDEX (TEXTOS) -->
+  <div class="modal-backdrop" id="configModal">
+    <div class="modal-dialog">
+      <div class="modal-header">
+        <h3><i class="fas fa-sliders-h"></i> Configurações do Index (Textos)</h3>
+        <button class="close-modal" id="closeConfigBtn" title="Fechar">
+          <i class="fas fa-times"></i>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="config-card">
+          <div class="config-title">Textos Gerais</div>
+          <div class="config-subtitle">
+            Ajuste aqui textos do <strong>index.html</strong>. As alterações são salvas apenas neste navegador
+            (via <code>localStorage.bemorhSiteConfig</code>) e o site lê esses valores.
+          </div>
+
+          <div class="config-alert config-alert-success" id="cfgSuccess">
+            <i class="fas fa-check-circle"></i> Configurações salvas com sucesso.
+          </div>
+          <div class="config-alert config-alert-error" id="cfgError">
+            <i class="fas fa-exclamation-circle"></i> Erro ao salvar configurações.
+          </div>
+
+          <!-- IDENTIDADE -->
+          <div class="config-row">
+            <h3>Identidade do Site</h3>
+            <small>Nome e slogan exibidos na logo e rodapé.</small>
+            <div class="config-grid-2" style="margin-top:6px;">
+              <div class="form-group">
+                <label for="cfg_logoTitle_idx">Título / Marca</label>
+                <input type="text" id="cfg_logoTitle_idx" class="form-control">
+              </div>
+              <div class="form-group">
+                <label for="cfg_logoTagline_idx">Slogan</label>
+                <input type="text" id="cfg_logoTagline_idx" class="form-control">
+              </div>
+            </div>
+          </div>
+
+          <!-- HERO -->
+          <div class="config-row">
+            <h3>Hero (Topo do Index)</h3>
+            <small>Título, subtítulo e texto do botão principal.</small>
+            <div class="form-group" style="margin-top:6px;">
+              <label for="cfg_heroTitle_idx">Título</label>
+              <input type="text" id="cfg_heroTitle_idx" class="form-control">
+            </div>
+            <div class="form-group">
+              <label for="cfg_heroSubtitle_idx">Subtítulo</label>
+              <textarea id="cfg_heroSubtitle_idx" rows="2" class="form-control"></textarea>
+            </div>
+            <div class="form-group">
+              <label for="cfg_heroContactText_idx">Texto do Botão Verde</label>
+              <input type="text" id="cfg_heroContactText_idx" class="form-control">
+            </div>
+          </div>
+
+          <!-- SERVIÇOS -->
+          <div class="config-row">
+            <h3>Serviços (Index)</h3>
+            <small>Título da seção e descrições dos 4 serviços.</small>
+            <div class="form-group" style="margin-top:6px;">
+              <label for="cfg_servicesTitle_idx">Título da Seção</label>
+              <input type="text" id="cfg_servicesTitle_idx" class="form-control">
+            </div>
+            <div class="config-grid-2">
+              <div>
+                <strong>Serviço 1</strong>
+                <div class="form-group">
+                  <label for="cfg_service1Title_idx">Título</label>
+                  <input type="text" id="cfg_service1Title_idx" class="form-control">
+                </div>
+                <div class="form-group">
+                  <label for="cfg_service1Description_idx">Descrição</label>
+                  <textarea id="cfg_service1Description_idx" rows="2" class="form-control"></textarea>
+                </div>
+              </div>
+              <div>
+                <strong>Serviço 2</strong>
+                <div class="form-group">
+                  <label for="cfg_service2Title_idx">Título</label>
+                  <input type="text" id="cfg_service2Title_idx" class="form-control">
+                </div>
+                <div class="form-group">
+                  <label for="cfg_service2Description_idx">Descrição</label>
+                  <textarea id="cfg_service2Description_idx" rows="2" class="form-control"></textarea>
+                </div>
+              </div>
+            </div>
+            <div class="config-grid-2">
+              <div>
+                <strong>Serviço 3</strong>
+                <div class="form-group">
+                  <label for="cfg_service3Title_idx">Título</label>
+                  <input type="text" id="cfg_service3Title_idx" class="form-control">
+                </div>
+                <div class="form-group">
+                  <label for="cfg_service3Description_idx">Descrição</label>
+                  <textarea id="cfg_service3Description_idx" rows="2" class="form-control"></textarea>
+                </div>
+              </div>
+              <div>
+                <strong>Serviço 4</strong>
+                <div class="form-group">
+                  <label for="cfg_service4Title_idx">Título</label>
+                  <input type="text" id="cfg_service4Title_idx" class="form-control">
+                </div>
+                <div class="form-group">
+                  <label for="cfg_service4Description_idx">Descrição</label>
+                  <textarea id="cfg_service4Description_idx" rows="2" class="form-control"></textarea>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- SOBRE -->
+          <div class="config-row">
+            <h3>Sobre (Index)</h3>
+            <small>Título, introdução e textos de Missão, Visão e Abordagem.</small>
+            <div class="form-group" style="margin-top:6px;">
+              <label for="cfg_aboutTitle_idx">Título da Seção</label>
+              <input type="text" id="cfg_aboutTitle_idx" class="form-control">
+            </div>
+            <div class="form-group">
+              <label for="cfg_aboutIntro_idx">Texto de Introdução</label>
+              <textarea id="cfg_aboutIntro_idx" rows="2" class="form-control"></textarea>
+            </div>
+            <div class="config-grid-2">
+              <div>
+                <strong>Missão</strong>
+                <div class="form-group">
+                  <label for="cfg_missionTitle_idx">Título</label>
+                  <input type="text" id="cfg_missionTitle_idx" class="form-control">
+                </div>
+                <div class="form-group">
+                  <label for="cfg_missionText_idx">Texto</label>
+                  <textarea id="cfg_missionText_idx" rows="2" class="form-control"></textarea>
+                </div>
+              </div>
+              <div>
+                <strong>Visão</strong>
+                <div class="form-group">
+                  <label for="cfg_visionTitle_idx">Título</label>
+                  <input type="text" id="cfg_visionTitle_idx" class="form-control">
+                </div>
+                <div class="form-group">
+                  <label for="cfg_visionText_idx">Texto</label>
+                  <textarea id="cfg_visionText_idx" rows="2" class="form-control"></textarea>
+                </div>
+              </div>
+            </div>
+            <div class="config-grid-2">
+              <div>
+                <strong>Abordagem</strong>
+                <div class="form-group">
+                  <label for="cfg_approachTitle_idx">Título</label>
+                  <input type="text" id="cfg_approachTitle_idx" class="form-control">
+                </div>
+                <div class="form-group">
+                  <label for="cfg_approachText_idx">Texto</label>
+                  <textarea id="cfg_approachText_idx" rows="2" class="form-control"></textarea>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- CONTATO / RODAPÉ -->
+          <div class="config-row">
+            <h3>Contato e Rodapé (Index)</h3>
+            <small>Títulos e textos da seção de contato e rodapé.</small>
+            <div class="config-grid-2" style="margin-top:6px;">
+              <div>
+                <div class="form-group">
+                  <label for="cfg_contactTitle_idx">Título Seção Contato</label>
+                  <input type="text" id="cfg_contactTitle_idx" class="form-control">
+                </div>
+                <div class="form-group">
+                  <label for="cfg_contactInfoTitle_idx">Título Bloco Informações</label>
+                  <input type="text" id="cfg_contactInfoTitle_idx" class="form-control">
+                </div>
+                <div class="form-group">
+                  <label for="cfg_contactAddressTitle_idx">Título Endereço</label>
+                  <input type="text" id="cfg_contactAddressTitle_idx" class="form-control">
+                </div>
+                <div class="form-group">
+                  <label for="cfg_contactAddressText_idx">Texto Endereço (pode usar &lt;br&gt;)</label>
+                  <textarea id="cfg_contactAddressText_idx" rows="2" class="form-control"></textarea>
+                </div>
+                <div class="form-group">
+                  <label for="cfg_contactPhoneTitle_idx">Título Telefone</label>
+                  <input type="text" id="cfg_contactPhoneTitle_idx" class="form-control">
+                </div>
+                <div class="form-group">
+                  <label for="cfg_contactPhoneText_idx">Texto Telefone</label>
+                  <input type="text" id="cfg_contactPhoneText_idx" class="form-control">
+                </div>
+                <div class="form-group">
+                  <label for="cfg_contactEmailTitle_idx">Título Email</label>
+                  <input type="text" id="cfg_contactEmailTitle_idx" class="form-control">
+                </div>
+                <div class="form-group">
+                  <label for="cfg_contactEmailText_idx">Texto Email</label>
+                  <input type="text" id="cfg_contactEmailText_idx" class="form-control">
+                </div>
+                <div class="form-group">
+                  <label for="cfg_contactScheduleTitle_idx">Título Horário</label>
+                  <input type="text" id="cfg_contactScheduleTitle_idx" class="form-control">
+                </div>
+                <div class="form-group">
+                  <label for="cfg_contactScheduleText_idx">Texto Horário (pode usar &lt;br&gt;)</label>
+                  <textarea id="cfg_contactScheduleText_idx" rows="2" class="form-control"></textarea>
+                </div>
+              </div>
+              <div>
+                <div class="form-group">
+                  <label for="cfg_contactFormTitle_idx">Título Formulário</label>
+                  <input type="text" id="cfg_contactFormTitle_idx" class="form-control">
+                </div>
+                <div class="form-group">
+                  <label for="cfg_contactNameLabel_idx">Label Nome</label>
+                  <input type="text" id="cfg_contactNameLabel_idx" class="form-control">
+                </div>
+                <div class="form-group">
+                  <label for="cfg_contactEmailLabel_idx">Label Email</label>
+                  <input type="text" id="cfg_contactEmailLabel_idx" class="form-control">
+                </div>
+                <div class="form-group">
+                  <label for="cfg_contactPhoneLabel_idx">Label Telefone</label>
+                  <input type="text" id="cfg_contactPhoneLabel_idx" class="form-control">
+                </div>
+                <div class="form-group">
+                  <label for="cfg_contactMessageLabel_idx">Label Mensagem</label>
+                  <input type="text" id="cfg_contactMessageLabel_idx" class="form-control">
+                </div>
+                <div class="form-group">
+                  <label for="cfg_contactSubmitText_idx">Texto Botão Enviar</label>
+                  <input type="text" id="cfg_contactSubmitText_idx" class="form-control">
+                </div>
+                <div class="form-group">
+                  <label for="cfg_footerDescription_idx">Texto Rodapé (descrição)</label>
+                  <textarea id="cfg_footerDescription_idx" rows="2" class="form-control"></textarea>
+                </div>
+                <div class="form-group">
+                  <label for="cfg_footerQuickLinksTitle_idx">Título "Links Rápidos"</label>
+                  <input type="text" id="cfg_footerQuickLinksTitle_idx" class="form-control">
+                </div>
+                <div class="form-group">
+                  <label for="cfg_footerContactTitle_idx">Título "Contato" Rodapé</label>
+                  <input type="text" id="cfg_footerContactTitle_idx" class="form-control">
+                </div>
+                <div class="form-group">
+                  <label for="cfg_footerAddress_idx">Endereço Rodapé</label>
+                  <input type="text" id="cfg_footerAddress_idx" class="form-control">
+                </div>
+                <div class="form-group">
+                  <label for="cfg_footerPhone_idx">Telefone Rodapé</label>
+                  <input type="text" id="cfg_footerPhone_idx" class="form-control">
+                </div>
+                <div class="form-group">
+                  <label for="cfg_footerEmail_idx">Email Rodapé</label>
+                  <input type="text" id="cfg_footerEmail_idx" class="form-control">
+                </div>
+                <div class="form-group">
+                  <label for="cfg_footerSchedule_idx">Horário Rodapé</label>
+                  <input type="text" id="cfg_footerSchedule_idx" class="form-control">
+                </div>
+                <div class="form-group">
+                  <label for="cfg_footerCopyright_idx">Texto de Copyright</label>
+                  <textarea id="cfg_footerCopyright_idx" rows="2" class="form-control"></textarea>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="config-actions">
+            <button class="btn" id="saveIndexConfigBtn"><i class="fas fa-save"></i> Salvar Configurações</button>
+            <button class="btn btn-neutral" id="reloadIndexConfigBtn"><i class="fas fa-sync-alt"></i> Recarregar</button>
+            <button class="btn btn-danger" id="resetIndexConfigBtn"><i class="fas fa-undo"></i> Restaurar Padrão</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL ALTERAR SENHA -->
+  <div class="modal-backdrop" id="passwordModal">
+    <div class="modal-dialog">
+      <div class="modal-header">
+        <h3><i class="fas fa-key"></i> Alterar Senha do Administrador</h3>
+        <button class="close-modal" id="closePasswordBtn" title="Fechar">
+          <i class="fas fa-times"></i>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="config-alert config-alert-error" id="pwdError">
+          <i class="fas fa-exclamation-circle"></i> Erro ao alterar a senha.
+        </div>
+        <div class="config-alert config-alert-success" id="pwdSuccess">
+          <i class="fas fa-check-circle"></i> Senha alterada com sucesso.
+        </div>
+
+        <form id="passwordForm">
+          <div class="form-group">
+            <label for="currentPasswordAdmin">Senha Atual *</label>
+            <input type="password" id="currentPasswordAdmin" class="form-control" required>
+          </div>
+          <div class="form-group">
+            <label for="newPasswordAdmin">Nova Senha *</label>
+            <input type="password" id="newPasswordAdmin" class="form-control" minlength="6" required>
+            <small>Mínimo de 6 caracteres.</small>
+          </div>
+          <div class="form-group">
+            <label for="confirmPasswordAdmin">Confirmar Nova Senha *</label>
+            <input type="password" id="confirmPasswordAdmin" class="form-control" required>
+          </div>
+
+          <div class="config-actions" style="justify-content:flex-end;margin-top:10px;">
+            <button type="button" class="btn-neutral btn" id="cancelPasswordBtn">
+              <i class="fas fa-times"></i> Cancelar
+            </button>
+            <button type="submit" class="btn" id="savePasswordBtn">
+              <i class="fas fa-save"></i> Salvar Nova Senha
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- JS: Firestore + Projetos + Config Index + Senha -->
   <script type="module">
+    // ====== AUTENTICAÇÃO LOCAL DO ADMIN (MESMA DO INDEX) ======
+    const adminAuth = {
+      password: localStorage.getItem('adminPassword') || "admin123",
+
+      login(inputPassword) {
+        return inputPassword === this.password;
+      },
+
+      changePassword(currentPassword, newPassword) {
+        if (currentPassword === this.password) {
+          this.password = newPassword;
+          localStorage.setItem('adminPassword', newPassword);
+          return true;
+        }
+        return false;
+      }
+    };
+
     import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
     import {
       getFirestore,
@@ -719,7 +969,6 @@
     document.getElementById("firestoreStatus").textContent = "conectado";
 
     const projectsCol = collection(db, "siteProjects");
-
     const projectsTableBody = document.getElementById("projectsTableBody");
     const summaryActive = document.getElementById("summaryActive");
     const summaryTotal = document.getElementById("summaryTotal");
@@ -751,7 +1000,6 @@
           </td>
         </tr>
       `;
-
       try {
         const q = query(projectsCol, orderBy("timestamp", "desc"));
         const snap = await getDocs(q);
@@ -760,7 +1008,6 @@
           const data = docSnap.data();
           projects.push({ id: docSnap.id, ...data });
         });
-
         renderProjectsTable(projects);
         updateSummary(projects);
       } catch (err) {
@@ -795,16 +1042,13 @@
         `;
         return;
       }
-
       projectsTableBody.innerHTML = "";
       projects.forEach((p) => {
         const tr = document.createElement("tr");
-
         const createdAt = p.timestamp?.toDate?.() || null;
         const dateStr = createdAt
           ? createdAt.toLocaleDateString("pt-BR", { day: "2-digit", month: "2-digit", year: "numeric" })
           : "-";
-
         let statusClass = "active";
         if (p.status === "draft") statusClass = "draft";
         if (p.status === "archived") statusClass = "archived";
@@ -844,7 +1088,6 @@
             </div>
           </td>
         `;
-
         projectsTableBody.appendChild(tr);
       });
     }
@@ -886,7 +1129,6 @@
       return found;
     }
 
-    // Eventos
     reloadProjectsBtn.addEventListener("click", loadProjects);
     newProjectBtn.addEventListener("click", resetForm);
     clearFormBtn.addEventListener("click", resetForm);
@@ -980,7 +1222,288 @@
       }
     });
 
-    // Início
+    // ======= MODAL CONFIG INDEX (LOCALSTORAGE) =======
+    const configModal = document.getElementById("configModal");
+    const openConfigBtn = document.getElementById("openConfigBtn");
+    const closeConfigBtn = document.getElementById("closeConfigBtn");
+
+    openConfigBtn.addEventListener("click", () => {
+      configModal.classList.add("show");
+    });
+    closeConfigBtn.addEventListener("click", () => {
+      configModal.classList.remove("show");
+    });
+    configModal.addEventListener("click", (e) => {
+      if (e.target === configModal) configModal.classList.remove("show");
+    });
+
+    const defaultSiteConfig = {
+      logoTitle:"Bemorh",
+      logoTagline:"tecnologia que conecta ideias",
+      heroTitle:"Bemorh",
+      heroSubtitle:"Nascemos da crença de que as melhores soluções surgem da conexão de ideias. Somos uma empresa de tecnologia especializada em desenvolver ferramentas virtuais que facilitam a colaboração, estimulam a inovação e transformam conceitos em realidade.",
+      heroContactText:"Fale Conosco",
+      servicesTitle:"Nossos Serviços",
+      service1Title:"Desenvolvimento Web",
+      service1Description:"Sites, sistemas web e aplicações responsivas com as melhores tecnologias do mercado.",
+      service2Title:"Apps Mobile",
+      service2Description:"Aplicativos nativos e híbridos para iOS e Android, com designs intuitivos e funcionais.",
+      service3Title:"UI/UX Design",
+      service3Description:"Design centrado no usuário, interfaces intuitivas e experiências digitais memoráveis.",
+      service4Title:"Consultoria em Inovação",
+      service4Description:"Ajudamos sua empresa a implementar processos inovadores e soluções tecnológicas estratégicas.",
+      aboutTitle:"Sobre a Bemorh",
+      aboutIntro:"A Bemorh nasceu da crença de que as melhores soluções surgem da conexão de ideias. Somos uma empresa de tecnologia especializada em desenvolver ferramentas virtuais que facilitam a colaboração, estimulam a inovação e transformam conceitos em realidade.",
+      missionTitle:"Nossa Missão",
+      missionText:"Conectar pessoas, ideias e tecnologias para criar soluções digitais inovadoras que transformam negócios e impulsionam resultados.",
+      visionTitle:"Nossa Visão",
+      visionText:"Ser referência em tecnologia conectiva, reconhecida por transformar ideias dispersas em ecossistemas digitais integrados e eficientes.",
+      approachTitle:"Nossa Abordagem",
+      approachText:"Trabalhamos em parceria com nossos clientes, entendendo suas necessidades únicas e co-criando soluções que realmente fazem a diferença.",
+      contactTitle:"Conecte-se Conosco",
+      contactInfoTitle:"Informações de Contato",
+      contactAddressTitle:"Endereço",
+      contactAddressText:"Av. das Inovações, 123 - Centro de Tecnologia<br>São Paulo - SP, 04538-000",
+      contactPhoneTitle:"Telefone",
+      contactPhoneText:"(11) 3456-7890",
+      contactEmailTitle:"Email",
+      contactEmailText:"contato@bemorh.com.br",
+      contactScheduleTitle:"Horário de Atendimento",
+      contactScheduleText:"Segunda a Sexta: 8h às 19h<br>Sábado: 9h às 13h",
+      contactFormTitle:"Envie sua Ideia",
+      contactNameLabel:"Nome",
+      contactEmailLabel:"Email",
+      contactPhoneLabel:"Telefone",
+      contactMessageLabel:"Sua Ideia ou Projeto",
+      contactSubmitText:"Enviar Mensagem",
+      footerDescription:"Tecnologia que conecta ideias. Desenvolvemos soluções digitais inovadoras que transformam conceitos em realidade.",
+      footerQuickLinksTitle:"Links Rápidos",
+      footerContactTitle:"Contato",
+      footerAddress:"Av. das Inovações, 123 - São Paulo, SP",
+      footerPhone:"(11) 3456-7890",
+      footerEmail:"contato@bemorh.com.br",
+      footerSchedule:"Seg-Sex: 8h-19h",
+      footerCopyright:"© 2023 Bemorh - Tecnologia que Conecta Ideias. Todos os direitos reservados."
+    };
+
+    function loadIndexConfig() {
+      const saved = localStorage.getItem("bemorhSiteConfig");
+      if (!saved) return defaultSiteConfig;
+      try {
+        const parsed = JSON.parse(saved);
+        return { ...defaultSiteConfig, ...parsed };
+      } catch {
+        return defaultSiteConfig;
+      }
+    }
+
+    const setVal = (id,v) => { const el = document.getElementById(id); if (el && v != null) el.value = v; };
+    const getVal = (id) => (document.getElementById(id) || {}).value || "";
+
+    function fillIndexConfigForm(cfg) {
+      setVal("cfg_logoTitle_idx", cfg.logoTitle);
+      setVal("cfg_logoTagline_idx", cfg.logoTagline);
+      setVal("cfg_heroTitle_idx", cfg.heroTitle);
+      setVal("cfg_heroSubtitle_idx", cfg.heroSubtitle);
+      setVal("cfg_heroContactText_idx", cfg.heroContactText);
+      setVal("cfg_servicesTitle_idx", cfg.servicesTitle);
+      setVal("cfg_service1Title_idx", cfg.service1Title);
+      setVal("cfg_service1Description_idx", cfg.service1Description);
+      setVal("cfg_service2Title_idx", cfg.service2Title);
+      setVal("cfg_service2Description_idx", cfg.service2Description);
+      setVal("cfg_service3Title_idx", cfg.service3Title);
+      setVal("cfg_service3Description_idx", cfg.service3Description);
+      setVal("cfg_service4Title_idx", cfg.service4Title);
+      setVal("cfg_service4Description_idx", cfg.service4Description);
+      setVal("cfg_aboutTitle_idx", cfg.aboutTitle);
+      setVal("cfg_aboutIntro_idx", cfg.aboutIntro);
+      setVal("cfg_missionTitle_idx", cfg.missionTitle);
+      setVal("cfg_missionText_idx", cfg.missionText);
+      setVal("cfg_visionTitle_idx", cfg.visionTitle);
+      setVal("cfg_visionText_idx", cfg.visionText);
+      setVal("cfg_approachTitle_idx", cfg.approachTitle);
+      setVal("cfg_approachText_idx", cfg.approachText);
+      setVal("cfg_contactTitle_idx", cfg.contactTitle);
+      setVal("cfg_contactInfoTitle_idx", cfg.contactInfoTitle);
+      setVal("cfg_contactAddressTitle_idx", cfg.contactAddressTitle);
+      setVal("cfg_contactAddressText_idx", cfg.contactAddressText);
+      setVal("cfg_contactPhoneTitle_idx", cfg.contactPhoneTitle);
+      setVal("cfg_contactPhoneText_idx", cfg.contactPhoneText);
+      setVal("cfg_contactEmailTitle_idx", cfg.contactEmailTitle);
+      setVal("cfg_contactEmailText_idx", cfg.contactEmailText);
+      setVal("cfg_contactScheduleTitle_idx", cfg.contactScheduleTitle);
+      setVal("cfg_contactScheduleText_idx", cfg.contactScheduleText);
+      setVal("cfg_contactFormTitle_idx", cfg.contactFormTitle);
+      setVal("cfg_contactNameLabel_idx", cfg.contactNameLabel);
+      setVal("cfg_contactEmailLabel_idx", cfg.contactEmailLabel);
+      setVal("cfg_contactPhoneLabel_idx", cfg.contactPhoneLabel);
+      setVal("cfg_contactMessageLabel_idx", cfg.contactMessageLabel);
+      setVal("cfg_contactSubmitText_idx", cfg.contactSubmitText);
+      setVal("cfg_footerDescription_idx", cfg.footerDescription);
+      setVal("cfg_footerQuickLinksTitle_idx", cfg.footerQuickLinksTitle);
+      setVal("cfg_footerContactTitle_idx", cfg.footerContactTitle);
+      setVal("cfg_footerAddress_idx", cfg.footerAddress);
+      setVal("cfg_footerPhone_idx", cfg.footerPhone);
+      setVal("cfg_footerEmail_idx", cfg.footerEmail);
+      setVal("cfg_footerSchedule_idx", cfg.footerSchedule);
+      setVal("cfg_footerCopyright_idx", cfg.footerCopyright);
+    }
+
+    function collectIndexConfigForm() {
+      return {
+        logoTitle:getVal("cfg_logoTitle_idx"),
+        logoTagline:getVal("cfg_logoTagline_idx"),
+        heroTitle:getVal("cfg_heroTitle_idx"),
+        heroSubtitle:getVal("cfg_heroSubtitle_idx"),
+        heroContactText:getVal("cfg_heroContactText_idx"),
+        servicesTitle:getVal("cfg_servicesTitle_idx"),
+        service1Title:getVal("cfg_service1Title_idx"),
+        service1Description:getVal("cfg_service1Description_idx"),
+        service2Title:getVal("cfg_service2Title_idx"),
+        service2Description:getVal("cfg_service2Description_idx"),
+        service3Title:getVal("cfg_service3Title_idx"),
+        service3Description:getVal("cfg_service3Description_idx"),
+        service4Title:getVal("cfg_service4Title_idx"),
+        service4Description:getVal("cfg_service4Description_idx"),
+        aboutTitle:getVal("cfg_aboutTitle_idx"),
+        aboutIntro:getVal("cfg_aboutIntro_idx"),
+        missionTitle:getVal("cfg_missionTitle_idx"),
+        missionText:getVal("cfg_missionText_idx"),
+        visionTitle:getVal("cfg_visionTitle_idx"),
+        visionText:getVal("cfg_visionText_idx"),
+        approachTitle:getVal("cfg_approachTitle_idx"),
+        approachText:getVal("cfg_approachText_idx"),
+        contactTitle:getVal("cfg_contactTitle_idx"),
+        contactInfoTitle:getVal("cfg_contactInfoTitle_idx"),
+        contactAddressTitle:getVal("cfg_contactAddressTitle_idx"),
+        contactAddressText:getVal("cfg_contactAddressText_idx"),
+        contactPhoneTitle:getVal("cfg_contactPhoneTitle_idx"),
+        contactPhoneText:getVal("cfg_contactPhoneText_idx"),
+        contactEmailTitle:getVal("cfg_contactEmailTitle_idx"),
+        contactEmailText:getVal("cfg_contactEmailText_idx"),
+        contactScheduleTitle:getVal("cfg_contactScheduleTitle_idx"),
+        contactScheduleText:getVal("cfg_contactScheduleText_idx"),
+        contactFormTitle:getVal("cfg_contactFormTitle_idx"),
+        contactNameLabel:getVal("cfg_contactNameLabel_idx"),
+        contactEmailLabel:getVal("cfg_contactEmailLabel_idx"),
+        contactPhoneLabel:getVal("cfg_contactPhoneLabel_idx"),
+        contactMessageLabel:getVal("cfg_contactMessageLabel_idx"),
+        contactSubmitText:getVal("cfg_contactSubmitText_idx"),
+        footerDescription:getVal("cfg_footerDescription_idx"),
+        footerQuickLinksTitle:getVal("cfg_footerQuickLinksTitle_idx"),
+        footerContactTitle:getVal("cfg_footerContactTitle_idx"),
+        footerAddress:getVal("cfg_footerAddress_idx"),
+        footerPhone:getVal("cfg_footerPhone_idx"),
+        footerEmail:getVal("cfg_footerEmail_idx"),
+        footerSchedule:getVal("cfg_footerSchedule_idx"),
+        footerCopyright:getVal("cfg_footerCopyright_idx")
+      };
+    }
+
+    const cfgSuccess = document.getElementById("cfgSuccess");
+    const cfgError = document.getElementById("cfgError");
+    const saveIndexConfigBtn = document.getElementById("saveIndexConfigBtn");
+    const reloadIndexConfigBtn = document.getElementById("reloadIndexConfigBtn");
+    const resetIndexConfigBtn = document.getElementById("resetIndexConfigBtn");
+
+    function showCfgAlert(el, show) { if (el) el.style.display = show ? "block" : "none"; }
+
+    fillIndexConfigForm(loadIndexConfig());
+
+    saveIndexConfigBtn.addEventListener("click", () => {
+      showCfgAlert(cfgSuccess, false);
+      showCfgAlert(cfgError, false);
+      try {
+        const cfg = collectIndexConfigForm();
+        localStorage.setItem("bemorhSiteConfig", JSON.stringify(cfg));
+        showCfgAlert(cfgSuccess, true);
+        setTimeout(() => showCfgAlert(cfgSuccess, false), 4000);
+      } catch (e) {
+        console.error(e);
+        showCfgAlert(cfgError, true);
+      }
+    });
+
+    reloadIndexConfigBtn.addEventListener("click", () => {
+      fillIndexConfigForm(loadIndexConfig());
+      showCfgAlert(cfgSuccess, false);
+      showCfgAlert(cfgError, false);
+    });
+
+    resetIndexConfigBtn.addEventListener("click", () => {
+      if (!confirm("Tem certeza que deseja restaurar os textos padrão do index?")) return;
+      localStorage.removeItem("bemorhSiteConfig");
+      fillIndexConfigForm(defaultSiteConfig);
+      showCfgAlert(cfgSuccess, false);
+      showCfgAlert(cfgError, false);
+      alert("Padrão restaurado. Recarregue o index.html para ver o resultado.");
+    });
+
+    // ===== MODAL DE ALTERAR SENHA NO ADMIN =====
+    const passwordModal = document.getElementById('passwordModal');
+    const openPasswordBtn = document.getElementById('openPasswordBtn');
+    const closePasswordBtn = document.getElementById('closePasswordBtn');
+    const cancelPasswordBtn = document.getElementById('cancelPasswordBtn');
+    const passwordForm = document.getElementById('passwordForm');
+    const pwdError = document.getElementById('pwdError');
+    const pwdSuccess = document.getElementById('pwdSuccess');
+
+    function openPasswordModal() {
+      pwdError.style.display = 'none';
+      pwdSuccess.style.display = 'none';
+      document.getElementById('currentPasswordAdmin').value = '';
+      document.getElementById('newPasswordAdmin').value = '';
+      document.getElementById('confirmPasswordAdmin').value = '';
+      passwordModal.classList.add('show');
+      document.getElementById('currentPasswordAdmin').focus();
+    }
+
+    function closePasswordModal() {
+      passwordModal.classList.remove('show');
+    }
+
+    openPasswordBtn.addEventListener('click', openPasswordModal);
+    closePasswordBtn.addEventListener('click', closePasswordModal);
+    cancelPasswordBtn.addEventListener('click', closePasswordModal);
+
+    passwordModal.addEventListener('click', (e) => {
+      if (e.target === passwordModal) closePasswordModal();
+    });
+
+    passwordForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+      pwdError.style.display = 'none';
+      pwdSuccess.style.display = 'none';
+
+      const currentPwd = document.getElementById('currentPasswordAdmin').value;
+      const newPwd = document.getElementById('newPasswordAdmin').value;
+      const confirmPwd = document.getElementById('confirmPasswordAdmin').value;
+
+      if (newPwd.length < 6) {
+        pwdError.textContent = "A nova senha deve ter pelo menos 6 caracteres.";
+        pwdError.style.display = 'block';
+        return;
+      }
+
+      if (newPwd !== confirmPwd) {
+        pwdError.textContent = "As novas senhas não coincidem.";
+        pwdError.style.display = 'block';
+        return;
+      }
+
+      if (!adminAuth.changePassword(currentPwd, newPwd)) {
+        pwdError.textContent = "Senha atual incorreta.";
+        pwdError.style.display = 'block';
+        return;
+      }
+
+      pwdSuccess.style.display = 'block';
+      setTimeout(() => {
+        closePasswordModal();
+      }, 1200);
+    });
+
+    // Carrega projetos ao iniciar
     loadProjects();
   </script>
 </body>

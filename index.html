@@ -1056,7 +1056,31 @@
         </div>
     </footer>
 
-    <script>
+    <script type="module">
+        // ===== FIREBASE / FIRESTORE IMPORTS =====
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+        import {
+            getFirestore,
+            collection,
+            getDocs,
+            query,
+            orderBy,
+            where
+        } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
+
+        // ===== FIREBASE CONFIG =====
+        const firebaseConfig = {
+            apiKey: "AIzaSyAqNKa5jp5UpcTtnAF1_EUVKCXVrGZTFkA",
+            authDomain: "bemorh-bc5a8.firebaseapp.com",
+            projectId: "bemorh-bc5a8",
+            storageBucket: "bemorh-bc5a8.firebasestorage.app",
+            messagingSenderId: "313271255362",
+            appId: "1:313271255362:web:167e42b830f8fdcb9188db"
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const db = getFirestore(app);
+
         // ===== AUTENTICAÇÃO ADMIN =====
         const adminAuth = {
             password: localStorage.getItem('adminPassword') || "admin123",
@@ -1493,7 +1517,109 @@
             setText('footerCopyright', cfg.footerCopyright);
         }
 
-        document.addEventListener('DOMContentLoaded', applySiteConfig);
+        // ===== CARREGAR PROJETOS DO FIRESTORE =====
+        async function loadProjectsFromFirestore() {
+            try {
+                const projectsCol = collection(db, "siteProjects");
+                // Carrega apenas projetos ativos, ordenados por order (se existir) e depois por timestamp
+                const q = query(
+                    projectsCol,
+                    where("status", "==", "active"),
+                    orderBy("timestamp", "desc")
+                );
+                const snapshot = await getDocs(q);
+                const projects = [];
+                snapshot.forEach((doc) => {
+                    projects.push({ id: doc.id, ...doc.data() });
+                });
+
+                // Ordena por campo order (se existir), senão mantém ordem por timestamp
+                projects.sort((a, b) => {
+                    const orderA = a.order != null ? a.order : 999999;
+                    const orderB = b.order != null ? b.order : 999999;
+                    return orderA - orderB;
+                });
+
+                renderProjects(projects);
+            } catch (error) {
+                console.error("Erro ao carregar projetos do Firestore:", error);
+                // Em caso de erro, mantém os projetos padrão que já estão no HTML
+            }
+        }
+
+        function renderProjects(projects) {
+            const projectsGrid = document.querySelector('.projects-grid');
+            if (!projectsGrid) return;
+
+            // Limpa o grid atual
+            projectsGrid.innerHTML = '';
+
+            // Se não houver projetos, mostra mensagem
+            if (projects.length === 0) {
+                projectsGrid.innerHTML = '<p style="grid-column: 1/-1; text-align:center; color:#7f8c8d;">Nenhum projeto ativo no momento.</p>';
+                return;
+            }
+
+            // Renderiza cada projeto
+            projects.forEach((project) => {
+                const card = document.createElement('div');
+                card.className = 'project-card';
+
+                // Determina qual ícone usar baseado na categoria
+                const categoryIcons = {
+                    web: 'fa-laptop-code',
+                    mobile: 'fa-mobile-alt',
+                    design: 'fa-palette',
+                    consulting: 'fa-handshake',
+                    innovation: 'fa-lightbulb'
+                };
+                const icon = categoryIcons[project.category] || 'fa-project-diagram';
+
+                // Determina a classe de status
+                const statusClasses = {
+                    active: 'status-completed',
+                    draft: 'status-pending',
+                    archived: 'status-pending'
+                };
+                const statusClass = statusClasses[project.status] || 'status-in-progress';
+
+                // Traduz o status para português
+                const statusLabels = {
+                    active: 'Ativo',
+                    draft: 'Rascunho',
+                    archived: 'Arquivado'
+                };
+                const statusLabel = statusLabels[project.status] || 'Em Andamento';
+
+                // Monta o HTML do card
+                card.innerHTML = `
+                    <div class="project-img">
+                        ${project.images && project.images[0] 
+                            ? `<img src="${project.images[0]}" alt="${project.title}" style="width:100%;height:100%;object-fit:cover;display:block;">` 
+                            : `<i class="fas ${icon}" style="font-size: 3rem; color: white;"></i>`
+                        }
+                    </div>
+                    <div class="project-info">
+                        <h3>${project.title || 'Projeto sem título'}</h3>
+                        <span class="project-status ${statusClass}">${statusLabel}</span>
+                        <p>${project.description || 'Sem descrição'}</p>
+                        ${project.features && project.features.length > 0 
+                            ? `<div style="margin-top:10px;font-size:0.85rem;color:#7f8c8d;">
+                                ${project.features.slice(0, 2).map(f => `<div>• ${f}</div>`).join('')}
+                               </div>` 
+                            : ''
+                        }
+                    </div>
+                `;
+
+                projectsGrid.appendChild(card);
+            });
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            applySiteConfig();
+            loadProjectsFromFirestore();
+        });
     </script>
 </body>
 </html>

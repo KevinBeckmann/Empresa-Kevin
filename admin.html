@@ -1527,6 +1527,17 @@
 
     function showCfgAlert(el, show) { if (el) el.style.display = show ? "block" : "none"; }
 
+    // Inicializa localStorage com valores padrão se não existir
+    function initializeDefaultConfig() {
+      const saved = localStorage.getItem("bemorhSiteConfig");
+      if (!saved) {
+        localStorage.setItem("bemorhSiteConfig", JSON.stringify(defaultSiteConfig));
+        console.log("Configurações padrão salvas no localStorage");
+      }
+    }
+
+    // Inicializa as configurações padrão
+    initializeDefaultConfig();
     fillIndexConfigForm(loadIndexConfig());
 
     saveIndexConfigBtn.addEventListener("click", () => {

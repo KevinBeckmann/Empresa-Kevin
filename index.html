@@ -1412,6 +1412,15 @@
             }
         }
 
+        // Inicializa localStorage com valores padrão se não existir
+        function initializeDefaultConfig() {
+            const saved = localStorage.getItem('bemorhSiteConfig');
+            if (!saved) {
+                localStorage.setItem('bemorhSiteConfig', JSON.stringify(defaultSiteConfig));
+                console.log('Configurações padrão salvas no localStorage');
+            }
+        }
+
         function applySiteConfig() {
             const cfg = loadSiteConfig();
             const setText = (id,v,html=false) => {
@@ -1632,6 +1641,7 @@
         }
 
         document.addEventListener('DOMContentLoaded', () => {
+            initializeDefaultConfig();
             applySiteConfig();
             loadProjectsFromFirestore();
         });

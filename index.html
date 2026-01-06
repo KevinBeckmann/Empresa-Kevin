@@ -1591,11 +1591,13 @@
             if (projectsUnsubscribe) {
                 projectsUnsubscribe();
             }
+            if (adminActionsUnsubscribe) {
+                adminActionsUnsubscribe();
+            }
         });
 
         // ===== MONITORAR AÇÕES DO ADMIN EM TEMPO REAL =====
         let adminActionsUnsubscribe = null;
-        let beforeUnloadListenerAdded = false;
 
         function monitorAdminActions() {
             try {
@@ -1618,16 +1620,6 @@
                 }, (error) => {
                     console.error("Erro ao monitorar ações do admin:", error);
                 });
-
-                // Adiciona listener de cleanup apenas uma vez
-                if (!beforeUnloadListenerAdded) {
-                    window.addEventListener('beforeunload', () => {
-                        if (adminActionsUnsubscribe) {
-                            adminActionsUnsubscribe();
-                        }
-                    });
-                    beforeUnloadListenerAdded = true;
-                }
             } catch (error) {
                 console.error("Erro ao configurar monitor de ações:", error);
             }

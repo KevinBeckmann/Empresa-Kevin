@@ -685,6 +685,11 @@
             <button class="admin-icon-btn" id="adminAccessBtn" title="Acesso Administrativo">
                 <i class="fas fa-cogs"></i>
             </button>
+            
+            <!-- Indicador de sincronização -->
+            <div id="syncIndicator" style="display:none;margin-left:8px;padding:4px 8px;border-radius:999px;background-color:rgba(46,204,113,0.1);color:#27ae60;font-size:0.75rem;font-weight:600;">
+                <i class="fas fa-circle" style="font-size:0.5rem;"></i> Sincronizado
+            </div>
         </div>
     </header>
 
@@ -1056,7 +1061,6 @@
         </div>
     </footer>
 
-    <script>
     <script type="module">
         // ===== FIREBASE / FIRESTORE IMPORTS =====
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
@@ -1066,7 +1070,8 @@
             getDocs,
             query,
             orderBy,
-            where
+            where,
+            onSnapshot
         } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
 
         // ===== FIREBASE CONFIG =====
@@ -1519,8 +1524,10 @@
         }
 
         document.addEventListener('DOMContentLoaded', applySiteConfig);
-        // ===== CARREGAR PROJETOS DO FIRESTORE =====
-        async function loadProjectsFromFirestore() {
+        // ===== CARREGAR PROJETOS DO FIRESTORE COM REAL-TIME =====
+        let projectsUnsubscribe = null;
+
+        function loadProjectsFromFirestore() {
             try {
                 const projectsCol = collection(db, "siteProjects");
                 // Carrega apenas projetos ativos, ordenados por order (se existir) e depois por timestamp
@@ -1529,25 +1536,168 @@
                     where("status", "==", "active"),
                     orderBy("timestamp", "desc")
                 );
-                const snapshot = await getDocs(q);
-                const projects = [];
-                snapshot.forEach((doc) => {
-                    projects.push({ id: doc.id, ...doc.data() });
-                });
+                
+                // Usa onSnapshot para atualizações em tempo real
+                projectsUnsubscribe = onSnapshot(q, (snapshot) => {
+                    const projects = [];
+                    snapshot.forEach((doc) => {
+                        projects.push({ id: doc.id, ...doc.data() });
+                    });
 
-                // Ordena por campo order (se existir), senão mantém ordem por timestamp
-                projects.sort((a, b) => {
-                    const orderA = a.order != null ? a.order : 999999;
-                    const orderB = b.order != null ? b.order : 999999;
-                    return orderA - orderB;
-                });
+                    // Ordena por campo order (se existir), senão mantém ordem por timestamp
+                    projects.sort((a, b) => {
+                        const orderA = a.order != null ? a.order : 999999;
+                        const orderB = b.order != null ? b.order : 999999;
+                        return orderA - orderB;
+                    });
 
-                renderProjects(projects);
+                    renderProjects(projects);
+                    updateSyncIndicator(true);
+                    console.log("✓ Projetos sincronizados em tempo real:", projects.length);
+                }, (error) => {
+                    console.error("Erro ao carregar projetos do Firestore:", error);
+                    updateSyncIndicator(false);
+                    // Em caso de erro, mantém os projetos padrão que já estão no HTML
+                });
             } catch (error) {
-                console.error("Erro ao carregar projetos do Firestore:", error);
-                // Em caso de erro, mantém os projetos padrão que já estão no HTML
+                console.error("Erro ao configurar listener de projetos:", error);
+                updateSyncIndicator(false);
             }
         }
+
+        // Função para atualizar o indicador de sincronização
+        function updateSyncIndicator(connected) {
+            const indicator = document.getElementById('syncIndicator');
+            if (!indicator) return;
+            
+            indicator.style.display = 'flex';
+            indicator.style.alignItems = 'center';
+            indicator.style.gap = '4px';
+            
+            if (connected) {
+                indicator.style.backgroundColor = 'rgba(46,204,113,0.1)';
+                indicator.style.color = '#27ae60';
+                indicator.innerHTML = '<i class="fas fa-circle" style="font-size:0.5rem;"></i> Sincronizado';
+            } else {
+                indicator.style.backgroundColor = 'rgba(231,76,60,0.1)';
+                indicator.style.color = '#e74c3c';
+                indicator.innerHTML = '<i class="fas fa-circle" style="font-size:0.5rem;"></i> Desconectado';
+            }
+        }
+
+        // Limpa o listener quando a página é fechada
+        window.addEventListener('beforeunload', () => {
+            if (projectsUnsubscribe) {
+                projectsUnsubscribe();
+            }
+            if (adminActionsUnsubscribe) {
+                adminActionsUnsubscribe();
+            }
+        });
+
+        // ===== MONITORAR AÇÕES DO ADMIN EM TEMPO REAL =====
+        let adminActionsUnsubscribe = null;
+
+        function monitorAdminActions() {
+            try {
+                const actionsCol = collection(db, "adminActions");
+                const q = query(actionsCol, orderBy("timestamp", "desc"));
+                
+                // Monitora as últimas ações do admin
+                adminActionsUnsubscribe = onSnapshot(q, (snapshot) => {
+                    snapshot.docChanges().forEach((change) => {
+                        if (change.type === "added") {
+                            const action = change.doc.data();
+                            // Só mostra notificação para ações recentes (últimos 5 segundos)
+                            const actionTime = action.timestamp?.toDate();
+                            const now = new Date();
+                            if (actionTime && (now - actionTime) < 5000) {
+                                showSyncNotification(action);
+                            }
+                        }
+                    });
+                }, (error) => {
+                    console.error("Erro ao monitorar ações do admin:", error);
+                });
+            } catch (error) {
+                console.error("Erro ao configurar monitor de ações:", error);
+            }
+        }
+
+        // Função para mostrar notificação de sincronização
+        function showSyncNotification(action) {
+            const actionMessages = {
+                'created_project': '✓ Novo projeto adicionado',
+                'updated_project': '✓ Projeto atualizado',
+                'activated_project': '✓ Projeto reativado',
+                'archived_project': '✓ Projeto arquivado'
+            };
+
+            const message = actionMessages[action.action] || '✓ Dados atualizados';
+            const projectTitle = action.projectTitle ? `: ${escapeHtml(action.projectTitle)}` : '';
+            
+            // Cria elemento de notificação de forma segura
+            const notification = document.createElement('div');
+            notification.style.cssText = `
+                position: fixed;
+                top: 90px;
+                right: 20px;
+                background-color: rgba(46, 204, 113, 0.95);
+                color: white;
+                padding: 12px 18px;
+                border-radius: 6px;
+                box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+                z-index: 10000;
+                font-size: 0.9rem;
+                font-weight: 600;
+                animation: slideInRight 0.3s ease;
+                display: flex;
+                align-items: center;
+                gap: 8px;
+            `;
+            
+            // Cria o conteúdo de forma segura
+            const icon = document.createElement('i');
+            icon.className = 'fas fa-sync-alt fa-spin';
+            
+            const text = document.createTextNode(` ${message}${projectTitle}`);
+            
+            notification.appendChild(icon);
+            notification.appendChild(text);
+            document.body.appendChild(notification);
+
+            // Remove após 3 segundos
+            setTimeout(() => {
+                notification.style.animation = 'slideOutRight 0.3s ease';
+                setTimeout(() => notification.remove(), 300);
+            }, 3000);
+        }
+
+        // Adiciona animações CSS
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes slideInRight {
+                from {
+                    transform: translateX(400px);
+                    opacity: 0;
+                }
+                to {
+                    transform: translateX(0);
+                    opacity: 1;
+                }
+            }
+            @keyframes slideOutRight {
+                from {
+                    transform: translateX(0);
+                    opacity: 1;
+                }
+                to {
+                    transform: translateX(400px);
+                    opacity: 0;
+                }
+            }
+        `;
+        document.head.appendChild(style);
 
         // ===== FUNÇÃO DE ESCAPE HTML (SEGURANÇA XSS) =====
         function escapeHtml(text) {
@@ -1634,7 +1784,8 @@
         document.addEventListener('DOMContentLoaded', () => {
             applySiteConfig();
             loadProjectsFromFirestore();
+            monitorAdminActions();
         });
-Visualização de comentários    </script>
+    </script>
 </body>
 </html>

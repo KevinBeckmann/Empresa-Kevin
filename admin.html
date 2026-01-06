@@ -988,7 +988,8 @@
       updateDoc,
       serverTimestamp,
       orderBy,
-      query
+      query,
+      onSnapshot
     } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
 
     const firebaseConfig = {
@@ -1028,7 +1029,9 @@
     const saveBtn = document.getElementById("saveBtn");
     const reloadProjectsBtn = document.getElementById("reloadProjectsBtn");
 
-    async function loadProjects() {
+    let projectsUnsubscribe = null;
+
+    function loadProjects() {
       projectsTableBody.innerHTML = `
         <tr>
           <td colspan="5" style="text-align:center;color:#7f8c8d;padding:20px;">
@@ -1038,23 +1041,78 @@
       `;
       try {
         const q = query(projectsCol, orderBy("timestamp", "desc"));
-        const snap = await getDocs(q);
-        const projects = [];
-        snap.forEach((docSnap) => {
-          const data = docSnap.data();
-          projects.push({ id: docSnap.id, ...data });
+        
+        // Se já existe um listener, remove antes de criar um novo
+        if (projectsUnsubscribe) {
+          projectsUnsubscribe();
+        }
+        
+        // Usa onSnapshot para atualizações em tempo real
+        projectsUnsubscribe = onSnapshot(q, (snap) => {
+          const projects = [];
+          snap.forEach((docSnap) => {
+            const data = docSnap.data();
+            projects.push({ id: docSnap.id, ...data });
+          });
+          renderProjectsTable(projects);
+          updateSummary(projects);
+          updateSyncStatus("connected");
+          console.log("✓ Projetos sincronizados em tempo real:", projects.length);
+        }, (err) => {
+          console.error("Erro ao carregar projetos:", err);
+          projectsTableBody.innerHTML = `
+            <tr>
+              <td colspan="5" style="text-align:center;color:#e74c3c;padding:20px;">
+                <i class="fas fa-exclamation-circle"></i> Erro ao carregar projetos. Verifique o console.
+              </td>
+            </tr>
+          `;
+          updateSyncStatus("error");
         });
-        renderProjectsTable(projects);
-        updateSummary(projects);
       } catch (err) {
-        console.error("Erro ao carregar projetos:", err);
-        projectsTableBody.innerHTML = `
-          <tr>
-            <td colspan="5" style="text-align:center;color:#e74c3c;padding:20px;">
-              <i class="fas fa-exclamation-circle"></i> Erro ao carregar projetos. Verifique o console.
-            </td>
-          </tr>
-        `;
+        console.error("Erro ao configurar listener:", err);
+        updateSyncStatus("error");
+      }
+    }
+
+    // Limpa o listener quando a página é fechada
+    window.addEventListener('beforeunload', () => {
+      if (projectsUnsubscribe) {
+        projectsUnsubscribe();
+      }
+    });
+
+    // Função para atualizar o status de sincronização
+    function updateSyncStatus(status) {
+      const statusEl = document.getElementById("firestoreStatus");
+      if (!statusEl) return;
+      
+      if (status === "connected") {
+        statusEl.textContent = "sincronizado";
+        statusEl.style.color = "#2ecc71";
+      } else if (status === "error") {
+        statusEl.textContent = "erro";
+        statusEl.style.color = "#e74c3c";
+      } else {
+        statusEl.textContent = "conectando...";
+        statusEl.style.color = "#f39c12";
+      }
+    }
+
+    // Função para registrar ações do admin (para comunicação com index.html)
+    async function logAdminAction(action, projectId = null, projectTitle = null) {
+      try {
+        const actionsCol = collection(db, "adminActions");
+        await addDoc(actionsCol, {
+          action: action,
+          projectId: projectId,
+          projectTitle: projectTitle,
+          timestamp: serverTimestamp(),
+          user: "admin"
+        });
+        console.log("✓ Ação registrada:", action);
+      } catch (err) {
+        console.error("Erro ao registrar ação:", err);
       }
     }
 
@@ -1190,7 +1248,13 @@
             status: newStatus,
             timestamp: serverTimestamp()
           });
-          loadProjects();
+          // Log da ação
+          await logAdminAction(
+            newStatus === "archived" ? "archived_project" : "activated_project",
+            id,
+            proj.title
+          );
+          // Não precisa chamar loadProjects() - onSnapshot fará isso automaticamente
         } catch (err) {
           console.error("Erro ao atualizar status:", err);
           alert("Erro ao atualizar status. Veja o console.");
@@ -1241,14 +1305,18 @@
             ...baseData,
             timestamp: serverTimestamp()
           });
+          // Log da ação
+          await logAdminAction("updated_project", existingId, title);
         } else {
-          await addDoc(projectsCol, {
+          const docRef = await addDoc(projectsCol, {
             ...baseData,
             timestamp: serverTimestamp()
           });
+          // Log da ação
+          await logAdminAction("created_project", docRef.id, title);
           resetForm();
         }
-        await loadProjects();
+        // Não precisa chamar loadProjects() - onSnapshot fará isso automaticamente
       } catch (err) {
         console.error("Erro ao salvar projeto:", err);
         alert("Erro ao salvar projeto. Veja o console.");

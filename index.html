@@ -1610,7 +1610,7 @@
                         if (change.type === "added") {
                             const action = change.doc.data();
                             // Só mostra notificação para ações recentes (últimos 5 segundos)
-                            const actionTime = action.timestamp?.toDate?.();
+                            const actionTime = action.timestamp?.toDate();
                             const now = new Date();
                             if (actionTime && (now - actionTime) < 5000) {
                                 showSyncNotification(action);
@@ -1637,7 +1637,7 @@
             const message = actionMessages[action.action] || '✓ Dados atualizados';
             const projectTitle = action.projectTitle ? `: ${escapeHtml(action.projectTitle)}` : '';
             
-            // Cria elemento de notificação
+            // Cria elemento de notificação de forma segura
             const notification = document.createElement('div');
             notification.style.cssText = `
                 position: fixed;
@@ -1656,7 +1656,15 @@
                 align-items: center;
                 gap: 8px;
             `;
-            notification.innerHTML = `<i class="fas fa-sync-alt fa-spin"></i> ${message}${projectTitle}`;
+            
+            // Cria o conteúdo de forma segura
+            const icon = document.createElement('i');
+            icon.className = 'fas fa-sync-alt fa-spin';
+            
+            const text = document.createTextNode(` ${message}${projectTitle}`);
+            
+            notification.appendChild(icon);
+            notification.appendChild(text);
             document.body.appendChild(notification);
 
             // Remove após 3 segundos

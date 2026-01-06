@@ -1595,6 +1595,7 @@
 
         // ===== MONITORAR AÇÕES DO ADMIN EM TEMPO REAL =====
         let adminActionsUnsubscribe = null;
+        let beforeUnloadListenerAdded = false;
 
         function monitorAdminActions() {
             try {
@@ -1618,12 +1619,15 @@
                     console.error("Erro ao monitorar ações do admin:", error);
                 });
 
-                // Limpa o listener quando a página é fechada
-                window.addEventListener('beforeunload', () => {
-                    if (adminActionsUnsubscribe) {
-                        adminActionsUnsubscribe();
-                    }
-                });
+                // Adiciona listener de cleanup apenas uma vez
+                if (!beforeUnloadListenerAdded) {
+                    window.addEventListener('beforeunload', () => {
+                        if (adminActionsUnsubscribe) {
+                            adminActionsUnsubscribe();
+                        }
+                    });
+                    beforeUnloadListenerAdded = true;
+                }
             } catch (error) {
                 console.error("Erro ao configurar monitor de ações:", error);
             }
@@ -1639,7 +1643,7 @@
             };
 
             const message = actionMessages[action.action] || '✓ Dados atualizados';
-            const projectTitle = action.projectTitle ? `: ${action.projectTitle}` : '';
+            const projectTitle = action.projectTitle ? `: ${escapeHtml(action.projectTitle)}` : '';
             
             // Cria elemento de notificação
             const notification = document.createElement('div');

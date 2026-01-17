@@ -713,13 +713,30 @@
             </div>
           </div>
 
-          <!-- IMAGENS DOS PROJETOS EM DESTAQUE -->
+          <!-- PROJETOS EM DESTAQUE -->
           <div class="config-row">
-            <h3>Imagens dos Projetos em Destaque</h3>
-            <small>URLs das imagens usadas nos 3 cards de projetos em destaque do index.</small>
-            <div class="config-grid-2" style="margin-top:6px;">
+            <h3>Projetos em Destaque (Index)</h3>
+            <small>Título da seção e informações completas dos 3 projetos em destaque exibidos no index.</small>
+            <div class="form-group" style="margin-top:6px;">
+              <label for="cfg_projectsTitle_idx">Título da Seção</label>
+              <input type="text" id="cfg_projectsTitle_idx" class="form-control">
+            </div>
+            
+            <div class="config-grid-2">
               <div>
                 <strong>Projeto 1</strong>
+                <div class="form-group">
+                  <label for="cfg_project1Title_idx">Título</label>
+                  <input type="text" id="cfg_project1Title_idx" class="form-control">
+                </div>
+                <div class="form-group">
+                  <label for="cfg_project1Status_idx">Status</label>
+                  <input type="text" id="cfg_project1Status_idx" class="form-control" placeholder="Ex: Concluído, Em Andamento">
+                </div>
+                <div class="form-group">
+                  <label for="cfg_project1Description_idx">Descrição</label>
+                  <textarea id="cfg_project1Description_idx" rows="2" class="form-control"></textarea>
+                </div>
                 <div class="form-group">
                   <label for="cfg_project1Image_idx">URL da imagem</label>
                   <input type="url" id="cfg_project1Image_idx" class="form-control" placeholder="https://...">
@@ -727,6 +744,18 @@
               </div>
               <div>
                 <strong>Projeto 2</strong>
+                <div class="form-group">
+                  <label for="cfg_project2Title_idx">Título</label>
+                  <input type="text" id="cfg_project2Title_idx" class="form-control">
+                </div>
+                <div class="form-group">
+                  <label for="cfg_project2Status_idx">Status</label>
+                  <input type="text" id="cfg_project2Status_idx" class="form-control" placeholder="Ex: Concluído, Em Andamento">
+                </div>
+                <div class="form-group">
+                  <label for="cfg_project2Description_idx">Descrição</label>
+                  <textarea id="cfg_project2Description_idx" rows="2" class="form-control"></textarea>
+                </div>
                 <div class="form-group">
                   <label for="cfg_project2Image_idx">URL da imagem</label>
                   <input type="url" id="cfg_project2Image_idx" class="form-control" placeholder="https://...">
@@ -736,6 +765,18 @@
             <div class="config-grid-2">
               <div>
                 <strong>Projeto 3</strong>
+                <div class="form-group">
+                  <label for="cfg_project3Title_idx">Título</label>
+                  <input type="text" id="cfg_project3Title_idx" class="form-control">
+                </div>
+                <div class="form-group">
+                  <label for="cfg_project3Status_idx">Status</label>
+                  <input type="text" id="cfg_project3Status_idx" class="form-control" placeholder="Ex: Concluído, Em Andamento">
+                </div>
+                <div class="form-group">
+                  <label for="cfg_project3Description_idx">Descrição</label>
+                  <textarea id="cfg_project3Description_idx" rows="2" class="form-control"></textarea>
+                </div>
                 <div class="form-group">
                   <label for="cfg_project3Image_idx">URL da imagem</label>
                   <input type="url" id="cfg_project3Image_idx" class="form-control" placeholder="https://...">
@@ -1368,8 +1409,18 @@
       heroSubtitle:"Nascemos da crença de que as melhores soluções surgem da conexão de ideias. Somos uma empresa de tecnologia especializada em desenvolver ferramentas virtuais que facilitam a colaboração, estimulam a inovação e transformam conceitos em realidade.",
       heroContactText:"Fale Conosco",
       heroImage:"https://images.unsplash.com/photo-1552664730-d307ca884978?ixlib=rb-4.0.3&auto=format&fit=crop&w=1100&q=80",
+      projectsTitle:"Projetos em Destaque",
+      project1Title:"Sistema de Gestão de Ideias",
+      project1Status:"Concluído",
+      project1Description:"Plataforma colaborativa que organiza e prioriza ideias em projetos executáveis com fluxos visuais intuitivos.",
       project1Image:"",
+      project2Title:"IA para Inovação",
+      project2Status:"Em Andamento",
+      project2Description:"Ferramenta de inteligência artificial que auxilia na geração e refinamento de ideias criativas para negócios.",
       project2Image:"",
+      project3Title:"Plataforma Colaborativa",
+      project3Status:"Em Planejamento",
+      project3Description:"Ambiente virtual para equipes distribuídas colaborarem em tempo real no desenvolvimento de projetos.",
       project3Image:"",
       servicesTitle:"Nossos Serviços",
       service1Title:"Desenvolvimento Web",
@@ -1435,8 +1486,18 @@
       setVal("cfg_heroSubtitle_idx", cfg.heroSubtitle);
       setVal("cfg_heroContactText_idx", cfg.heroContactText);
       setVal("cfg_heroImage_idx", cfg.heroImage);
+      setVal("cfg_projectsTitle_idx", cfg.projectsTitle);
+      setVal("cfg_project1Title_idx", cfg.project1Title);
+      setVal("cfg_project1Status_idx", cfg.project1Status);
+      setVal("cfg_project1Description_idx", cfg.project1Description);
       setVal("cfg_project1Image_idx", cfg.project1Image);
+      setVal("cfg_project2Title_idx", cfg.project2Title);
+      setVal("cfg_project2Status_idx", cfg.project2Status);
+      setVal("cfg_project2Description_idx", cfg.project2Description);
       setVal("cfg_project2Image_idx", cfg.project2Image);
+      setVal("cfg_project3Title_idx", cfg.project3Title);
+      setVal("cfg_project3Status_idx", cfg.project3Status);
+      setVal("cfg_project3Description_idx", cfg.project3Description);
       setVal("cfg_project3Image_idx", cfg.project3Image);
       setVal("cfg_servicesTitle_idx", cfg.servicesTitle);
       setVal("cfg_service1Title_idx", cfg.service1Title);
@@ -1489,8 +1550,18 @@
         heroSubtitle:getVal("cfg_heroSubtitle_idx"),
         heroContactText:getVal("cfg_heroContactText_idx"),
         heroImage:getVal("cfg_heroImage_idx"),
+        projectsTitle:getVal("cfg_projectsTitle_idx"),
+        project1Title:getVal("cfg_project1Title_idx"),
+        project1Status:getVal("cfg_project1Status_idx"),
+        project1Description:getVal("cfg_project1Description_idx"),
         project1Image:getVal("cfg_project1Image_idx"),
+        project2Title:getVal("cfg_project2Title_idx"),
+        project2Status:getVal("cfg_project2Status_idx"),
+        project2Description:getVal("cfg_project2Description_idx"),
         project2Image:getVal("cfg_project2Image_idx"),
+        project3Title:getVal("cfg_project3Title_idx"),
+        project3Status:getVal("cfg_project3Status_idx"),
+        project3Description:getVal("cfg_project3Description_idx"),
         project3Image:getVal("cfg_project3Image_idx"),
         servicesTitle:getVal("cfg_servicesTitle_idx"),
         service1Title:getVal("cfg_service1Title_idx"),
